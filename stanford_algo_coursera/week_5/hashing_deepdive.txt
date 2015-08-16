@@ -7,4 +7,18 @@ Why not use arrays, they have O(1) lookup too right?, yes, but they maintain the
 
 Why not use lists, they can use space in the order of O(s), however issue is lookup is O(s), sine random access is not v good in lists.
 
+Best of both worlds?(arrays and lists)
+------------------------------------
+1. Pick n = # of buckets
+where n roughly equal to |s|
+
+2. Choose a hash function 
+   func hash_function(Key) => spits out (elements from index 0..n-1)
+
+3. Use Array of leangth N, store X in array at A[hash_function[X]]   
+
+4. 
+   
+
+
 
