@@ -43,6 +43,11 @@ P(shared_birthdays) = 100% - P (distinct_birthdays)
 365!/(365-N)!/365^N = 50%
  N is 23 here for 50%, so what this means is if we have 23 people in the room, atleast 1 person will have 50% probability of sharing the birthday with another person, neat!!!
 
+How to resolve collisions in hastable?
+---------------------------------------
+Solution 1. Use chaining i.e. in buckets having collision do a linked list of items
+Soution 2. Open addressing i.e. try inserting element till you find an emty bucket when collisions happen
+eg:- linear probing, double linkedlists etc.
 
 
    
