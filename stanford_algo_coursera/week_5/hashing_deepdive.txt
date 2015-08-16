@@ -17,7 +17,18 @@ where n roughly equal to |s|
 
 3. Use Array of leangth N, store X in array at A[hash_function[X]]   
 
-4. 
+4. How do we handle collisons?
+
+Example of collisons :-
+
+Birthday paradox
+Consider N people with random birthdays which are equally likely on any day of the year. How large does n need to be before there is atleast 50% probability of two people have same birthdays.
+
+P(shared_birthdays) + P (distinct_birthdays) = 100%
+P(shared_birthdays) = 100% - P (distinct_birthdays)
+
+Person  Days possible
+
    
 
 
