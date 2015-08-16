@@ -1,1 +1,5 @@
+Hash Table is like a subset of values of the universe of possible values,
+We would like this to be small this way we could hold it in the main memory.
+
+Goal:- Maintain an evolving set S which belong to the U (universe)
 
