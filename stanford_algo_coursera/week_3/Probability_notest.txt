@@ -4,4 +4,7 @@ Sample space => All possible outcomes
 
 What is discrete probability?
 ------------------------------
-In discrete probability outcomes are finite unlike general probability.
+1. In discrete probability outcomes are finite unlike general probability.
+2. Probability of each outcome is P(i) >= 0
+3. Also sum of all outcomes summation of P(i) is 1
+
