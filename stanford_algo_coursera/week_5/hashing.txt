@@ -13,3 +13,5 @@ Operations
 1. Insert => Add a new record
 2. Delete => Remove an existing record
 3. Lookup => Retrive/Check an existing record
+
+Guarantees all the above operations in O(1) => Amazing Guarantee!!, this is amortized.
