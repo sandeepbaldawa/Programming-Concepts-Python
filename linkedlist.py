@@ -1,9 +1,15 @@
 class linkedlist:
+   """
+   LinkedList Node
+   """ 
    def  __init__(self, data):
         self.data = data
         self.next = None
 
 def print_ll(head):
+    """
+    Print Linked List
+    """
     tmp = head
     while(tmp):
         print tmp.data 
@@ -12,6 +18,12 @@ def print_ll(head):
 
 
 def split_ll(root):
+    """
+    Split the linked list
+    1. Find the mid node
+    2. Assign mid->next as None
+    3. Create head of second list from mid->next till end
+    """
     if not root or not root.next:
         return None
     slow = root
@@ -34,6 +46,13 @@ def move(dest, src):
     src = tmp
 
 def shuffle_merge(l1, l2):
+    """
+    Combine first node from l1 and one node from l2 and then
+    second node from l1 and second node from l2 and so on..
+    Technique in standford linkedlist document
+    - Use dummy node as the starting node
+    - 
+    """
     tail = linkedlist(9)
     dummy = tail 
     while(True):
@@ -57,6 +76,11 @@ def shuffle_merge(l1, l2):
     
     
 def merge_optimized(n1, n2):
+    """
+    Optimized merge sort using linked list and
+    dummy node at the start for merging, makes it
+    pretty simple to merge
+    """
     tail = linkedlist(9)
     dummy = tail 
     while(True):
@@ -79,6 +103,10 @@ def merge_optimized(n1, n2):
     return dummy.next     
 
 def split_even_odd(l):
+    """
+    Splits a given linkedlist into even elements and odd elements
+    Uses dummy nodes to maintain the head of the two linked lists
+    """
     tail1 = linkedlist(9)
     dummy1 = tail1 
     tail2 = linkedlist(9)
@@ -160,6 +188,9 @@ def find_circular(root):
     return False
    
 def rev(root):
+    """
+    Reverse linked list non-recursive
+    """
     prev = None
     curr = root
     next = curr.next
@@ -173,6 +204,9 @@ def rev(root):
     return curr
 
 def rev_recur(root):
+   """
+   Reverse linked list recursive
+   """
    if not root.next:
        return root
 
@@ -182,6 +216,9 @@ def rev_recur(root):
    return root
 
 def rev_recur_2(root):
+   """
+   Reverse linked list recursive optimized
+   """
    if not root.next:
        return root
 
