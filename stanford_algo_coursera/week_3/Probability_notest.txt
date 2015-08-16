@@ -1,0 +1,2 @@
+- Understanding why average for quicksort is N LogN
+- 
