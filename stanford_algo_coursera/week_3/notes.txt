@@ -26,11 +26,28 @@ RSelect algorithm
 2. Average is not over the data, but the random pivot choices made i.e. no assumption on data ordering or type
 
 RSelect is in phasej if current array size is between 3/4 ^(j+1)*n and 3/4^j*n
+
 Xj number of recursive calls in phase j
 Running time of RSelect =  Summation(Xj * c * (3/4)^j*n)
 3/4^j*n => upper bound on array size during Phasej
 
 Key => To get a 25-75 split probability is 50%
+
+Deterministic(DSelect) algorithm
+------------------------
+1. RSelect above is not deterministic 
+2. Best way to get a linear algorithm is by chossing the Pivot equal to Median, but practically impossible
+3. Choose Median of medians
+
+Algorithm:-
+1. Break whole array of size N into group of 5 and sort them individually
+2. Copy N/5 medians(middle element of each sorted group of 5) into a new array C.
+3. Recursively compute median of C.
+4. Return this as Pivot
+5. Partition A around P, j is the index of P
+6. if j==i return P
+7. if j<i RSelect(array A, length j-1, order statistic i)  
+8. if j>i RSelect(array A, length N-j, order statistic i-j)
 
 
 
