@@ -1,3 +1,14 @@
 - Given an unsorted array find the ith element from the sorted array.
 - Inefficient way do a mergesort- O(N LogN) and choose the ith element
 - Can we do better?
+
+Randomized Select
+RSelect(array A, length N, order statistic i)
+
+Algorithm:-
+1. If N==0 Return A[0]
+2. Choose pivot P from A uniformly at random
+3. Partition A around P, j is the index of P
+4. if j==i return P
+5. if j<i RSelect(array A, length j-1, order statistic i)  
+6. if j>i RSelect(array A, length N-j, order statistic i-j)
