@@ -24,10 +24,26 @@ Example of collisons :-
 Birthday paradox
 Consider N people with random birthdays which are equally likely on any day of the year. How large does n need to be before there is atleast 50% probability of two people have same birthdays.
 
+
+
 P(shared_birthdays) + P (distinct_birthdays) = 100%
 P(shared_birthdays) = 100% - P (distinct_birthdays)
 
-Person  Days possible
+Person 1 :- can have birthday on 365/365
+Person 2 :- can have birthday on 364/365
+Person 3 :- can have birthday on 363/365
+Person 4 :- can have birthday on 362/365
+Person 5 :- can have birthday on 361/365
+and so on...
+
+For 3 people P (distinct_birthdays) = (365.364.363)/365^3 = (365!/362!)/365^3
+for N people 365!/(365-N)!/365^N
+P(shared_birthdays) = 100% - P (distinct_birthdays)
+50% = 100% - 365!/(365-N)!/365^N
+365!/(365-N)!/365^N = 50%
+ N is 23 here for 50%, so what this means is if we have 23 people in the room, atleast 1 person will have 50% probability of sharing the birthday with another person, neat!!!
+
+
 
    
 
