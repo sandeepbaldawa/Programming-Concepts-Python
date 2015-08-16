@@ -24,6 +24,17 @@ EXAMPLE:- Roll 2 dices, probability that sum is 7
 5,2 4,3 6,1 2,5 3,4 1,6
 
 EXAMPLE:- In QuickSort, what is the probability that a randomly choosen pivot has a split better than 25-75
-Since the atleast need 25% on any side we can use on left side 25-75 and right side can be 75-25 and vice versa, so we can choose 50 different index for pivot to maintain this  which is 50/100 which is 1/2
+Since the atleast need 25% on any side we can use on left side 25-75 and right side can be 75-25 and vice versa, so we can choose 50 different index for pivot to maintain this  which is 50/100 which is 1/2,
+
+Random Variables
+-----------------
+Given a set of outcomes, this is a function on the outcomes which gives a particular value.
+Example:- Sum of two dice, can be two at minium and 12 as maximum.
+Example:- Size of subarray passed to QuickSort recursive calls
+
+Expectation
+------------
+E[X] is the average value of a random variable X i.e. sum of X[i]*P[i]
+
 
 
