@@ -1,1 +1,11 @@
-Best comparison level sorts can do is O(N logN)
+- Best comparison level sorts can do is O(N logN)
+- Comparison sorts are independet of data types or contents
+eg:- MergeSort, QuickSort, HeapSort
+
+Non-Comparison Sorts(depend on data type)
+eg:- Bucket Sort => Divide data into buckets, given that any number is between a given range, also uniformly random
+     Counting Sort => Good for integera and small integers. where K < N, K is number of buckets
+     Radix Sort => Extension of counting sort, sorts by decimal LSB to MSB
+
+
+
