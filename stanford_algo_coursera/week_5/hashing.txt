@@ -1,1 +1,15 @@
+Arrays advantages
+-------------------
+- Random access 
+- Retrieval and Storage in O(1)
 
+Purpose
+----------
+Maintain an possible evolving set of stuff
+(people associated data, ip addresses, trnsactions etc..)
+
+Operations
+-----------
+1. Insert => Add a new record
+2. Delete => Remove an existing record
+3. Lookup => Retrive/Check an existing record
