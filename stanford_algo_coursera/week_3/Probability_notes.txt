@@ -62,6 +62,7 @@ Let Y be the number of processes which can be assigned to the first server
 E[Y] = ?
 Indicator random variables have value 1/0 or True/False
 Xj => "1" if jth process is assigned to first server else "0"
+Hence any server with randomly selected process on an average will have 1 process.
 
      
 
