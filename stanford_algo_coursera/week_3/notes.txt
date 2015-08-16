@@ -1,3 +1,3 @@
-- Finding ith element in an unsorted array
+- Given an unsorted array find the ith element from the sorted array.
 - Inefficient way do a mergesort- O(N LogN) and choose the ith element
 - Can we do better?
