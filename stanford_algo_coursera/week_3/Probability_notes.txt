@@ -64,6 +64,25 @@ Indicator random variables have value 1/0 or True/False
 Xj => "1" if jth process is assigned to first server else "0"
 Hence any server with randomly selected process on an average will have 1 process.
 
+Conditional Probability
+------------------------
+P(X | Y) => Probability of X given Y is P(X intersection Y)/P(Y)
+
+Fiven two dice, what is the probability that atleast one dice is 1, given sum of two dice is 7
+1,6 
+X = atleast one is 1
+Y = sum of two dice is 7 => 1,6 2,5 4,3 6,1 5,2 3,4 
+P(X intersection Y) = {(1,6) (6,1)}/36 = 2/36
+P(Y) = 6/36
+P(X | Y) = 2/36 / 6/36 = 1/3
+
+Independence of Events
+-----------------------
+Events are independent if Pr(X intersection Y) = Pr(X). Pr(Y)
+Usefulness?
+Probability of two independent events is the multiplication of the individual events probabilities
+and same with expectation
+
      
 
 
