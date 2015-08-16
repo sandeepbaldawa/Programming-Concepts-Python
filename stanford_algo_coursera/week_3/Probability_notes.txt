@@ -35,6 +35,38 @@ Example:- Size of subarray passed to QuickSort recursive calls
 Expectation
 ------------
 E[X] is the average value of a random variable X i.e. sum of X[i]*P[i]
+Example:- Expectation of sum of two dice
+2,3,4,5,6,7,8,9,10,11,12
+Average is 7 since we can pair 2,12 3,11 4,10 5,9 6,8 7 and so on..
+
+Example:- Expectation of the size of subarray passed in QuickSort to the first recursive call
+Let X be the subarray size
+We could have pivot at 0,1,2,3..n indices
+E[X] = 1/n*0 + 1/n*1 + 1/n*2 + .. 1/n*(n-1)
+     = (n-1)/2
+     
+Linearity of Expectation
+-------------------------
+
+
+
+Load Balancing
+---------------
+Problem:- Assign N processes to N servers
+
+Possible Solution:- Assign each process to a random server
+Question:- What is the expect number of processes per server
+
+Entire sample space(all possible outcomes are) => N^N
+Let Y be the number of processes which can be assigned to the first server
+E[Y] = ?
+Indicator random variables have value 1/0 or True/False
+Xj => "1" if jth process is assigned to first server else "0"
+
+     
+
+
+
 
 
 
