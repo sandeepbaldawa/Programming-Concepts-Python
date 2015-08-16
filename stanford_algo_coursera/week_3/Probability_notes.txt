@@ -23,4 +23,7 @@ Probability of an event is the summation of all possible probabilities for the s
 EXAMPLE:- Roll 2 dices, probability that sum is 7
 5,2 4,3 6,1 2,5 3,4 1,6
 
+EXAMPLE:- In QuickSort, what is the probability that a randomly choosen pivot has a split better than 25-75
+Since the atleast need 25% on any side we can use on left side 25-75 and right side can be 75-25 and vice versa, so we can choose 50 different index for pivot to maintain this  which is 50/100 which is 1/2
+
 
