@@ -49,6 +49,14 @@ Algorithm:-
 7. if j<i RSelect(array A, length j-1, order statistic i)  
 8. if j>i RSelect(array A, length N-j, order statistic i-j)
 
+Analysis:-
+Step 1. above is O(N)
+Step 2. above is O(N)
+Step 3. above is T(N/5)
+Step 4. O(N)
+
+
+
 
 
 
