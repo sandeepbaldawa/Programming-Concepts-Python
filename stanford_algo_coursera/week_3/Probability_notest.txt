@@ -1,2 +1,7 @@
 - Understanding why average for quicksort is N LogN
-- 
+
+Sample space => All possible outcomes
+
+What is discrete probability?
+------------------------------
+In discrete probability outcomes are finite unlike general probability.
