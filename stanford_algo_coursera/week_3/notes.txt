@@ -12,3 +12,19 @@ Algorithm:-
 4. if j==i return P
 5. if j<i RSelect(array A, length j-1, order statistic i)  
 6. if j>i RSelect(array A, length N-j, order statistic i-j)
+
+Running Time => Depends on the quality of the Pivot
+Worst case if you choose a Pivot which is always the minimum we end up partitioning only 1 element each time a pivot is choosen, giving O(N^ 2)
+
+Best Pivot=> Choosen as the median element => O(N)
+What happens if pivot choosen is random?
+Goal is to prove that randomy choosen Pivot will also provide a linear solution
+
+RSelect algorithm
+------------------
+1. Average running time is O(N)
+2. Average is not over the data, but the random pivot choices made i.e. no assumption on data ordering or type
+
+
+
+
