@@ -25,6 +25,14 @@ RSelect algorithm
 1. Average running time is O(N)
 2. Average is not over the data, but the random pivot choices made i.e. no assumption on data ordering or type
 
+RSelect is in phasej if current array size is between 3/4 ^(j+1)*n and 3/4^j*n
+Xj number of recursive calls in phase j
+Running time of RSelect =  Summation(Xj * c * (3/4)^j*n)
+3/4^j*n => upper bound on array size during Phasej
+
+Key => To get a 25-75 split probability is 50%
+
+
 
 
 
