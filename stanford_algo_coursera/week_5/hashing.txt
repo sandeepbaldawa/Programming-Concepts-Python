@@ -28,10 +28,24 @@ Goal
 Remove duplicates (keep track of unique objects)
 eg:- Report unique visitors to websites, avoid duplicate results in search etc.
 
+
 Solution
 --------
 Use hash tables, if a new object X arrives and it is not in the hash table, then create a new key X and insert it inside the hash table.
 
+
 2 Sum Problem
 --------------
+Use has tables to index Target-number
+
+
+Symbol tables in Compilers
+--------------------------
+
+Lookup in routers to quickly block some ip addresses from spammers
+------------------------------------------------------------------
+
+Search algorithms eg:- game tree explorations
+----------------------------------------------
+
 
