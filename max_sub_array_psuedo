@@ -45,7 +45,7 @@ FIND-MAX-CROSSING-SUBARRAY (A, start, mid, end)
   return (max-left, max-right, left-sum + right-sum)
 }
 
-
+Reference:- http://jelices.blogspot.com/2014/06/leetcode-python-maximum-subarray.html
 class Solution:
     # @param A, a list of integers
     # @return an integer
