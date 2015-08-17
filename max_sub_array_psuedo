@@ -1,0 +1,46 @@
+A is the array with N elements
+
+FIND-MAX-SUBARRAY(A, start, end) 
+{
+
+  if (start == end) {
+    return (start, end, A[start])
+  } else {
+    mid = (start + end) / 2
+
+    (left-start, left-end, left-sum) = FIND-MAX-SUBARRAY(A, start, mid)
+    (right-start, right-end, right-sum) = FIND-MAX-SUBARRAY(A, mid+1, end)
+    (cross-start, cross-end, cross-sum) = FIND-MAX-CROSSING-SUBARRAY(A, start, mid, end)
+    
+    if (left-sum >= right-sum && left-sum >= cross-sum) 
+      return (left-start, left-end, left-sum)
+    else if (right-sum >= left-sum && right-sum >= cross-sum) 
+      return (right-start, right-end, right-sum)
+    else
+      return (cross-start, cross-end, cross-sum)
+
+  }
+}
+
+FIND-MAX-CROSSING-SUBARRAY (A, start, mid, end) 
+{
+  left-sum = MIN_VALUE
+  sum = 0;
+  for (i = mid; i >= start; i--) {
+    sum += A[i];
+    if (sum > left-sum) {
+      left-sum = sum
+      max-left = i
+    }
+  }
+  right-sum = MIN_VALUE
+  sum = 0
+  for (j = mid+1; j <= end; j++) {
+    sum += A[j];
+    if (sum > right-sum) {
+      right-sum = sum;
+      max-right = j;
+    }
+  } 
+  return (max-left, max-right, left-sum + right-sum)
+}
