@@ -1,0 +1,5 @@
+- Divide the problem, conquer it and process it(eg:- MergeSort)
+- Array inversions
+- 1,3,5,2,4,6 => 5,2 5,4 3,2
+- Intersection between two lines provides number of inversions
+- Useful to find how different two peoples choices are, helps in recommendation engine(comparing to people who have similar interests like you)
