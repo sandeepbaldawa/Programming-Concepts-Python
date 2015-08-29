@@ -19,6 +19,22 @@ def isBalanced(node):
   else:
       return isBalanced(node.left) and isBalanced(node.right)
 
+def isBalanced_optimized(node):
+  if not node:
+     return True
+  
+  left_h = height(node.left)
+  if left_h == -2:
+      return -2
+  right_h = height(node.right)
+  if right_h == -2:
+      return -2
+  if abs(left_h - right_h) >1:
+      return -2 
+  else:
+      return isBalanced(node.left) and isBalanced(node.right)
+
+
 t = Node(24)
 t.left = Node(18)
 t.left.left = Node(10)
