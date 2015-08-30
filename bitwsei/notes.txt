@@ -1,3 +1,28 @@
 CHECKS IF NON-NEGATIVE INTEGER IS A POWER OF 2 OR NOT
 --------------------------------------------------------
 https://www.quora.com/What-are-some-cool-bit-manipulation-tricks-hacks
+
+
+Check if nth bit is set
+-----------------------
+True if x & (1 << n) else False
+
+
+Set the nth bit
+-----------------------
+y =  x | (1 << n)
+
+
+UnSet the nth bit
+-----------------------
+y =  x & ~(1 << n)
+
+
+UnSet the nth bit
+-----------------------
+y =  x & ~(1 << n)
+
+
+Toggle the nth bit
+------------------
+y =  x ^ (1 << n)
