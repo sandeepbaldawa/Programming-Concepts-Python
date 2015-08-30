@@ -1,6 +1,7 @@
 CHECKS IF NON-NEGATIVE INTEGER IS A POWER OF 2 OR NOT
 --------------------------------------------------------
 https://www.quora.com/What-are-some-cool-bit-manipulation-tricks-hacks
+http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/
 
 
 Check if nth bit is set
