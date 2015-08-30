@@ -26,3 +26,14 @@ y =  x & ~(1 << n)
 Toggle the nth bit
 ------------------
 y =  x ^ (1 << n)
+
+
+Turn off the rightmost 1-bit
+-----------------------------
+x & (x-1)
+
+
+Isolate the rightmost 1-bit.
+----------------------------
+x & ~(x-1)
+
