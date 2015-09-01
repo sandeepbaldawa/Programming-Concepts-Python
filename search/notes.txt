@@ -1,0 +1,4 @@
+Linear search algorithms
+KMP
+Boyer-Moore
+Rabin-Karp
