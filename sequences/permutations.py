@@ -1,11 +1,12 @@
-def getPermutations(A, K=0):
-    if K == len(A):
-    	print A
+def permutations(word):
+    if len(word) == 1:
+    	return word
+    perms=permutations(word[1:])
+    first = word[0]
+    result = []
+    for perm in perms:
+    	for i in range(len(perm)+1):
+    		result.append(perm[:i] + first + perm[i:])
+    return result       
 
-    for i in xrange(K, len(A)):
-        A[i], A[K] = A[K], A[i] # swap
-        getPermutations(A, K+1)
-        A[K], A[i] = A[i], A[K] # swap restore
-        
-if __name__ == "__main__":
-    getPermutations([1,2,3])
+print permutations("abc")
