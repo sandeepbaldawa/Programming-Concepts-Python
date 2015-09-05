@@ -5,9 +5,16 @@
   Np-Hard => No polynomial time algorithm that exists. 
   
 => What is P and NP?
-P solutional in polynomial time and NP is verifiable in polynomial time
+P solved and verified in polynomial time
+NP is verifiable but not solvable in polynomial time
+
+=> What is NP Hard
+
 
 => what is NP complete?
+a decision problem which is both NP and NP hard
+
+
 
 
   
