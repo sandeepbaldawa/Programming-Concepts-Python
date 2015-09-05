@@ -1,0 +1,3 @@
+LIS => Longest increasing subsequence O(N logN) 
+LCS => Longest common sequence If number of input are know using dynamic programming O(N^2)
+LCISA => Longest contiguous increasing subarray O(N)
