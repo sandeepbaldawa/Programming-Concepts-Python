@@ -9,12 +9,22 @@
 P solved and verified in polynomial time
 NP is verifiable but not solvable in polynomial time
 
-=> What is NP Hard
-NP problems 
+Np is a superset and P is a subset of NP
 
+=> What is NP Hard
+NP hard need not be even verifiable in polynomial time
 
 => what is NP complete?
-a decision problem which is both NP and NP hard
+Similar problems with polynomial solution and verification
+
+1> Problems are reducible(problems of similar type)
+2> Verify a prolem in Polynomial time
+3> A problem is solvable in polynomial time
+
+3 = P
+2 = NP
+1&2 = NP Complete
+!2 = NP Hard
 
 
 
