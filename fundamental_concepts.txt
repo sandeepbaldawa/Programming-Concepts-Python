@@ -18,7 +18,7 @@ NP hard need not be even verifiable in polynomial time
 Similar problems with polynomial solution and verification
 
 1> Problems are reducible(problems of similar type)
-2> Verify a prolem in Polynomial time
+2> Verify a problem in Polynomial time
 3> A problem is solvable in polynomial time
 
 3 = P
