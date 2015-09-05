@@ -1,3 +1,7 @@
 => What is polynomial and exponential?
   Polynomial is x^y
   Exponential is 2^y
+  Usually(for all known polynomial algorithms) y is maximum 4, Hence 2^y is most of the times greater than x^y
+  Np-Hard => No polynomial time algorithm that exists. 
+  
+  
