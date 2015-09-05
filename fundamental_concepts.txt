@@ -1,0 +1,3 @@
+=> What is polynomial and exponential?
+  Polynomial is x^y
+  Exponential is 2^y
