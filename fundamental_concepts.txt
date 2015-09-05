@@ -4,4 +4,12 @@
   Usually(for all known polynomial algorithms) y is maximum 4, Hence 2^y is most of the times greater than x^y
   Np-Hard => No polynomial time algorithm that exists. 
   
+=> What is P and NP?
+P solutional in polynomial time and NP is verifiable in polynomial time
+
+=> what is NP complete?
+
+
+  
+  
   
