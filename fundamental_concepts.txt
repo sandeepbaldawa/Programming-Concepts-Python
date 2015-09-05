@@ -9,6 +9,7 @@ P solved and verified in polynomial time
 NP is verifiable but not solvable in polynomial time
 
 => What is NP Hard
+NP problems 
 
 
 => what is NP complete?
