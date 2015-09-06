@@ -9,12 +9,14 @@ d = { '1': "1",
       '9': "WXYZ",
 }
 
-def digstolets(digs):
-  if len(digs) == 0:
-    yield ''
-    return
-  first, rest = digs[0], digs[1:]
-  for x in d[first]:
-      for y in digstolets(rest): yield x + y
-
-print list(digstolets('1234'))
+def getphoneMneumonicHelper(input, digitIndex, acc):
+	if digitIndex < len(input):
+		digit = input[digitIndex]
+		for c in d[str(ord(input[digitIndex]) - ord('0'))]:
+			acc[digitIndex] =  c
+			getphoneMneumonicHelper(input, digitIndex + 1, acc)
+	else:
+		print acc
+	
+acc = [None] * 3
+getphoneMneumonicHelper("567", 0 , acc)
