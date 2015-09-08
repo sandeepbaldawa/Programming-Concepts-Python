@@ -1,0 +1,93 @@
+# pathname of file or folder conversion to normalize pathname
+# eg:- /usr/lib/../bin/gcc => /usr/bin/gcc
+# scripts//./../scripts/awkscripts/././ =? scripts/awkscripts
+
+# Answer:-
+# Grammmer
+# 1. Name => [A-Za-z0-9]
+# 2. Special => .|..
+# 3. pathname => dir|filename etc.
+
+# Split by "/"
+# If .. go one step back i.e. pop from stack
+# If . do nothing
+# If "" do nothing
+# If name add to stack
+# O(n)
+
+"""
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class NormalizedPathnames {
+  // @include
+  public static String ShortestEquivalentPath(String path) {
+    LinkedList<String> pathNames = new LinkedList<>();
+    // Special case: starts with "/", which is an absolute path.
+    if (path.startsWith("/")) {
+      pathNames.push("/");
+    }
+
+    for (String token : path.split("/")) {
+      System.out.println(token);
+      if (token.equals("..")) {
+        if (pathNames.isEmpty() || pathNames.peek().equals("..")) {
+          pathNames.push(token);
+        } else {
+          if (pathNames.peek().equals("/")) {
+            throw new IllegalArgumentException(
+                "Path error, trying to go up root " + path);
+          }
+          pathNames.pop();
+        }
+      } else if (!token.equals(".") && !token.isEmpty()) { // Must be a name.
+        pathNames.push(token);
+      }
+    }
+
+    StringBuilder result = new StringBuilder();
+    if (!pathNames.isEmpty()) {
+      Iterator<String> it = pathNames.descendingIterator();
+      String prev = it.next();
+      result.append(prev);
+      while (it.hasNext()) {
+        if (!prev.equals("/")) {
+          result.append("/");
+        }
+        prev = it.next();
+        result.append(prev);
+      }
+    }
+    return result.toString();
+  }
+  // @exclude
+
+  public static void main(String[] args) {
+    assert(ShortestEquivalentPath("123/456").equals("123/456"));
+    assert(ShortestEquivalentPath("/123/456").equals("/123/456"));
+    assert(ShortestEquivalentPath("usr/lib/../bin/gcc").equals("usr/bin/gcc"));
+    assert(ShortestEquivalentPath("./../").equals(".."));
+    assert(ShortestEquivalentPath("../../local").equals("../../local"));
+    assert(ShortestEquivalentPath("./.././../local").equals("../../local"));
+    assert(ShortestEquivalentPath("/foo/../foo/./../").equals("/"));
+    try {
+      ShortestEquivalentPath("/..");
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    }
+    try {
+      ShortestEquivalentPath("/cpp_name/bin/");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      assert(false);
+    }
+    assert(ShortestEquivalentPath("scripts//./../scripts/awkscripts/././")
+               .equals("scripts/awkscripts"));
+    if (args.length == 1) {
+      System.out.println(ShortestEquivalentPath(args[0]));
+    }
+  }
+}
+
+
+"""
