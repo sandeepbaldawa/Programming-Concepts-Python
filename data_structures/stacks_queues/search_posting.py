@@ -2,4 +2,66 @@
 # Another way can be using the jump/random node
 # Each node in the linkedlist contains a random pointer which can point to any node(including itself)
 
-#Question:- How do you traverse a Linked list using next and random pointer?
+#Question:- How do you traverse a Linked list using jump/random pointer?
+#Answer:- You could use a stack for the same
+
+"""
+import java.util.LinkedList;
+
+public class SearchPostingsListIterative {
+  // @include
+  public static void setJumpOrder(PostingListNode L) {
+    LinkedList<PostingListNode> s = new LinkedList<>();
+    int order = 0;
+    s.push(L);
+    while (!s.isEmpty()) {
+      PostingListNode curr = s.pop();
+      if (curr != null && curr.getOrder() == -1) {
+        curr.setOrder(order++);
+        // Stack is last-in, first-out, and we want to process
+        // the jump node first, so push next, then push jump.
+        s.push(curr.getNext());
+        s.push(curr.getJump());
+      }
+    }
+  }
+  // @exclude
+
+  public static void main(String[] args) {
+    PostingListNode L = null, curr = null;
+    // Build a linked list L->1->2->3->4->5->nullptr.
+    for (int i = 0; i < 5; ++i) {
+      PostingListNode temp = new PostingListNode(-1, null, null);
+      if (curr != null) {
+        curr.setNext(temp);
+        curr = temp;
+      } else {
+        curr = L = temp;
+      }
+    }
+
+    L.setJump(null); // no jump from 1
+    L.getNext().setJump(L.getNext().getNext().getNext()); // 2's jump points to
+    // 4
+    L.getNext().getNext().setJump(L); // 3's jump points to 1
+    L.getNext().getNext().getNext().setJump(null); // no jump from 4
+    L.getNext().getNext().getNext().getNext().setJump(
+        L.getNext().getNext().getNext().getNext()); // 5's jump points
+    // to 5
+    PostingListNode temp = L;
+    setJumpOrder(L);
+    // output the jump-first order, it should be 0, 1, 4, 2, 3
+    assert(temp.getOrder() == 0);
+    temp = temp.getNext();
+    assert(temp.getOrder() == 1);
+    temp = temp.getNext();
+    assert(temp.getOrder() == 4);
+    temp = temp.getNext();
+    assert(temp.getOrder() == 2);
+    temp = temp.getNext();
+    assert(temp.getOrder() == 3);
+  }
+}
+
+
+"""
