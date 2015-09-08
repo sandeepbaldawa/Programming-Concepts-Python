@@ -1,4 +1,8 @@
 week1:-
-Union-connect
+--------
+1. Union-connect
 Union - connects two nodes
 Connect - Queries if two nodes are connected 
+Connected components :- Maintains table of all connected components
+
+
