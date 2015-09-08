@@ -1,0 +1,4 @@
+week1:-
+Union-connect
+Union - connects two nodes
+Connect - Queries if two nodes are connected 
