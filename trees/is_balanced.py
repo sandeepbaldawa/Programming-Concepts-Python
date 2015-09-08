@@ -9,16 +9,6 @@ class Node:
 def height(node):
   return max(height(node.left), height(node.right)) + 1 if node else 0
 
-def isBalanced(node):
-  if not node:
-     return True
-  left_h = height(node.left)
-  right_h = height(node.right)
-  if abs(left_h - right_h) >1:
-      return False
-  else:
-      return isBalanced(node.left) and isBalanced(node.right)
-
 def isBalanced_optimized(node):
   if not node:
      return True
@@ -32,7 +22,7 @@ def isBalanced_optimized(node):
   if abs(left_h - right_h) >1:
       return -2 
   else:
-      return isBalanced(node.left) and isBalanced(node.right)
+      return max(left_h, right_h) + 1
 
 
 t = Node(24)
