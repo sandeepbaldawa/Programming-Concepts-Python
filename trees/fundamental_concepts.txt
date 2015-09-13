@@ -1,0 +1,5 @@
+- InOrder, PreOrder, PostOrder
+- When to pass parameters, return value
+- When to do pre-order/post-order, in-order processing
+- When to short circuit and return (eg:- is_balanced.py)
+- Tail recursion i.e. accumulate (eg:- getMax.py)
