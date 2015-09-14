@@ -1,12 +1,7 @@
 # https://www.youtube.com/watch?v=NBcqBddFbZw
 # https://www.youtube.com/watch?v=bl-gwEwm8CM
 
-class Node:
-    def __init__(self, data, left=None, right=None):
-        self.data = data
-        self.left = left
-        self.right = right
-
+from print_tree import *
 def getLca(curr, A, B): 
     assert(A != B) 
     if not curr:
@@ -25,12 +20,13 @@ def getLca(curr, A, B):
 
     return left if left else right
 
-myTree = Node(1)
-myTree.left = Node(2)
-myTree.right = Node(3)
-myTree.left.left = Node(4)
-myTree.left.right = Node(5)
-myTree.right.left = Node(6)
-myTree.right.right = Node(7)
+myTree = BinTree(1)
+myTree.left = BinTree(2)
+myTree.right = BinTree(3)
+myTree.left.left = BinTree(4)
+myTree.left.right = BinTree(5)
+myTree.right.left = BinTree(6)
+myTree.right.right = BinTree(7)
+print(myTree)
 tmp = getLca(myTree, myTree.left.right, myTree.left.left )   
-print tmp.data
+print " LCA of %s %s is %s" % (myTree.left.right.entry, myTree.left.left.entry, tmp.entry)
