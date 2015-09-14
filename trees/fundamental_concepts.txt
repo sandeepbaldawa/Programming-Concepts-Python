@@ -3,3 +3,17 @@
 - When to do pre-order/post-order, in-order processing
 - When to short circuit and return (eg:- is_balanced.py)
 - Tail recursion i.e. accumulate (eg:- getMax.py)
+
+Iterative InOrder, PreOrder, PostOrder
+--------------------------------------
+curr => top of stack
+prev => Last pushed element if going from top to bottom
+        Last poped element if going from bottom to top
+
+ 1. Going from top to bottom root to left
+   prev.left == curr
+   prev.right == curr
+   
+2. Going from bottom to top 
+   curr.left == prev
+   curr.right == prev
