@@ -22,5 +22,7 @@ def isBalancedHelper(node):
       return max(left_h, right_h) + 1
 
 
-t = BinTree(6, BinTree(2, BinTree(10, BinTree(8), BinTree(12))))
-print isBalanced(t)
+t = BinTree(906, BinTree(2, BinTree(0), BinTree(4)), BinTree(10, BinTree(8), BinTree(12)))
+print(t)
+
+print "Is balanced?", isBalanced(t)
