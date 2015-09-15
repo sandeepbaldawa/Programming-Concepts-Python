@@ -1,28 +1,24 @@
-class Node:
-	def __init__(self, data, left=None, right=None):
-		self.data = data
-		self.left = left
-		self.right = right
-
+from print_tree import *
 def getDiameter(node):
     if not node:
-        return 0,0
+        return 0, 0
 
     h_l, d_l = getDiameter(node.left)
     h_r, d_r = getDiameter(node.right)
     height = max(h_l, h_r) + 1
-    diameter =  h_l + h_r + 1
-    diameter=d_l if d_l > diameter else diameter
-    diameter=d_r if d_r > diameter else diameter
+    diameter = h_l + h_r + 1
+    diameter = d_l if d_l > diameter else diameter
+    diameter = d_r if d_r > diameter else diameter
 
     return height, diameter
 
-myTree = Node(10)
-myTree.left = Node(5)
-myTree.right = Node(15)
-myTree.left.left = Node(2)
-myTree.left.right = Node(6)
-myTree.right.left = Node(11)
-myTree.right.right = Node(20)
+myTree = BinTree(1)
+myTree.left = BinTree(5)
+myTree.right = BinTree(15)
+myTree.left.left = BinTree(2)
+myTree.left.right = BinTree(6)
+myTree.right.left = BinTree(11)
+myTree.right.right = BinTree(20)
+print(myTree)
 
 print getDiameter(myTree)
