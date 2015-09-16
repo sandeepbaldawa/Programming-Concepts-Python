@@ -106,14 +106,49 @@ class Graph(object):
         # show graph
         plt.show()
 
+    def find_path(self, start_vertex, end_vertex, path=[]):
+        """ find a path from start_vertex to end_vertex 
+            in graph """
+        graph = self.__graph_dict
+        path = path + [start_vertex]
+        if start_vertex == end_vertex:
+            return path
+        if start_vertex not in graph:
+            return None
+        for vertex in graph[start_vertex]:
+            if vertex not in path:
+                extended_path = self.find_path(vertex, 
+                                               end_vertex, 
+                                               path)
+                if extended_path: 
+                    return extended_path
+        return None
 
+    def find_all_paths(self, start_vertex, end_vertex, path=[]):
+        """ find all paths from start_vertex to 
+            end_vertex in graph """
+        graph = self.__graph_dict 
+        path = path + [start_vertex]
+        if start_vertex == end_vertex:
+            return [path]
+        if start_vertex not in graph:
+            return []
+        paths = []
+        for vertex in graph[start_vertex]:
+            if vertex not in path:
+                extended_paths = self.find_all_paths(vertex, 
+                                                     end_vertex, 
+                                                     path)
+                for p in extended_paths: 
+                    paths.append(p)
+        return paths
 
 if __name__ == "__main__":
 
-    g = { "a" : ["d"],
+    g = { "a" : ["d", "b"],
           "b" : ["c"],
           "c" : ["b", "c", "d", "e"],
-          "d" : ["a", "c"],
+          "d" : ["a", "b", "c"],
           "e" : ["c"],
           "f" : []
         }
@@ -148,4 +183,10 @@ if __name__ == "__main__":
     print(graph.vertices())
     print("Edges of graph:")
     print(graph.edges())
+    source = "a"
+    dest = "b"
+    print " Path from %s to %s are" % (source, dest)
+    print graph.find_path(source, dest)
+    print " All Paths from %s to %s are" % (source, dest)
+    print graph.find_all_paths(source, dest)
     graph.draw_graph(graph.edges())
