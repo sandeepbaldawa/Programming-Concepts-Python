@@ -1,0 +1,7 @@
+How to decide which type of sorting?
+
+- Time => N logN
+- In place?
+- Stable?
+- Mostly sorted?
+- Data value restricted? (Radi, Bucket, Counting etc..)
