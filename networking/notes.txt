@@ -25,6 +25,4 @@ VLANs (only for managed switch)
 -----
 - Segragating devices intro different areas i.e. separate ports into different virtual LANs
 - VLANs cannot talk between each other, we need routers to talk between VLANs
-- 
 
-- 
