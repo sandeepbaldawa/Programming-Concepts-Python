@@ -16,7 +16,6 @@ Speed
 - Un-managed switches will auto detect the speed and set the corresponding speed to the ports, managed switches cn hard code the speed
 - Backplane bandwidth is important to drive switches
 
-
 Trunk
 ------
 - Trunk ports helps connect multiple switches together
@@ -25,4 +24,7 @@ Trunk
 VLANs (only for managed switch)
 -----
 - Segragating devices intro different areas i.e. separate ports into different virtual LANs
+- VLANs cannot talk between each other, we need routers to talk between VLANs
+- 
+
 - 
