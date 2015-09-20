@@ -29,5 +29,11 @@ VLANs (only for managed switch)
 Power over ethernet
 -------------------
 Ability to power ON/OFF devices like computer, VOIP, phone etc.
+Power per port or power for entire switch
 Convergence => VOIP, survellience etc connected to same network
+
+QOS
+----
+Priortizing the services eg:- VOIP is on the top, survellience is below and so on..
+
 
