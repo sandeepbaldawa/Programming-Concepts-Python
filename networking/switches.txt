@@ -39,7 +39,7 @@ Priortizing the services eg:- VOIP is on the top, survellience is below and so o
 
 
 Routing protocols
-------------------
+------------------ 
 Switches talk between each other using the routing protocols like spanning tree protocol, 
 
 eg:- Let's say 6 switches are connected through a Trunk, the spanning tree protocol enables the communication
