@@ -2,6 +2,12 @@ https://github.com/python-git/python/blob/master/Lib/heapq.py
 http://www.ardendertat.com/2011/05/30/my-favorite-interview-question/
 http://interactivepython.org/runestone/static/pythonds/Trees/BinaryHeapImplementation.html
 
+Heap is a complete binary tree(all nodes available except the lowest level nodes)
+Parent => p Left => 2p Right => 2p + 1
+Parent always at floor of p/2
+In a heap, for every node x with parent p, the key in p is smaller than or equal to the key in x
+
+
 Why do we need heaps?
 ---------------------
 In a list, inserting O(N) and sorting is O(N log N)
