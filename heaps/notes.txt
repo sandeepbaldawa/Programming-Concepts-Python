@@ -1,2 +1,8 @@
 https://github.com/python-git/python/blob/master/Lib/heapq.py
 http://www.ardendertat.com/2011/05/30/my-favorite-interview-question/
+
+Why do we need heaps?
+---------------------
+In a list, inserting O(N) and sorting is O(N log N)
+We need these functions to implement a priority queue
+Heap can do both of these in O(log N)
