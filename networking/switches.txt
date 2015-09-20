@@ -3,6 +3,7 @@ Switches
 Intro
 -------
 https://www.youtube.com/watch?v=9yYqNqTNnqI
+Imporvement over Hub which is nothing but a splitter, which does a broadcast of all data on all ports.
 - COmmunication between devices on the same network
 - Layer 2
 - Use MAC(MAC's are unique for each device with upper digits indicating the manufacturer) for unique identification of devices on the network
@@ -37,3 +38,8 @@ QOS
 Priortizing the services eg:- VOIP is on the top, survellience is below and so on..
 
 
+Routing protocols
+------------------
+Switches talk between each other using the routing protocols like spanning tree protocol, 
+
+eg:- Let's say 6 switches are connected through a Trunk, the spanning tree protocol enables the communication
