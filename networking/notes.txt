@@ -22,5 +22,7 @@ Trunk
 - Trunk ports helps connect multiple switches together
 - Fiber for Cisco switches which can handle 10GB/s
 
-VLANs
+VLANs (only for managed switch)
 -----
+- Segragating devices intro different areas i.e. separate ports into different virtual LANs
+- 
