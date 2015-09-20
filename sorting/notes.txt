@@ -5,3 +5,4 @@ How to decide which type of sorting?
 - Stable?
 - Mostly sorted?
 - Data value restricted? (Radi, Bucket, Counting etc..)
+- Fits in memory?
