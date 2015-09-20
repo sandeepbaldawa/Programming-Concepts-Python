@@ -1,6 +1,7 @@
 Switches:- https://www.youtube.com/watch?v=9yYqNqTNnqI
+- COmmunication between devices on the same network
 - Layer 2
-- Use MAC for unique identification of devices on the network
+- Use MAC(MAC's are unique for each device with upper digits indicating the manufacturer) for unique identification of devices on the network
 - SMart to recognize the destination by remebering the port it is connected to
 - Better than Hub
 - Managed/Umanaged switches
