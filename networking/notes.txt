@@ -1,10 +1,26 @@
-Switches:- https://www.youtube.com/watch?v=9yYqNqTNnqI
+Switches
+
+Intro
+-------
+https://www.youtube.com/watch?v=9yYqNqTNnqI
 - COmmunication between devices on the same network
 - Layer 2
 - Use MAC(MAC's are unique for each device with upper digits indicating the manufacturer) for unique identification of devices on the network
 - SMart to recognize the destination by remebering the port it is connected to
 - Better than Hub
 - Managed/Umanaged switches
+
+Speed
+------
 - 10/100/1000 on a switch indicates it supports 10 or 100 or 1000 Mb/s
 - Un-managed switches will auto detect the speed and set the corresponding speed to the ports, managed switches cn hard code the speed
-- 
+- Backplane bandwidth is important to drive switches
+
+
+Trunk
+------
+- Trunk ports helps connect multiple switches together
+- Fiber for Cisco switches which can handle 10GB/s
+
+VLANs
+-----
