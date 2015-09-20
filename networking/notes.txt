@@ -1,0 +1,7 @@
+Switches:- https://www.youtube.com/watch?v=9yYqNqTNnqI
+- Layer 2
+- Use MAC for unique identification of devices on the network
+- SMart to recognize the destination by remebering the port it is connected to
+- Better than Hub
+- Managed/Umanaged switches
+- 10/100/1000 on a switch indicates it supports 10 or 100 or 1000 Mb/s
