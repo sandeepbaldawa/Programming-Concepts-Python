@@ -6,3 +6,5 @@ Switches:- https://www.youtube.com/watch?v=9yYqNqTNnqI
 - Better than Hub
 - Managed/Umanaged switches
 - 10/100/1000 on a switch indicates it supports 10 or 100 or 1000 Mb/s
+- Un-managed switches will auto detect the speed and set the corresponding speed to the ports, managed switches cn hard code the speed
+- 
