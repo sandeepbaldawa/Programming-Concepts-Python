@@ -14,3 +14,10 @@ Why do we need heaps?
 In a list, inserting O(N) and sorting is O(N log N)
 We need these functions to implement a priority queue
 Heap can do both of these in O(log N)
+
+Add to Heap
+----------
+- Add to leaf, and swim to top the value by comparison wih parent.
+
+Remove Min/Max i.e. Top from Heap
+----------
