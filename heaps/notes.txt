@@ -21,3 +21,10 @@ Add to Heap
 
 Remove Min/Max i.e. Top from Heap
 ----------
+- Remove Root
+- Add some leaf node to root and then sink by comparison with children
+
+Heaps can be represented with arrays
+------------------------------------
+for every parent "p" the children are at "2p + 1" and "2p + 2"
+and for each chil "c" parent is at n-1/2 floor
