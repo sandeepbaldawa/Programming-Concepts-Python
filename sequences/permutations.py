@@ -1,3 +1,4 @@
+# https://www.youtube.com/watch?v=Jf0WYAbPDKI
 def permutations(word):
     if len(word) == 1:
     	return word
