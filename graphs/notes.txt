@@ -1,1 +1,9 @@
 https://www.udacity.com/wiki/creating-network-graphs-with-python
+http://web.stanford.edu/class/archive/cs/cs161/cs161.1138/
+https://en.wikipedia.org/wiki/Vertex_(graph_theory)
+http://algs4.cs.princeton.edu/42digraph/
+
+
+Topological sort applications. Application: course prerequisites, order in which to compile components of a large computer program, causalities, class inheritance, deadlocking detection, temporal dependencies, pipeline of computing jobs, check for symbol link loop, evaluate formula in spreadsheet.
+
+Strong component applications. Applications to CAD, Markov chains (irreducible), spider traps and web search, pointer analysis, garbage collection.
