@@ -26,10 +26,16 @@ https://www.quora.com/What-are-some-cool-bit-manipulation-tricks-hacks
 http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/
 https://graphics.stanford.edu/~seander/bithacks.html#ParityNaive
 
+Idiom to get the ith bit
+-------------
+(x >> i) & 1
 
-Check if nth bit is set
------------------------
-True if x & (1 << n) else False
+
+
+
+
+
+
 
 
 Set the nth bit
