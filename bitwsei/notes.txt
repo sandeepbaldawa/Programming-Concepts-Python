@@ -11,6 +11,12 @@ x & ~(x-1)
 
 Swap ith and jth bits
 -----------------------
+Idiom to flip ith pos
+Left shift 1 by i times and xor with the number
+x ^= (1 << i) 
+
+
+
 
 
 
