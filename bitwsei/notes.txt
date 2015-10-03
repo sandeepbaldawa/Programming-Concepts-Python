@@ -9,6 +9,10 @@ Extract one bit
 --------------------
 x & ~(x-1)
 
+Swap ith and jth bits
+-----------------------
+
+
 
 CHECKS IF NON-NEGATIVE INTEGER IS A POWER OF 2 OR NOT
 --------------------------------------------------------
