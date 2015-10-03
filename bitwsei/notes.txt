@@ -1,3 +1,15 @@
+Parity
+-----------------------------
+1. Brutest x = x >> 1 and count += 1 return count % 2
+2. x & (x-1) with res = res ^ 1  
+3. Cache the 16 bits parity
+4. XOR commutative and associative property
+
+Extract one bit
+--------------------
+x & ~(x-1)
+
+
 CHECKS IF NON-NEGATIVE INTEGER IS A POWER OF 2 OR NOT
 --------------------------------------------------------
 https://www.quora.com/What-are-some-cool-bit-manipulation-tricks-hacks
