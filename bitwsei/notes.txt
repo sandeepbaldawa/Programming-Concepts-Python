@@ -14,7 +14,8 @@ Swap ith and jth bits
 -----------------------
 Idiom to flip ith pos
 Left shift 1 by i times and xor with the number
-x ^= (1 << i) 
+bit_mask = ((1 << i) | (1 << j))
+x = x ^ bit_mask
 
 Reverse the bits
 ------------------
