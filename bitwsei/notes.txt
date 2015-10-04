@@ -28,8 +28,9 @@ Weight of a number
 
 
 
-CHECKS IF NON-NEGATIVE INTEGER IS A POWER OF 2 OR NOT
+Awesome links
 --------------------------------------------------------
+Hackers Delight!!
 https://www.quora.com/What-are-some-cool-bit-manipulation-tricks-hacks
 http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/
 https://graphics.stanford.edu/~seander/bithacks.html#ParityNaive
