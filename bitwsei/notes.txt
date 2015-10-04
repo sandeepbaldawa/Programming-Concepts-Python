@@ -23,6 +23,9 @@ Weight of a number
 ------------------
 92 => 4 (number of 1's)
 
+CLosest number with same weight
+--------------------------------
+
 
 
 
