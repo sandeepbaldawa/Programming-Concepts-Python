@@ -1,3 +1,5 @@
+# Insert operands + and - in 1...9 to form an expresion equals to a target
+# +1+2+3-4+5+6+78+9  == 100
 def get_ops(num, acc=""):
     if not num:
     	if eval(acc) == 100:
