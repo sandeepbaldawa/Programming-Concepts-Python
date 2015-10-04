@@ -5,6 +5,7 @@ Parity
 3. Cache the 16 bits parity
 4. XOR commutative and associative property
 
+
 Extract one bit
 --------------------
 x & ~(x-1)
