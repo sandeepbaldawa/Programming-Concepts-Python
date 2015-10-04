@@ -15,6 +15,14 @@ Idiom to flip ith pos
 Left shift 1 by i times and xor with the number
 x ^= (1 << i) 
 
+Reverse the bits
+------------------
+
+
+Weight of a number
+------------------
+92 => 4 (number of 1's)
+
 
 
 
