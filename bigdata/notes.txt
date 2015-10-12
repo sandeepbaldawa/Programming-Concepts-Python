@@ -25,5 +25,5 @@ Distributed Model
 3. Project
 
 Slaves => "Task Tracker", "Data Node"
-Master => "Task Tracker", "Data Node", " ", "Job Tracker", "Name Node"
+Master => "Task Tracker", "Data Node", "Job Tracker", "Name Node"
 
