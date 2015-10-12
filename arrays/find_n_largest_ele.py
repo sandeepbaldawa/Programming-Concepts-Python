@@ -10,3 +10,13 @@ RSelect(A, n, order statistic i)
 4 - If j > i  RSelect(A, j-1, i) => 1st part
 5-  If i > j  RSelect(A, n-j, i-j) => 1st part
 
+
+Choose a good pivot
+-------------------
+Median of Medians
+ChoosePivot(A,n)
+1 - break A into n/5 groups with 5 elements each
+2 - Sort each group (mergesort)
+3 - Copy n/5 medians(middle element of each sorted group) into new array C
+4 - 
+
