@@ -29,3 +29,7 @@ Master => "Task Tracker", "Data Node", "Job Tracker", "Name Node"
 
 "Task Tracker" and "Job Tracker" fall under MapReduce
 "Data Node" and "Name Node" fall under HDFS
+
+
+Applications talk to Master Node by submitting batch of jobs to the queue
+Job Trackers breaks bigger job to the task tracker
