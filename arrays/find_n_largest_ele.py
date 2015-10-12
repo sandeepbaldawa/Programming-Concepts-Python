@@ -1,3 +1,5 @@
+http://www.ardendertat.com/2011/10/27/programming-interview-questions-10-kth-largest-element-in-array/
+
 One could sort and then find element that would be O(N logN)
 Below can be done in O(N)
 Worst case if you always choose the smallest element as the pivot O(N^2)
@@ -19,4 +21,10 @@ ChoosePivot(A,n)
 2 - Sort each group (mergesort)
 3 - Copy n/5 medians(middle element of each sorted group) into new array C
 4 - Recursively compute median of C
+Then do above RSelect
+
+Guarantees O(N)
+However not in place, takes extra storage, worse constants
+
+
 
