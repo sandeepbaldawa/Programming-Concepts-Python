@@ -1,4 +1,8 @@
 What is big data?
+-----------------------------
 Volume   - GB, TB, PB
 Velocity -  
 Variety - structured, unstructured(video, audio text etc..) and semi-structured (logs)
+
+GFS => Google File system , Technique to store the data
+MapReduce => Technique to process the data
