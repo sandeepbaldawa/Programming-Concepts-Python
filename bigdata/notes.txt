@@ -13,3 +13,17 @@ Yahoo
 ------
 HDFS
 MapReduce
+
+Hadoop
+--------
+Linux based
+Low cost commodity machines
+Distributed Model
+
+1. MapReduce
+2. HDFS
+3. Project
+
+Slaves => "Task Tracker", "Data Node"
+Master => "Task Tracker", "Data Node", " ", "Job Tracker", "Name Node"
+
