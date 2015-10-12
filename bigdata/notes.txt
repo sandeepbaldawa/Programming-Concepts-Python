@@ -1,0 +1,4 @@
+What is big data?
+Volume   - GB, TB, PB
+Velocity -  
+Variety - structured, unstructured(video, audio text etc..) and semi-structured (logs)
