@@ -18,5 +18,5 @@ ChoosePivot(A,n)
 1 - break A into n/5 groups with 5 elements each
 2 - Sort each group (mergesort)
 3 - Copy n/5 medians(middle element of each sorted group) into new array C
-4 - 
+4 - Recursively compute median of C
 
