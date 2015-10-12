@@ -1,5 +1,6 @@
 One could sort and then find element that would be O(N logN)
 Below can be done in O(N)
+Worst case if you always choose the smallest element as the pivot O(N^2)
 
 RSelect(A, n, order statistic i)
 0 - If n == 1 return A[1]
