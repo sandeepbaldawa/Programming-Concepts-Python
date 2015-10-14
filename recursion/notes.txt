@@ -1,5 +1,16 @@
 https://see.stanford.edu/materials/icspacs106b/H19-RecBacktrackExamples.pdf
 http://www.kosbie.net/cmu/fall-11/15-112/handouts/optional-notes-combinatorial-iterators.html
 
+Permutations and Subsets are about choice
+Width of branching represents number of options available for each decision
+
+Exhaustive recursion
+-----------------------
+Explore all possible outcomes at every decision point
 Pemutation => N!
 Subsets => 2^N
+
+Partial exploration of exhaustive space
+----------------------------------------
+Stop at some satisfactory outcome
+
