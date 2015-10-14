@@ -14,3 +14,23 @@ Partial exploration of exhaustive space
 ----------------------------------------
 Stop at some satisfactory outcome
 
+
+Backtracking
+--------------------
+bool Solve(configuration conf) {
+     if (no more choices) // BASE CASE
+         return (conf is goal state);
+     
+     for (all available choices) {
+         try one choice c;
+         
+        // recursively solve after making choice
+        ok = Solve(conf with choice c made);
+       
+        if (ok)
+            return true;
+        else
+            unmake choice c;
+     }
+   return 
+}
