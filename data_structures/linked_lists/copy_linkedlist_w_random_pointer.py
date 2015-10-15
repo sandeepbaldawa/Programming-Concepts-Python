@@ -5,6 +5,6 @@ Then in second pass link the random nodes using row in the HashMap
 
 2nd Method
 ---------------
-Inser new nodes in between the old linked list with old linked list pointing to new nodes.
+Insert new nodes in between the old linked list with old linked list pointing to new nodes.
 p1.next.random = p1.random.next
 
