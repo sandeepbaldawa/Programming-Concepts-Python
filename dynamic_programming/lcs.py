@@ -25,6 +25,8 @@
 #}
 
 # Techniques:- Optimal sub-structure and Overlapping sub-problem
+# Ovelapping substructure problem occurs when recursion computes the same values again and again
+# http://www.geeksforgeeks.org/dynamic-programming-set-4-longest-common-subsequence/
 # http://wordaligned.org/articles/longest-common-subsequence#tocdynamic-programming
 #Psuedo Code
 # for all in i : LCS(i,0) = 0
