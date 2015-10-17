@@ -1,4 +1,6 @@
 # A Naive recursive implementation of LCS problem
+# From call stack we can see lot of calls being recalculated
+# Can we avoid this?
 
 def lcs_helper(X, Y, m, n):
    if (m == 0 or n == 0):
@@ -10,4 +12,11 @@ def lcs_helper(X, Y, m, n):
 
 def lcs(X, Y):
     return lcs_helper(X, Y, len(X), len(Y))
-print lcs("MAN","CHIMPANZEE")
+print lcs("AXYT","AYZX")
+
+
+                     lcs("AXYT", "AYZX")
+                       /                 \
+         lcs("AXY", "AYZX")            lcs("AXYT", "AYZ")
+         /            \                  /               \
+lcs("AX", "AYZX") lcs("AXY", "AYZ")   lcs("AXY", "AYZ") lcs("AXYT", "AY")
