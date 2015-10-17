@@ -7,3 +7,4 @@
 # LCS of A and B is "bcd" and "bce"
 
 # LCS represent similarity of A and B, longer the subsequence is more similar A and B are.
+# Used to compare DNA sequences to know similarity between genes
