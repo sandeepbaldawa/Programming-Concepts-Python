@@ -14,3 +14,11 @@
 # 1. Generate all subsequences of A   (2^M)
 # 2. generate all subsequences of B   (2^N) 
 # 3. Retain the longest               O(2^Max(M.N))
+
+# Recursive procedure
+# Search(S){
+#     Divide in to SubSpaces S1,S2,S3..Sk
+#     Find the best in each Si
+#     Find the best of the best
+#}
+     
