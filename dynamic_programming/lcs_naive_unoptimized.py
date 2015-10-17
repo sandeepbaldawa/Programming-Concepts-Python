@@ -1,6 +1,7 @@
 # A Naive recursive implementation of LCS problem
 # From call stack we can see lot of calls being recalculated
 # Can we avoid this?
+# O(2 ^N)
 
 def lcs_helper(X, Y, m, n):
    if (m == 0 or n == 0):
