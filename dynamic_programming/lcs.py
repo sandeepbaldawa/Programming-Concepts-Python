@@ -8,3 +8,9 @@
 
 # LCS represent similarity of A and B, longer the subsequence is more similar A and B are.
 # Used to compare DNA sequences to know similarity between genes
+# Mis-spelt word
+
+# Brute Force
+# 1. Generate all subsequences of A
+# 2. generate all subsequences of B
+# 3. Retain the longest
