@@ -5,3 +5,5 @@
 # "ad" is a subsequence of "abcde"
 # A="abcde" and B="bceadq"  => "bcd" and "ad" are common sequences
 # LCS of A and B is "bcd" and "bce"
+
+# LCS represent similarity of A and B, longer the subsequence is more similar A and B are.
