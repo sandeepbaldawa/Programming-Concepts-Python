@@ -11,6 +11,6 @@
 # Mis-spelt word
 
 # Brute Force
-# 1. Generate all subsequences of A
-# 2. generate all subsequences of B
-# 3. Retain the longest
+# 1. Generate all subsequences of A   (2^M)
+# 2. generate all subsequences of B   (2^N) 
+# 3. Retain the longest               O(2^Max(M.N))
