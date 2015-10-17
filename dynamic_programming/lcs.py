@@ -1,4 +1,5 @@
-# http://wordaligned.org/articles/longest-common-subsequence#tocdynamic-programming
+# http://www.geeksforgeeks.org/dynamic-programming-set-4-longest-common-subsequence/
+# http://www.geeksforgeeks.org/printing-longest-common-subsequence/
 # https://www.youtube.com/watch?v=ml0i13Uvmuc
 # Longest common subsequence
 # Input   :- A[1..M],B[1..N] Output  :- C[1..P]
