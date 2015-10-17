@@ -24,4 +24,11 @@
 #}
 
 # Techniques:- Optimal sub-structure and Overlapping sub-problem
+
+#Psuedo Code
+# for all in i : LCS(i,0) = 0
+# for all in j : LCS(0,j) = 0
+# if X[i] == X[j] : 1 + LCS(i-1, j-1)
+# if X[i] != X[j] : max(LCS(i-1,j), LCS(i,j-1))
+
      
