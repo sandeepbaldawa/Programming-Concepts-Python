@@ -22,4 +22,6 @@
 #     Find the best in each Si
 #     Find the best of the best
 #}
+
+# Techniques:- Optimal sub-structure and Overlapping sub-problem
      
