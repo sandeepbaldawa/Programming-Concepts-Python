@@ -5,4 +5,4 @@
 # X is a subsequence of Y if X is obtained by dropping elements of Y
 # "ad" is a subsequence of "abcde"
 # A="abcde" and B="bceadq"  => "bcd" and "ad" are common sequences
-# LCS of A and B is "bcd"
+# LCS of A and B is "bcd" and "bce"
