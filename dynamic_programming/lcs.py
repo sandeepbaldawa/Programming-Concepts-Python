@@ -25,7 +25,7 @@
 #}
 
 # Techniques:- Optimal sub-structure and Overlapping sub-problem
-
+# http://wordaligned.org/articles/longest-common-subsequence#tocdynamic-programming
 #Psuedo Code
 # for all in i : LCS(i,0) = 0
 # for all in j : LCS(0,j) = 0
