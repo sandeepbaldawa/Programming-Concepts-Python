@@ -1,0 +1,17 @@
+def bin_search(input, start, stop, val):
+    if start > stop:
+        return "Not Found"
+    
+    mid = (start + stop)/2
+    if input[mid] == val:
+        return mid
+    if input[mid] < val:
+        return bin_search(input, start, mid-1, val)
+    if input[mid] > val:
+        return bin_search(input, mid-1, stop, val)
+        
+def BS(input, val):
+    return bin_search(input, 0, len(input), val)
+    
+            
+print BS([1,2,3,4,5], 3)
