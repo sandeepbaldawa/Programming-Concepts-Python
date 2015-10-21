@@ -1,4 +1,5 @@
 # Beautiful piece of code from Stanford classes
+# N! permutations
 
 def getPerms(soFar, rest):
     if len(rest) == 0:
