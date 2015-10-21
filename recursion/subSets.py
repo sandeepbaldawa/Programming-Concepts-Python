@@ -1,4 +1,5 @@
 # From Stanford easy way to generate subsets
+# 2^N calls
 def getSubSets(soFar, rest):
     if len(rest) == 0:
         print soFar
