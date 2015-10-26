@@ -1,3 +1,4 @@
+http://yefangliang.com/2015/10/16/leetcode-294-flip-game-ii/
 https://see.stanford.edu/materials/icspacs106b/H19-RecBacktrackExamples.pdf
 http://www.kosbie.net/cmu/fall-11/15-112/handouts/optional-notes-combinatorial-iterators.html
 
