@@ -12,3 +12,24 @@ B : *quickly* "Nine!"
 A : "How'd you know it was nine so fast?"
 A : "You just added one more"
 A : "So you didn't need to recount because you remembered there were eight! Dynamic Programming is just a fancy way to say 'remembering stuff to save time later'"
+
+
+Following are steps to coming up with a dynamic programming solution :
+----------------------------------------------------------------------
+
+1. Think of a recursive approach to solving the problem.
+    Essentially expressing the problem P(X) in terms of P(Y) or an expression involving P(Yi)
+            where Yi is less than X.
+    The "less than" here could mean multiple things. if X is an integer, then it could mean less than arithmetically.
+    If X is a string, it could mean a substring of X.
+    If X is an array, it could mean a subarray of X, and so forth.
+
+2. Write a recursive code for the approach you just thought of.
+            Lets say your function definition looks like this :
+                    solve(A1, A2, A3 ... )
+
+3. Save the results you get for every function run so that if solve(A1, A2, A3, ... ) is called again, you do not recompute the whole thing.
+
+4. Analyze the space and time requirements, and improve it if possible.
+
+    And voila, we have a DP solution ready.
