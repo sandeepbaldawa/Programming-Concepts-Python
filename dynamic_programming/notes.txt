@@ -33,3 +33,30 @@ Following are steps to coming up with a dynamic programming solution :
 4. Analyze the space and time requirements, and improve it if possible.
 
     And voila, we have a DP solution ready.
+    
+http://www.cs.cmu.edu/afs/cs/academic/class/15210-f13/www/lectures/lecture22-23.pdf
+
+It turns out that most problems that can be tackled with dynamic programming solutions are
+optimization or decision problems. An optimization problem is one in which we are trying to find a
+solution that optimizes some criteria (e.g. finding a shortest path, or finding the longest contiguous
+subsequence sum). Sometimes we want to enumerate (list) all optimal solutions, or count the number
+of such solutions. A decision problem is one in which we are trying to find if a solution to a problem
+exists. Again we might want to count or enumerate the valid solutions. Therefore when you see
+an optimization or enumeration problem you should think about possible dynamic programming
+solutions.    
+    
+Although dynamic programming can be viewed abstractly as a DAG, in practice we need to
+implement (code) the dynamic program. There are two common ways to do this, which are referred
+to as the top-down and bottom-up approaches. The top-down approach starts at the root and uses
+recursion, as in divide-and-conquer, but remembers solutions to subproblems so that when the
+algorithm needs to solve the same instance many times only the first call does the work and the
+remaining calls just look up the solution. Storing solutions for reuse is called memoization. The
+bottom-up approach starts at the leaves of the DAG and typically processes the DAG in some form of
+level order traversal—for example, by processing all problems of size 1 and then 2 and then 3, and
+so on. Each approach has its advantages and disadvantages. Using the top-down approach (recursion
+with memoization) can be quite elegant and can be more efficient in certain situations by evaluating
+only those instances actually needed. Using the bottom up approach (level order traversal of the
+DAG) assumes it will need every instance whether or not is it use in the overall solution, but can be
+easier to parallelize and can be more space efficient. It is important, however, to remember to first
+formulate the problem abstractly in terms of the inductive structure, then think about it in terms of how
+substructure is shared in a DAG, and only then worry about coding strategies.
