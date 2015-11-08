@@ -39,7 +39,7 @@ def maxContiguousSubArray(arr):
 arr = [-2,1,-3,4,-1,2,1,-5,4]   
 maxContiguousSubArray(arr)    
 
- /**
+"""
      * CREDIT: InterviewBit.com
      *
      * Find out the maximum sub-array of non negative numbers from an array.
@@ -59,4 +59,4 @@ maxContiguousSubArray(arr)
      *
      * @return the maximum sub-array of non-negative numbers
      *
-     */
+"""
