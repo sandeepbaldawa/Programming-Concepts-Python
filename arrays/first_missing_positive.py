@@ -30,3 +30,18 @@ This means we can use the array to track these elements.
 We traverse the array and if A[i] is in [1,N] range, we try to put in the index of same value in the array.
 """
 
+class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def firstMissingPositive(self, A):
+        for i in range(len(A)):
+            if (A[i] > 0 and A[i] <= len(A)):
+                pos = A[i] - 1
+                if (A[pos] != A[i]):
+                    A[pos], A[i] = A[i], A[pos]
+                    i = i - 1
+       
+        for i in range(len(A)):
+            if (A[i]!=(i+1)):
+                return i+1
+        return len(A)+1
