@@ -1,0 +1,3 @@
+In Python 3
+- Divide is // instead of /
+- there is no long, there is only int
