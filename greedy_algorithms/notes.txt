@@ -1,0 +1,4 @@
+- Safe Move => Logic for the subproblem
+- Solve Safe Move for all other subproblems
+- Will work for one dimentional problems like Kanpsack for weight/value maximization, won't work for multi dimensional problems
+like optimizing for weight/value/volume.
