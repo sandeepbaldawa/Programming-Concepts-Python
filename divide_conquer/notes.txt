@@ -3,14 +3,12 @@ Binary Search
 - Works only on sorted arrays
 
 BS(A, low, high, key):
-  if low < high:
-    return low - 1
-  mid = low + (high - low)/2 ==> Floor of this since this might not be an integer
-  if key == mid:
-    return A[mid]
-  elif key < mid:
-    high = mid - 1
-    BS(A, low, high, key)
-  else:
-    low = mid + 1 
-    BS(A, low, high, key)
+    if low < high:
+        return low - 1
+    mid = low + (high - low)/2 ==> Floor of this since this might not be an integer
+    if key == mid:
+        return A[mid]
+    elif key < mid:
+        BS(A, low, mid-1, key)
+    else:
+        BS(A, mid + 1, high, key)
