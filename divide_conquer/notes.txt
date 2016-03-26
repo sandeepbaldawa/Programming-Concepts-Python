@@ -8,6 +8,9 @@ Divide and Conquer principles
 Binary Search
 ---------------
 - Works only on sorted arrays
+- Recurrance relation :- T(n) = T(n/2) + c
+- Base case is for empty array T(n) = c
+
 
 BS(A, low, high, key):
     if low < high:
