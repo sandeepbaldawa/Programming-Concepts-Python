@@ -1,7 +1,7 @@
 # Uses python3
 '''
 The goal of this problem is to represent a given positive
-integer n as a sum of as many pairwise distinct positive integers 
+integer n as a sum of as many pairwise distinct positive integers
 as possible.
 
 FOR 7
@@ -27,12 +27,15 @@ result = []
 sum = 0
 
 for i in range(1,int(n/2+1)):
-	#sum + i + (i+1) <= n
-	#if ((sum + i == n) or (sum + 1 + 2*i) <= n):
-	if ((sum + 1 + 2*i) <= n):
-		sum += i
-		result.append(str(i))
+        #sum + i + (i+1) <= n
+        #if ((sum + i == n) or (sum + 1 + 2*i) <= n):
+        if ((sum + 1 + 2*i) <= n):
+                sum += i
+                result.append(str(i))
+        else:
+                break
 
 result.append(str(n-sum))
 print(len(result))
 print(" ".join(result))
+~
