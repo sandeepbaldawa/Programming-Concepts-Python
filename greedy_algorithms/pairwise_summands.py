@@ -38,4 +38,3 @@ for i in range(1,int(n/2+1)):
 result.append(str(n-sum))
 print(len(result))
 print(" ".join(result))
-~
