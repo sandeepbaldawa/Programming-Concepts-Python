@@ -16,4 +16,9 @@ MultyPolyt(A, B, n):
       
 Naive with D & Q - 
 -----------------------------
+A(x) = D1(x)x^n/2 + D0(x)
+D1(x) = an-1 * x^n/2-1 + an-2 * x^n/2-2....+ an/2
+D0(x) = an/2-1 * x^n/2-1 + an/2-2 * x^n/2-2....+ a0
+
+
   
