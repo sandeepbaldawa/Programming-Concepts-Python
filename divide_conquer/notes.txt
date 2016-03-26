@@ -40,5 +40,7 @@ BS(A, low, high, key):
         low = mid + 1
         
         
+Multiplying polynomials
+-------------------------
         
         
