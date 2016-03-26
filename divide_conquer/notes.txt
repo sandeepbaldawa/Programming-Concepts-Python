@@ -1,3 +1,10 @@
+Divide and Conquer principles
+------------------------------
+- Divide problem in non-overlapping sub-problems
+- Sub-problems are similar and cannot be dis-similar
+- One could recursively or iteratively solve the sub problems
+- Once above is done combine the results
+
 Binary Search
 ---------------
 - Works only on sorted arrays
