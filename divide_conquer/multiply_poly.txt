@@ -26,7 +26,8 @@ E0(x) = bn/2-1 * x^n/2-1 + bn/2-2 * x^n/2-2....+ b0
 
 A.B = (D1.x^n/2 + D0) . (E1.x^n/2 + E0)
     = (D1E1).x^n + (D1E0 + E1D0)x^n/2 + D0E0
-    
+Calculate D1E1, D1E0 , E1D0, D0E0
+
     
     
 
