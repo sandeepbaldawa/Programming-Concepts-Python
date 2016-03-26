@@ -1,6 +1,7 @@
 
 Multiplying polynomials
 -------------------------
+
 - Lot of applications
 eg:- A(x) = 3x^2 + 2x + 5
      B(x) = 5x^2 + x + 2
@@ -8,14 +9,15 @@ eg:- A(x) = 3x^2 + 2x + 5
      
 Naive without D & Q - O(N^2)
 -----------------------------
-        
 MultyPolyt(A, B, n):
   from i in range(n):
     from j in range(n):
       product[i+j] = product[i+j] + A[i] * B[j]
       
-Naive with D & Q - 
+Naive with D & Q - O(N^2)
 -----------------------------
+Recurrance :- 4T(n/2) + kn
+
 A(x) = D1(x)x^n/2 + D0(x)
 D1(x) = an-1 * x^n/2-1 + an-2 * x^n/2-2....+ an/2
 D0(x) = an/2-1 * x^n/2-1 + an/2-2 * x^n/2-2....+ a0
@@ -42,6 +44,14 @@ D0E0 = 6.x^2 + 11x + 4
 AB = (4x^2 + 11x + 6).x^4 + (12.x^2 + 25x + 12 + 2.x^2 + 5x + 2).x^2 + 6.x^2 + 11x + 4
    = 4x^6 + 11.x^5 + 20.x^4 + 30.x^3 + 20.x^2 + 11x + 4
 
+
+Faster Algorthm(Kasturba) - O(n^1.56)
+----------------------------
+A(x) = a1x + a0
+B(x) = b1x = b0
+Naive => C(x) = a1b1x^2 + (a1b0 + a0b1)x + a0b0 => Needs 4 multiplications
+
+Kasturba Rewrite => C(x) = ((a1 + a0)(b1 + b0) - a1b1 - a0b0)x + a0b0 => Needs 3 multiplications
 
 
 
