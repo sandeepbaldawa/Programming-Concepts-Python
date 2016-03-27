@@ -23,5 +23,9 @@ Complexity :- T(N) = O(NlogN)
          -----------
    T(N) = aT(Ceiling(a/b)) + O(n^d)
    
+   T(N) = O(n^d)            if d > log a/log b
+   T(N) = O(n^d logn)       if d == log a/log b 
+   T(N) = O(n^(loga/logb))  if d < log a/log b
+   
  
  
