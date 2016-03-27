@@ -51,5 +51,11 @@ Complexity :- T(N) = O(NlogN)
  d = 0
  Since d == (loga/logb) i.e. log1/log2 == 0 T(N) = O(N^0 logN) = O(logN)
  
+ eg:- T(N) = 2T(N/2) + O(N^2)
+ a = 2
+ b = 2
+ d = 2
+ Since d > (loga/logb) 0 T(N) = O(N^d) = O(N^2)
+ 
  
  
