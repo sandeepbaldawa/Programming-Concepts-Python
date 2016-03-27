@@ -45,5 +45,11 @@ Complexity :- T(N) = O(NlogN)
  d = 1
  Since d == (loga/logb) T(N) = O(N^1(logN)) = O(NlogN)
  
+ eg:- T(N) = T(N/2) + O(1)
+ a = 1
+ b = 2
+ d = 0
+ Since d == (loga/logb) i.e. log1/log2 == 0 T(N) = O(N^0 logN) = O(logN)
+ 
  
  
