@@ -1,1 +1,19 @@
+Binary Search
+-------------
+Recurrance :- T(N) = T(N/2) + O(1)
+Complexity :- T(N) = O(logN)
 
+Naive Polynominal
+------------------
+Recurrance :- T(N) = 4T(N/2) + O(N)
+Complexity :- T(N) = O(N^2)
+
+Fast Kasturba Polynominal
+-------------------------
+Recurrance :- T(N) = 3T(N/2) + O(N)
+Complexity :- T(N) = O(N^(log3/log2))
+
+Merge Sort
+-----------
+Recurrance :- T(N) = 2T(N/2) + O(N)
+Complexity :- T(N) = O(NlogN)
