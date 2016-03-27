@@ -13,7 +13,6 @@ import sys
 import math
 
 def binary_search(a, x):
-
         low, high = 0, len(a)-1
         while low <= high:
                 mid = (low + math.ceil((high - low)//2))
@@ -24,8 +23,7 @@ def binary_search(a, x):
                 else:
                         low = mid + 1
         return -1
-    # write your code here
-
+        
 def linear_search(a, x):
     for i in range(len(a)):
         if a[i] == x:
