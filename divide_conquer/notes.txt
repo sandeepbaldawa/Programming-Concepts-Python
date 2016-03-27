@@ -5,3 +5,4 @@ Divide and Conquer principles
 - One could recursively or iteratively solve the sub problems
 - Once above is done combine the results
 
+http://cseweb.ucsd.edu/~dasgupta/101/sol4.pdf
