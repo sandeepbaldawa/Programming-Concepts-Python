@@ -21,6 +21,7 @@ Complexity :- T(N) = O(NlogN)
          -----------
         |  Generic | 
          -----------
-   T(N) = aT(a/b) + O(n^d)
+   T(N) = aT(Ceiling(a/b)) + O(n^d)
+   
  
  
