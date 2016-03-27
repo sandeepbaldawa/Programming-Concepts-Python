@@ -17,3 +17,10 @@ Merge Sort
 -----------
 Recurrance :- T(N) = 2T(N/2) + O(N)
 Complexity :- T(N) = O(NlogN)
+
+         -----------
+        |  Generic | 
+         -----------
+   T(N) = aT(a/b) + O(n^d)
+ 
+ 
