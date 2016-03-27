@@ -45,7 +45,7 @@ AB = (4x^2 + 11x + 6).x^4 + (12.x^2 + 25x + 12 + 2.x^2 + 5x + 2).x^2 + 6.x^2 + 1
    = 4x^6 + 11.x^5 + 20.x^4 + 30.x^3 + 20.x^2 + 11x + 4
 
 
-Faster Algorthm(Kasturba) - O(n^1.56)
+Faster Algorthm(Kasturba) - O(n^1.58)
 ----------------------------
 A(x) = a1x + a0
 B(x) = b1x = b0
