@@ -22,10 +22,29 @@ Complexity :- T(N) = O(NlogN)
         |  Generic | 
          -----------
    T(N) = aT(Ceiling(a/b)) + O(n^d)
+  
+   Here we break the problem into "a" copies  of size "n/b"
+   Level "0"
+   Problem size at level "0"         => n
+   Number of problems at level "0"   => 1
+   
+   Level "1"
+   Problem size at level "1"         => n/b
+   Number of problems at level "1"   => a
+   
+   Level "i"
+   Problem size at level "i"         => n/b^i
+   Number of problems at level "i"   => a^i
+   
+   Level "logn/logb"
+   Problem size at level "logn/logb" => 1
+   Problem size at level "logn/logb" => a^(logn/logb)
    
    T(N) = O(n^d)            if d > log a/log b
    T(N) = O(n^d logn)       if d == log a/log b 
    T(N) = O(n^(loga/logb))  if d < log a/log b
+   
+  
    
  eg:- T(N) = 4T(N/2) + O(N)
  a = 4
