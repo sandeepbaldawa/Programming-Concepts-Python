@@ -33,3 +33,17 @@ Complexity :- T(N) = O(NlogN)
  d = 1
  Since d < (log a/log b) T(N) = O(n^(log4/log2)) = O(n^2)
  
+ eg:- T(N) = 3T(N/2) + O(N)
+ a = 3
+ b = 2
+ d = 1
+ Since d < (loga/logb) T(N) = O(N^(log3/log2)) = O(N^1.58)
+ 
+ eg:- T(N) = 2T(N/2) + O(N)
+ a = 2
+ b = 2
+ d = 1
+ Since d == (loga/logb) T(N) = O(N^1(logN)) = O(NlogN)
+ 
+ 
+ 
