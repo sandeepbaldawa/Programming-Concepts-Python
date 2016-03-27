@@ -27,5 +27,9 @@ Complexity :- T(N) = O(NlogN)
    T(N) = O(n^d logn)       if d == log a/log b 
    T(N) = O(n^(loga/logb))  if d < log a/log b
    
- 
+ eg:- T(N) = 4T(N/2) + O(N)
+ a = 4
+ b = 2
+ d = 1
+ Since d < (log a/log b) T(N) = O(n^(log4/log2)) = O(n^2)
  
