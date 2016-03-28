@@ -6,3 +6,5 @@ Divide and Conquer principles
 - Once above is done combine the results
 
 http://cseweb.ucsd.edu/~dasgupta/101/sol4.pdf
+Inversions:-
+http://www.cp.eng.chula.ac.th/~piak/teaching/algo/algo2008/count-inv.htm
