@@ -8,3 +8,4 @@ Divide and Conquer principles
 http://cseweb.ucsd.edu/~dasgupta/101/sol4.pdf
 Inversions:-
 http://www.cp.eng.chula.ac.th/~piak/teaching/algo/algo2008/count-inv.htm
+https://github.com/OferSheffer/Review_Stanford_Algorithms/blob/master/src/P01W01Q01/inv_count.py
