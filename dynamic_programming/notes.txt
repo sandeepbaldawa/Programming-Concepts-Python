@@ -1,3 +1,10 @@
+An example where greedy fails and dp succeeds
+smallest amount of coins needed for denominations 1,8,20
+Greedy => Total of 24 => 20 + 1 + 1 + 1 + 1  = 5
+dp     => Total of 24 => 8 + 8 + 8           = 3
+
+
+
 http://people.cs.clemson.edu/~bcdean/dp_practice/
 https://www.youtube.com/watch?v=6h6Fi6AQiRM
 https://www.quora.com/Are-there-any-good-resources-or-tutorials-for-dynamic-programming-besides-the-TopCoder-tutorial
