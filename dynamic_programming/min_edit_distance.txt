@@ -1,4 +1,7 @@
 - Minimum edits required to change string "A" to string "b"
+insertion
+deletion
+match mismatch
 
 Convert X[1..i] => Y[1..j]
 E[i,j] is the edits required to convert string of length i to length j
