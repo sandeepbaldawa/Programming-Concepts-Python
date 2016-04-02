@@ -1,2 +1,9 @@
 - Minimum edits required to change string "A" to string "b"
+
+Convert X[1..i] => Y[1..j]
+E[i,j] is the edits required to convert string of length i to length j
+E[i,0] = i  => Convert i length string to 0 length string
+E[0,j] = j  => Convert 0 length string to j length string
+
+
    
