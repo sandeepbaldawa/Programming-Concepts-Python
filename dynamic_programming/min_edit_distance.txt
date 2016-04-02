@@ -5,5 +5,11 @@ E[i,j] is the edits required to convert string of length i to length j
 E[i,0] = i  => Convert i length string to 0 length string
 E[0,j] = j  => Convert 0 length string to j length string
 
+diff[i,j] = 1 if X[i] != Y[j]
+diff[i,j] = 0 if X[i] == Y[j]
+
+E[i,j] =  Min(E[i-1,j-1] + diff[i,j], E[i-1,j] + 1, E[i,j-1] + 1)
+
+
 
    
