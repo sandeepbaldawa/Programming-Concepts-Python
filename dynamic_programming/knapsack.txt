@@ -7,7 +7,7 @@ W=7 is the max weight the knaspsack can hold
 j => 1 to W values
 i => wt[] given along with their values.
 
-if j < i: # Here the target weight is lesser than the available weight, hence we cannot take the available weight
+if j < wt[i]: # Here the target weight is lesser than the available weight, hence we cannot take the available weight
     T[i][j] = T[i-1][j]
 else:
     T[i][j] = max(val[i] + T[i-1][j-wt[i]), T[i-1][j])
