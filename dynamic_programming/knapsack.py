@@ -1,9 +1,10 @@
 '''
 Problem Statement
 =================
-This problem is about implementing an algorithm for the knapsack without repetitions problem.
+Implementing an algorithm for the knapsack without repetitions problem.
 Also called as 0/1 Knapsack. Given weights(w) and value of items(w), the goal is to maximize
-the value, keeping in mind the maximum value possible i.e. the Knapsack size(W)
+the value(in this case same as w as all items have same value), keeping in mind the maximum value
+possible i.e. the Knapsack size(W)
 
 Runtime Analysis
 ----------------
