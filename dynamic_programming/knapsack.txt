@@ -1,0 +1,17 @@
+Knapsack 0/1
+- Either take it or leave it
+
+wt = [1,3,5,7]
+val = [1,4,5,7]
+W=7 is the max weight the knaspsack can hold
+j => 1 to W values
+i => wt[] given along with their values.
+
+if j < i: # Here the target weight is lesser than the available weight, hence we cannot take the available weight
+    T[i][j] = T[i-1][j]
+else:
+    T[i][j] = max(val[i] + T[i-1][j-wt[i]), T[i-1][j])
+    
+Here val[i] + T[i-1][j-wt[i]] => We are selecting wt[i] i.e. val[i], hence remaining weight is j-wt[i] which is the jth col
+                                 Hence for remaining weight we select T[i-1][j-wt[i] 
+    
