@@ -12,6 +12,11 @@ or delete char from str2) to change str1 to str2.
 Runtime Analysis
 ----------------
 Time complexity - O(len(s) * len(t))
+
+References
+----------
+https://www.youtube.com/watch?v=We3YDTzNXEk
+
 '''
 
 def edit_distance(s, t):
@@ -51,4 +56,9 @@ if __name__ == '__main__':
     str1 = 'a'
     str2 = 'a'
     expected = 0
+    assert expected == edit_distance(str1, str2)
+
+    str1="editing"
+    str2="distance"
+    expected=5
     assert expected == edit_distance(str1, str2)
