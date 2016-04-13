@@ -15,11 +15,8 @@ closing brackets, output the 1-based index of the first unmatched opening bracke
 # After Pop compare if left and right character matches
 
 """
-
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# python3
-
 import sys
 
 
@@ -41,36 +38,32 @@ class Bracket:
 
 __name__ = '__main__'
 if __name__ == '__main__':
-
-    # text = sys.stdin.read()
-
-    text = '{'
+    text = '{[}'  # sys.stdin.read()
+    text = text.strip(' ')
+    if len(text) <= 1:
+        print '1'
+        sys.exit()
     bkt = Bracket()
     ret = 0
     opening_brackets_stack = []
     for (i, next) in enumerate(text):
         if next == '(' or next == '[' or next == '{':
-
-            # Process opening bracket, write your code here
-
-            opening_brackets_stack.append(next)
+            opening_brackets_stack.append([next, i])
             bkt.bracket_type = next
 
         if next == ')' or next == ']' or next == '}':
-
-            # Process closing bracket, write your code here
-
             if len(opening_brackets_stack) == 0:
                 ret = -1
                 break
-            bkt.bracket_type = opening_brackets_stack.pop()
-
-            # print(next, bkt.bracket_type)
+            bkt.bracket_type = opening_brackets_stack.pop()[0]
 
             if not bkt.Match(next):
                 ret = -1
                 break
-    if ret == 0 and len(opening_brackets_stack) == 0:
+    if len(opening_brackets_stack) >= 1 and ret != -1:
+        index = opening_brackets_stack.pop()[1]
+        print index + 1
+    elif ret == 0 and len(opening_brackets_stack) == 0:
         print 'Success'
     else:
         print i + 1
