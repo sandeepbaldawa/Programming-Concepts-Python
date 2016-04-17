@@ -51,4 +51,9 @@ Simplest way => Sort O(N logN)
 Can we do better?
 
 Leaves are always => floor(n/2) + 1 to n
+Properties
+----------
+1. Every leaf always follows max-heap property
+2. From largest index not a leaf apply heapify(parent and it's children) and make sure parent is greater than or equal to it's children
+
 
