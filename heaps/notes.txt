@@ -28,3 +28,9 @@ Heaps can be represented with arrays
 ------------------------------------
 for every parent "p" the children are at "2p + 1" and "2p + 2"
 and for each chil "c" parent is at n-1/2 floor
+
+Maximum height for complete binary tree
+-----------------------------------------
+max(nodes) = 2 ^(h+1)-1
+h           1   2  3  4      
+max_node    3   7 15  31
