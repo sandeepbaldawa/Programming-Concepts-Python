@@ -2,6 +2,15 @@
    for IPV4 we have 32 bit i.e. 2^32 entries, here there is one to one mapping between the entries (in billions)
    for IPV6 we have 128 bit i.e. 2^128 entries, here there is one to one mapping between the entries
    This can be too much to store as we would need such a huge array
+   Direct addressing is good when universe is v small
+
+- List based mapping
+  Store only active ip's
+  Direct addressing takes too much memory
+  Store them in a list
+  Store just the last occurance(as the query could be if the ip address was every used)
+  Store order of occurance of the ip addresses
+  
 
 
    
