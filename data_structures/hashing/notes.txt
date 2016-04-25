@@ -1,0 +1,8 @@
+- Direct addressing 
+   for IPV4 we have 32 bit i.e. 2^32 entries, here there is one to one mapping between the entries (in billions)
+   for IPV6 we have 128 bit i.e. 2^128 entries, here there is one to one mapping between the entries
+   This can be too much to store as we would need such a huge array
+
+
+   
+                    
