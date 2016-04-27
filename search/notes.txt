@@ -2,7 +2,36 @@ Ways to search pattern in a text
 - Brute Force Search O(MN)
 - KMP algo           O(M + N)
 - Z algo             O(M + N)
-- Rabin Carp         (Uses hashing)
+- Rabin Carp         (Uses hashing) O(MN)
 - Boyer-Moore
 - Aho-Covasick
 - Finite state automation
+
+Rabin - Carp
+----------
+- Used to detect plagiarism
+- Search multiple patterns in a given text
+- Also called rolling hash function
+
+Tak any prime number
+m = length of pattern
+X = OldHash - val(oldChar)
+X = X /prime
+newHash = X + prime ^ (m-1) * val(newChar)
+
+a => 1
+b => 2
+c => 3
+d => 4
+and so on..
+
+text = abdabc
+pattern = abc
+prime = 3
+ a       b          e
+ 1 +  2 * 3^1  +  5 * 3^2 = 52
+ 
+ b       e          d
+ 2  +  5 * 3^2   + 4 * 3^2  OR (h(abe) - val(a))/prime + prime ^ (m-1) * val(newChar)
+                                (52 - 1)/3 + 3^2 * val(d) = 17 + 4 * 9 = 53
+
