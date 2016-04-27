@@ -1,4 +1,8 @@
-Linear search algorithms
-KMP
-Boyer-Moore
-Rabin-Karp
+Ways to search pattern in a text
+- Brute Force Search O(MN)
+- KMP algo           O(M + N)
+- Z algo             O(M + N)
+- Rabin Carp         (Uses hashing)
+- Boyer-Moore
+- Aho-Covasick
+- Finite state automation
