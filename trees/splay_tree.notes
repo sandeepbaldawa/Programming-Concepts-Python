@@ -1,0 +1,11 @@
+- Why do u need them?
+BST's can be unbalanced which increases search time, so  keeping BST's balanced helps search become O(logN) on an average
+
+- How do splay trees work?
+1. They are nearly balance BST's(not exactly balanced)
+2. All operations involve something called "splay"
+3. On an average takes O(logN)
+4. Worst case O(N)
+5. For K play operations with K reasonably large O(K * logn)
+6. Provides faster access to recently accessed keys(like a cache)
+
