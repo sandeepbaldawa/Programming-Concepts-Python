@@ -1,5 +1,7 @@
+https://www.youtube.com/watch?v=So8szqIvIFs
 - Why do u need them?
 BST's can be unbalanced which increases search time, so  keeping BST's balanced helps search become O(logN) on an average
+Bottom line splay trees still follow BST properties
 
 - How do splay trees work?
 1. They are nearly balance BST's(not exactly balanced)
@@ -8,3 +10,26 @@ BST's can be unbalanced which increases search time, so  keeping BST's balanced 
 4. Worst case O(N)
 5. For K play operations with K reasonably large O(K * logn)
 6. Provides faster access to recently accessed keys(like a cache)
+
+- How does it work?
+Find()
+- Walk to the key
+- Splay node up
+
+Insert()
+- Insert the key
+- Splay Node up
+
+Remove()
+- Remove the key
+- Splay the Parent node up
+
+Zig-Zig operation
+- Dealing with straight line
+- Left child of a left child or right child of a right child
+- Goal is to move the grand child "X" up i.e. G->P->X on the left to X -> P -> G on the right
+
+Zig-Zag operation
+- Operation in which the recently accessed element "X" ends up splitting the grand parent and the parent
+
+
