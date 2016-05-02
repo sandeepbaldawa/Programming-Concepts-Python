@@ -2,6 +2,7 @@ https://www.youtube.com/watch?v=So8szqIvIFs
 - Why do u need them?
 BST's can be unbalanced which increases search time, so  keeping BST's balanced helps search become O(logN) on an average
 Bottom line splay trees still follow BST properties
+Fundamental idea is to have a BST with the most recently used item put at the root
 
 - How do splay trees work?
 1. They are nearly balance BST's(not exactly balanced)
