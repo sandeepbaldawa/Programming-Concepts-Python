@@ -1,0 +1,2 @@
+=> Python partials
+http://www.pydanny.com/python-partials-are-fun.html
