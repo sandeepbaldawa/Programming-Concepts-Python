@@ -6,3 +6,8 @@ ps | grep $$
 [sandeep@sbaldawa-dev]$ which bash
 /bin/bash
 
+Preserve whitespace while printing?
+
+Encapsulating the variable name with "" will preserve any white space values
+greeting='Hello        world!'
+echo $greeting" now with spaces: $greeting"
