@@ -13,3 +13,16 @@ Preserve whitespace while printing?
 Encapsulating the variable name with "" will preserve any white space values
 greeting='Hello        world!'
 echo $greeting" now with spaces: $greeting"
+
+Passing Arguments to the Script
+---------------------------------
+./bin/my_shopping.sh apple 5 banana 8 "Fruit Basket" 15
+
+echo $3 --> results with: banana
+
+BIG=$5
+
+echo "A $BIG costs just $6" --> results with: A Fruit Basket costs just 15
+
+$# =>  holds the number of arguments passed to the script
+echo $# --> results with: 6
