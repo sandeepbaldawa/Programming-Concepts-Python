@@ -1,1 +1,7 @@
+Training set => eg:- Different house prices based on size
 
+m => No of training examples
+x => Input variables          (house size)     
+y => output/target variables  (housing prices)
+
+(x,y) - single training example
