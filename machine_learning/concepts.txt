@@ -16,3 +16,8 @@ Predicting the answer/output/target for the input variable
 
 *** Classification problem
 Discrete values eg:- 0/1 for tumuors malignant or not.
+
+Training Set => Learning Algorithm => h (Hypothesis)
+
+Size of house =>  h (Hypothesis) => Target price of house
+
