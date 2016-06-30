@@ -21,3 +21,14 @@ Training Set => Learning Algorithm => h (Hypothesis)
 
 Size of house =>  h (Hypothesis) => Target price of house
  h => Function which maps  X's to Y's
+ 
+Idea is to predict that y is a linear function of x i.e. 
+y = mx + c
+h^@(x) = @^0 + @^1*x
+
+|y
+|
+|   x
+|_ _ _ _ _ 
+
+ 
