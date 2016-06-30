@@ -35,3 +35,4 @@ h^@(x) = @^0 + @^1*x
 ** Why linear function => this is not necessary, just a starting step.
 ** This example is called univariate linear regression(linear regression with single variable)
  
+*** Cost function 
