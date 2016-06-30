@@ -19,6 +19,7 @@ Discrete values eg:- 0/1 for tumuors malignant or not.
 
 Training Set => Learning Algorithm => h (Hypothesis)
 
+*** Linear regression
 Size of house =>  h (Hypothesis) => Target price of house
  h => Function which maps  X's to Y's
  
@@ -32,5 +33,5 @@ h^@(x) = @^0 + @^1*x
 |_ _ _ _ _ 
 
 ** Why linear function => this is not necessary, just a starting step.
-
+** This example is called univariate linear regression(linear regression with single variable)
  
