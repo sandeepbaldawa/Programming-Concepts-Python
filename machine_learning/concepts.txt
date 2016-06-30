@@ -31,4 +31,6 @@ h^@(x) = @^0 + @^1*x
 |   x
 |_ _ _ _ _ 
 
+** Why linear function => this is not necessary, just a starting step.
+
  
