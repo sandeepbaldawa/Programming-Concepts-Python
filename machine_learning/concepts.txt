@@ -13,3 +13,6 @@ give right answer/output/target for the input variable
 
 *** Regression problem
 Predicting the answer/output/target for the input variable
+
+*** Classification problem
+Discrete values eg:- 0/1 for tumuors malignant or not.
