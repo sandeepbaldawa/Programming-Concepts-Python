@@ -5,3 +5,4 @@ x => Input variables          (house size)
 y => output/target variables  (housing prices)
 
 (x,y) - single training example
+x^i, y^i - ith training example
