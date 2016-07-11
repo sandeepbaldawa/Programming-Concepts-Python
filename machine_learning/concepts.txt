@@ -1,3 +1,11 @@
+WHAT?        Parameters strcuture hidden-concepts
+WHAT FROM?   Supervised UnSupervised Reinforcement
+WHAT FOR?    Prediction Disgnostic Summarization
+HOW?         Passive Active Offline Online
+OUTPUTS?     Classification Regression
+DETAILS?     Generative Discriminative
+ 
+
 ***Training set => eg:- Different house prices based on size
 
 m => No of training examples
