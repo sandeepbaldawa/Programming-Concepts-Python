@@ -7,7 +7,7 @@ Supervised learning(function approximation) => Based on provided inputs on how t
 eg:- A bunch of people
 And if someone provides a picture of how an Indian looks, we can categorize people as Indian based on the input data
 
-Reinforcement learning => Make decisions based on previous decisions taken.
+Reinforcement learning => Make decisions based on continuous feedback from the physical environment.
 eg:-
 Tic Tac Toe
 Avoid mistakes made in the past by avoiding them in the future by learning from the past.
