@@ -9,5 +9,5 @@ And if someone provides a picture of how an Indian looks, we can categorize peop
 
 Reinforcement learning => Make decisions based on continuous feedback from the physical environment.
 eg:-
-Tic Tac Toe
-Avoid mistakes made in the past by avoiding them in the future by learning from the past.
+Auto drive car
+
