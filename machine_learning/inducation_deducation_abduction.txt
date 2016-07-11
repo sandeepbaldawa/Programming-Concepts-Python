@@ -1,0 +1,5 @@
+Rule => Cause => Effect
+
+Induction => We induce a rule based on the cause and effect relation
+Deduction => We deduce an effect based on the cause and rule
+Abduction => We absduct a cause based on the rule and effect
