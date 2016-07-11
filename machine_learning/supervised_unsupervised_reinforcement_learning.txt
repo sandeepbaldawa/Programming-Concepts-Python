@@ -6,3 +6,8 @@ One can divide them based on height, weight etc..
 Supervised learning(function approximation) => Based on provided inputs on how things look
 eg:- A bunch of people
 And if someone provides a picture of how an Indian looks, we can categorize people as Indian based on the input data
+
+Reinforcement learning => Make decisions based on previous decisions taken.
+eg:-
+Tic Tac Toe
+Avoid mistakes made in the past by avoiding them in the future by learning from the past.
