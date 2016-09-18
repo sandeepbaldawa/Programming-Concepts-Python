@@ -56,6 +56,29 @@ How does it differ from mergsort?
 Mergesort gives the midpoint whereas quicksort returns in the partition function the current pivot elements index which
 may or may not be the midpoint. Chooding pivot is the key to make quicksort time complexity O(N*lgN) and space O(lgN)
      
+Best case and worst case?
+========================
+Best case the elements are equally divided on left and right of pivot
+QS(A, p, r):
+  if p < r:
+     q = partition(A, p, r) <== O(n)
+     QS(A, p, q-1)          <== T(N/2) 
+     QS(A,q+1, r)           <== T(N/2) 
+
+T(n) = 2 * T(n) + O(n) 
+
+Worst case the elements are divided one element on the left and n-1 elements on right of pivot
+QS(A, p, r):
+  if p < r:
+     q = partition(A, p, r) <== O(n)
+     QS(A, p, q-1)          <== T(1) 
+     QS(A,q+1, r)           <== T(n-1) 
+
+T(n) = T(1) + T(n-1) + C*O(n)
+     = T(n-2) + C*O(n-1) + C*O(n)
+     = T(n-3) + C*O(n-2) + C*O(n-1) + C*O(n)
+     = C + 2*C + 3*C + 4*C..n*C
+     = O(N^2)
 
 # Given a list, use the last element in the list as the pivot to partition the
 # list into those less than or equal to the pivot, the pivot itself and those
