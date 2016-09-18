@@ -1,3 +1,13 @@
+QuickSort 
+Worst => O(N^2)
+Average => O(N logN)
+
+Pick an element and place it such that all elements to the left of the element are less than and the right element
+are greater than the element. Fundamentally we are ranking the element(Kth largest element), essentially one element at a time.
+
+Sorting is never needed for ranking an element.
+
+
 # Given a list, use the last element in the list as the pivot to partition the
 # list into those less than or equal to the pivot, the pivot itself and those
 # greater. Return the final index of the pivot. Assume that start and end are
