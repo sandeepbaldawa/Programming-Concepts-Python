@@ -54,7 +54,7 @@ QS(A, p, r):
 How does it differ from mergsort?
 =================================
 Mergesort gives the midpoint whereas quicksort returns in the partition function the current pivot elements index which
-may or may not be the midpoint.
+may or may not be the midpoint. Chooding pivot is the key to make quicksort time complexity O(N*lgN) and space O(lgN)
      
 
 # Given a list, use the last element in the list as the pivot to partition the
