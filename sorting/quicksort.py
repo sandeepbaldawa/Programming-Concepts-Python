@@ -1,4 +1,4 @@
-QuickSort 
+QuickSort is a divide and conquer algo for sorting
 Worst => O(N^2)
 Average => O(N logN)
 
@@ -50,6 +50,12 @@ QS(A, p, r):
      q = partition(A, p, r)
      QS(A, p, q-1)
      QS(A,q+1, r)
+     
+How does it differ from mergsort?
+=================================
+Mergesort gives the midpoint whereas quicksort returns in the partition function the current pivot elements index which
+may or may not be the midpoint.
+     
 
 # Given a list, use the last element in the list as the pivot to partition the
 # list into those less than or equal to the pivot, the pivot itself and those
