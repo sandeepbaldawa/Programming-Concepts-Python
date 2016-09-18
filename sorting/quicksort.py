@@ -2,16 +2,19 @@ QuickSort
 Worst => O(N^2)
 Average => O(N logN)
 
-How does it work?
+How does it work ?
 ==================
-Pick an element and place it such that all elements to the left of the element are less than and the right element
+Pick an element and place it such that all elements to the left of the element are less than or equal and the right element
 are greater than the element. Fundamentally we are ranking the element(Kth largest element), essentially one element at a time.
 
 Sorting is never needed for ranking an element.
 
-When to use quicksort?
+Follows divide and conquer algorithm
+
+When to use quicksort ?
 ======================
 When number of elements are not so large the complexity is better than merge sort eg:- 100 elements.
+
 
 
 # Given a list, use the last element in the list as the pivot to partition the
