@@ -17,12 +17,16 @@ When number of elements are not so large the complexity is better than merge sor
 
 Trick to understand algo?
 ===========================
+For ranking use the below:-
 1.Choose a pivot element
 2.Take two indice i=0 & j=0
 3. Keep traversing arry by incrementing j++
-4. When a[j] <= pivot 
+4. if a[j] <= pivot 
       increment i++
-      swap(a[i], pivot)
+      swap(a[i], a[j])
+      increment j++
+   else
+      increment j++
 5. Keep continuing at the end of O(N) we will get rank of the pivot element.      
 
 
