@@ -15,6 +15,15 @@ When to use quicksort ?
 ======================
 When number of elements are not so large the complexity is better than merge sort eg:- 100 elements.
 
+Trick to understand algo?
+===========================
+1.Choose a pivot element
+2.Take two indice i=0 & j=0
+3. Keep traversing arry by incrementing j++
+4. When a[j] <= pivot 
+      increment i++
+      swap(a[i], pivot)
+5. Keep continuing at the end of O(N) we will get rank of the pivot element.      
 
 
 # Given a list, use the last element in the list as the pivot to partition the
