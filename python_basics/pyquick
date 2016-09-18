@@ -1,5 +1,8 @@
 https://developers.google.com/edu/python/introduction
 
+What is __main__ ?
+====================
+
 In the below:-
 => True Only if caller is the main function itself else ignored
    ./hello.py => In this case __name__ = "main" hence below will be executed
@@ -23,3 +26,9 @@ def main():
 # the program.
 if __name__ == '__main__':
     main()
+    
+    
+How to know help about a module?
+================================
+help(sys) or dir(sys)
+    
