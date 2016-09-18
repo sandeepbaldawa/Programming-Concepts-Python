@@ -30,8 +30,8 @@ For ranking use the below:-
    else
       increment j++
 5. Keep continuing at the end of O(N) we will get rank of the pivot element.
-   In short we are sorting one element(pivot) in each iteration, so wrost case will take O(N^2)
-   
+   In short we are sorting one element(pivot) in each iteration, so worst case will take O(N^2)
+6. At the end swap(a[i+1], pivot)   
 Partition algo
 ==============
 Returns the point at which partition is done based on the pivot element
