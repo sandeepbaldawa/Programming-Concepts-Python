@@ -82,13 +82,33 @@ T(n) = T(1) + T(n-1) + C*O(n)
 
 When will worst case O(N^2) happen in quicksort?
 ================================================
-When input is already sorted (divide is T(1) and T(n-1))
+When input is already sorted (divide is T(1) and T(n-1)), it can be ascending or descending
 
 What will be complexity of Quicksort if median is taken as the pivot?
 =====================================================================
 Here divide is T(n/2) and T(n/2)
 O(N*logN)
 
+What will be complexity of Quicksort if n/4th smallest element is taken as the pivot?
+======================================================================================
+Here divide is T(n/4) and T(3*n/4)
+T(n) = O(n) + 1 + O(n) + T(n/4) +  T(3*n/4)
+     = O(n) + T(n/4) +  T(3*n/4)
+     = O(N * logN)
+  
+What will be relation of T1 and T2 if
+QS(1,2,3,4,5,6,7..n) => T1
+QS(n,n-1,n-2,n-3..1) => T2
+======================================================================================
+T1 = T2 = O(N^2)     
+
+What will be complexity of Quicksort if n/5th smallest element is taken as the pivot?
+======================================================================================
+Here divide is T(n/5) and T(4*n/5)
+T(n) = O(n) + 1 + O(n) + T(n/5) +  T(4*n/5)
+     <= O(n) + T(n/5) +  T(4*n/5)
+     <= O(n) + 2*T(4*n/5)
+      
 # Given a list, use the last element in the list as the pivot to partition the
 # list into those less than or equal to the pivot, the pivot itself and those
 # greater. Return the final index of the pivot. Assume that start and end are
