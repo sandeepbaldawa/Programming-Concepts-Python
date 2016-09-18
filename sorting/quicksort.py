@@ -17,6 +17,8 @@ When number of elements are not so large the complexity is better than merge sor
 
 Trick to understand algo?
 ===========================
+Ranking algo
+============
 For ranking use the below:-
 1.Choose a pivot element
 2.Take two indice i=0 & j=0
@@ -27,8 +29,27 @@ For ranking use the below:-
       increment j++
    else
       increment j++
-5. Keep continuing at the end of O(N) we will get rank of the pivot element.      
+5. Keep continuing at the end of O(N) we will get rank of the pivot element.
+   In short we are sorting one element(pivot) in each iteration, so wrost case will take O(N^2)
+   
+Partition algo
+==============
+Returns the point at which partition is done based on the pivot element
 
+---------------------------------------
+| p |  |  |  |  | q |  |  |  |  |  |r |
+---------------------------------------
+q => partition
+p => start
+q => end
+
+QuickSort algo
+==============
+QS(A, p, r):
+  if p < r:
+     q = partition(A, p, r)
+     QS(A, p, q-1)
+     QS(A,q+1, r)
 
 # Given a list, use the last element in the list as the pivot to partition the
 # list into those less than or equal to the pivot, the pivot itself and those
