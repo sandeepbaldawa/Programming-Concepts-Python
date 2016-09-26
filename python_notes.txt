@@ -1,2 +1,22 @@
 => Python partials
 http://www.pydanny.com/python-partials-are-fun.html
+
+=>  contextlib
+
+https://docs.python.org/2/library/contextlib.html
+
+from contextlib import contextmanager
+
+@contextmanager
+def tag(name):
+    print "<%s>" % name
+    yield # Code after this is executed once statements within the "with" i.e. print "foo" is executed.
+    print "</%s>" % name
+
+>>> with tag("h1"):
+...    print "foo"
+...
+<h1>
+foo
+</h1>
+
