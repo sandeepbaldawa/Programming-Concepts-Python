@@ -40,5 +40,13 @@ Hence size of each part is 2 ^ n / 2 ^ k = 2 ^ (n-k)
 |                      |                         | 
  ------------------------------------------------
  
+ In networking
+ =============
  With K bits we have 2 ^ K network ids (or number of networks)
  and 2 ^ (n-K) hosts in each network   (or size of each network)
+
+In OS
+=====
+"n" bits are the address
+"k" bits are the block offset
+"n-k" bits are the block address in that block offset
