@@ -3,7 +3,15 @@ Binary => "0,1"
 Octa => "0..7"
 Hexas = "0..9" & "A..F"
 
+In binary
+=========
+
 2^10 = 1048 => Kilobytes
 2^20 => Megabytes
 2^30 => Gigabytes
 2^40 => Terabytes
+
+1 bit  => "0"
+2 bits => "00 01 10 11"
+3 bits => "000 001 ...111"
+
