@@ -35,7 +35,10 @@ If we take n bits we will have 2 ^ n numbers which can be represented
 Let's say we choose a partition of "K" we will have 2 ^ K parts
 So we have 2 ^K parts which have 2 ^ n numbers
 Hence size of each part is 2 ^ n / 2 ^ k = 2 ^ (n-k)
-
-
-
-
+ ------------------------------------------------
+|       K              |         n - k           |
+|                      |                         | 
+ ------------------------------------------------
+ 
+ With K bits we have 2 ^ K network ids (or number of networks)
+ and 2 ^ (n-K) hosts in each network   (or size of each network)
