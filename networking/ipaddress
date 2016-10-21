@@ -1,3 +1,9 @@
 Ip address initially was statically divided(ARPA)
 32 bits => 8 bits network id's and 24 bits hosts
 We could have 256 networks and 16M hosts, however this is not scalable since 256 networks are surely not enough.
+
+Classful ip address
+====================
+32 bits => 2 ^ 32 addresses
+If we choose K=1 i.e. first bit as network id => we can have 2 ^ 1 i.e. "2" networks and 2 ^ 31 hosts
+
