@@ -1,0 +1,3 @@
+Ip address initially was statically divided(ARPA)
+32 bits => 8 bits network id's and 24 bits hosts
+We could have 256 networks and 16M hosts, however this is not scalable since 256 networks are surely not enough.
