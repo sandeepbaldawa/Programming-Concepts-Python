@@ -1,3 +1,14 @@
+- Recursion has a terminating case
+- Varying input for each call(else it would be an inifnite loop and not terminate)
+- Recursive decomposition
+   a. Solve problem using result from smaller problems.
+   b. identify base case
+- Common patterns
+   a. Handle first and/or last recur on the remaining.
+   b. Divide in two halves and recur on one/both.
+   c. Make a choice among options and recur on the updated state.
+
+
 http://yefangliang.com/2015/10/16/leetcode-294-flip-game-ii/
 https://see.stanford.edu/materials/icspacs106b/H19-RecBacktrackExamples.pdf
 http://www.kosbie.net/cmu/fall-11/15-112/handouts/optional-notes-combinatorial-iterators.html
