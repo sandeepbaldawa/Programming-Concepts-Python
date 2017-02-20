@@ -1,4 +1,8 @@
 Design a distributed key value caching system, like Memcached or Redis.
 
 https://gist.github.com/jboner/2841832
+http://videolectures.net/wsdm09_dean_cblirs/
+http://norvig.com/21-days.html#answers
+https://gist.github.com/dakull/2842457
+
 
