@@ -5,8 +5,8 @@
    b. identify base case
 - Common patterns
    a. Handle first and/or last recur on the remaining.
-   b. Divide in two halves and recur on one/both.
-   c. Make a choice among options and recur on the updated state.
+   b. Divide in two halves and recur on one/both.(Binary Search)
+   c. Make a choice among options and recur on the updated state. (Permutation/Combination)
 
 
 http://yefangliang.com/2015/10/16/leetcode-294-flip-game-ii/
