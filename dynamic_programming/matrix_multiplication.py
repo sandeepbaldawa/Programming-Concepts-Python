@@ -1,0 +1,3 @@
+- Two matrix can be multiplied if rows of one and column of others are same i.e. p*q and q*r
+- Number of scalar operations to multiply are p*q*r
+- Size of resulting matrix is p*r (rows and columns)
