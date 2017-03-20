@@ -1,3 +1,7 @@
+When can DP be applied?
+========================
+Divide and Conquer when subproblems are repetative in nature unlike something like merge sort(where things are not repetative)
+
 An example where greedy fails and dp succeeds
 smallest amount of coins needed for denominations 1,8,20
 Greedy => Total of 24 => 20 + 1 + 1 + 1 + 1  = 5
