@@ -1,3 +1,9 @@
+'''
+Problem Statement
+=================
+Given two sequences A = [A1, A2, A3,..., An] and B = [B1, B2, B3,..., Bm], find the length of the longest common
+subsequence.
+'''
 # http://www.geeksforgeeks.org/dynamic-programming-set-4-longest-common-subsequence/
 # http://www.geeksforgeeks.org/printing-longest-common-subsequence/
 # https://www.youtube.com/watch?v=ml0i13Uvmuc
