@@ -1,7 +1,14 @@
-# A Naive recursive implementation of LCS problem
-# From call stack we can see lot of calls being recalculated
-# Can we avoid this?
-# O(2 ^N)
+"""
+Problem Statement
+=================
+Given two sequences A = [A1, A2, A3,..., An] and B = [B1, B2, B3,..., Bm], find the length of the longest common
+subsequence.
+
+A Naive recursive implementation of LCS problem
+From call stack we can see lot of calls being recalculated
+Can we avoid this?
+O(2 ^N)
+"""
 
 def lcs_helper(X, Y, m, n):
    if (m == 0 or n == 0):
