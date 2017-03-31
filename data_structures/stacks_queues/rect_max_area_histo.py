@@ -8,6 +8,6 @@ else:
     area = input[top] * (i-stacktop-1)
     
     
-i => Jut the index of the bar item in histo    
+i => Just the index of the bar item in histo 
 
 """
