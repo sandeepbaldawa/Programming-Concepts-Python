@@ -1,0 +1,29 @@
+iptables
+========
+iptables -S
+iptables -L -n -v
+
+
+route
+=====
+route -n
+
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+10.0.0.0        *               255.255.255.0   U     1      0        0 eth0
+link-local      *               255.255.0.0     U     1000   0        0 eth0
+default         RTA1025W.home   0.0.0.0         UG    0      0        0 eth0
+
+First entry tell you the following:
+-----------------------------------
+Any traffic with destination 10.0.0.0 will not be using a gateway (thats the * on the line), 
+will be using a 255.255.255.0 net mask, route is UP (that's the meaning of the U) and which interface the route uses.
+If you do ifconfig -a you will probably see that your eth0 IP address is within the 10.0.0.0 range, 
+so this is you local network route.
+
+Third entry tells you the following:
+------------------------------------
+If any traffic does not fit the traffic defined on any other rules then use this route.
+Imagine you want to visit www.yahoo.com. The address will be translated (I don't know what the exact result,
+but it won't be in the 10.0.0.0 range for sure). Since it won't fit on the 1st or the 2nd route,
+it will be routed using the RTA1025W.home gateway. 
+The metric will not matter and it will be using the interface defined on the default route line.
