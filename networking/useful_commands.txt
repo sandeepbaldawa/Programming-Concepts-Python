@@ -27,3 +27,11 @@ Imagine you want to visit www.yahoo.com. The address will be translated (I don't
 but it won't be in the 10.0.0.0 range for sure). Since it won't fit on the 1st or the 2nd route,
 it will be routed using the RTA1025W.home gateway. 
 The metric will not matter and it will be using the interface defined on the default route line.
+
+
+route taken
+============
+command to ask the kernel to report the route it would use to send a packet to the specified address:
+ip route get <address>
+
+
