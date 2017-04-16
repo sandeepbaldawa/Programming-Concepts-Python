@@ -6,3 +6,24 @@ broadcast => one to many hosts
 CA => 1- 126
 CB => 128 - 191
 SS => 192-223
+
+eg:-
+
+NW1 - 11.0.0.0 (always first ip is reserved for n/w ip i.e. 0.0.0)
+NW2 - 22.0.0.0 (always first ip is reserved for n/w ip i.e. 0.0.0)
+Both are class A
+Packet => | Data | Source Addr | Destination Addr |
+
+Unicast
+=======
+Limited or direct boradcasting
+
+In Limited 
+Packet => | Data | Source Addr | Destination Addr | i.e. Packet => | XYZ | 11.2.1.3 | 255.255.255.255| (send to all)
+Can be used in the same network
+
+In direct boradcasting
+Packet => | Data | Source Addr | Destination Addr | i.e. Packet => | XYZ | 11.2.1.3 | 22.255.255.255| (send to all in network "22")
+
+
+
