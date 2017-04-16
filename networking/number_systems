@@ -6,7 +6,7 @@ Hexas = "0..9" & "A..F"
 In binary
 =========
 
-2^10 = 1048 => Kilobytes
+2^10 = 1024 => Kilobytes
 2^20 => Megabytes
 2^30 => Gigabytes
 2^40 => Terabytes
