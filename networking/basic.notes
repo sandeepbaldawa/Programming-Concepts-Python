@@ -1,0 +1,13 @@
+- What happens when www.google.com is typed
+   One needs to convert www.google.com into => (Network, dest_host, process) to reach the destination host process
+   This is nothing but ip address => NetworkID, HostID  and port no:- for http it is always 80
+- Port no ftp => 21, smtp => 25, http => 80
+
+- How do we convert names to ip address?
+  Each network has a DNS(Domain name server), which translates www.google.com => ip address
+  called DNS overhead, we don't go to DNS everytime, we cache it in our browser, only when the cache expires we got to DNS
+  
+  
+   
+   
+   
