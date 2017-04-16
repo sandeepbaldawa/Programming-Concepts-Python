@@ -1,0 +1,8 @@
+How to send packets from a host to another?
+==========================================
+Unicast => one to one host
+broadcast => one to many hosts
+
+CA => 1- 126
+CB => 128 - 191
+SS => 192-223
