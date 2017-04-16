@@ -6,4 +6,51 @@ Classful ip address
 ====================
 32 bits => 2 ^ 32 addresses
 If we choose K=1 i.e. first bit as network id => we can have 2 ^ 1 i.e. "2" networks and 2 ^ 31 hosts
+This is class A i.e. starts with "0" and has 2^31 items
+class B i.e. starts with "10" and has 2^30 items
+class C i.e. starts with "110" and has 2^29 items
+class D i.e. starts with "1110" and has 2^28 items
+class E i.e. starts with "1111" and has 2^28 items
+
+class A
+=======
+first bit set to "0"
+0--- NID ---, ---HID--
+NID - 7 bits (because first bit set to "0") i.e. 2^7 = 128 possibilities, 0000000 and 1111111 can't be used, so usable are 126
+HID - 24 bits  i.e. 2^24 = 16M I/Ps
+Since it supports such huge number of hosts usually used for bigger enterprises like NASA, Miscrosoft etc..
+first octate 1 to 126
+
+
+class B
+=======
+first two bits set to "10"
+16 bits - NID i.e. 14 bits(first 2 are fixed) => 2^14 Networks      i.e. 16K networks
+16 bits - HID i.e. 16 bits                    => 2^16 I/P addr networks i.e. 64K ips
+usually used by banks like SBI, IRTC etc..
+first octate 128 to 191
+
+
+class C
+=======
+first three bits set to "110"
+24 bits - NID i.e. 24 bits(first 3 are fixed) => 2^24 Networks      i.e. 16K networks
+8 bits - HID i.e. 8 bits                    => 2^8 I/P addr networks i.e. 256 ips
+usually used by small orgs like eng departments
+first octate 192 to 225
+
+
+class D and class E
+===================
+first three bits set to "1110" or "1100"
+No NID or HID..
+Total ips => 2 ^ 28
+first octate 240 to 255 and 224 - 239
+class E usually used by military
+
+
+
+
+
+
 
