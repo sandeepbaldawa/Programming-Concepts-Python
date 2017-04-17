@@ -1,0 +1,18 @@
+SPEED => CPU > main memory > HDD
+Since CPU is faster than MM we need to have faster devices like register which can talk with CPU
+but since registers are limited, something like cache was invented..
+
+Cache
+=====
+High speed memory faster than main memory, but not as fast as registers
+Cache Hit 
+Hit latency  => Time taken to read from cache
+Miss latency => Time taken to bring item from main memory to cache on cache miss
+Page fault => Not present in main memory, need to fetch the same from secondary
+Page hit => Found in main memory
+Page table => Mapping for mainmemory on pages present in main memory
+Tag directory => Table of items present in the cache
+Page fault service time => Time taken to bring page from secondary to main memory
+Locality of reference => Spatial and temporal locality
+spatiality locality => Chances of next request is near to the current one
+Temporal locality => LRU..
