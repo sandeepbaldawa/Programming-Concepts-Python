@@ -6,3 +6,42 @@ Dividing huge network into small networks for ease of maintenace, security etc..
 - Reach NID
 - Reach HID
 - Reach process id
+
+eg:-
+Class C 
+200.1.2.0
+HID is last 8 bits i.e. --------
+so 2^8 -2 = 254 hosts(00000000 is used for network ip and 11111111 is used for direct broadcast)
+To divide into two subnets use the 7th bit as 0/1
+1st subnet 0 - 127 and second subnet 128 - 255
+1st subnet SubnetID => 200.1.2.0   and directed broadcast is 200.1.2.127
+2nd subnet SubnetID => 200.1.2.128 and directed broadcast is 200.1.2.255
+
+for 4 subnets, we choose first two bits of the HID..
+
+Router
+======
+Router knows which subnet to route the packet to..
+
+Subnet Mask
+===========
+eg:- In 32 bits in classC 24 bits are for NID and 8 bits HID
+NID and SID - all 1's
+HID - all 0's
+If 2 bit SID then we have Subnet Mask as 1111111 1111111 1111111 110000000 i.e. 255.255.255.192
+
+Why need a subnet Mask
+======================
+Given an ip addr if we bitwise and it with the subnet mask we get the network to which the ipaddr belongs to..
+
+Fixed Length subnet masking
+==========================
+When length of subnet id is same for all subnets..
+
+
+
+
+
+
+
+
