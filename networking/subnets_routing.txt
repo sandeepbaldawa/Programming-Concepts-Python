@@ -38,6 +38,11 @@ Fixed Length subnet masking
 ==========================
 When length of subnet id is same for all subnets..
 
+Routing Tables
+==============
+Using ipaddress and Mask calculate the NID and decide which interface to route the packet to..
+
+
 
 
 
