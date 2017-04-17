@@ -1,3 +1,8 @@
 Subnetting
 ===========
 Dividing huge network into small networks for ease of maintenace, security etc..
+4 steps to reach process unlike 3 steps for network
+- Reach subnet
+- Reach NID
+- Reach HID
+- Reach process id
