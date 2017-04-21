@@ -81,3 +81,7 @@ Isolate the rightmost 1-bit.
 ----------------------------
 x & ~(x-1)
 
+
+Check if bit is set
+------------------
+bit = (x >> pos) & 1;
