@@ -62,11 +62,6 @@ UnSet the nth bit
 y =  x & ~(1 << n)
 
 
-UnSet the nth bit
------------------------
-y =  x & ~(1 << n)
-
-
 Toggle the nth bit
 ------------------
 y =  x ^ (1 << n)
