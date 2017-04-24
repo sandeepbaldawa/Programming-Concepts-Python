@@ -19,4 +19,15 @@
    P(E) = 1/2
    P(E1) = 1/2
    
+   S={HH, HT, TH, TT}
+   Each item has a probability of 1/4 of happening
+   
+5. For E1 and E2 if E3=E1 U E2  and E1 and E2 are mutually exclusive events
+   P(E1 U E2)= P(E1) + P(E2)
+   
+6. For E1 and E2 if E3=E1 U E2  and E1 and E2 are **not mutually exclusive events
+   P(E1 U E2)= P(E1) + P(E2) - P(E1^E2)
+
+7.
+   
    
