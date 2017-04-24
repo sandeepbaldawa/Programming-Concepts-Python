@@ -1,0 +1,4 @@
+1. Random experiment
+   Tossing a coin
+   Rolling a dice
+   Picking an object
