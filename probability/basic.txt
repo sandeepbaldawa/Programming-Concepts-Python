@@ -2,3 +2,21 @@
    Tossing a coin
    Rolling a dice
    Picking an object
+   
+2. Sample space
+   Set of possible outcomes of an experiment
+   For tossing a coing sample space is {H, T}
+   Rolling a dice S ={1,2,3,4,5,6}
+   Toss two coins S ={HH, HT, TH, TT}
+   Two dice S = {1,1 1,2 1,3 1,4...6,6} i.e. 36
+
+3. Event
+   Subset of the sample space eg:- with atleast one head E1 = {HH, HT, TH}
+   Union of events or mutually exclusive events
+
+4. S ={H, T}
+   E = {H}  E1={T}
+   P(E) = 1/2
+   P(E1) = 1/2
+   
+   
