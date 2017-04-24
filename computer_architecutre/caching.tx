@@ -27,6 +27,14 @@ Block Number => MM size / Block size i.e. number of blocks a MM can hold
 Lines => Cache size / Block size i.e. number of blocks a cache can hold
 Tag => Ratio of blocks in MM vs Cache in 1 line i.e. Number of blocks in MM/Number of Blocks in Cache
 
+Fundamental concept is MM has more capacity than cache, so it can hold more blocks
+So when a request in for of physical address comes
+1. The physical address first needs to identiy the line in cache which it needs to go.
+2. Once line is identified, each line can hold only so many blocks since cache is smaller, so the tag helps identify 
+   which blocks from MM is the cache holding.
+3. If the tag in PA and in cache matches it is a hit else it is a miss.
+4. Once the tag is found, the PA uses the block offset to identify the offset.
+
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/caching1.JPG
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/computer_architecutre/caching_direct_mapping.JPG
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/direct_mapping_example1.JPG
