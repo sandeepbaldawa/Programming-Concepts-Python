@@ -52,6 +52,18 @@ Associative Mapping
   entire cache
 - We would need one comparator for each block in the cache, which is pretty costly.
 
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/computer_architecutre/associative_mapping.JPG
+
+Set Associative Mapping
+=======================
+Best of both worlds, direct mapping and associative mapping.
+Mapping to sets is direct mapping and within the set is associative mapping i.e. block can stay anywhere in the set.
+
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/computer_architecutre/set_associative.JPG
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/computer_architecutre/set_associative1.JPG
+
+
+
 
    
 
