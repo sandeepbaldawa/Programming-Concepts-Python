@@ -1,0 +1,12 @@
+Difference between heap and stack
+=================================
+1. Physically stack and heap both are allocated on RAM and their implementation varies from language, compiler and run time 
+2. Stack is used for local variables of functions and to track function calling sequences. 
+   Heap is used for allocating dynamically created variables using malloc, calloc or new. 
+3. Stack memory is freed whenever the function completes execution,
+   but the heap memory needs to be freed explicitly using delete, free or by garbage collector of the language. 
+4. Stack memory of a process is fixed size and heap is variable memory. 
+5. Stack is faster than heap as allocating memory on stack is simpler just moving stack pointer up. 
+6. In case of multi threading, each thread of process will have a different stack but all threads share single heap
+7. Stack and Heap grow in opposite directions.
+
