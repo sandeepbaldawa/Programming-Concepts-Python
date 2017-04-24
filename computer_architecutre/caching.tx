@@ -19,5 +19,14 @@ Temporal locality => LRU..
 
 Direct Mapping
 ==============
+Blocks => Contain words
+Block size => number of words in a block (if byte addressable, word size if "1")
+Cache size => Number of words in a cache
+Main memory size => Number of words in MM
+Block Number => MM size / Block size i.e. number of blocks a MM can hold
+Lines => Cache size / Block size i.e. number of blocks a cache can hold
+Tag => Ratio of blocks in MM vs Cache in 1 line i.e. Number of blocks in MM/Number of Blocks in Cache
+
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/caching1.JPG
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/computer_architecutre/caching_direct_mapping.JPG
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/direct_mapping_example1.JPG
