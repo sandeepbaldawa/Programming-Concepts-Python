@@ -17,4 +17,6 @@ Locality of reference => Spatial and temporal locality
 spatiality locality => Chances of next request is near to the current one
 Temporal locality => LRU..
 
+Direct Mapping
+==============
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/caching1.JPG
