@@ -38,3 +38,20 @@ So when a request in for of physical address comes
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/caching1.JPG
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/computer_architecutre/caching_direct_mapping.JPG
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/direct_mapping_example1.JPG
+
+Disadvantages
+=============
+- Multiple blocks  might maps to the same line number, so even if we have other line empty we might continue to replace blocks 
+  in the same line no.
+ 
+Associative Mapping
+===================
+- Uses whole cache capacity without replacing blocks unecessarily, because we just have a tag and no line no. This help use
+  entire cache capacity
+- Disadvantage is how to search for a particular block, since we no longer have line no and the block can be anywhere in the
+  entire cache
+- We would need one comparator for each block in the cache, which is pretty costly.
+
+
+   
+
