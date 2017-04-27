@@ -1,0 +1,67 @@
+
+https://unix.stackexchange.com/questions/4402/what-is-a-superblock-inode-dentry-and-a-file
+
+Superblock
+Inode
+dentry
+
+File
+
+A file just means a bunch of bytes arranged in a certain order. 
+It's what normal people call the contents of a file. When Linux opens a file, 
+it also creates a file object, which holds data about where the file is stored and what processes are using it. 
+The file object (but not the file data itself) is thrown away when the file is closed.
+
+Inode
+
+An inode (short for "index node") is a bunch of attributes about a file that Linux stores. 
+There is one inode for each file (though with some filesystems, Linux has to create its own inodes because
+the information is spread around the filesystem). The inode stores information like who owns the file, 
+how big the file is, and who is allowed to open the file. Each inode also contains a number unique to the 
+filesystem partition; it's like a serial number for the file described by that inode.
+
+Dentry
+
+A dentry (short for "directory entry") is what the Linux kernel uses to keep track of the hierarchy of files in 
+directories. Each dentry maps an inode number to a file name and a parent directory.
+
+Superblock
+
+The superblock is a unique data structure in a filesystem (though multiple copies exist to guard against corruption). 
+The superblock holds metadata about the filesystem, like which inode is the top-level directory and the type of filesystem
+used.
+
+How to find superblock?
+======================
+dumpe2fs /dev/foo | grep -i superblock
+
+How to find inode no for a file?
+================================
+ls -li filename
+stat fileName-Here
+
+df -i
+df -i
+Filesystem            Inodes   IUsed   IFree IUse% Mounted on
+/dev/sda1            1875968  293264 1582704   16% /
+none                  210613     764  209849    1% /dev
+none                  213415       9  213406    1% /dev/shm
+none                  213415      63  213352    1% /var/run
+none                  213415       1  213414    1% /var/lock
+/dev/sda2            7643136  156663 7486473    3% /home
+
+stat a
+File: `a'
+Size: 0 Blocks: 0 IO Block: 4096 regular empty file
+Device: 805h/2053d Inode: 1448240 Links: 2
+Access: (0644/-rw-r--r--) Uid: ( 1000/himanshu) Gid: ( 1001/ family)
+Access: 2012-01-14 16:30:04.871719357 +0530
+Modify: 2012-01-14 16:29:50.918267873 +0530
+Change: 2012-01-14 16:30:03.858251514 +0530
+
+Delete all inodes related to a file?
+===================================
+$ find . -inum 1448239 -exec rm -i {} \;
+rm: remove regular empty file `./"ab*'? y
+
+
