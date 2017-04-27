@@ -65,3 +65,6 @@ $ find . -inum 1448239 -exec rm -i {} \;
 rm: remove regular empty file `./"ab*'? y
 
 
+Find all files with a given inode no
+=====================================
+debugfs -R "ncheck your_inode_num" /dev/sda
