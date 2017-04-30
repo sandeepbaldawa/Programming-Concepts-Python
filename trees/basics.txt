@@ -136,3 +136,12 @@ def growDouble(n):
 
 Insert element in a BST
 =======================
+def Insert(Node n, Value r):
+    if !n:
+       n = Node(r)
+    else:
+        if r < n.left.data:
+           n.left = Insert(n.left, r)
+        else:   
+           n.right = Insert(n.right, r)
+    return n
