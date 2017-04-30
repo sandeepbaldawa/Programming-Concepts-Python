@@ -51,8 +51,8 @@ D   E      F  G
    while(!q.empty()):
        curr = q.dequeue()
        print curr.data
-       q.enqueue(curr.left)
-       q.enqueue(curr.right)
+       if curr.left q.enqueue(curr.left)
+       if curr.right q.enqueue(curr.right)
        
    Maximum size of queue is all the leaf nodes present..
    
