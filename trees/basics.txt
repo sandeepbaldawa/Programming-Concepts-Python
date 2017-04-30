@@ -56,7 +56,19 @@ D   E      F  G
        
    Maximum size of queue is all the leaf nodes present..
    
+   Time => O(N)
+   Space => 2^h-1 => leaf nodes
    
-   
+
+- Difference between nodes at level 2^h and 2^(h-1)
+  At every level we add +n nodes i.e.
+  
+           A
+    B            C
+ D     E       F    G
+H  I  J  K   L  M  N O => Level 3, here we added 8 nodes and before this in all we had almost 8 nodes, so double the size happened at this level
+
+
+ 
    
    
