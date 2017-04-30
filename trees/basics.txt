@@ -14,3 +14,26 @@ Consider below BST, inorder is always sorted data..
 pre-order => 20, 10, 5, 15, 30, 25, 35
 post-order => 5, 15, 10, 25, 35, 30, 20
 in-order => 5, 10, 15, 20, 25, 30, 35
+
+inorder(Node n):
+   if !n:
+     return
+   inorder(n.left)
+   print n.data
+   inorder(n.right)
+   
+postorder(Node n):
+   if !n:
+     return
+   inorder(n.left)
+   inorder(n.right)
+   print n.data
+   
+pre-order(Node n):
+   if !n:
+     return
+   print n.data
+   inorder(n.left)
+   inorder(n.right)   
+   
+   
