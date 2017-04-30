@@ -37,3 +37,24 @@ pre-order(Node n):
    inorder(n.right)   
    
    
+ - BFS
+   Keep adding to queue node at a particular level
+   Once we add the children of a particular node to the queue, dequeue the parent node.
+   print when you dequeue, that will be level order traversal.
+ 
+        A
+  B          C
+D   E      F  G
+   
+   
+   q.enqueue(node.root)
+   while(!q.empty()):
+       curr = q.dequeue()
+       print curr.data
+       q.enqueue(curr.left)
+       q.enqueue(curr.right)
+       
+   
+   
+   
+   
