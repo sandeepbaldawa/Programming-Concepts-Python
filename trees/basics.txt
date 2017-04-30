@@ -70,5 +70,28 @@ H  I  J  K   L  M  N O => Level 3, here we added 8 nodes and before this in all 
 
 
  
-   
+ 
+ Template
+ 
+ traverse (Node n):
+     if !n:
+       return n
+     nleft = traverse(n.left)
+     nright = traverse(n.right)
+     result = (nleft, nright, n)
+     return result
+     
+Sum of all nodes
+================
+
+Sum (Node n):
+     if !n:
+       return 0
+     nleft = traverse(n.left)
+     nright = traverse(n.right)
+     result = nleft + nright + n.root
+     return result
+ 
+This template follows bottom up approach, i.e. dont process anything till we hit the bottom leaf on left..
+
    
