@@ -1,0 +1,16 @@
+- Height lg(n)
+- BST, left is always smaller than or equal to the right element
+- Binary trees have no order
+- pre-order root comes first then left and right
+- post-order root comes after left and right
+- in-order root comes between left and right
+
+Consider below BST, inorder is always sorted data..
+
+        20
+  10          30
+5   15      25  35
+
+pre-order => 20, 10, 5, 15, 30, 25, 35
+post-order => 5, 15, 10, 25, 35, 30, 20
+in-order => 5, 10, 15, 20, 25, 30, 35
