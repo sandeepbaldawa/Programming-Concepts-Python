@@ -1,5 +1,9 @@
 #Pseudo code form a mirror of tree
-
+'''
+    4               4
+  2    5   ==    5     2
+1  3                3    1
+'''
 def mirror_tree(node):
     if not node return
     tmp = Node(node.val)
