@@ -110,3 +110,26 @@ def mirror(n):
      n.right = nleft
      return n
      
+   2                   
+1     3
+ 
+ to
+
+     2
+  2   3
+ 1  3
+1 
+i.e. mirror self on the left.. 
+
+
+Every node producing a self on the left
+=======================================
+def growDouble(n):
+    if !n:
+       return
+     growDouble(n.left)
+     growDouble(n.right)
+     tmp = n.left
+     n.left = node(n.data)
+     n.left.left = temp
+     return n
