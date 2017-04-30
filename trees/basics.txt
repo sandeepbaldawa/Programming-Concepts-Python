@@ -133,3 +133,6 @@ def growDouble(n):
      n.left = node(n.data)
      n.left.left = temp
      return n
+
+Insert element in a BST
+=======================
