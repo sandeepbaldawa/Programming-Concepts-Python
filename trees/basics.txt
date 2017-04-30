@@ -145,3 +145,25 @@ def Insert(Node n, Value r):
         else:   
            n.right = Insert(n.right, r)
     return n
+
+- In BST data does not tell the exact structure, you would need atleast two things to be known in Pre-Order, Post-Order and In-Order.
+
+Find min in BST
+=============
+- Left most leaf
+- Space (uses stack so no space used by algorithm), but implementation detail space used is  O(lg N) i.e. height
+
+Maximum value in a tree
+=======================
+from print_tree import *
+def getMax(n):
+    if not n:
+       return -1
+    nleft = getMax(n.left)
+    nright = getMax(n.right)
+    return max(nleft, nright, n.entry)
+
+
+t = BinTree(6, BinTree(2, BinTree(0), BinTree(4)), BinTree(10, BinTree(8), BinTree(12)))
+print getMax(t)
+       
