@@ -46,7 +46,7 @@ pre-order(Node n):
   B          C
 D   E      F  G
    
-   
+   q = new Queue()
    q.enqueue(node.root)
    while(!q.empty()):
        curr = q.dequeue()
@@ -54,6 +54,8 @@ D   E      F  G
        q.enqueue(curr.left)
        q.enqueue(curr.right)
        
+   Maximum size of queue is all the leaf nodes present..
+   
    
    
    
