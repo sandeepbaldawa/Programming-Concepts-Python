@@ -167,3 +167,31 @@ def getMax(n):
 t = BinTree(6, BinTree(2, BinTree(0), BinTree(4)), BinTree(10, BinTree(8), BinTree(12)))
 print getMax(t)
        
+In BST pre-decessor and sucessor are
+====================================
+pre-decessor 
+if current node has children:
+    max of left tree (greatest among all nos lesser than current node)
+else:
+    keep going up until you find a node less than current node
+
+sucessor
+if current node has children:
+    min of right tree (smallest among all nos greater than current node)
+else:
+    keep going up until you find a node greater than current node
+    
+Delete some node
+================
+Find the predecessor of the node to be delete and replace it with the deleted node.
+Delete the predecessor from the left subtree
+
+BPlus tree
+==========
+Reply on range of values to compare, Binary trees require one value to compare (more like n ary tree)
+ Last level is the disk i.e. sequential access i.e. linkedlist
+ Higher levels are in RAM, or more faster memory, which helps us to point to a particular node in the last level i.e. linkedlist
+ 
+ examples where trees are used
+ =============================
+ google maps, version control, BPlus tree
