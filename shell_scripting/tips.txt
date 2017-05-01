@@ -1,0 +1,10 @@
+List last n number of files
+============================
+`ls -t $WORKDIR|tail -n $BALANCE`
+
+Remove last n directories
+==========================
+`ls -t $WORKDIR|tail -n $BALANCE` | xargs rm -rf
+`ls -t $WORKDIR|tail -n $BALANCE` -exec rm -rf "{}"\;
+
+
