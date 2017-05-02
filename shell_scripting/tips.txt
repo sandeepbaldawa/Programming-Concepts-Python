@@ -7,4 +7,67 @@ Remove last n directories
 `ls -t $WORKDIR|tail -n $BALANCE` | xargs rm -rf
 `ls -t $WORKDIR|tail -n $BALANCE` -exec rm -rf "{}"\;
 
+Remove all cores
+================
+find ~/ -name 'core*' -exec rm {} \;
+
+Delete all file/directories not accessed in last 5 days
+=======================================================
+DIR=/home/bozo/junk_files
+find "$DIR" -type f -atime +5 -exec rm {} \;
+find "$DIR" -type d -atime +5 -exec rm {} \;
+
+# Finds all IP addresses (xxx.xxx.xxx.xxx) in /etc directory files.
+======================================================================
+find /etc -exec grep '[0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*' {} \;
+
+find inode of all files
+=======================
+inum = `ls -i | grep $1 | awk '{print $1}'`
+echo $inum
+1830629 441466 441450 441452 1394710 441454 441506 441508 1357443 441510 441512 1376769 1334249 1388218
+
+
+Remove all files by inode no
+=============================
+find . -inum $inum -exec rm {} \;
+
+gzip each file in current directory
+===================================
+ls | xargs -p -l gzip gzips every file in current directory, one at a time, prompting before each operation.
+
+
+ls | xargs -n 8 echo lists the files in the current directory in 8 columns.
+
+ls | xargs -n 8 echo
+Applications Desktop Documents Downloads Infrastructure-automation Library Movies Music
+MyFirstApp Pictures Public SimpleTodo android_hello_world todo.txt
+
+ls | xargs -n 1 echo
+Applications
+Desktop
+Documents
+Downloads
+Infrastructure-automation
+Library
+Movies
+Music
+MyFirstApp
+Pictures
+Public
+SimpleTodo
+android_hello_world
+todo.txt
+
+
+
+
+
+
+
+
+
+
+
+
 
