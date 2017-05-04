@@ -1,0 +1,20 @@
+- A Family has two children, if one of them is known to be a boy what is the probability that other is boy too?
+
+S = {BB, BG, GG, GB}
+E = {BB, BG, GB} (one of them is a boy)
+P(E) = 1/3
+F = {BB}
+P(F/E) = P(E^F)/P(E) = (1/4) / (3/4) = 1/3
+
+
+- Flip three coins
+{HHH HHT HTH HTT THH THT TTH TTT}
+E={HHT HTH THH HHH} atleast 2 are head
+F={HHT HTH HTT THH THT TTH TTT} atleast 1 tail
+P(E/F) = P(E^F)/P(F) = 3/8 / 7/8 = 3/7
+P(F/E) = P(E^F)/P(E) = 3/8 / 4/8 = 3/4
+
+
+P(E/F) = P(E^F)/P(F) and P(F/E) = P(E^F)/P(E)
+P(E^F) = P(E/F) . P(F) = P(F/E) . P(E)
+       = 3/7 . 7/8 = 3/4 . 4/8 = 3/8
