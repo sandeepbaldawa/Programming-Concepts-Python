@@ -1,1 +1,4 @@
 
+- Can work only if events are dependent.
+- Cases like ball is not replaced just drawn from a jar.
+- 
