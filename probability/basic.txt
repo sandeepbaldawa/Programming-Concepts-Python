@@ -39,6 +39,6 @@
    P(B) = 3/6 = 1/2
    P(A U B)= P(A) + P(B) - P(A^B) = 1/2 + 1/2 + 2/6 (since 4,6 are common) = 2/3
 
-7.
+7. P(E1 U E2 U E3)= P(E1) + P(E2) + P(E3) - P(E1^E2) - P(E2^E3) - P(E3^E1) + P(E1^E2^E2)
    
   
