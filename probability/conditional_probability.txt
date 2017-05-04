@@ -1,0 +1,35 @@
+S ={1,2,3,4,5,6} each event probability = 1/6
+E ={1}
+P(E) = 1/6
+
+what if it is given output is an even number?, what is it's probability?
+========================================================================
+E = {2,4,6} each event probability = 1/3
+
+what if it is given output is an prime number?, what is it's probability?
+========================================================================
+F = {2,3,5} each event probability = 1/3
+
+What is P(E ^ F) = {2} = 1/6
+
+
+What is probability of getting an prime number given that an even number showed up?
+===================================================================================
+P(F/E) = n(E^F)/n(E)= P(E^F)/P(E) = (1/6)/(1/3) = 1/3 (Probability of F will occur given that E has already occured)
+P(E) = 3/6 = 1/3
+
+eg:-
+Two dices rolled
+E={41 42 43 44 45 46} => Given that First dice is always 4 what is probability the sum of two dice is 6?
+P(E)= 6/36 = 1/6
+F={15 51 24 42 33} Sum is 6
+P(F/E) = P(E^F)/P(E) = (1/36) / (1/6) = 1/6
+
+eg:-
+
+P(E) = {11 13 15 31 33 35 51 53 55} = 9/36 = 1/4  Two dices rolled and both are odd numbers
+P(F) = {15 51 24 42 33} Sum of both dice is 6
+P(F/E) = P(E^F)/P(E) = (3/36)/(1/4) = 4/12 = 1/3
+
+
+
