@@ -1,3 +1,7 @@
+Good problems
+=============
+http://www.crazyforcode.com/probability/
+
 1. Random experiment
    Tossing a coin
    Rolling a dice
