@@ -18,3 +18,10 @@ P(F/E) = P(E^F)/P(E) = 3/8 / 4/8 = 3/4
 P(E/F) = P(E^F)/P(F) and P(F/E) = P(E^F)/P(E)
 P(E^F) = P(E/F) . P(F) = P(F/E) . P(E)
        = 3/7 . 7/8 = 3/4 . 4/8 = 3/8
+
+
+- Let's say we have 10 cards 1..10
+E - card is atleast 5 = {5,6,7,8,9,10} P(E) = 6/10
+F - card no is 10     = {10} P(F) = 1/10
+P(F/E) = ? 
+P(F/E) = P(E^F)/P(E) = 1/10 / 6/10 = 1/6
