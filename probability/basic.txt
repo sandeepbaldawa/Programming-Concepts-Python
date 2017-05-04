@@ -24,9 +24,20 @@
    
 5. For E1 and E2 if E3=E1 U E2  and E1 and E2 are mutually exclusive events
    P(E1 U E2)= P(E1) + P(E2)
+   eg:- P(A)={1,3} P(B)={4,5} in rolling a dice
+   Total outcomes = 6
+   P(A) = 2/6 = 1/3
+   P(B) = 2/6 = 1/3
+   P(A U B) = 4/6 = 2/3 or (1/3 + 1/3)
+   This is possible only because A and B are both mutually exclusive..
+   
    
 6. For E1 and E2 if E3=E1 U E2  and E1 and E2 are **not mutually exclusive events
    P(E1 U E2)= P(E1) + P(E2) - P(E1^E2)
+   eg:- P(A)={2, 4, 6} P(B)={4, 6, 5} in rolling a dice
+   P(A) = 3/6 = 1/2
+   P(B) = 3/6 = 1/2
+   P(A U B)= P(A) + P(B) - P(A^B) = 1/2 + 1/2 + 2/6 (since 4,6 are common) = 2/3
 
 7.
    
