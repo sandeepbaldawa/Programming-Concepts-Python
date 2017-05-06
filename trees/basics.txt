@@ -36,7 +36,12 @@ pre-order(Node n):
    inorder(n.left)
    inorder(n.right)   
    
+ -DFS
+   Uses stack
    
+***Difference between compiler recursion and stack?   
+In our own stack always push right first and then left if we need to process left first(LIFO while popping out)..
+
  - BFS
    Keep adding to queue node at a particular level
    Once we add the children of a particular node to the queue, dequeue the parent node.
