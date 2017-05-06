@@ -46,6 +46,9 @@ In our own stack always push right first and then left if we need to process lef
    Keep adding to queue node at a particular level
    Once we add the children of a particular node to the queue, dequeue the parent node.
    print when you dequeue, that will be level order traversal.
+   
+   What is the length of the queue?
+   Number of leaf elements as that is the max size of queue required in BFS..
  
         A
   B          C
