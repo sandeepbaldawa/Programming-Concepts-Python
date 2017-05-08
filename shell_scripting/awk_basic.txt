@@ -1,0 +1,38 @@
+cat db.txt 
+John,29,MS,IBM,M,Married
+Barbi,45,MD,JHH,F,Single
+Mitch,33,BS,BofA,M,Single
+Tim,39,Phd,DELL,M,Married
+Lisa,22,BS,SmartDrive,F,Married
+
+Each row print the 1st continuous string
+========================================
+awk '{print $1}' db.txt 
+John,29,MS,IBM,M,Married
+Barbi,45,MD,JHH,F,Single
+Mitch,33,BS,BofA,M,Single
+Tim,39,Phd,DELL,M,Married
+Lisa,22,BS,SmartDrive,F,Married
+
+Each row print the first string by delimiter ","
+========================================
+awk -F"," '{print $1}' db.txt
+John
+Barbi
+Mitch
+Tim
+Lisa
+
+Each row print the second string by delimiter ","
+========================================
+user$ awk -F"," '{print $2}' db.txt
+29
+45
+33
+39
+22
+
+
+
+
+
