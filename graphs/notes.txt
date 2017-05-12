@@ -9,6 +9,7 @@ Topological sort applications. Application: course prerequisites, order in which
 Strong component applications. Applications to CAD, Markov chains (irreducible), spider traps and web search, pointer analysis, garbage collection.
 
 
-1. Graphs can be represented as adjacency matrix or buckets with linked list
-2. Graphs can be dense or sparse..
-3. For dense graphs usually adjacency matrix is used..
+1. Graphs can be represented as adjacency matrix or adjacency list.
+2. Graphs can be dense or sparse.., dense is when graph E = O(V^2) and sparse is when E = O(V)
+3. For dense graphs usually adjacency matrix is used and adjancecy list otherwise..
+
