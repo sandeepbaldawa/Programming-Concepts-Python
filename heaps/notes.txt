@@ -21,6 +21,10 @@ How to know if heap property is satisfied?
 - Parent always greater than children (in max heap)
 - Child always at 2i and 2i+1 for left and right sub childs.
 
+Time taken to construct heap?
+-----------------------------
+O(N)
+
 Add to Heap
 ----------
 - Add to leaf, and swim to top the value by comparison wih parent.
