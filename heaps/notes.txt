@@ -16,6 +16,11 @@ In a list, inserting O(N) and sorting is O(N log N)
 We need these functions to implement a priority queue
 Heap can do both of these in O(log N)
 
+How to know if heap property is satisfied?
+------------------------------------------
+- Parent always greater than children (in max heap)
+- Child always at 2i and 2i+1 for left and right sub childs.
+
 Add to Heap
 ----------
 - Add to leaf, and swim to top the value by comparison wih parent.
