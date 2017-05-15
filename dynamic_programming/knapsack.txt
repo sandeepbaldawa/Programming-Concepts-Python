@@ -1,5 +1,16 @@
 Knapsack can be fractional(object can be cut into fraction) or 0/1
 Knapsack 0/1
+greedy fails hence use dp..
+
+when to know greedy will fail?
+==============================
+profit(2,3) or profit(2,w)
+weight(1,3) or weight(1,w)
+
+In greedy P/W = (2,1) and we sort.. so greedy always gives answer as "2" which is clearly wrong, since
+w can be 1 or 100 or 1000 or 1Million, we should have ideally taken W's value to calculate the worthness.
+
+
 - Either take it or leave it
 
 wt = [1,3,5,7]
