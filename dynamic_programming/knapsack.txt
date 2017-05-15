@@ -1,3 +1,4 @@
+Knapsack can be fractional(object can be cut into fraction) or 0/1
 Knapsack 0/1
 - Either take it or leave it
 
