@@ -10,7 +10,7 @@ def isPalindrome(input, i , j):
 def getPalindromes(input):
    count = 0
    for i in range(len(input)):
-      for j in range(len(input)):
+      for j in range(i, len(input)):
          if isPalindrome(input, i , j):
             count += 1
 
@@ -38,7 +38,7 @@ def getPalindromesOptimized(input):
             count += 1
 
    return count
-
-print getPalindromes("aabb")
-print getPalindromesOptimized("bbaabb")
-~                                       
+input = "abbbba"
+print getPalindromes(input)
+print getPalindromesOptimized(input)
+~                                     
