@@ -6,7 +6,7 @@ def isPalindrome(input, i , j):
    #print tmp
    return tmp ==  tmp[::-1]
 
-
+# O(N^3)
 def getPalindromes(input):
    count = 0
    for i in range(len(input)):
@@ -16,7 +16,7 @@ def getPalindromes(input):
 
    return count
 
-
+# O(N^2)
 def getPalindromesOptimized(input):
    count = 0
    for i in range(len(input)):
