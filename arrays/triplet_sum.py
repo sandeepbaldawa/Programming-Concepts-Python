@@ -14,9 +14,9 @@ tripletSum(x, a) = true.
 The given array contains the elements 1,2, and 5, which add up to 8.
 
 '''
-
+#Solution1
 def tripletSum(x, a):
-   a = sorted(a)
+   a.sort()
    
    for i, vali in enumerate(a):
       start = i + 1
@@ -37,3 +37,13 @@ def tripletSum(x, a):
 x = 15
 a = [14, 1, 2, 3, 8, 15, 3]
 tripletSum(x, a)
+
+# Solution2
+from itertools import combinations
+def tripletSum(x, a):
+    for e in combinations(a, 3):
+        if sum(e) == x: return True
+    
+   return False
+
+
