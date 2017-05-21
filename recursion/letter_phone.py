@@ -15,26 +15,29 @@ Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 Make sure the returned strings are lexicographically sorted.
 
 """
-# Tail recursion
-d = { '1': "1",
-      '2': "ABC",
-      '3': "DEF",
-      '4': "GHI",
-      '5': "JKL",
-      '6': "MNO",
-      '7': "PQRS",
-      '8': "TUV",
-      '9': "WXYZ",
+dict = { '1': "1",
+      '2': "abc",
+      '3': "def",
+      '4': "ghi",
+      '5': "jkl",
+      '6': "mno",
+      '7': "pqrs",
+      '8': "tuv",
+      '9': "wxyz",
 }
 
-def getphoneMneumonicHelper(input, digitIndex, acc):
-	if digitIndex < len(input):
-		digit = input[digitIndex]
-		for c in d[str(ord(input[digitIndex]) - ord('0'))]:
-			acc[digitIndex] =  c
-			getphoneMneumonicHelper(input, digitIndex + 1, acc)
-	else:
-		print acc
-	
-acc = [None] * 3
-getphoneMneumonicHelper("567", 0 , acc)
+res = []
+def pressingButtons(buttons):
+    if len(buttons) <= 0:
+        return res
+    helper(buttons, 0, "")
+    return res
+    
+
+def helper(buttons, i, soFar=""): 
+   if i >= (len(buttons)):
+       res.append(soFar)
+       return
+    
+   for val in dict[buttons[i]]:
+        helper(buttons, i+1, soFar + val)
