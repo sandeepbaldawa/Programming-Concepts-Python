@@ -1,5 +1,5 @@
 # x & ~(x-1) => Isolates the right most "1"
-
+# O(K) K is no of bits set to "1"
 # return 1 for odd no of 1's and 0 otherwise
 def parity(x):
    count = 0
