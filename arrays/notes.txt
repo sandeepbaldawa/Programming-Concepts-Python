@@ -1,4 +1,5 @@
 Array           LL 
+array is homogenous, ll need not be..
 
 O(1)            O(N)
 
