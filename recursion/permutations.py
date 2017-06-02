@@ -12,3 +12,22 @@ def getPerms(soFar, rest):
         getPerms(first, second)
 
 getPerms("", "abcde")
+
+
+# Second method, does not create new array each time and passes indices..
+
+def printPerm(arr):
+   n = len(arr) - 1
+   helper(arr, 0, n)
+
+def helper(arr, soFar_idx, n):
+   if soFar_idx == n:
+      print(arr)
+      return
+
+   for i in range(soFar_idx, len(arr)):
+     arr[i], arr[soFar_idx] = arr[soFar_idx], arr[i] # swap
+     helper(arr, soFar_idx + 1, n)
+     arr[soFar_idx], arr[i] = arr[i], arr[soFar_idx] # reset swap
+
+printPerm(['a','b','c','d'])
