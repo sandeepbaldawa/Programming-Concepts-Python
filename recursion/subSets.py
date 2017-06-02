@@ -25,4 +25,20 @@ word = 'abc'
 soFar = [0] * len(word)
 print sub(word, 0, soFar, 0)
 
+# Third method use bit array
+def sub_bitarray(word, word_idx, soFar):
+  if word_idx == len(soFar):
+    res = []
+    for i in range(len(soFar)):
+       if soFar[i] == 1:
+         res.append(word[i])
+    print res
+    return
+  soFar[word_idx] = 0
+  sub_bitarray(word, word_idx+1, soFar)
+  soFar[word_idx] = 1
+  sub_bitarray(word, word_idx+1, soFar)
 
+word = 'abc'
+soFar = [0] * len(word)
+print sub_bitarray(word, 0, soFar)
