@@ -1,0 +1,38 @@
+Array           LL 
+
+O(1)            O(N)
+
+resizing
+O(N)            O(1)
+
+append/add 
+
+
+insertion
+ 
+
+deletion 
+
+
+
+Find
+
+
+
+ADT  LIST - append(item), insert(index, item), delete(index), find(item)
+vs 
+DS - Array, LinkedList, ArrayList, Set, Deque, Queue
+
+
+Comments 
+--------
+
+1. Ammortized (2 4 8 16 32 64 128)
+Study - how grow-array-size is amortized O(1)
+
+2. ADT - operations (Robert Sedgewick, Princeton)
+
+
+
+
+
