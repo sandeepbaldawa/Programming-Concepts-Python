@@ -1,3 +1,15 @@
+Basic template
+==============
+
+func(cond, acc):
+  termination_cond(cond)
+  
+  for loop
+      if (cond)
+          result = change to cond
+
+  return result 
+
 - Recursion has a terminating case
 - Varying input for each call(else it would be an inifnite loop and not terminate)
 - Recursive decomposition
