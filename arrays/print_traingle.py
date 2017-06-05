@@ -10,8 +10,7 @@ def printPattern(n):
     if n <= 0:
         print "0"
         return
-    line_size = 1
-    num = 1
+    line_size, num  = 1, 1
     while(True):
         string = ""
         # print how many numbers on each line
@@ -21,8 +20,9 @@ def printPattern(n):
                 return
             string = string + str(num) + " "
             num += 1
-        print string    
+        print string
         line_size += 1
+
         
             
 #printPattern(7)
