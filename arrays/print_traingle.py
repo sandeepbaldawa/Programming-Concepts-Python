@@ -20,7 +20,6 @@ def printPattern(n):
                 return
             string = string + str(num) + " "
             num += 1
-        print string
         line_size += 1
 
         
