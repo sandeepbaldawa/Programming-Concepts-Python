@@ -17,7 +17,7 @@ def printPattern(n):
         for i in range(line_size):
             if num >= n:
                 string = string + str(num)
-                return
+                return string
             string = string + str(num) + " "
             num += 1
         line_size += 1
