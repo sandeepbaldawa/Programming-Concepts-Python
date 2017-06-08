@@ -8,7 +8,7 @@ def bin_search(input, start, stop, val):
     if input[mid] < val:
         return bin_search(input, start, mid-1, val)
     if input[mid] > val:
-        return bin_search(input, mid-1, stop, val)
+        return bin_search(input, mid+1, stop, val)
         
 def BS(input, val):
     return bin_search(input, 0, len(input), val)
