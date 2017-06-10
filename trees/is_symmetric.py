@@ -8,16 +8,28 @@ class Node:
         self.right = right
 
 
-def isSymmetric(node):
-    return not node or helper(node.left, node.right)
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
-
-def helper(left, right):
-    if not left and not right:
-        return True
-    elif left and right:
-        return left.data == right.data and helper(left.left, right.right) and helper(left.right, right.left)
-    else: # not node.left or not node.right
+class Solution:
+    # @param A : root node of tree
+    # @return an integer
+    def isSymmetric(self, A):
+        return self.isMirror(A, A)
+        
+    def isMirror(self, root1, root2):
+        if not root1 and not root2:
+            return True
+        
+        if root1 and root2:
+            l_s = self.isMirror(root1.left, root2.right) 
+            r_s = self.isMirror(root1.right, root2.left)
+            return l_s and r_s and root1.val == root2.val
+        
         return False
      
     
