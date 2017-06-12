@@ -1,5 +1,9 @@
 '''
 Boggle game
+Instead of prefix, one can use a trie for lookup which will make this faster
+Brute Force:- Without prefix lookup => 8 ^ (n ** 2) where n is the side size(assuming square), each time we fanout 8
+Better :- Use prefix
+Even better:- User Trie
 '''
 
 import time
