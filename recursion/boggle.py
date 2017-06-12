@@ -5,7 +5,7 @@ Brute Force:- Without prefix lookup => 8 ^ (n ^ 2) where n is the side size(assu
 Better :- Use prefix
 Even better:- User Trie
 '''
-
+import random
 import time
 NEIGHBOURS = [(-1, -1),  (-1, 0), (-1, 1),
                (0, -1),            (0, 1),
@@ -82,3 +82,7 @@ board = ["mag"]
 res, visited = set(), set()
 solveBoggle(board)
 assert  res == set(['ama', 'gag', 'gam', 'aga', 'mag'])
+
+board = ["".join(random.choice(string.ascii_lowercase) for x in range(10)) for y in range(100)]
+res, visited = set(), set()
+solveBoggle(board)
