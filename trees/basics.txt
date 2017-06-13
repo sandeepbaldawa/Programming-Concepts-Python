@@ -1,3 +1,8 @@
+- Traversal can be breadth wise or depth wise
+   Breadth wise => Level order traversal
+   Depthwise => Pre-order, in-order, post-order
+
+
 - Height lg(n)
 - BST, left is always smaller than or equal to the right element
 - Binary trees have no order
