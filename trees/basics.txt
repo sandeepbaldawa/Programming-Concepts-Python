@@ -30,16 +30,16 @@ inorder(Node n):
 postorder(Node n):
    if !n:
      return
-   inorder(n.left)
-   inorder(n.right)
+   postorder(n.left)
+   postorder(n.right)
    print n.data
    
 pre-order(Node n):
    if !n:
      return
    print n.data
-   inorder(n.left)
-   inorder(n.right)   
+   order(n.left)
+   order(n.right)   
    
  -DFS
    Uses stack
