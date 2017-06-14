@@ -15,55 +15,40 @@ closing brackets, output the 1-based index of the first unmatched opening bracke
 # After Pop compare if left and right character matches
 
 """
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-import sys
 
 
-class Bracket:
+BRACKETS =['(',')','{','}','[',']']
+OPENING = ['(','{','[']
+CLOSING = [')','}',']']
 
-    def __init__(self, bracket_type='', position=0):
-        self.bracket_type = bracket_type
-        self.position = position
+def check_match(open, close):
+    '''Check bracket open/close bracket match'''
+    #print open, close
+    if open == "(" and close == ")":
+        return True
+    if open == "{" and close == "}":
+        return True
+    if open == "[" and close == "]":
+        return True
+    return False
 
-    def Match(self, c):
-        if self.bracket_type == '[' and c == ']':
-            return True
-        if self.bracket_type == '{' and c == '}':
-            return True
-        if self.bracket_type == '(' and c == ')':
-            return True
-        return False
+def bracket_check(input):
+    stack = []
+    idx = 0
 
+    while(idx < len(input)):
+        if input[idx] not in BRACKETS:
+            idx += 1
+            continue
+        if input[idx] in OPENING:
+            stack.append(input[idx])
+        else:  # If closing bracket compare with last opening bracket in stack
+            if not check_match(stack.pop(),input[idx]):
+                return False
+        idx += 1
 
-__name__ = '__main__'
-if __name__ == '__main__':
-    text = '{[}'  # sys.stdin.read()
-    text = text.strip(' ')
-    if len(text) <= 1:
-        print '1'
-        sys.exit()
-    bkt = Bracket()
-    ret = 0
-    opening_brackets_stack = []
-    for (i, next) in enumerate(text):
-        if next == '(' or next == '[' or next == '{':
-            opening_brackets_stack.append([next, i])
-            bkt.bracket_type = next
+    return len(stack) == 0
 
-        if next == ')' or next == ']' or next == '}':
-            if len(opening_brackets_stack) == 0:
-                ret = -1
-                break
-            bkt.bracket_type = opening_brackets_stack.pop()[0]
-
-            if not bkt.Match(next):
-                ret = -1
-                break
-    if len(opening_brackets_stack) >= 1 and ret != -1:
-        index = opening_brackets_stack.pop()[1]
-        print index + 1
-    elif ret == 0 and len(opening_brackets_stack) == 0:
-        print 'Success'
-    else:
-        print i + 1
+print bracket_check('[dklf(df(kl))d]{}')
+print bracket_check('{[[[]]]}')
+print bracket_check('{3234[fd')
