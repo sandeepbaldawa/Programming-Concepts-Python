@@ -27,29 +27,33 @@ Ans => [1,6][8,10][15,18]
 
 '''
 
+class Interval():
+    def __init__(self, s=0, e=0):
+        self.start = s
+        self.end = e
 
-def merge_intervals(input):
-  res = []
-  input = sorted(input, key=lambda x:x[0])
-  print input
+    def __repr__(self):
+        return "[{0}, {1}]".format(self.start, self.end)
 
-  prev_start, prev_end = input[0][0], input[0][1]
-  res.append([prev_start],[prev_end])
-  start = prev_start
-  end = prev_end
-  for idx in range(1, len(input)):
-    curr_start, curr_end = input[idx][0], input[idx][1]
-    prev_start, prev_end = res[-1][0], res[-1][1]
-   
-    if curr_start <= prev_end:
-      end = max(prev_end, curr_end)
-    else:
-      res.append(res[-1][1])
-  
-  return res
-   
+class Solution:
+    def merge_intervals(self, input):
+        if not input:
+            return input
+        input = sorted(input, key=lambda x:x.start)
+        result=[input[0]]
+        for i in range(len(input)):
+            prev, current = result[-1], input[i]
+            if current.start <= prev.end:
+                prev.end = max(prev.end, current.end)
+            else:
+                result.append(current)
+        return result
 
 
-res = [1,3],[2,6],[8,10],[6,12],[15,18]
-print merge_intervals(res)
+        return res
 
+def print_input(res1):
+    for each in res1:
+        print each.start, each.end
+
+print Solution().merge_intervals([Interval(1, 3), Interval(2, 6), Interval(8, 10), Interval(15,18)])
