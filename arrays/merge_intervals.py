@@ -36,16 +36,21 @@ class Interval():
 
 class Solution:
     def merge_intervals(self, input):
+        '''
+        Merge overlapping intervals
+        :param input: intervals List(list)
+        :return: merged intervals List(list)
+        '''
         if not input:
             return input
         input = sorted(input, key=lambda x:x.start)
         result=[input[0]]
         for i in range(len(input)):
-            current = input[i]
-            if current.start <= result[-1].end:
-                result[-1].end = max(result[-1].end, current.end)
-            else:
-                result.append(current)
+            # If current start overlaps with previous end
+            if input[i].start <= result[-1].end:
+                result[-1].end = max(result[-1].end, input[i].end)
+            else:# no overlap
+                result.append(input[i])
         return result
 
 
