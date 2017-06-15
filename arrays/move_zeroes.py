@@ -14,6 +14,7 @@ Time:- O(N)
 Space:- O(1)
 '''
 def move_zeroes(arr):
+    '''Move zeroes to left maintaining relative order '''
     if not arr:
         return arr
     read_idx = write_idx = len(arr) - 1 #last element
