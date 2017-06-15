@@ -52,8 +52,6 @@ class Solution:
             else:# no overlap
                 result.append(input[i])
         return result
-
-
         return res
 
 def print_input(res1):
