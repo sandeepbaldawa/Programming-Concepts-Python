@@ -240,3 +240,5 @@ traverse (Node n, res):
        result += 1  
      traverse(n.left, result)
      traverse(n.right, result)
+
+See example https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/trees/sum_left_leaves.py
