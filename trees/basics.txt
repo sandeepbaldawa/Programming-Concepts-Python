@@ -208,3 +208,35 @@ Reply on range of values to compare, Binary trees require one value to compare (
  examples where trees are used
  =============================
  google maps, version control, BPlus tree
+ 
+ 
+ Template modifications
+ ======================
+ To solve using return values use
+ 
+ Template1
+ =========
+ 
+ traverse (Node n):
+     if !n:
+       return n
+     nleft = traverse(n.left)
+     nright = traverse(n.right)
+     result = (nleft, nright, n)
+     return result
+     
+To solve using passed parameters
+1. Define a global parameter result
+2. Pass it to the recursive call
+3. We process result before recursing
+
+
+Template2
+=========
+traverse (Node n, res):
+     if !n:
+       return n
+     if n % 2:
+       result += 1  
+     traverse(n.left, result)
+     traverse(n.right, result)
