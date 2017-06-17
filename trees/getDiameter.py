@@ -1,24 +1,26 @@
-from print_tree import *
-def getDiameter(node):
-    if not node:
-        return 0, 0
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
-    h_l, d_l = getDiameter(node.left)
-    h_r, d_r = getDiameter(node.right)
-    height = max(h_l, h_r) + 1
-    diameter = h_l + h_r + 1
-    diameter = d_l if d_l > diameter else diameter
-    diameter = d_r if d_r > diameter else diameter
-
-    return height, diameter
-
-myTree = BinTree(1)
-myTree.left = BinTree(5)
-myTree.right = BinTree(15)
-myTree.left.left = BinTree(2)
-myTree.left.right = BinTree(6)
-myTree.right.left = BinTree(11)
-myTree.right.right = BinTree(20)
-print(myTree)
-
-print getDiameter(myTree)
+class Solution(object):
+    def diameterOfBinaryTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        h, d = self.helper(root)
+        return d
+    
+    def helper(self, root):
+        if not root:
+            return (0, 0)
+        
+        h_l, d_l = self.helper(root.left)
+        h_r, d_r = self.helper(root.right)
+        
+        h = 1 + max(h_l, h_r)
+        d = max((h_l + h_r), d_l, d_r)
+        return (h, d)
