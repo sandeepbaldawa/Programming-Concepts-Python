@@ -11,4 +11,6 @@ Given set of N objects
 union connects any two objects
 connect checks if connectivity exists between two components..
 
+eg:- Given a complex maze, find route from source to destination, pixels in photos..friends in network, 
+
 
