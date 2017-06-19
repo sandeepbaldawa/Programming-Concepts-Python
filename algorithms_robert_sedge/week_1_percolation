@@ -1,0 +1,18 @@
+- Consider N * N grid of sites(blocks)
+- Each site/block had p probability of being open or 1-p of being blocked
+- System is said to be percolated if top and bottom are connected by open sites/blocks
+
+eg:- Electricity flows, water flows, social network connected etc..
+
+
+Monte Carlo simulation can help define the threshold at which system starts to perculate i.e. threshold is the probability
+of open spaces becoming high.
+
+How to check if N^2 site percolates?
+=====================================
+We can use dynamic connectivity model here...
+
+- Create object for each site/block and name them from 0..N^2
+- Sites are in same component if connected by open sites.
+- Change one site at a time and see if we percolate...
+
