@@ -15,4 +15,16 @@ eg:- Given a complex maze, find route from source to destination, pixels in phot
 
 Fundamentally helps find connected components..
 
+More concretely
+- Given N objects
+- Given M operations(union and find)
+- Find an efficient datastructure for union find
+
+class UF():
+    def __init__(self, N):
+      self.N = N #initialized with N objects
+    
+    def union(p, q) # Need to define this
+    def connected(p, q) # Need to define this
+
 
