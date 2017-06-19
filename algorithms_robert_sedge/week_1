@@ -53,3 +53,38 @@ find/connected => O(1)
 union          => O(N)
 
 For N commands union becomes O(N^2)
+
+Quick union and avg/slow find
+=============================
+
+class QuickUnionUF():
+    def __init__(self, N):
+        '''Set id of each object to itself (N array accesses)'''
+        self.id = [i for i in range(N)]
+
+    def __root(self, i):
+        '''Chase parent pointers until we reach root(at root i == id[i]'''
+        while(i != self.id[i]):
+            i = self.id[i]
+        return i
+
+    def connected(self, p, q):
+        '''Two components are connected if their root is the same'''
+        return self.__root(p) == self.__root(q)
+
+    def union(self, p, q):
+        '''Change root of p to point to root of q'''
+        self.id[self.__root(p)] = self.__root(q)
+
+input =  open('tinyUF.txt').read().split("\n")
+print QuickUnionUF(10).connected(0, 0)
+
+'''
+Each operation worst case
+initialize     => O(N)
+find/connected => O(N)
+union          => O(N)
+
+For N commands find becomes O(N^2)
+'''
+
