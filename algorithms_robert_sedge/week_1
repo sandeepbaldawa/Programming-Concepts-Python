@@ -13,6 +13,13 @@ connect checks if connectivity exists between two components..
 
 eg:- Given a complex maze, find route from source to destination, pixels in photos..friends in network, 
 
+Use cases
+=========
+- Dynamic Connectivy(eg:- check if two machines are connected on the fly)
+- Krushkals' spanning tree
+- Least common ancestor
+-
+
 Fundamentally helps find connected components..
 
 More concretely
