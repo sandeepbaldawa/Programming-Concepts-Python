@@ -6,4 +6,9 @@ Union - connects two nodes
 Connect - Queries if two nodes are connected 
 Connected components :- Maintains table of all connected components
 
+Problem:-
+Given set of N objects
+union connects any two objects
+connect checks if connectivity exists between two components..
+
 
