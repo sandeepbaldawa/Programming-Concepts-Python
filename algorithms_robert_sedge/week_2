@@ -16,6 +16,9 @@ https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/algori
 
 Implement using arrays
 =======================
+Add to the end and remove from the end
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/algorithms_robert_sedge/week_2_stack_array.py
+
 - Every operation takes constant amortized time.
 - Less space wasted.
 
