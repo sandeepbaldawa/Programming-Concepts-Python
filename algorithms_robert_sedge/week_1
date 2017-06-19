@@ -86,5 +86,9 @@ find/connected => O(N)
 union          => O(N)
 
 For N commands find becomes O(N^2)
+Why is find costly?, because worst case we can connect a huge tree which is linear i.e. not well balanced on the fan out,
+this can be pretty costly, so optimization would be to try to balance trees, so that find can be improved..
+
+
 '''
 
