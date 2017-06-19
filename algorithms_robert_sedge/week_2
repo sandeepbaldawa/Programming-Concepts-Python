@@ -1,2 +1,73 @@
 Stacks
 ======
+ADT
+LIFO
+
+Push/Pop
+
+Implement using linked-list
+============================
+Add to the start and remove from the start
+
+- Every operation takes constant time in worst case.
+- Extra time and space for managing links.
+
+Implement using arrays
+=======================
+- Every operation takes constant amortized time.
+- Less space wasted.
+
+
+Queue
+======
+ADT
+FIFO
+
+Template
+========
+class QueueOfStrings():
+    def __init(self, capacity):
+       self.capacity = capacity 
+    def enqueue(item):
+    def dequeue()
+    def isEmpty()
+    def size()
+
+Implement using linked-list
+============================
+Add to the end and remove from the start
+
+class QueueOfStrings():
+    def __init(self, capacity):
+       self.capacity = capacity 
+       self.first = self.last = None
+    
+    class Node():
+       def __init__(val):
+           self.val = val
+           self.next = None
+       
+    def enqueue(item):
+       '''Add at the tail with new value'''
+       new_last = Node(item)
+       news_last.next = None
+       if self.isEmpty(): 
+          self.first = self.last
+       else:
+           self.last.next = new_last
+           self.last = self.last.next
+       
+    def dequeue()
+       '''Remove from the head and return value'''
+       deq_item = None
+       if !self.isEmpty(): 
+          deq_item = self.first
+          self.first = self.first.next
+       return deq_item.val   
+    
+    def isEmpty():
+      return self.first == None
+    
+Implement using arrays
+=======================
+
