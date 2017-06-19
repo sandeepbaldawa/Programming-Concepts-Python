@@ -27,7 +27,10 @@ class UF():
     def union(p, q) # Need to define this
     def connected(p, q) # Need to define this
     
-    
+1. Quick find and slow union O(N^2)
+2. Quick union and avg/slow find O(N^2)
+3. Weighted Quick union and avg/slow find O(N*logN)
+4. Path compression Weighted union and find  O(N) => linear wow!!!
     
 Quick find and slow union
 ==========================
@@ -56,7 +59,6 @@ For N commands union becomes O(N^2)
 
 Quick union and avg/slow find
 =============================
-
 class QuickUnionUF():
     def __init__(self, N):
         '''Set id of each object to itself (N array accesses)'''
@@ -89,7 +91,97 @@ For N commands find becomes O(N^2)
 Why is find costly?, because worst case we can connect a huge tree which is linear i.e. not well balanced on the fan out,
 this can be pretty costly, so optimization would be to try to balance trees, so that find can be improved.
 Let's try to make avg distance from root lower.
-
-
 '''
 
+Weighted Quick Union(Significant improvement)
+==============================================
+
+class WeightedQuickUnionUF():
+    def __init__(self, N):
+        '''Set id of each object to itself (N array accesses)'''
+        self.id = [i for i in range(N)]
+        self.sz = [0 for i in range(N)]
+
+    def __root(self, i):
+        '''Chase parent pointers until we reach root(at root i == id[i]'''
+        while(i != self.id[i]):
+            i = self.id[i]
+        return i
+
+    def connected(self, p, q):
+        '''Two components are connected if their root is the same'''
+        return self.__root(p) == self.__root(q)
+
+    def union(self, p, q):
+        '''Change root of p to point to root of q
+           we change this to make sure the smaller tree is always joined to
+           the larger tree, to make the average distance from the root lesser for all
+            nodes'''
+        i, j = self.__root(p), self.__root(q)
+        if i == j: return
+        if self.sz[i] <= self.sz[j]:
+            self.id[i] = j
+            self.sz[i] += self.sz[j]
+        else:
+            self.id[j] = i
+            self.sz[j] += self.sz[i]
+
+input =  open('tinyUF.txt').read().split("\n")
+print WeightedQuickUnionUF(10).connected(0, 0)
+
+'''
+Each operation worst case
+initialize     => O(N)
+find/connected => O(lg N)
+union          => O(lg N)
+
+For N commands find becomes O(N lg N)
+'''
+
+Weighted Path  Compression QuickUnionUF (linear)
+================================================
+class WeightedPathCompressionQuickUnionUF():
+    def __init__(self, N):
+        '''Set id of each object to itself (N array accesses)'''
+        self.id = [i for i in range(N)]
+        self.sz = [0 for i in range(N)]
+
+    def __root(self, i):
+        '''Chase parent pointers until we reach root(at root i == id[i]'''
+        '''Path compression:- Make every other node point to it's grand parent(half the length)'''
+        while(i != self.id[i]):
+            self.id[i] = self.id[id[i]]
+            i = self.id[i]
+        return i
+
+    def connected(self, p, q):
+        '''Two components are connected if their root is the same'''
+        return self.__root(p) == self.__root(q)
+
+    def union(self, p, q):
+        '''Change root of p to point to root of q
+           we change this to make sure the smaller tree is always joined to
+           the larger tree, to make the average distance from the root lesser for all
+            nodes'''
+        i, j = self.__root(p), self.__root(q)
+        if i == j: return
+        if self.sz[i] <= self.sz[j]:
+            self.id[i] = j
+            self.sz[i] += self.sz[j]
+        else:
+            self.id[j] = i
+            self.sz[j] += self.sz[i]
+
+input =  open('tinyUF.txt').read().split("\n")
+print WeightedPathCompressionQuickUnionUF(10).connected(0, 0)
+
+'''
+Each operation worst case
+initialize     => O(N)
+find/connected => O(lg * N)  => constant for practical purposes
+union          => O(lg  * N) => constant for practical purposes
+
+For N commands find becomes O(N)
+'''
+
+For billion operation would take 30 years for a O(N^2) but only 6 seconds for a O(N) algorithm, so great improvement!!!
