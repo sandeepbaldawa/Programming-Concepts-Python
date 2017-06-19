@@ -8,6 +8,8 @@ Push/Pop
 Implement using linked-list
 ============================
 Add to the start and remove from the start
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/algorithms_robert_sedge/week_2_stack_ll.py
+
 
 - Every operation takes constant time in worst case.
 - Extra time and space for managing links.
@@ -40,4 +42,3 @@ https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/algori
     
 Implement using arrays
 =======================
-
