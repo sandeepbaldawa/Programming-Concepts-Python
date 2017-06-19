@@ -1,0 +1,55 @@
+week1:-
+--------
+Problem :- Dynamic Connectivity
+1. Union-connect
+Union - connects two nodes
+Connect - Queries if two nodes are connected 
+Connected components :- Maintains table of all connected components
+
+Problem:-
+Given set of N objects
+union connects any two objects
+connect checks if connectivity exists between two components..
+
+eg:- Given a complex maze, find route from source to destination, pixels in photos..friends in network, 
+
+Fundamentally helps find connected components..
+
+More concretely
+- Given N objects
+- Given M operations(union and find)
+- Find an efficient datastructure for union find
+
+class UF():
+    def __init__(self, N):
+      self.N = N #initialized with N objects
+    
+    def union(p, q) # Need to define this
+    def connected(p, q) # Need to define this
+    
+    
+    
+Quick find and slow union
+==========================
+class QuickFindUF():
+    def __init__(self, N):
+        self.id = [i for i in range(N)]
+
+    def connected(self, p, q):
+        return self.id[p] == self.id[q]
+
+    def union(self, p, q):
+        for idx in range(len(self.id)):
+            if self.id[idx] == self.id[p]:
+                self.id[idx] = self.id[q]
+
+input =  open('tinyUF.txt').read().split("\n")
+print QuickFindUF(10).connected(0, 1)
+
+
+Each operation worst case
+initialize     => O(N)
+find/connected => O(1)
+union          => O(N)
+
+For N commands union becomes O(N^2)
