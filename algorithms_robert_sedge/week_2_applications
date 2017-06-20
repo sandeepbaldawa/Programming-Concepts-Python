@@ -1,0 +1,28 @@
+Stack
+- Functions calls
+   On function call
+   1. Push local environment and return address.
+   2. Pop return call and local environment.
+   
+One can always use stack instead of a recursive call
+
+eg:-
+def gcd(p, q):
+   if q == 0:
+     return q
+   gcd(p, p % q)
+   
+ 
+- Evaluate infix opertaions
+(1 + ((2 + 3)) *  (4 * 5 )))
+
+   Two stack algorithm
+   operand and operator stacks
+   - Value push on the value stack
+   - Operator push on operator stack
+   - Left paranthesis ignore
+   - Right paranthesis
+     pop operator and two values 
+     push the result of applying that operator to those values on the operand stack
+     
+ Used by interpreter..    
