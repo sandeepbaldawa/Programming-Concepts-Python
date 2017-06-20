@@ -18,10 +18,10 @@ def gcd(p, q):
 
    Two stack algorithm
    operand and operator stacks
-   - Value push on the value stack
-   - Operator push on operator stack
-   - Left paranthesis ignore
-   - Right paranthesis
+   1. Value push on the value stack
+   2. Operator push on operator stack
+   3. Left paranthesis ignore
+   4. Right paranthesis
      pop operator and two values 
      push the result of applying that operator to those values on the operand stack
      
