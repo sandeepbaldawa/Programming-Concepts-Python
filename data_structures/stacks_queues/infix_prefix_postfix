@@ -1,0 +1,15 @@
+infix
+======
+- Operator between operands
+<operand><operator><operand>
+Order
+1. Paranthesis (({[etc..)
+2. Exponents(right to left)
+3. Multi/divi (left to right)
+4. adddition/Sub (left to right)
+
+Postfix
+<operand><operand><operator>
+
+Prefix
+<operator><operand><operand>
