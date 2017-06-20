@@ -25,4 +25,22 @@ def gcd(p, q):
      pop operator and two values 
      push the result of applying that operator to those values on the operand stack
      
- Used by interpreter..    
+ Used by interpreter.. 
+ 
+ infix
+======
+- Operator between operands
+<operand><operator><operand>
+Order
+1. Paranthesis (({[etc..)
+2. Exponents(right to left)
+3. Multi/divi (left to right)
+4. adddition/Sub (left to right)
+
+Postfix
+========
+<operand><operand><operator>
+
+Prefix
+======
+<operator><operand><operand>
