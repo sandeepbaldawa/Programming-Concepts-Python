@@ -25,7 +25,7 @@ def helper(arr, soFar_idx, n):
       print(arr)
       return
 
-   for i in range(soFar_idx, len(arr)):
+   for i in range(len(arr)):
      arr[i], arr[soFar_idx] = arr[soFar_idx], arr[i] # swap
      helper(arr, soFar_idx + 1, n)
      arr[soFar_idx], arr[i] = arr[i], arr[soFar_idx] # reset swap
