@@ -32,6 +32,21 @@ agen in(1..25)
 # employees not in range 25 and 100
 select name from employeeinfo where id not between 25 and 100;
 
+regex
+=====
+% => matches any number of characters like *
+_ => Matches one character like ?
+
+# Print names with 3 letters where first letter is d
+d _ _
+
+use world
+select * from city
+
+select name from city where countrycode like 'A%';
+select countrycode from city where countrycode like 'A%';
+select countrycode from city where countrycode like '__A%';
+
 
 
 
