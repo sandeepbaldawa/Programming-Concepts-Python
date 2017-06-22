@@ -1,0 +1,21 @@
+#Views
+# Virtual table derived from Parent table
+use qadbt;
+create view google_info as;
+select * from company where name ='google';
+
+
+
+#client can call the below, it has a new table now called google_info
+select * from google_info
+
+
+
+# Return name of companies employees greater than average
+create view avg_company as;
+select name, employee from company group by name having employees > (select avg(employees) from company);
+
+
+#client can call the below, it has a new table now called google_info
+select * from avg_company
+
