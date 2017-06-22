@@ -1,1 +1,30 @@
 https://tutorialzine.com/2016/01/learn-sql-in-20-minutes
+
+# create database
+create database xyz;
+
+#point to database
+use xyz;
+
+# create tables
+create table Employeeinfo(name varchar(20), id int, location varchar(20), age int);
+
+# Dump the schema
+describe Employeeinfo;
+
+# create records/row info
+insert into Employeeinfo values('sam', 1, 'newjersey', 25);
+insert into Employeeinfo values('sam1', 2, 'newjersey1', 25);
+insert into Employeeinfo values('sam2', 3, 'newjersey2', 25);
+insert into Employeeinfo values('sam3', 4, 'newjersey3', 25);
+
+# Query fields from table
+select name, id from Employeeinfo;
+
+# Query everything from table
+select * from Employeeinfo;
+
+# Difference between describe and select?
+- describe prints the schema
+- select runs the query for given fields
+
