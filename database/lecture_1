@@ -1,0 +1,62 @@
+https://tutorialzine.com/2016/01/learn-sql-in-20-minutes
+
+# create database
+create database xyz;
+
+#point to database
+use xyz;
+
+# create tables
+create table Employeeinfo(name varchar(20), id int, location varchar(20), age int);
+
+# Dump the schema
+describe Employeeinfo;
+
+# create records/row info
+insert into Employeeinfo values('sam', 1, 'newjersey', 25);
+insert into Employeeinfo values('sam1', 2, 'newjersey1', 25);
+insert into Employeeinfo values('sam2', 3, 'newjersey2', 25);
+insert into Employeeinfo values('sam3', 4, 'newjersey3', 25);
+
+# Query fields from table
+select name, id from Employeeinfo;
+
+# Query everything from table
+select * from Employeeinfo;
+
+# Difference between describe and select?
+# describe prints the schema
+# select runs the query for given fields
+
+# alter can be used only to change only table structure
+# update is used to change the data contents
+# Add a column
+alter table Employeeinfo add gender varchar(10);
+describe Employeeinfo;
+
+# Modify a column
+alter table Employeeinfo modify gender varchar(20);
+describe Employeeinfo;
+
+# Drop a column
+alter table Employeeinfo drop gender;
+describe Employeeinfo;
+
+# Add a column
+alter table Employeeinfo add gender varchar(10);
+
+# Update table contents
+update Employeeinfo set gender='male' where name ='sam';
+update Employeeinfo set gender='female' where name ='sam1';
+update Employeeinfo set gender='male' where name ='sam2';
+
+# drop row from a table (eg:- employee leaves)
+delete from Employeeinfo where name='sam2'
+select * from Employeeinfo;
+
+# delete entire database
+create database sample;
+use sample;
+drop database sample;
+
+
