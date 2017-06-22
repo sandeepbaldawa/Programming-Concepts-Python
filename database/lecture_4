@@ -23,5 +23,5 @@ two tables
   Established => Name, Year
 
 # Find total count of employees of a company established in 1990
-select c.name, e.year from company as c join established as e on c.name=e.name group by c.name having e.year=1990;
+select c.name, e.year, sum(e.employees) from company as c join established as e on c.name=e.name group by c.name having e.year=1990;
 
