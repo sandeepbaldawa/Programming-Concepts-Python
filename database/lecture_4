@@ -16,3 +16,12 @@ select c.name, cl.location, c.age from citizens as c join from citizenloc as cl 
 select c.name, cl.location, c.age from citizens as c join from citizenloc as cl on c.name=cl.name where cl.location='california';
 
 
+#interview question
+
+two tables
+  company => Name, Branch, employees
+  Established => Name, Year
+
+# Find total count of employees of a company established in 1990
+select c.name, e.year from company as c join established as e on c.name=e.name group by c.name having e.year=1990;
+
