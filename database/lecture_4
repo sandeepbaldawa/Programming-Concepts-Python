@@ -25,3 +25,5 @@ two tables
 # Find total count of employees of a company established in 1990
 select c.name, e.year, sum(e.employees) from company as c join established as e on c.name=e.name group by c.name having e.year=1990;
 
+# Min employees present in a branch for all companies established after 1990
+select c.name, e.year, Min(e.employees) from company as c join established as e on c.name=e.name group by c.name having e.year>1990;
