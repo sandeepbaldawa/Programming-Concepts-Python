@@ -50,6 +50,16 @@ update Employeeinfo set gender='male' where name ='sam';
 update Employeeinfo set gender='female' where name ='sam1';
 update Employeeinfo set gender='male' where name ='sam2';
 
+# drop row from a table (eg:- employee leaves)
+delete from Employeeinfo where name='sam2'
+select * from Employeeinfo;
+
+# delete entire database
+create database sample;
+use sample;
+drop database sample;
+
+
 
 
 
