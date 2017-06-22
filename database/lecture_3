@@ -1,0 +1,38 @@
+# sort by name
+use xyz
+select * from employeeinfo order by name; # ascending order
+select * from employeeinfo order by id desc; # descending order
+
+use demo;
+select * from company;
+select count(branch) from company; # Sum total of branches
+select Max(employee) from company; # Company with max employees
+select Avg(employee) from company; # avg employees 
+select Min(employee) from company; # min employees
+select sum(employee) from company; # Total employees in the world
+select name, Min(employee) from company; # Company name with Min employees
+
+# count vs sum => count is number of rows, sum is total of the values
+
+# Sum of employees in each location
+select branch,sum(employee) from company group by branch;
+
+# Sum of employees in each company
+select name,sum(employee) from company group by name;
+
+#Sum of employees in canada and india branch
+select sum(employee) from company group by branch having branch='india' or 'canada';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
