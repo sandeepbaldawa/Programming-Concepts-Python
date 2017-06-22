@@ -1,0 +1,18 @@
+# query in two different but related tables
+# tables are citizenloc and citizens
+
+use demo;
+select name,age from citizens where name='flex';
+select name from citizenloc where location='texas';
+
+What if we need to run both queries together?
+select name,age from citizens where name=(select name from citizenloc where location='texas');
+
+
+#sql joins
+# first see the common column in two tables
+select c.name, cl.location, c.age from citizens as c join from citizenloc as cl on c.name=cl.name;
+
+select c.name, cl.location, c.age from citizens as c join from citizenloc as cl on c.name=cl.name where cl.location='california';
+
+
