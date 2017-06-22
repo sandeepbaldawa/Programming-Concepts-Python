@@ -28,3 +28,19 @@ select * from Employeeinfo;
 - describe prints the schema
 - select runs the query for given fields
 
+# alter can be used only to change only table structure
+# Add a column
+alter table Employeeinfo add gender varchar(10);
+
+# Modify a column
+alter table Employeeinfo modify gender varchar(20);
+
+# Drop a column
+alter table Employeeinfo drop gender;
+
+
+
+
+
+
+
