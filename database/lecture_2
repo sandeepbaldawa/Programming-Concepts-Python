@@ -1,1 +1,47 @@
+create database xyz;
+use xyz;
+select age,gender from employeeinfo;
+select * from employeeinfo;
+
+# get distinct name i.e. no dupes
+select distinct name from employeeinfo;
+
+# get all employee names whose location is newyork
+select name from employeeinfo where location='newyork';
+
+# get all employee names whose location is newyork and age > 23
+select name from employeeinfo where location='newyork' and age > 23;
+
+# get all employee names from Florida and whose age > 23 or city is charlotte
+select name from employeeinfo where (location='florida' and age > 23) or (location='charlotte');
+
+#Print employee names whose age is between 23 and 25
+select name from employeeinfo where age in(23,24,25);
+
+#Print employee names whose location is florida or newyork
+select name from employeeinfo where location in('florida','newyork');
+
+#Print employee names whose id lies between 1 and 1000
+select name from employeeinfo where id between 1 and 1000;
+
+# employees less than 25
+age < 25 
+age between 1 and 25
+agen in(1..25)
+
+# employees not in range 25 and 100
+select name from employeeinfo where id not between 25 and 100;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
