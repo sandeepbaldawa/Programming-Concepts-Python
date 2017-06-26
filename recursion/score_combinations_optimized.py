@@ -6,7 +6,7 @@ For 5 we could have
 
 Bottom Up DP approach
 Time:- O(N^2) 
-Space:- O(N^2),
+Space:- O(N),
 
 Code is generic form of below...
 if score >= 2:
