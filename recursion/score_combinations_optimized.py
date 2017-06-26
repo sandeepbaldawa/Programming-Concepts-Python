@@ -6,7 +6,7 @@ For 5 we could have
 
 Bottom Up DP approach
 Time:- O(N^2) 
-Space:- O(N) => can be improved to O(1)
+Space:- O(N) => can be improved to O(1) by storing just last 7 values, we dont need to store more than 7..
 
 Code is generic form of below...
 if score >= 2:
@@ -19,7 +19,7 @@ if score >= 2:
 scores = [2, 3, 7]
 def CountComb(target):
     '''Count all combinations of drive scores which can reach a specific target'''
-    dp = [0 for _ in range(target)] # dp = [0 for _ in range(max(scores))] for O(1) space
+    dp = [0 for _ in range(target)]
     dp[0] = 1
     a = 0
     for cscore_idx, current_score in enumerate(range(target)):
