@@ -1,0 +1,13 @@
+- Use enumerate
+- Use zip when trying to iterate two lists same time
+  for x,y in zip(list1,list2):
+      print "{0}{1}".format(x,y)
+- swap x, y = y, x      
+- querying for keys which might or might not be in the dictionary
+  val = dict.get('Query',None) # If Query key is not present val we get is None, this prevents exception being thrown
+- for files always use with
+   with open('myfile.txt','w+') as f:
+      for line in f:
+         print line
+- Use finally with try catch, very handy even if exceptions are thrown..         
+  
