@@ -7,20 +7,20 @@ bottom up approach using DP..
 Complexity O(2^N)
 '''
 
-def allpaths(x, y, n):
-   if x > n-1 or y > n-1:
-     return 0
-   if x < y:
-     return 0
-   if x == n-1 and y == n-1:
+def allpaths(x, y):
+   if x == 0 and y == 0:
       return 1
-   print x,y
-   m1 = allpaths(x+1, y, n)
-   m2 = allpaths(x, y+1, n)
+
+   if x < 0 or y < 0:
+     return 0
+
+   m1 = allpaths(x-1, y)
+   m2 = allpaths(x, y-1)
+   
    return m1 + m2
 
-print allpaths(0, 0, 4)
-
+def getallpaths(N):
+    return allpaths(N-1, N-1)
 
 '''
 Using DP 
