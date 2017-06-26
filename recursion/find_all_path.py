@@ -21,6 +21,8 @@ def allpaths(x, y):
 
 def getallpaths(N):
     return allpaths(N-1, N-1)
+   
+print getallpaths(2)   
 
 '''
 Using DP 
