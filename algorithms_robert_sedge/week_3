@@ -1,0 +1,17 @@
+- Merge method
+
+def merge(arr, aux, lo, hi, mid):
+  assert isSorted(arr, lo , mid)
+  assert isSorted(arr, mid + 1 , hi)
+  
+  for k in xrange(lo, hi+1):
+    aux[k] = arr[k]
+    
+  i , j = lo, mid + 1 # Start of both the sorted arrays
+  for k in xrange(lo, hi+1):
+    if i > mid: aux[k] = arr[j++]
+    elif j > hi: aux[k] = arr[i++]
+    elif arr[i] < arr[j]: aux[k] = arr[i++]
+    elif arr[j] < arr[i]: aux[k] = arr[j++]
+    
+  assert isSorted(arr, lo , hi)
