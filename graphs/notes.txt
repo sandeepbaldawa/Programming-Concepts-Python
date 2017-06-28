@@ -13,3 +13,10 @@ Strong component applications. Applications to CAD, Markov chains (irreducible),
 2. Graphs can be dense or sparse.., dense is when graph E = O(V^2) and sparse is when E = O(V)
 3. For dense graphs usually adjacency matrix is used and adjancecy list otherwise..
 
+
+def Vertex(object):
+  def __init__(self, val):
+    sel.val = val
+    self.neighbours = []
+    
+    
