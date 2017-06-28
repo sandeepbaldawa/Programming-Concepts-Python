@@ -13,6 +13,11 @@ Strong component applications. Applications to CAD, Markov chains (irreducible),
 2. Graphs can be dense or sparse.., dense is when graph E = O(V^2) and sparse is when E = O(V)
 3. For dense graphs usually adjacency matrix is used and adjancecy list otherwise..
 
+When to use BFS and DFS
+========================
+BFS(N^K) uses more space compared to DFS(NK)
+BFS - is useful for shortest path or where we would like to return immediately on finding the answer
+DFS - is useful when we would like to explore the entire graph regardless and less space consumption is imp
 
 def Vertex(object):
   def __init__(self, val):
