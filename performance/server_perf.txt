@@ -20,4 +20,61 @@ Application tier => Logic and Calculation                  (Shopping Cart Code)
 Database tier => store and manage data                     (Shipping and Order processing Database)
 
 
+Hardware resources like CPU, Memory, Disk IO etc..
+Software Server resources
+Web Server – Number of Http connections
+Application Server – JVM Heap, Web Container thread pool, Database Connection pool etc..
+DB Server – SGA Memory
+Application Code – Memory used by an object, CPU time of a Method etc..
 
+Hardware resource monitoring:
+=============================
+The objective here is to monitor the hardware resources such as CPU utilization, Memory utilization, IO usage. The monitoring result will tell us the used capacity of the system and how much more capacity is remaining to serve more request.
+The hardware resource can be monitored using Operating System specific tools such as Perfmon in Windows or vmstat, top in Unix flavors.
+
+Software resource monitoring:
+==============================
+
+Web Server resources like number of http connections can be monitoring using utilities like server-status in Apache/IBM Http server which has a web interface to monitor
+
+Most of the common Application servers in industry are J2EE based servers. The most common ones are Oracle WebLogic and IBM Webpshere. WebLogic server resources like JVM Heap, Thread pool etc..can be monitoring using JMX monitors built in to WebLogic admin console or part of SiteScope/LoadRunner tools. Similar to WebbLogic, Websphere can be monitored by using Tivoli performance viewer which is part of Websphere or using performance servlet option through LoadRunner
+
+From database monitoring stand point, Oracle awr report is the best way to monitor Oracle resources like Top SQLs, I/O rate, transaction rate, contentions etc..
+
+Application Monitoring
+=======================
+Application code monitoring/profiling:
+
+Application profiling is technique to find out the piece of code which is taking more time or more memory. There are lot of tools available to do application profiling. Some example for J2EE applications are JProfiler and JProbe. Other option in Java based application is VisualVM shipped with Sun JDK.
+
+Here is quick table to summarize monitors in a Linux and Java based application
+
+PERFORMANCE METRICS
+#	METRICS	SOURCE	DESCRIPTION
+1	Average Response Time from Test Tool	Test Tool	Average response time reported by load generation tool for test run
+2	Transactions per second	Test Tool	Transactions per second reported by load generation tool from test run
+3	Average CPU Utilization	vmstat -tn 1	CPU utilization = 100 – 'id' column in vmstat. Average all CPU utilization from test run
+4	Average Run Queue length	vmstat -tn 1	'r' column in vmstat output. Average of all ‘r’ values from test run.
+5	Average IO Request Read KB per second	iostat -d -nxtk 1	rKB/s column in Iostat output. Average of values from isostat. Iostat granularity 1 second
+6	Average IO Request Write KB per second	iostat -d -nxtk 1	wKB/s column in Iostat output. Average of values from isostat. Iostat granularity 1 second
+7	Average IO Request Queue	iostat -d -nxtk 1	avgqu-sz column of iostat ouput. Granularity 1 second
+8	Average IO Request Await	iostat -d -nxtk 1	await column of iostat ouput. Granularity 1 second
+9	Heap Usage	verbose gc	Heap memory usage
+10	GC Throughput	verbose gc	GC Throughput = (Total Time – Time spent in GC)/ Total Time. GC log is trimmed to the exact test duration to get accurate time measurements
+11	GC overhead	verbose GC	GC overhead = (Time spent in GC)/ Total Time. GC log is trimmed to the exact test duration to get accurate time.
+12	Thread Pool utilization	MBean or application specific monitors	Active Threads in Application Threads
+13	Connection Pool utilization	MBean or application specific monitors	Number of database connections active
+Following are the Windows specific OS counters for monitoring.
+Perfmon is a single point solution for almost all the resource monitoring in Windows servers including application servers like Internet Information Server (IIS). It can be used to view and log the server statistics. It is part of Windows OS and need not be installed separately. That means in all the Windows computers including PCs, you can find this tool.
+
+Following are the some of the counters and how they help to identify the performance bottlenecks. Please refer the perfmon help page in windows for setup and more details.
+
+%Processor Time – It shows the total CPU utilization of the Windows server. If there are multiple CPUs in the server, this will give an average of all the processor utilization. CPU Utilization consistently above 85 % can be considered as CPU bottleneck. Again, many people confuse with CPU spikes. Intermittent CPU spikes may not be a concern, but if it is with too short interval or showing consistencies, it will be a problem.
+
+Processor Queue Length – It is the number of threads waiting to get CPU time. As name says if the there are more threads waiting, it shows CPU is more busy. The value of this counter more than 2 times the number of CPUs in the server is an indicator of CPU bottleneck. But always try combine with CPU utilization to conclude the CPU issues.
+
+Available MBytes – It will give the measure of available physical memory in Mega Bytes. During long running endurance tests, if the available memory going down over a period of time even with constant user load, it is good indicator of memory leak in the server.
+
+Pages/sec – Along with Available Mbytes, this counter will give useful information on systems memory usage. If pages/sec is more, it is an indicator of lack of physical memory. There can be situations where Pages/sec shows huge values even with lot of physical memory. These issues can be seen when new processes are creating in the server. One of the classic examples is when users are logging into the Citrix servers. It can not be an indicator of memory shortage and can be due to memory mapped files. Please refer Microsoft documentation for more details.
+
+Private bytes – It shows the dedicate memory of a windows process. It should be monitored to find out the memory usage of a process. Increase in memory usage over a period of time is a good indicator of memory leak. This can be combined with memory utilization to come to final conclusion.
