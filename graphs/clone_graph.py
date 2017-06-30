@@ -14,7 +14,7 @@ class Solution:
         dict[node] = UndirectedGraphNode(node.label)
         
         while(queue):
-            curr_node = queue.pop()
+            curr_node = queue.pop(0). # for queue always pop "0"
             for neighbour in curr_node.neighbors:
                 if neighbour in dict:
                     dict[curr_node].neighbors.append(dict[neighbour])
