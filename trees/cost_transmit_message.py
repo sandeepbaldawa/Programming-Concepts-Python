@@ -13,7 +13,9 @@ class Node(object):
         self.child = list()
 
 def get_cost_transmit(root):
-    ''' Get cost of trasmitting message from root to leaf nodes'''
+    ''' Get cost of trasmitting message from root to leaf nodes
+    Each queue element is a tuple i.e. (node_addr, time_stamp_transmitted)
+    '''
     if not root:
         return 0
 
