@@ -1,0 +1,23 @@
+Server Performance Monitoring
+==============================
+
+Performance Testing is not just testing. it is the process of identifying the performance issues.
+Well, when you identify that performance is poor, what will be the next step? Obviously it is to find out the root cause 
+of the performance problem. Here is where Performance Monitoring helps. In other words, it helps to gather more data from 
+the server side to narrow down the root cause of the performance problem.
+
+What to monitor?
+=====================
+Before determining what needs to be monitored, it is important to understand different type of 
+resources involved in a software deployment and level of monitoring required for each type of resources .
+Let us consider the case of Web application which has a typical 3 tier architecture – Web, App & DB. Let us also assume Web,
+App and DB servers are deployed in one physical server.
+
+What is 3 tier architecture?
+============================
+Presentation layer => Receives input and displays output . (Web Browsers)
+Application tier => Logic and Calculation                  (Shopping Cart Code) 
+Database tier => store and manage data                     (Shipping and Order processing Database)
+
+
+
