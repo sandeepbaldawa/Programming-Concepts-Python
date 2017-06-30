@@ -5,13 +5,6 @@ the scheduler is optimally used i.e. the idle times of the
 scheduler are minimized
 '''
 
-
-
-"""
-Unweighted Interval scheduling algorithm.
-Runtime complexity: O(n log n)
-"""
-
 class Interval(object):
     '''Date interval'''
 
@@ -21,8 +14,6 @@ class Interval(object):
 
     def __repr__(self):
         return str(self.start + self.finish)
-
-
 
 def schedule_unweighted_intervals(I):
     '''sorting is O(n log n), selecting is O(n)'''
