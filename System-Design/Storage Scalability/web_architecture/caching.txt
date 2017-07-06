@@ -1,0 +1,14 @@
+Why Scale?
+=========
+Store more requests
+store more data
+resiliency
+server requests faster
+
+What to Scale?
+==============
+Bandwidth
+Storage
+Computers(memory, CPU)
+Power
+
