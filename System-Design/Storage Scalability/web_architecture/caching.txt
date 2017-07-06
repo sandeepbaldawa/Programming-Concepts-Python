@@ -12,3 +12,29 @@ Storage
 Computers(memory, CPU)
 Power
 
+Techniques?
+==========
+1. Optimizing Code .. cost to add machine/maintainence vs cost for a developer to change code
+2. Caching complex operations
+3. upgrade machines...more memory, cpu, storage..
+4. Add more machines..
+
+Caching?
+========
+Storing result of an operation so that subsequent/future requests become faster.
+
+When to Cache?
+=============
+Computation is slow
+Caching will run multiple times
+When output is same for a particular input
+Your hosting provider charges for db accesses
+
+# Cache is usually a large hashtable
+if request in cache:  # Hit
+  return cache[request]
+else: # Miss
+  r = db_read(). # 100 ms
+  cache[request] = r
+  return r
+  
