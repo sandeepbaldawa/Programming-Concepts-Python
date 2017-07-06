@@ -11,7 +11,7 @@ def complex_computation(a, b):
 # results after computing them for the first time so future calls are faster
 cache = {}
 def cached_computation(a, b):
-    if (a,b) in cache.iteritems():
+    if (a,b) in cache.keys():
         return cache[(a,b)]
     else:
         cache[(a,b)] = complex_computation(a, b)
