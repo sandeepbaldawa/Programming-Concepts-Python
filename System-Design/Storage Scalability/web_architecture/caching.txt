@@ -36,5 +36,5 @@ if request in cache:  # Hit
 else: # Miss
   r = db_read(). # 100 ms
   cache[request] = r
-  return r
+  return r 
   
