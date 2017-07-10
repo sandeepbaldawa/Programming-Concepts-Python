@@ -1,0 +1,3 @@
+- Worst case O(N)
+- Best Case (Omega)
+- Avg Case(theta)
