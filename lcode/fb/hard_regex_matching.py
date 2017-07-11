@@ -1,3 +1,27 @@
+'''
+Recurrence relation
+===================
+for str for i = 0..n and pat j = 0..m
+T = [[False]*len(str)+1 for _ in range(len(pat)+1)]
+T[0][0] = True
+
+# For a* or a*b* or a*b*c*
+for j 1..m
+   if pat[j-1] == "*"
+     T[0][j] = T[0][j-2]
+     
+for i = 1..n
+  for j = 1..m
+        1. if pat[j-1] == str[i-1] or pat[j-1] == "."
+              T[i][j] = T[i-1][j-1] 
+        2. elif pat[j-1] == "*"
+              T[i][j] = T[i][j-2]
+              if pat[j-2] == "." or pat[j-2] == str[i-1]
+                  T[i][j] = T[i][j] or T[i-1][j]
+           else
+              T[i][j] = False
+        return T[len(str)-1][len(pat)-1]      
+'''
 class Solution:
     # @param s : string
     # @param p : string
