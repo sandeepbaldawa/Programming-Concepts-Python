@@ -37,5 +37,31 @@ class ListNode(object):
                 return lists[begin]
             return mergeTwoLists(mergeKListsHelper(lists, begin, (begin + end) / 2), \
                                  mergeKListsHelper(lists, (begin + end) / 2 + 1, end))
+        
+        
+ # Time:  O(nlogk)
+# Space: O(k)
+# Heap solution.
+import heapq
+class Solution3:
+    # @param a list of ListNode
+    # @return a ListNode
+    def mergeKLists(self, lists):
+        dummy = ListNode(0)
+        current = dummy
+        
+        heap = []
+        for sorted_list in lists:
+            if sorted_list:
+                heapq.heappush(heap, (sorted_list.val, sorted_list))
+                
+        while heap:
+            smallest = heapq.heappop(heap)[1]
+            current.next = smallest
+            current = current.next
+            if smallest.next:
+                heapq.heappush(heap, (smallest.next.val, smallest.next))
+                
+        return dummy.next       
    
         return mergeKListsHelper(lists, 0, len(lists) - 1)     
