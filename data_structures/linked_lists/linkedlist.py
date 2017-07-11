@@ -81,26 +81,18 @@ def merge_optimized(n1, n2):
     dummy node at the start for merging, makes it
     pretty simple to merge
     """
-    tail = linkedlist(9)
-    dummy = tail 
-    while(True):
-        if not n1:
-            tail.next = n2
-            break 
-        if not n2:
-            tail.next = n1
-            break  
-
-        if (n1.data <= n2.data):
-            tail.next = n1
-            tail = tail.next
-            n1 = n1.next  
-        else:
-            tail.next = n2
-            tail = tail.next
-            n2 = n2.next  
-   
-    return dummy.next     
+    def mergeTwoLists(l1, l2):
+            curr = dummy = ListNode(0)
+            while l1 and l2:
+                if l1.val < l2.val:
+                    curr.next = l1
+                    l1 = l1.next
+                else:
+                    curr.next = l2
+                    l2 = l2.next
+                curr = curr.next
+            curr.next = l1 or l2
+            return dummy.next
 
 def split_even_odd(l):
     """
