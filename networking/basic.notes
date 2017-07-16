@@ -6,7 +6,8 @@
 - How do we convert names to ip address?
   Each network has a DNS(Domain name server), which translates www.google.com => ip address
   called DNS overhead, we don't go to DNS everytime, we cache it in our browser, only when the cache expires we got to DNS
-  
+  www.google.com. => The last do goes to the root name server
+  Root Name server => TLD Name Server(tells where .com or co or ci is) => Authoritative Name server(knows the exact ip)
   
    
    
