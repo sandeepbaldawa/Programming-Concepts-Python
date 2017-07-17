@@ -11,9 +11,7 @@ def count11(str, count=0, idx=0):
 
   if str[idx:idx+2] == "11":
     count += 1
-  elif str[idx:idx+1] == "1":
-    return count11(str, count, idx + 1)
-  elif str[idx+1:idx+2] == "1":
+  elif str[idx:idx+1] == "1" or str[idx+1:idx+2] == "1":
     return count11(str, count, idx + 1)
   return count11(str, count, idx + 2)
 
