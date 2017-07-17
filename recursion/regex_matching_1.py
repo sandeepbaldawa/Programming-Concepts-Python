@@ -15,35 +15,32 @@ Logic
 
 '''
 
-def isMatchHelper(text, pattern, textIndex, patIndex):
-   # Both text and pattern are of same length
-   if (textIndex >= len(text) and patIndex >= len(pattern)):
-      return True
-
-   # text ended but pattern did not
-   if textIndex >= len(text) and patIndex < len(pattern):
-      if (pattern[patIndex+1] == '*'):
-         return isMatchHelper(text, pattern, textIndex, patIndex + 2)
+def match_regex(s, p):
+  T = [[False] * (len(p)+1) for _ in range(len(s)+1)]
+  T[0][0] = True
+  
+  for i in xrange(1, len(T[0])):
+    if p[i-1] == "*":
+      T[0][i] = T[0][i-2]
+      
+  for i in xrange(1, len(T)):
+    for j in xrange(1, len(T[0])):
+      if p[j-1] == "." or s[i-1] == p[j-1]:
+        T[i][j] = T[i-1][j-1]
+      elif p[j-1] == "*":
+        T[i][j] = T[i][j-2] # * consume zero characters
+        if s[i-1] == p[j-2] or p[j-2] == ".": # * consumes one or more
+          T[i][j] = T[i-1][j]
       else:
-         return False
-
-   # pattern ended but text did not
-   if patIndex >= len(pattern) and textIndex < len(text):
-      return False
-
-   # string matching for character followed by '*'
-   if (patIndex+1 < len(pattern) and pattern[patIndex+1] == '*'):
-        if (pattern[patIndex] == '.') or (text[textIndex] == pattern[patIndex]):
-            return (isMatchHelper(text, pattern, textIndex, patIndex + 2) or
-                    isMatchHelper(text, pattern, textIndex + 1, patIndex))
-        else:
-            return isMatchHelper(text, pattern, textIndex, patIndex + 2)
-
-   # match . or each character
-   if (pattern[patIndex] == '.') or (pattern[patIndex] == text[textIndex]):
-        return  isMatchHelper(text, pattern, textIndex + 1, patIndex + 1)
-   return false
-
-pat = "ab*c."
-text = "acd"
-print isMatchHelper(text, pat, 0 , 0)
+        T[i][j] = False
+        
+  return T[len(s)][len(p)]
+  
+assert match_regex("aaa","aa") == False
+assert match_regex("aaa","aaa") == True
+assert match_regex("ab","a.") == True
+assert match_regex("abbb","ab*") == True
+assert match_regex("a","ab*") == True
+assert match_regex("abbc","ab*") == False
+        
+        
