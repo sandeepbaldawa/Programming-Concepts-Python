@@ -18,5 +18,4 @@ class Solution(object):
         for i, val in enumerate(nums):
             res ^= val
             res ^= i
-            i += 1
         return res    
