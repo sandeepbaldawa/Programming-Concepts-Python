@@ -15,7 +15,8 @@ class Solution(object):
         :rtype: int
         """
         res, i  = len(nums), 0
-        for i, val in enumerate(nums):
+        for idx, val in enumerate(nums):
             res ^= val
             res ^= i
+            i+= 1
         return res    
