@@ -33,3 +33,12 @@ A hardlink is useful when the source file is getting moved around, because renam
 the hardlink connection. On the other hand, if you rename the source of a softlink, the softlink is broken. 
 This is because hardlink’s share the same inode, and softlink uses the source filename in it’s data portion.
 
+ls -i a
+  232177 a
+ls -i b
+  232177 b
+So ln a b is roughly equivalent to cp a b, but there are several important differences:
+
+The contents of the file are only stored once, so you don't use twice the space.
+If you change a, you're changing b, and vice-versa.
+If you change the permissions or ownership of a, you're changing those of b as well, and vice-versa.
