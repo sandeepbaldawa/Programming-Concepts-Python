@@ -1,5 +1,9 @@
 http://www.the-art-of-web.com/system/logs/
 
+Parsing CSV and json
+=====================
+https://automatetheboringstuff.com/chapter14/
+
 
 Parse /var/log/syslog and extract values.
 
