@@ -15,10 +15,16 @@ generates a CSV with two columns: minute, number_of_messages in sorted time orde
 
 
 import re
+import csv
 from collections import Counter
 regexp = "^(.*? \d+\s+\d+:(\d+):\d+).*"
 c = Counter()
 with open("test.txt","r") as f:
   for each_line in f:
     c.update(re.match(regexp, each_line).group(2))
-print sorted(c.items(), key=lambda x:x[1])
+c = sorted(c.items(), key=lambda x:x[1])
+
+with open("output.txt","w+") as f:
+   writer = csv.writer(f)
+   for key, val in c:
+      writer.writerow([key,val])
