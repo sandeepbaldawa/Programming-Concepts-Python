@@ -1,1 +1,24 @@
 http://www.the-art-of-web.com/system/logs/
+
+
+Parse /var/log/syslog and extract values.
+
+Dec  3 00:02:54 Mac Google Chrome Helper[69194]: Couldn't set selectedTextBackgroundColor from default ()
+Dec  3 00:03:05 Mac Safari[68992]: KeychainGetICDPStatus: keychain: -25300
+Dec  3 00:03:05 Mac Safari[68992]: KeychainGetICDPStatus: status: off
+Dec  3 00:03:06 Mac com.apple.xpc.launchd[1] (com.apple.WebKit.Networking.AC8ED90D-0AC0-4666-B213-8BE93DE51E8C[68993]): Service exited with abnormal code: 1
+Dec  3 00:03:08 Mac WindowServer[68664]: CGXGetConnectionProperty: Invalid connection 20367
+Dec  3 00:03:08 Mac garcon[68729]: host connection <NSXPCConnection: 0x7fc9d8f1eda0> connection from pid 68708 invalidated
+Dec  3 00:03:08 Mac WindowServer[68664]: CGXGetConnectionProperty: Invalid connection 20367
+Write a script which parses /var/log/messages and
+generates a CSV with two columns: minute, number_of_messages in sorted time order.
+
+
+import re
+from collections import Counter
+regexp = "^(.*? \d+\s+\d+:(\d+):\d+).*"
+c = Counter()
+with open("test.txt","r") as f:
+  for each_line in f:
+    c.update(re.match(regexp, each_line).group(2))
+print sorted(c.items(), key=lambda x:x[1])
