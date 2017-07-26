@@ -1,0 +1,9 @@
+Debug a server currently serving errors.
+log processing and parsing
+details of ssh  
+Rest APIs
+IP addressing , port numbers,TCP headers, basic linux commands,processes
+API calls and parsing data from them
+Write code to parse generic web logs and format it in different ways  
+fork, runleves, init, docker, application deployment and port numbers. The e-mail said it would have scripting questions on Application deployment, 
+filesystem traversal, log parsing.
