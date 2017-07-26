@@ -1,0 +1,35 @@
+What is an inode?
+=================
+
+An inode is a data structure in Unix that contains metadata about a file. Some of the items contained in an inode are:
+1) mode
+2) owner (UID, GID)
+3) size
+4) atime, ctime, mtime
+5) acl’s
+6) blocks list of where the data is
+
+The filename is present in the parent directory’s inode structure.
+
+What is the difference between a soft link and a hard link?
+===========================================================
+
+1) Hardlink shares the same inode number as the source link. Softlink has a different inode number. Example:
+
+$ touch a
+$ ln a b
+$ ls -i a b
+24 a  24 b
+$ ln -s a c
+$ ls -i a c
+24 a  25 c
+
+2) In the data portion of the softlink is the name of the source file
+3) Hardlinks are only valid in the same filesystem, softlinks can be across filesystems
+
+When would you use a hardlink over a softlink?
+==============================================
+A hardlink is useful when the source file is getting moved around, because renaming the source does not remove 
+the hardlink connection. On the other hand, if you rename the source of a softlink, the softlink is broken. 
+This is because hardlink’s share the same inode, and softlink uses the source filename in it’s data portion.
+
