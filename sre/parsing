@@ -17,7 +17,17 @@ Dec  3 00:03:08 Mac WindowServer[68664]: CGXGetConnectionProperty: Invalid conne
 Write a script which parses /var/log/messages and
 generates a CSV with two columns: minute, number_of_messages in sorted time order.
 
+minute,number_of_messages
+Dec  3 00:02,1
+Dec  3 00:03,6
+Extract the program name from the field between the hostname and the log message and output those values in columns.
 
+minute,number_of_messages,Google Chrome Helper,Safari,com.apple.xpc.launchd,WindowServer,garcon
+Dec  3 00:02,1,0,0,0,0
+Dec  3 00:03,0,2,1,2,1
+
+For first part
+==============
 import re
 import csv
 from collections import Counter
@@ -26,6 +36,26 @@ c = Counter()
 with open("test.txt","r") as f:
   for each_line in f:
     c.update(re.match(regexp, each_line).groups())
+c = sorted(c.items(), key=lambda x:x[1])
+
+with open("output.txt","w+") as f:
+   writer = csv.writer(f)
+   for key, val in c:
+      writer.writerow([key,val])
+
+
+For second part
+===============
+import re
+import csv
+from collections import Counter
+regexp = "^(.*? \d+\s+\d+:\d+):\d+\s+.*?\s+ (.*?)\["
+c = Counter()
+with open("test.txt","r") as f:
+  for each_line in f:
+        time = re.match(regexp, each_line).group[1]
+        msg= re.match(regexp, each_line).group[2]
+        c.update((time, msg))
 c = sorted(c.items(), key=lambda x:x[1])
 
 with open("output.txt","w+") as f:
