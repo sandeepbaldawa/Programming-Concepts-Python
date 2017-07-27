@@ -5,6 +5,20 @@ Parsing CSV and json
 https://automatetheboringstuff.com/chapter14/
 
 
+def print_fizz(n):
+  for i in xrange(1,n+1):
+    if i%3 == 0 and i%5 == 0:
+      print "FizzBuzz"
+    elif i%3 == 0:
+      print "Fizz",
+    elif i%5 == 0:
+      print "Buzz",
+    else:
+      print "{0} ".format(i),
+      
+print_fizz(15) 
+
+
 Parse /var/log/syslog and extract values.
 
 Dec  3 00:02:54 Mac Google Chrome Helper[69194]: Couldn't set selectedTextBackgroundColor from default ()
