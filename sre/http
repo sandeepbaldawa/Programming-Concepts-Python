@@ -1,0 +1,34 @@
+Error codes
+==========
+https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+
+Simple rest call
+=================
+>>> import requests
+>>> resp = requests.get("http://samples.openweathermap.org/data/2.5/weather?q=Sunnyvale,uk&appid=1022e14ec5d5ccf20a6980c5c0eae545")
+>>> res = resp.json()
+>>> pprint(res)
+{u'base': u'stations',
+ u'clouds': {u'all': 90},
+ u'cod': 200,
+ u'coord': {u'lat': 51.51, u'lon': -0.13},
+ u'dt': 1485789600,
+ u'id': 2643743,
+ u'main': {u'humidity': 81,
+           u'pressure': 1012,
+           u'temp': 280.32,
+           u'temp_max': 281.15,
+           u'temp_min': 279.15},
+ u'name': u'London',
+ u'sys': {u'country': u'GB',
+          u'id': 5091,
+          u'message': 0.0103,
+          u'sunrise': 1485762037,
+          u'sunset': 1485794875,
+          u'type': 1},
+ u'visibility': 10000,
+ u'weather': [{u'description': u'light intensity drizzle',
+               u'icon': u'09d',
+               u'id': 300,
+               u'main': u'Drizzle'}],
+ u'wind': {u'deg': 80, u'speed': 4.1}}
