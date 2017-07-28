@@ -39,3 +39,23 @@ CPU time that a process has recently consumed and the length of time it has been
 waiting to run. The kernel also pays attention to an administratively set value
 that’s usually called the “nice value” or “niceness,” so called because it tells how
 nice you are planning to be to other users of the system. 
+
+THE LIFE CYCLE OF A PROCESS
+===========================
+1. To create a new process, a process copies itself with the fork system call. fork
+creates a copy of the original process; that copy is largely identical to the parent.
+The new process has a distinct PID and has its own accounting information.
+fork has the unique property of returning two different values. From the child’s
+point of view, it returns zero. The parent receives the PID of the newly created
+child. Since the two processes are otherwise identical, they must both examine the
+return value to figure out which role they are supposed to play
+
+2. After a fork, the child process will often use one of the exec family of system calls
+to begin the execution of a new program. These calls change the program that the
+process is executing and reset the memory segments to a predefined initial state.
+The various forms of exec differ only in the ways in which they specify the command-line
+arguments and environment to be given to the new program.
+
+3. When the system boots, the kernel autonomously creates and installs several processes.
+The most notable of these is init, which is always process number 1. init is
+responsible for executing the system’s startup script.
