@@ -59,3 +59,20 @@ arguments and environment to be given to the new program.
 3. When the system boots, the kernel autonomously creates and installs several processes.
 The most notable of these is init, which is always process number 1. init is
 responsible for executing the system’s startup script.
+
+4. init also plays another important role in process management. When a process
+completes, it calls a routine named _exit to notify the kernel that it is ready to die.
+It supplies an exit code (an integer) that tells why it’s exiting. By convention, 0 is
+used to indicate a normal or “successful” termination.
+
+5. Before a process can be allowed to disappear completely, the kernel requires that
+its death be acknowledged by the process’s parent, which the parent does with a
+call to wait. The parent receives a copy of the child’s exit code (or an indication of
+why the child was killed if the child did not exit voluntarily) and can also obtain a
+summary of the child’s use of resources if it wishes.
+
+6. This scheme works fine if parents outlive their children and are conscientious
+about calling wait so that dead processes can be disposed of. If the parent dies
+first, however, the kernel recognizes that no wait will be forthcoming and adjusts
+the process to make the orphan a child of init. init politely accepts these orphaned
+processes and performs the wait needed to get rid of them when they die.
