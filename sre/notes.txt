@@ -1,3 +1,4 @@
 http://blog.marc-seeger.de/2015/05/01/sre-interviews-in-silicon-valley/
 https://www.glassdoor.com/Interview/LinkedIn-Site-Reliability-Engineer-Interview-Questions-EI_IE34865.0,8_KO9,34.htm
 https://syedali.net/engineer-interview-questions/
+http://advancedlinuxprogramming.com/alp-folder/advanced-linux-programming.pdf
