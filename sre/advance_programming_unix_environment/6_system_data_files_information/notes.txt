@@ -18,5 +18,37 @@ four lines from the /etc/passwd file on Linux could be
    For example, /bin/false is often used as the login shell. It simply exits with an unsuccessful (nonzero) status; 
    the shell evaluates the exit status as false. It is also common to see /bin/true used to disable an account; 
    it simply exits with a successful (zero) status. 
-   Some systems provide the nologin command, which prints a customizable error message and exits with a nonzero exit status.   
+   Some systems provide the nologin command, which prints a customizable error message and exits with a nonzero exit status. 
+5. The nobody user name can be used to allow people to log in to a system, but with a user ID (65534) and group ID (65534)  
+    that provide no privileges.
+6. If finger command is supported, we could use finger to print information about Steve Rago.
+   $ finger -p sar
+   Login: sar
+   Directory: /home/sar
+   Office: SF 5-121, 555-1111
+   On since Mon Jan 19 03:57 (EST) on ttyv0 (messages off) No Mail.
+7. Some systems provide the vipw command to allow administrators to edit the password file. The vipw command serializes
+   changes to the password file and makes sure that any additional files are consistent with the changes made.
+
+How is the password parameters fetched? when we run commands
+=============================================================
+POSIX.1 defines two functions to fetch entries from the password file
+
+#include <pwd.h>
+struct passwd *getpwuid(uid_t uid); => Used by ls program, maps the numerical user id contained in a i-node with the user's
+                                       login  name
+struct passwd *getpwnam(const char *name); => Used by login program when one enters the user name
+
+Both functions return a pointer to a passwd structure that the functions fill in. This structure is usually a static variable within the function, so its contents are overwritten each time we call either of these functions.
+
+but some programs need to go through the entire password file. Three functions can be used for this purpose: getpwent, setpwent, and endpwent.
+
+struct passwd *getpwent(void); => get next entry in the password file
+void setpwent(void); => rewinds the file to the start point
+void endpwent(void); => closes the file
+
+
+
+
+    
    
