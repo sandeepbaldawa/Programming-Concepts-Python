@@ -21,4 +21,21 @@ process. The clone can then exchange the program it’s running for a different 
 
 UID and EUID: real and effective user ID
 =========================================
+A process’s UID is the user identification number of the person who created it, or
+more accurately, it is a copy of the UID value of the parent process. 
 
+The EUID is the “effective” user ID, an extra UID used to determine what resources
+and files a process has permission to access at any given moment
+
+GID and EGID: real and effective group ID
+=========================================
+The GID is the group identification number of a process. The GID attribute of a process is largely vestigial. For purposes of access determination, a process can be a member of many groups at once.
+
+Niceness
+========
+A process’s scheduling priority determines how much CPU time it receives. The
+kernel uses a dynamic algorithm to compute priorities, allowing for the amount of
+CPU time that a process has recently consumed and the length of time it has been
+waiting to run. The kernel also pays attention to an administratively set value
+that’s usually called the “nice value” or “niceness,” so called because it tells how
+nice you are planning to be to other users of the system. 
