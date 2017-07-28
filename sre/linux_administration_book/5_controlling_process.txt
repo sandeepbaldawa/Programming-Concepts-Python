@@ -1,1 +1,24 @@
 
+The kernel’s internal data structures record various pieces of information about
+each process. Here are some of the more important of these:
+• The process’s address space map
+• The current status of the process (sleeping, stopped, runnable, etc.)
+• The execution priority of the process
+• Information about the resources the process has used
+• Information about the files and network ports the process has opened
+• The process’s signal mask (a record of which signals are blocked)
+• The owner of the process
+
+PID: process ID number
+======================
+The kernel assigns a unique ID number to every process.
+
+PPID: parent PID
+=================
+Neither UNIX nor Linux has a system call that initiates a new process running a
+particular program. Instead, an existing process must clone itself to create a new
+process. The clone can then exchange the program it’s running for a different one
+
+UID and EUID: real and effective user ID
+=========================================
+
