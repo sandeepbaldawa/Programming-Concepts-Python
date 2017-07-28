@@ -76,3 +76,32 @@ about calling wait so that dead processes can be disposed of. If the parent dies
 first, however, the kernel recognizes that no wait will be forthcoming and adjusts
 the process to make the orphan a child of init. init politely accepts these orphaned
 processes and performs the wait needed to get rid of them when they die.
+
+SIGNALS
+=======
+Signals are process-level interrupt requests. About thirty different kinds are defined,
+and they’re used in a variety of ways:
+• They can be sent among processes as a means of communication.
+• They can be sent by the terminal driver to kill, interrupt, or suspend
+processes when keys such as <Control-C> and <Control-Z> are typed.5
+• They can be sent by an administrator (with kill) to achieve various ends.
+• They can be sent by the kernel when a process commits an infraction
+such as division by zero.
+• They can be sent by the kernel to notify a process of an “interesting”
+condition such as the death of a child process or the availability of data
+on an I/O channel.
+
+1. When a signal is received, one of two things can happen. If the receiving process
+has designated a handler routine for that particular signal, the handler is called
+with information about the context in which the signal was delivered. Otherwise,
+the kernel takes some default action on behalf of the process. The default action
+varies from signal to signal. Many signals terminate the process; some also generate
+a core dump
+
+2. To prevent signals from arriving, programs can request that they be either ignored
+or blocked. A signal that is ignored is simply discarded and has no effect on the
+process. A blocked signal is queued for delivery, but the kernel doesn’t require the
+process to act on it until the signal has been explicitly unblocked.
+
+
+
