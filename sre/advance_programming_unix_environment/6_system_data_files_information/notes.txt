@@ -1,0 +1,22 @@
+
+Passwords are stored in /etc/passwd in ascii format
+
+four lines from the /etc/passwd file on Linux could be
+   root:x:0:0:root:/root:/bin/bash
+   squid:x:23:23::/var/spool/squid:/dev/null
+   nobody:x:65534:65534:Nobody:/home:/bin/sh
+   sar:x:205:105:Stephen Rago:/home/sar:/bin/bash
+   
+1. There is usually an entry with the user name root. This entry has a user ID of 0 (the superuser).
+2. Some fields in a password file entry can be empty. If the encrypted password field is empty, 
+   it usually means that the user does not have a password. (This is not recommended.)
+3. The shell field contains the name of the executable program to be used as the login shell for the user. 
+   The default value for an empty shell field is usually /bin/sh. Note,however,thattheentryforsquidhas/dev/nullasthelogin shell.
+   Obviously, this is a device and cannot be executed, so its use here is to prevent anyone from logging in to our system 
+   as user squid.
+4. There are several alternatives to using /dev/null to prevent a particular user from logging in to a system. 
+   For example, /bin/false is often used as the login shell. It simply exits with an unsuccessful (nonzero) status; 
+   the shell evaluates the exit status as false. It is also common to see /bin/true used to disable an account; 
+   it simply exits with a successful (zero) status. 
+   Some systems provide the nologin command, which prints a customizable error message and exits with a nonzero exit status.   
+   
