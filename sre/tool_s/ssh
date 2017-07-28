@@ -1,0 +1,16 @@
+The SSH system is a secure replacement for rlogin, rcp, and telnet. It uses cryptographic authentication 
+to confirm a user’s identity and encrypts all communications between the two hosts.
+
+The main components of SSH are 
+1. server daemon
+2. sshd
+   sshd can authenticate user logins in several different ways 
+   sshd can also use public key cryptography to verify the identity of the remote host. 
+   For that to happen, the remote host’s public key (generated at install time) 
+   must be listed in the local host’s /etc/ssh_known_hosts file or the user’s ~/.ssh/known_hosts file.
+   Authentication policy is set in /etc/sshd_config
+3. and a few user-level commands, notably ssh for remote logins and sftp/scp for copying files. 
+   Other components are an ssh-keygen command that generates public key pairs and a couple of utilities
+   that help support secure X Windows.
+
+
