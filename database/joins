@@ -1,0 +1,46 @@
+TableA
+id  firstName                  lastName
+.......................................
+1   arun                        prasanth                 
+2   ann                         antony                   
+3   sruthy                      abc                      
+6   new                         abc                                           
+
+TableB
+id2 age Place
+................
+1   24  kerala
+2   24  usa
+3   25  ekm
+5   24  chennai                                        
+
+INNER JOIN
+===========
+returns rows when there is a match in both tables.
+
+SELECT TableA.firstName, TableA.lastName, TableB.age, TableB.Place
+FROM TableA
+INNER JOIN TableB
+ON TableA.id = TableB.id2;
+
+firstName       lastName       age  Place
+..............................................
+arun            prasanth        24  kerala
+ann             antony          24  usa
+sruthy          abc             25  ekm
+
+LEFT JOIN
+=========
+SELECT TableA.firstName,TableA.lastName,TableB.age,TableB.Place
+FROM TableA
+LEFT JOIN TableB
+ON TableA.id = TableB.id2;
+
+Result
+
+firstName                   lastName                    age   Place
+...............................................................................
+arun                        prasanth                    24    kerala
+ann                         antony                      24    usa
+sruthy                      abc                         25    ekm
+new                         abc                         NULL  NULL
