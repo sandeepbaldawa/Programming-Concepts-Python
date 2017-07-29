@@ -76,3 +76,21 @@ with open("output.txt","w+") as f:
    writer = csv.writer(f)
    for key, val in c:
       writer.writerow([key,val])
+
+
+import requests
+
+def get_reporting_structure(id, name, depth=0):
+  print " " * depth,
+  print name
+  try:
+    url = "http://www.employee.com/api %s" % id
+    res = request.get(url)
+    res.raise_for_status()
+    json_file = json.loads(res)
+    for key,val in json_file.items():
+      get_reporting_structure(key, val, depth+1)
+  except:
+    raise RunTimeError('Reporting structure call failed')
+
+get_reporting_structure("whoami", id)
