@@ -15,3 +15,8 @@
    Entity classes.  => Business logic(Shopping cart, shopper, greeter)
    Control classes. => Greeting steps
    
+4. Communication diagram as to how these classes will interact.
+
+5. Class diagram with all details in each class
+
+6. Sequence diagram
