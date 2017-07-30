@@ -1,6 +1,6 @@
 1. Create Use Case Digaram
-     Sea level objects. => High level things eg:- greet a customer
-     Fish level object  => eg:- As part of greet one might say hello, or get a cart etc..
+     Sea level use cases. => High level things eg:- greet a customer
+     Fish level use cases  => eg:- As part of greet one might say hello, or get a cart etc..
      
 2. Use cases will be used to create an activity diagram. 
    Each use case will have an activity diagram showing the flow.
@@ -10,7 +10,7 @@
    c. Offer a cart
    d. Customer can take a cart or just move on..
 
-3. Classify each sea level object into class diagram
+3. Classify each sea level use cases into class diagram
    Boundary classes => Door (entrance point)
    Entity classes.  => Business logic(Shopping cart, shopper, greeter)
    Control classes. => Greeting steps
