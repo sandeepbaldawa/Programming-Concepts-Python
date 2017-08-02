@@ -95,10 +95,10 @@ def get_reporting_structure(id, depth=0):
   try:
     employee = requests.get('http://www.linkedin.corp/api/employee/%s' % employee_id)
     res = request.get(url)
-    print " " * depth,
-    print res['name'], res['title']
-    res.raise_for_status()
     json_file = json.loads(res)
+    print " " * depth,
+    print  json_file['name'], json_file['title']
+    res.raise_for_status()
     for report in json_file['reports']:
         get_reporting_structure(report)
   except:
