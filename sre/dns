@@ -13,3 +13,7 @@ Basic working
 2. Request goes to DNS which returns the ip addr the domain name matches to
 3. User computer uses this ipaddr to go through the router to the internet to find which subnet/machine/port the ipaddr
    maps to and connects to the same.
+
+
+- Important to note that a given DNS server will have mappings only for the local LAN
+- So if the DNS server does not have a record in it's table's it will query the remote DNS server to get the mapping
