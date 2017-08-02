@@ -4,6 +4,10 @@ Parsing CSV and json
 =====================
 https://automatetheboringstuff.com/chapter14/
 
+Questions
+=========
+Any limitations memory, time etc..
+
 
 def print_fizz(n):
   for i in xrange(1,n+1):
@@ -17,6 +21,12 @@ def print_fizz(n):
       print "{0} ".format(i),
       
 print_fizz(15) 
+
+
+Questions
+=========
+Can we assume syslog format will be uniform? or it can be malformed?
+
 
 
 Parse /var/log/syslog and extract values.
