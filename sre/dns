@@ -1,0 +1,8 @@
+- maps domain names to ip address
+- is a service on the TCP/IP n/w
+- DHCP dynamically assigns ip address to machines on the n/w
+- usually built into routers for normal users
+- In enterprise world we have windows servers and bind which can serve as dns
+- dhcp servers should always talk to dns servers, because when a dhcp server generates a dynamic ip, 
+  that should be recorded in the dns tables
+- 
