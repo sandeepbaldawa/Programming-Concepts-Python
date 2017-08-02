@@ -17,3 +17,8 @@ Basic working
 
 - Important to note that a given DNS server will have mappings only for the local LAN
 - So if the DNS server does not have a record in it's table's it will query the remote DNS server to get the mapping
+
+Components of DNS
+=================
+1. Root level server
+2. TLD - Top level domain
