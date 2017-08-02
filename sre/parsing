@@ -90,8 +90,9 @@ with open("output.txt","w+") as f:
 
 
 import requests
+import json
 
-def get_reporting_structure(id, depth=0):
+def get_reporting_structure(employee_id, depth=0):
   try:
     employee = requests.get('http://www.linkedin.corp/api/employee/%s' % employee_id)
     res = request.get(url)
