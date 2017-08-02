@@ -63,12 +63,13 @@ For second part
 import re
 import csv
 from collections import Counter
-regexp = "^(.*? \d+\s+\d+:\d+):\d+\s+.*?\s+ (.*?)\["
+regexp = "^(.*? \d+\s+\d+:\d+):\d+\s+(.*?)\["
 c = Counter()
 with open("test.txt","r") as f:
   for each_line in f:
-        time = re.match(regexp, each_line).group[1]
-        msg= re.match(regexp, each_line).group[2]
+        match = re.match(regexp, each_line)
+        time = match.group(1)
+        msg = match.group(2)
         c.update((time, msg))
 c = sorted(c.items(), key=lambda x:x[1])
 
