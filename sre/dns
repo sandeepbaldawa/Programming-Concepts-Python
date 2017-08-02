@@ -5,4 +5,11 @@
 - In enterprise world we have windows servers and bind which can serve as dns
 - dhcp servers should always talk to dns servers, because when a dhcp server generates a dynamic ip, 
   that should be recorded in the dns tables
-- 
+- reverse dns maps ipaddr to domain name
+
+Basic working
+=============
+1. User requests for www.google.com
+2. Request goes to DNS which returns the ip addr the domain name matches to
+3. User computer uses this ipaddr to go through the router to the internet to find which subnet/machine/port the ipaddr
+   maps to and connects to the same.
