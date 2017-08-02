@@ -80,16 +80,16 @@ with open("output.txt","w+") as f:
 
 import requests
 
-def get_reporting_structure(id, name, depth=0):
-  print " " * depth,
-  print name
+def get_reporting_structure(id, depth=0):
   try:
-    url = "http://www.employee.com/api %s" % id
+    employee = requests.get('http://www.linkedin.corp/api/employee/%s' % employee_id)
     res = request.get(url)
+    print " " * depth,
+    print res['name'], res['title']
     res.raise_for_status()
     json_file = json.loads(res)
-    for key,val in json_file.items():
-      get_reporting_structure(key, val, depth+1)
+    for report in json_file['reports']:
+        get_reporting_structure(report)
   except:
     raise RunTimeError('Reporting structure call failed')
 
