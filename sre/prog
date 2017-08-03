@@ -25,3 +25,16 @@ for i in range(len(X)):
 
 for r in result:
    print(r)
+
+
+reverse file
+=============
+
+import os
+
+bufsize = 1 << 15
+with open('file.in', 'rb') as f, open('file.out', 'wb') as fout:
+    f.seek(0, os.SEEK_END) # move to the end of file
+    for pos in reversed(xrange(0, f.tell(), bufsize)):
+        f.seek(pos, os.SEEK_SET)
+        fout.write(f.read(bufsize)[::-1])
