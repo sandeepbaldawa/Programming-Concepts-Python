@@ -2,6 +2,8 @@ How do I debug SSH problems?
 ============================
 1. Examine the SSH server logs. 
    These will reported by syslog according the server's syslog configuration, often in /var/log/messages.
+   sudo tail -f /var/log/auth.log 
+   On Red Hat, it's /var/log/secure
    
 2. Add the -vvv switch to your SSH client command line, causing it to report verbosely on what it does   
 
@@ -10,8 +12,21 @@ How do I debug SSH problems?
    # sshd -d -p 1234
 
    [on the client]
-   $ ssh -p 1234 ...
+   $ ssh -vvv -p 1234 ...
    
 4. Check the ssh environment
 operating systems on the client and server hosts, and their versions
 SSH software on the client and server hosts, and their versions
+
+5. When I try to connect to an SSH server, I get the error "Connection refused."
+   No SSH server is running where you tried to connect. Double-check the hostname and TCP port number: 
+   perhaps the server is running on a port different from the default?
+   try running netstat -tanp on the server side to see on which port the sshd service is bound to.
+   
+6. When I log in, the message of the day (/etc/motd) prints twice.
+   Both sshd and the login program are printing it. 
+   Disable sshd 's printing by setting the serverwide configuration keyword PrintMotd to no.
+
+7. When I log in, I see two messages about email, such as "No mail" or "You have mail."
+   Both sshd and the login program are checking for mail. 
+   Prevent sshd from checking by setting the serverwide configuration keyword CheckMail to no.
