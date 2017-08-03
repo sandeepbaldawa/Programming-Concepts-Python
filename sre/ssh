@@ -1,0 +1,17 @@
+How do I debug SSH problems?
+============================
+1. Examine the SSH server logs. 
+   These will reported by syslog according the server's syslog configuration, often in /var/log/messages.
+   
+2. Add the -vvv switch to your SSH client command line, causing it to report verbosely on what it does   
+
+3. Run an instance of the server in debug mode, and test your connection against it:
+   [on the server as root]
+   # sshd -d -p 1234
+
+   [on the client]
+   $ ssh -p 1234 ...
+   
+4. Check the ssh environment
+operating systems on the client and server hosts, and their versions
+SSH software on the client and server hosts, and their versions
