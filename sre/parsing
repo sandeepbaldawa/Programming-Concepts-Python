@@ -55,7 +55,7 @@ For first part
 import re
 import csv
 from collections import Counter
-regexp = "^(.*? \d+\s+\d+:\d+):\d+.*"
+regexp = "^(.*?\s+\d+\s+\d+:\d+):\d+.*"
 c = Counter()
 try:
   with open("test.txt","r") as f:
@@ -78,7 +78,7 @@ For second part
 import re
 import csv
 from collections import Counter
-regexp = "^(.*? \d+\s+\d+:\d+):\d+\s+(.*?)\["
+regexp = "^(.*?\s+\d+\s+\d+:\d+):\d+\s+(.*?)\["
 c = Counter()
 with open("test.txt","r") as f:
   for each_line in f:
