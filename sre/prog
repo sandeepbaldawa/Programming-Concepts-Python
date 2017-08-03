@@ -38,3 +38,12 @@ with open('file.in', 'rb') as f, open('file.out', 'wb') as fout:
     for pos in reversed(xrange(0, f.tell(), bufsize)):
         f.seek(pos, os.SEEK_SET)
         fout.write(f.read(bufsize)[::-1])
+
+
+print all files in dir
+======================
+for parent, dirs, files in os.walk("/home/DataScience"):   
+    for dirname in dirs:
+        print dirname
+    for filename in files:
+        print filename
