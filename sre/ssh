@@ -30,3 +30,16 @@ SSH software on the client and server hosts, and their versions
 7. When I log in, I see two messages about email, such as "No mail" or "You have mail."
    Both sshd and the login program are checking for mail. 
    Prevent sshd from checking by setting the serverwide configuration keyword CheckMail to no.
+   
+8. The SSH1 server says "Permission denied" and exits.
+   This occurs if all authentication techniques have failed. Run your client in debug mode and read the diagnostic messages,
+
+9. How do I authenticate without typing a password or passphrase?
+   ssh-copy-id
+
+10. I get prompted for my password or passphrase, but before I have time to respond, the SSH server closes the connection.
+    Your server's idle timeout value may be too short. If you are a system administrator of the server machine, 
+    set IdleTimeout to a larger value in the serverwide configuration file
+
+11. 
+   
