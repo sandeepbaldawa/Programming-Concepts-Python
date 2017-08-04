@@ -1,5 +1,10 @@
 1. details ssh
 2. explain host name resolution in detail
+3. fork
+4. Run levels
+5. init process
+6. docker
+
 
 
 
