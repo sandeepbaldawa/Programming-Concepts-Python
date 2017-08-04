@@ -1,3 +1,8 @@
+1. details ssh
+2. explain host name resolution in detail
+
+
+
 Debug a server currently serving errors.
 log processing and parsing
 details of ssh  
