@@ -19,3 +19,11 @@ Dashboards should answer basic questions about your service, and normally includ
 
 Conducting adhoc retrospective analysis (i.e., debugging)
 Our latency just shot up; what else happened around the same time?
+
+Lots of white-box monitoring
+Some black-box monitoring for critical stuff
+Four golden signals
+Latency
+Traffic
+Errors
+Saturation
