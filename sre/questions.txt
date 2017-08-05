@@ -4,6 +4,9 @@
 4. Run levels
 5. init process
 6. docker
+7. How to copy an extremely large file to multiple servers in the system quickly and efficiently.  
+8. How would you distribute 10gb of small files to a few thousand machines
+9. The scenario given was you start at a new place and theres no monitoring what would you do first. The site has a frontend  server, backend server and databases. The feeling I got from follow up questions was they're not looking for you to stop at monitoring just system stats and health. They seemed like they also wanted to talk about user metrics and data.
 
 
 
