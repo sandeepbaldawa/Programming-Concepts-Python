@@ -4,3 +4,4 @@ https://www.glassdoor.com/Interview/LinkedIn-Site-Reliability-Engineer-Interview
 https://syedali.net/engineer-interview-questions/
 http://advancedlinuxprogramming.com/alp-folder/advanced-linux-programming.pdf
 https://devops.com/linkedin-preps-site-reliability-engineers-sres-exciting-careers/
+https://github.com/dastergon/awesome-sre/blob/master/README.md#monitoring-and-alerting
