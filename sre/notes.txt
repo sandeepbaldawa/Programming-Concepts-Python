@@ -6,3 +6,4 @@ http://advancedlinuxprogramming.com/alp-folder/advanced-linux-programming.pdf
 https://devops.com/linkedin-preps-site-reliability-engineers-sres-exciting-careers/
 https://github.com/dastergon/awesome-sre/blob/master/README.md#monitoring-and-alerting
 https://hackernoon.com/the-must-know-checklist-for-devops-system-reliability-engineers-f74c1cbf259d
+https://adilaijaz.wordpress.com/2013/07/14/how-to-hire-site-reliability-engineers/
