@@ -59,3 +59,13 @@ When pages occur too frequently, employees second-guess, skim, or even ignore in
 sometimes even ignoring a "real" page that’s masked by the noise.
 Very important to balance between right amount of alerting, info, warning etc. types of messages to avoid too much information
 which is difficult to traige.
+
+
+Policies and response rules
+===========================
+
+Minotiring capacity and plan capacity
+Monitor failure rate of devices, nodes, h/w etc..and predict when we would need a new device and alert user..
+try to make alerting as specific as possible eg:- db is slow instead of website is slow..
+asup emails..
+
