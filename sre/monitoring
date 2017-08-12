@@ -27,3 +27,24 @@ Latency
 Traffic
 Errors
 Saturation
+
+Black-box monitoring
+====================
+Testing externally visible behavior as a user would see it.
+
+White-box monitoring
+====================
+Monitoring based on metrics exposed by the internals of the system, including logs,
+interfaces like the Java Virtual Machine Profiling Interface, or an HTTP handler that emits internal statistics.
+
+Dashboard
+=========
+An application (usually web-based) that provides a summary view of a service’s core metrics. 
+A dashboard may have filters, selectors, and so on, but is prebuilt to expose the metrics most important to its users.
+
+Alert
+======
+A notification intended to be read by a human and that is pushed to a system such as a bug or ticket queue, 
+an email alias, or a pager. Respectively, these alerts are classified as tickets, email alerts,1 and pages.
+The dashboard might also display team information such as ticket queue length, a list of high-priority bugs, 
+the current on-call engineer for a given area of responsibility, or recent pushes.
