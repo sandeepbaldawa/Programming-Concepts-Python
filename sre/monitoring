@@ -5,20 +5,24 @@ Why Monitor?
 
 There are many reasons to monitor a system, including:
 
-Analyzing long-term trends
+1. Analyzing long-term trends
 How big is my database and how fast is it growing? How quickly is my daily-active user count growing?
 
-Comparing over time or experiment groups
+2. Comparing over time or experiment groups
 Are queries faster with Acme Bucket of Bytes 2.72 versus Ajax DB 3.14? How much better is my memcache hit rate with an extra node? Is my site slower than it was last week?
 
-Alerting
+3. Alerting
 Something is broken, and somebody needs to fix it right now! Or, something might break soon, so somebody should look soon.
 
-Building dashboards
+4. Building dashboards
 Dashboards should answer basic questions about your service, and normally include some form of the four golden signals (discussed later in this chapter).
 
-Conducting adhoc retrospective analysis (i.e., debugging)
+5. Conducting adhoc retrospective analysis (i.e., debugging)
 Our latency just shot up; what else happened around the same time?
+
+6. System monitoring is also helpful in supplying raw input into business analytics 
+
+7. Facilitating analysis of security breaches
 
 Lots of white-box monitoring
 Some black-box monitoring for critical stuff
@@ -48,3 +52,10 @@ A notification intended to be read by a human and that is pushed to a system suc
 an email alias, or a pager. Respectively, these alerts are classified as tickets, email alerts,1 and pages.
 The dashboard might also display team information such as ticket queue length, a list of high-priority bugs, 
 the current on-call engineer for a given area of responsibility, or recent pushes.
+
+Outages can be prolonged because
+other noise interferes with a rapid diagnosis and fix. Effective alerting systems have good signal and very low noise.
+When pages occur too frequently, employees second-guess, skim, or even ignore incoming alerts, 
+sometimes even ignoring a "real" page that’s masked by the noise.
+Very important to balance between right amount of alerting, info, warning etc. types of messages to avoid too much information
+which is difficult to traige.
