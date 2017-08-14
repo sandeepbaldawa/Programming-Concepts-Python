@@ -43,5 +43,12 @@ SSH software on the client and server hosts, and their versions
     Your server's idle timeout value may be too short. If you are a system administrator of the server machine, 
     set IdleTimeout to a larger value in the serverwide configuration file
 
-11. 
+Basic working
+=============
+On first contact, SSH establishes a secure channel between the client and the server so that all transmissions 
+between them are encrypted. The client then prompts for your password, which it supplies to the server 
+over the secure channel. The server authenticates you by checking that the password is correct and permits the login.
+All subsequent client/server exchanges are protected by that secure channel, including everything you type into the 
+SSH application and everything it displays to you from shell.isp.com.
+It’s important to remember that the secure channel exists only between the SSH cli- ent and server machines.
    
