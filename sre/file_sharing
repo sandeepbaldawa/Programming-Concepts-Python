@@ -4,6 +4,8 @@ questions:-
 ==========
 machines:- sizing, heterogenous, IOPs, queueing, 
 
-server:- async, sync?, 
+server:- async, sync?, vertical scaling to handle threads synchronously? or have asynch threading model
 
 Network:- bandwidth?
+
+
