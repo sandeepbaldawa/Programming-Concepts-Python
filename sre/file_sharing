@@ -16,4 +16,13 @@ Compared to the synchronous model, the asynchronous model performs best when
 2. The tasks perform lots of I/O, causing a synchronous program to waste lots of time blocking when other tasks could be running.
 3. The tasks are largely independent from one another so there is little need for inter-task communication 
 (and thus for one task to wait upon another).
-
+4. The I/O part of threaded code is relatively easy but managing the shared state between threads (using locks/queues/etc)
+   without race conditions is what makes it tricky. Using an async model means you have less going on at the same time so races are easily avoided. 2/3.
+   each thread will consume at least one memory page of stack (4KB or 8KB typically), plus some unknown amount of memory for 
+   other data structures related to that thread's state.
+5. It is very difficult to write code that is thread safe. 
+   With asyncronous code you know exactly
+   where the code will shift from one task to the next and race conditions are much therefore much harder to come by. Threads
+   consume a fair amount of data since each thread needs to have its own stack;
+   with async code all the code shares the same stack and the stack is kept small due to continuously unwinding the stack between tasks. Threads are OS structures
+   and are therefore more memory for the platform to support. There is no such problem with asynchronous tasks.
