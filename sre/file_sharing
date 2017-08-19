@@ -26,3 +26,24 @@ Compared to the synchronous model, the asynchronous model performs best when
    consume a fair amount of data since each thread needs to have its own stack;
    with async code all the code shares the same stack and the stack is kept small due to continuously unwinding the stack between tasks. Threads are OS structures
    and are therefore more memory for the platform to support. There is no such problem with asynchronous tasks.
+
+
+A distributed system is an application that executes a collection of protocols to coordinate the
+actions of multiple processes on a network, such that all components cooperate together to perform
+a single or small set of related tasks.
+
+To be truly reliable, a distributed system must have the following characteristics:
+1. Fault-Tolerant: It can recover from component failures without performing incorrect actions.
+2. Highly Available: It can restore operations, permitting it to resume providing services even when some components have failed.
+3. Recoverable: Failed components can restart themselves and rejoin the system, after the cause of failure has been repaired.
+4. Consistent: The system can coordinate actions by multiple components often in the presence of concurrency and failure.
+   This underlies the ability of a distributed system to act like a non-distributed system.
+5. Scalable: It can operate correctly even as some aspect of the system is scaled to a larger size. For example, we might increase the size of the network on which the system is running. This increases the frequency of network outages and could degrade a "non-scalable" system. Similarly, we might increase the number of users or servers, or overall load on the system. In a scalable system, this should not have a significant effect.
+6. Predictable Performance: The ability to provide desired responsiveness in a timely manner.
+7. Secure: The system authenticates access to data and services
+
+Handling failures is an important theme in distributed systems design. Failures fall into two obvious categories: 
+hardware and software. Today, problems are most often associated with connections and mechanical devices, 
+i.e., network failures, node failures and drive failures.
+
+
