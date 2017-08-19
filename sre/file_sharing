@@ -46,4 +46,37 @@ Handling failures is an important theme in distributed systems design. Failures 
 hardware and software. Today, problems are most often associated with connections and mechanical devices, 
 i.e., network failures, node failures and drive failures.
 
+Heisenbug: A bug that seems to disappear or alter its characteristics when it is observed or researched. 
+A common example is a bug that occurs in a release-mode compile of a program, but not when researched under debug-mode. 
+The name "heisenbug" is a pun on the "Heisenberg uncertainty principle," a quantum physics term which is commonly (yet inaccurately) used to refer to the way in which observers affect the measurements of the things that they are observing, by the act of observing alone (this is actually the observer effect, and is commonly confused with the Heisenberg uncertainty principle).
+
+Bohrbug: A bug (named after the Bohr atom model) that, in contrast to a heisenbug, does not disappear or 
+alter its characteristics when it is researched. A Bohrbug typically manifests itself reliably under a well-defined
+set of conditions.
+Heisenbugs tend to be more prevalent in distributed systems than in local systems.
+One reason for this is the difficulty programmers have in obtaining a coherent and comprehensive view 
+of the interactions of concurrent processes.
+
+Let's get a little more specific about the types of failures that can occur in a distributed system:
+1. Halting failures: A component simply stops. There is no way to detect the failure except by timeout: it either stops sending "I'm alive" (heartbeat) messages or fails to respond to requests. Your computer freezing is a halting failure.
+2. Fail-stop: A halting failure with some kind of notification to other components. A network file server telling its clients it is about to go down is a fail-stop.
+3. Omission failures: Failure to send/receive messages primarily due to lack of buffering space, which causes a message to be discarded with no notification to either the sender or receiver. This can happen when routers become overloaded.
+4. Network failures: A network link breaks.
+5. Network partition failure: A network fragments into two or more disjoint sub-networks within which messages can be sent, but between which messages are lost. This can occur due to a network failure.
+6. Timing failures: A temporal property of the system is violated. For example, clocks on different computers which are used to coordinate processes are not synchronized; when a message is delayed longer than a threshold period, etc.
+7. Byzantine failures: This captures several types of faulty behaviors including data corruption or loss, failures caused by malicious programs, etc. [1]
+
+when they first build a distributed system, makes the following eight assumptions
+The network is reliable.
+Latency is zero.
+Bandwidth is infinite.
+The network is secure.
+Topology doesn't change.
+There is one administrator.
+Transport cost is zero.
+The network is homogeneous.    [3]
+Latency: the time between initiating a request for data and the beginning of the actual data transfer.
+Bandwidth: A measure of the capacity of a communications channel. The higher a channel's bandwidth, the more information it can carry.
+Topology: The different configurations that can be adopted in building networks, such as a ring, bus, star or meshed.
+Homogeneous network: A network running a single network protocol.
 
