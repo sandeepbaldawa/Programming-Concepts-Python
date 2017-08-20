@@ -4,12 +4,14 @@ http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html
 
 questions:-
 ==========
+Are we copying these files only once?
+
+
 machines:- sizing, heterogenous, IOPs, queueing, upload/download capacity, 
 
 server:- async, sync?, vertical scaling to handle threads synchronously? or have asynch threading model
 
 Network:- bandwidth?, network localization, i.e how many hops are different machines.
-
 
 data:- 
 1. data pattern?, 
