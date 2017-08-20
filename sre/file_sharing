@@ -4,14 +4,20 @@ http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html
 
 questions:-
 ==========
-Are we copying these files only once?
+How often do we do the transfer?  Is it a one-time or irregular transfer or is it a routine syncronization?
+How remote is the target?  Is it an in-office network,
+is it using an in-house remote network, or is it a remote copy across the "public" Internet?
 
 
 machines:- sizing, heterogenous, IOPs, queueing, upload/download capacity, 
 
 server:- async, sync?, vertical scaling to handle threads synchronously? or have asynch threading model
+         load balancing in place?
 
 Network:- bandwidth?, network localization, i.e how many hops are different machines.
+latency, link quality, reliability on the network size
+TCP windowing/sequencing
+NAT-ing, and NAT Traversal 
 
 data:- 
 1. data pattern?, 
@@ -42,6 +48,8 @@ then the batching size = Your Upload Capacity (Y)/ X(speed found by speedtest).
 
 According to this batching size you move ahead in transferring parallelly to 2000 server in batches.
 
+So I'd probably chunk the file (~32k each), compress each chunk, encrypt each compressed chunk by a key unique to that chunk (derived from the original chunk's hash),
+And I'd encrypt my chunk map by a master key and upload that too
 
 Compared to the synchronous model, the asynchronous model performs best when
 =============================================================================
