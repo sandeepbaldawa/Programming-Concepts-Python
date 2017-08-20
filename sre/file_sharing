@@ -26,6 +26,20 @@ data:-
 
 7. do we have to handle the long tail access pattern
 
+Design:-
+Either divide into chunks or batch these files
+
+OR
+
+So First select a sample of 100 nodes and do a speedtest across these node. 
+A speed test will give an indication of what is the median speed which is available across these 100 nodes and may be that acts as a sample to the entire network.
+So now you have a value of X Mbps is the speed at which you can do a transfer across to these nodes.
+
+Look at the capcity of your own outgoing data speed. So if the central server has a capacity of YGbps as its upload speed
+then the batching size = Your Upload Capacity (Y)/ X(speed found by speedtest).
+
+According to this batching size you move ahead in transferring parallelly to 2000 server in batches.
+
 
 Compared to the synchronous model, the asynchronous model performs best when
 =============================================================================
