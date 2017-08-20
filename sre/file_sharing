@@ -4,11 +4,27 @@ http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html
 
 questions:-
 ==========
-machines:- sizing, heterogenous, IOPs, queueing, 
+machines:- sizing, heterogenous, IOPs, queueing, upload/download capacity, 
 
 server:- async, sync?, vertical scaling to handle threads synchronously? or have asynch threading model
 
-Network:- bandwidth?
+Network:- bandwidth?, network localization, i.e how many hops are different machines.
+
+
+data:- 
+1. data pattern?, 
+
+2. how to verify integrity (md5 hash)
+
+3. can the file be archived and send, 
+
+4. IO size per day
+
+5. how much of the data set do they access
+
+6. is there any correlation between io pattern access between two clients
+
+7. do we have to handle the long tail access pattern
 
 
 Compared to the synchronous model, the asynchronous model performs best when
