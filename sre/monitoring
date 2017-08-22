@@ -70,3 +70,6 @@ Monitor failure rate of devices, nodes, h/w etc..and predict when we would need 
 try to make alerting as specific as possible eg:- db is slow instead of website is slow..
 asup emails..
 
+Policies and response rules
+============================
+
