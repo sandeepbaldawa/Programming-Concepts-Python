@@ -76,7 +76,9 @@ Unrelated services sharing hardware: for example, a code repository and a master
 Push
 Any change to a service’s running software or its configuration.
 
-
+capacity planning and traffic prediction
+========================================
+Base on disk filing up or cluster filing up or based on the runnign traffic..
 
 Policies and response rules
 ===========================
@@ -86,4 +88,17 @@ Monitor failure rate of devices, nodes, h/w etc..and predict when we would need 
 try to make alerting as specific as possible eg:- db is slow instead of website is slow..
 asup emails..
 
+Understanding symtoms vs cause
+===============================
+our monitoring system should address two questions: what’s broken, and why?
 
+The "what’s broken" indicates the symptom; the "why" indicates a (possibly intermediate) cause
+
+
+Symtoms => Cause
+I’m serving HTTP 500s or 404s => Database servers are refusing connections 
+My responses are slow => CPUs are overloaded by a bogosort, or an Ethernet cable is crimped under a rack,
+                         visible as partial packet loss
+Users in Antarctica aren’t receiving animated cat GIFs => Your Content Distribution Network hates scientists and felines, 
+                                                          and thus blacklisted some client IPs
+Private content is world-readable => A new software push caused ACLs to be forgotten and allowed all requests
