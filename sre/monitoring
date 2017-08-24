@@ -152,4 +152,18 @@ small window (e.g., one minute) can give a very early signal of saturation.
 Finally, saturation is also concerned with predictions of impending saturation,
 such as "It looks like your database will fill its hard drive in 4 hours."
 
+Some important points
+=====================
+1. A healthy monitoring and alerting pipeline is simple and easy to reason about. It focuses primarily on symptoms for paging,
+reserving cause-oriented heuristics to serve as aids to debugging problems. 
+2. Monitoring symptoms is easier the further
+"up" your stack you monitor, though monitoring saturation and performance of subsystems such as databases often must be
+performed directly on the subsystem itself.
+3. Email alerts are of very limited value and tend to easily become overrun 
+with noise; instead, you should favor a dashboard that monitors all ongoing subcritical problems for the sort of 
+information that typically ends up in email alerts. A dashboard might also be paired with a log, in order to analyze
+historical correlations.
 
+Over the long haul, achieving a successful on-call rotation and product includes choosing to alert on symptoms or 
+imminent real problems, adapting your targets to goals that are actually achievable, and making sure that your monitoring
+supports rapid diagnosis.
