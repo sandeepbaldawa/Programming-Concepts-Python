@@ -47,6 +47,11 @@ Dashboard
 An application (usually web-based) that provides a summary view of a service’s core metrics. 
 A dashboard may have filters, selectors, and so on, but is prebuilt to expose the metrics most important to its users.
 
+Root cause
+==========
+A defect in a software or human system that, if repaired, instills confidence that this event won’t happen again in the same way. A given incident might have multiple root causes: for example, perhaps it was caused by a combination of insufficient process automation, software that crashed on bogus input, and insufficient testing of the script used to generate the configuration. Each of these factors might stand alone as a root cause, and each should be repaired.
+
+
 Alert
 ======
 A notification intended to be read by a human and that is pushed to a system such as a bug or ticket queue, 
@@ -61,6 +66,17 @@ sometimes even ignoring a "real" page that’s masked by the noise.
 Very important to balance between right amount of alerting, info, warning etc. types of messages to avoid too much information
 which is difficult to traige.
 
+Node and machine
+================
+Used interchangeably to indicate a single instance of a running kernel in either a physical server, virtual machine, or container. There might be multiple services worth monitoring on a single machine. The services may either be:
+
+Related to each other: for example, a caching server and a web server
+Unrelated services sharing hardware: for example, a code repository and a master for a configuration system like Puppet or Chef
+
+Push
+Any change to a service’s running software or its configuration.
+
+
 
 Policies and response rules
 ===========================
@@ -70,6 +86,4 @@ Monitor failure rate of devices, nodes, h/w etc..and predict when we would need 
 try to make alerting as specific as possible eg:- db is slow instead of website is slow..
 asup emails..
 
-Policies and response rules
-============================
 
