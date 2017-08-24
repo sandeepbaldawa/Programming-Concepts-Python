@@ -140,8 +140,16 @@ How "full" your service is. A measure of your system fraction, emphasizing the r
 Note that many systems degrade in performance before they achieve 100% utilization, so having a utilization target
 is essential.
 
-In complex systems, saturation can be supplemented with higher-level load measurement: can your service properly handle double the traffic, handle only 10% more traffic, or handle even less traffic than it currently receives? For very simple services that have no parameters that alter the complexity of the request (e.g., "Give me a nonce" or "I need a globally unique monotonic integer") that rarely change configuration, a static value from a load test might be adequate. As discussed in the previous paragraph, however, most services need to use indirect signals like CPU utilization or network bandwidth that have a known upper bound. Latency increases are often a leading indicator of saturation. Measuring your 99th percentile response time over some small window (e.g., one minute) can give a very early signal of saturation.
+In complex systems, saturation can be supplemented with higher-level load measurement: can your service properly handle double the traffic, 
+handle only 10% more traffic, or handle even less traffic than it currently receives? 
+For very simple services that have no parameters that alter the complexity of the request 
+(e.g., "Give me a nonce" or "I need a globally unique monotonic integer") that rarely change configuration,
+a static value from a load test might be adequate. As discussed in the previous paragraph, however, 
+most services need to use indirect signals like CPU utilization or network bandwidth that have a known upper bound. 
+Latency increases are often a leading indicator of saturation. Measuring your 99th percentile response time over some
+small window (e.g., one minute) can give a very early signal of saturation.
 
-Finally, saturation is also concerned with predictions of impending saturation, such as "It looks like your database will fill its hard drive in 4 hours."
+Finally, saturation is also concerned with predictions of impending saturation,
+such as "It looks like your database will fill its hard drive in 4 hours."
 
 
