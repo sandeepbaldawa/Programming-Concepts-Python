@@ -34,13 +34,6 @@ def test_upload_sync(created_test_helper, setup_teardown_file_operations):
         upload_file_response=upload_file_response,
         file_type="images")
 
-    # delete file which was uploaded
-    upload_file_id = upload_file_response['file']['id']
-    created_test_helper.delete([upload_file_id])
-
-    # validate file uploaded was deleted
-    created_test_helper.validate_delete(upload_file_id, file_type="images")
-
 
 @pytest.mark.smoketest
 def test_delete_sync(created_test_helper, setup_teardown_file_operations):
