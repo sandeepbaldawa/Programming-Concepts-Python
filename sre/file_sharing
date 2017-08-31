@@ -4,6 +4,17 @@ http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html
 http://people.csail.mit.edu/moitra/docs/6854lec3.pdf
 https://www.akamai.com/us/en/multimedia/documents/technical-publication/consistent-hashing-and-random-trees-distributed-caching-protocols-for-relieving-hot-spots-on-the-world-wide-web-technical-publication.pdf
 
+What are hot spots
+===================
+Hot spots occur any time a large number of clientswish to simultaneously access data from a single server. 
+If the site is not provisioned to deal with all of these clients simultaneously,service may be degraded or lost 
+eg:- A Web site can suddenly become extremely popular and receive far more requests in a relatively short time.
+
+
+
+Consistent Hashing and Random Trees: Distributed Caching Protocols for Relieving Hot Spots on the World Wide Web (PDF Download Available). Available from: https://www.researchgate.net/publication/2395793_Consistent_Hashing_and_Random_Trees_Distributed_Caching_Protocols_for_Relieving_Hot_Spots_on_the_World_Wide_Web [accessed Aug 31, 2017].
+
+
 questions:-
 ==========
 How often do we do the transfer?  Is it a one-time or irregular transfer or is it a routine syncronization?
