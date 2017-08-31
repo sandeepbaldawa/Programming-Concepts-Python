@@ -13,9 +13,20 @@ eg:- A Web site can suddenly become extremely popular and receive far more reque
 why consistent hashing
 =======================
 When we have hot spots requests can clog the server, we can solve this with a proxy and set of caches which serve the requests.
-To search which caches client should requests from we could use multicast betwen the caches to decide that. However multicast is
-very inefficient because of number of messages, other way to do the same is distributed caching.
+To search which caches client should requests from 
+1. any request could go through the proxy to a random cache,
+    where we could use multicast betwen the caches to decide where to route the requests. 
+    If not found in caches it is fetched from the home server
+    However multicast is very inefficient because of number of messages.(**Maplpani)
+2. Harvest Cache uses a technique where in leaf nodes are caches assigned to clients making requests and if not found in leaf cache
+   the requests propogates to parent and eventually  the root, upon which page is fetched from the home server. Issue happens
+   if each request is distinct in which root node will have to fetch pages from home server, this can swap the root node.
+3. Plaxton and Rajaraman show how to balance the loadamong all caches by using randomization and hashing.
+   Issue are since their algorithm sends a copy of each page request to a random element in every set, the small sets for a 
+   popular page are guaranteed to be swamped. Different tree for each page.
 
+Consistent Hashing and Random Trees: Distributed Caching Protocols for Relieving Hot Spots on the World Wide Web (PDF Download Available). Available from: https://www.researchgate.net/publication/2395793_Consistent_Hashing_and_Random_Trees_Distributed_Caching_Protocols_for_Relieving_Hot_Spots_on_the_World_Wide_Web [accessed Aug 31, 2017].
+   
 
 
 Consistent Hashing and Random Trees: Distributed Caching Protocols for Relieving Hot Spots on the World Wide Web (PDF Download Available). Available from: https://www.researchgate.net/publication/2395793_Consistent_Hashing_and_Random_Trees_Distributed_Caching_Protocols_for_Relieving_Hot_Spots_on_the_World_Wide_Web [accessed Aug 31, 2017].
