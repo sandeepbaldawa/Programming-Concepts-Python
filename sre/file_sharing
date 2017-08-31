@@ -10,6 +10,12 @@ Hot spots occur any time a large number of clientswish to simultaneously access 
 If the site is not provisioned to deal with all of these clients simultaneously,service may be degraded or lost 
 eg:- A Web site can suddenly become extremely popular and receive far more requests in a relatively short time.
 
+why consistent hashing
+=======================
+When we have hot spots requests can clog the server, we can solve this with a proxy and set of caches which serve the requests.
+To search which caches client should requests from we could use multicast betwen the caches to decide that. However multicast is
+very inefficient because of number of messages, other way to do the same is distributed caching.
+
 
 
 Consistent Hashing and Random Trees: Distributed Caching Protocols for Relieving Hot Spots on the World Wide Web (PDF Download Available). Available from: https://www.researchgate.net/publication/2395793_Consistent_Hashing_and_Random_Trees_Distributed_Caching_Protocols_for_Relieving_Hot_Spots_on_the_World_Wide_Web [accessed Aug 31, 2017].
