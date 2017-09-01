@@ -36,7 +36,8 @@ Design
       a. It can maintain an ensemble(master slave) and heartbeat a node to check if some node is dead
       b. Help in easily querying for a file using the inode and check on which machines the corresponding chunks lie.
       c. Can help initiate rebalance. 
-5b. On the side sending the file we could have asynch transfer to efficiently transfer during blocking IOs.      
+5b. On the side sending the file we could have asynch transfer to efficiently transfer during blocking IOs.  
+5c. Re-create chunks(data, metadata, cache) on dead nodes, disks etc.
 6. We could build a persistent caching layer which will allow us to acknowledge writes back quicker.
    what do we optimize on performance or reliability?, we can optimize this by acknowledging by either writing/not writing to
    the mirrors in persistence layers with SSD's, or acknowledging in memory..fundamentally a tradeoff.
