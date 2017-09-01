@@ -2,6 +2,7 @@ Goals
 ====
 - Good interface, with minimum clicking to get to good data.
 - Qualitative measurement of metrics with deterministic outcome.
+- Alerting to predict patterns of beavior
 - Automation for most tasks like collecting, adding, analyzing a metric.
 - Abilty to co-relate different metrics without much user intervention
 - Reduce noise by giving capability to serives/users to listen to only what one is interested in
