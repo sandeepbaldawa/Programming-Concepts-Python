@@ -1,0 +1,3 @@
+- Publisher subscriber
+- Subscribers can be microservices which inrepret this data
+- Generating graphs/pictures important for understanding behavior/anamolies etc.
