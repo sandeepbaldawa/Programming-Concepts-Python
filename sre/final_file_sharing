@@ -33,4 +33,13 @@ Design
    the mirrors in persistence layers with SSD's, or acknowledging in memory..fundamentally a tradeoff.
 7. To save space we could compress the data or dedup it..  
 8. System can rebalance chunks automatedly time to time to reduce the hot spots.
-9. 
+9. Log structured file system (append only)
+   a. Maintains changes made to a file as delta in an in memory datastructure
+   b. Buffer changes to multiple files in one contiguous log segment datastructure
+   c. Once log segment fills up, push it to disk and since the log segments are sequential good for the disk(called flushing)
+   d. We can stripe this log segment across multiple disks for parallel flush'es to the disk   
+   e. On reads file has to be reconstructed from the log segments
+   f. logs have to be cleaned periodically to make sure disk is not cluttered due to the invalidation of blocks possible
+      which can potentially create holes(during overwrites). 
+   g. 
+   
