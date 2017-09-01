@@ -12,6 +12,22 @@ for items up to 4 KB in size. ...
 
 One write capacity unit represents one write per second for items up to 1 KB in size.
 
+CAP theorem
+===========
+states that it is impossible for a distributed software system to simultaneously provide more than two out of three of the following guarantees (CAP): Consistency, Availability and Partition tolerance. When we design a distributed system, 
+trading off among CAP is almost the first thing we want to consider. CAP theorem says while designing a distributed system 
+we can pick only two of:
+
+Consistency: All nodes see the same data at the same time. Consistency is achieved by updating several nodes before allowing 
+further reads.
+
+Availability: Every request gets a response on success/failure. Availability is achieved by replicating the data 
+across different servers.
+
+Partition tolerance: System continues to work despite message loss or partial failure. A system that is partition-tolerant 
+can sustain any amount of network failure that doesn’t result in a failure of the entire network. 
+Data is sufficiently replicated across combinations of nodes and networks to keep the system up through intermittent outages.
+
 
 Design
 ======
@@ -34,7 +50,8 @@ Design
 5. Some framework like zookeeper which can maintain for a given inode what are the corresponding chunks and 
    they are on which machines. Advantages of zookeeper is
       a. It can maintain an ensemble(master slave) and heartbeat a node to check if some node is dead
-      b. Help in easily querying for a file using the inode and check on which machines the corresponding chunks lie.
+      b. Help in easily querying for a file using the inode and check on which machines the corresponding chunks lay.
+         Other option is to use finger printing to indetify file(small unique key for large amount of data)
       c. Can help initiate rebalance. 
 5b. On the side sending the file we could have asynch transfer to efficiently transfer during blocking IOs.  
 5c. Re-create chunks(data, metadata, cache) on dead nodes, disks etc.
@@ -82,6 +99,10 @@ Design
  16. Write => ACK no need to compress and deduplicate so that ACK's are fast, from ACK to flushing to disk we can
      compress and deduplicate.
  17. Snapshot the system for recovering and backup.    
+ 18. Indexes can be used; they are used to improve the speed of data retrieval operations on the data store. 
+ An index makes the trade-offs of increased storage overhead, and slower writes (since we not only have to write 
+ the data but also have to update the index) for the benefit of faster reads. 
+ Indexes are used to quickly locate data without having to examine every row in a database table.
  
    
    
