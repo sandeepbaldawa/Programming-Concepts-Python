@@ -1,3 +1,39 @@
-- Publisher subscriber
-- Subscribers can be microservices which inrepret this data
-- Generating graphs/pictures important for understanding behavior/anamolies etc.
+Goals
+====
+- Good interface, with minimum clicking to get to good data.
+- Easy to add new people and keep up with the growth of new engineers.
+- Not much touch points to add a metric. Metrics adding should be automated and error free
+- Consistent set of metrics to work with
+- Optimum performance and space usage.
+
+
+- automated monitoring important because of the sheer scale of services to monitor. Also to reduce noise
+  Publisher subscriber would be better applicable. Automated reporting too is equally important.
+- Subscribers can be microservices which inrepret this data.  
+- Generating graphs/pictures important for understanding behavior/anamolies etc mainly because of the sheer amount of data
+  present, it will be very difficult to understand the same manually. 
+- Policies and response rules to judge the system
+
+Collecting metrics
+=================
+- Each Service can generate metrics.
+- Collect the standard cross-service metrics automatically from every service
+- broker which can publish these services and interested parties can subscribe to the same.
+- resolution of metrics(intervals they are served) important.
+- capacity planning for infrastructure important, since amount of data is huge
+   understand WCU, RCU, IOPs, throughput, latency, 
+- Configuring(adding/removing) metrics should be easy at various levels, GUI, command line, code etc.
+- Programatically name the metrics so we can do things based on the format
+- A push based system(forcasting what might be needed) that always sent the metrics it had regardless of being
+  in a data store or not
+
+Graphing frontend
+================
+
+- RRDtool is the OpenSource industry standard, high performance data logging and graphing system 
+for time series data. RRDtool can be easily integrated in shell scripts, perl, python, ruby, lua or tcl applications.
+- 
+
+
+
+  
