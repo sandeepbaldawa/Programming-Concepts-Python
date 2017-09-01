@@ -1,0 +1,9 @@
+
+
+
+
+advantages of distributed hashing with consistent hashing
+=========================================================
+1. Node add or remove only K/N keys need to be moved.
+2. we can rebalance as and when needed based on the hots spots.
+3. 
