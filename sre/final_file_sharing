@@ -5,6 +5,12 @@ machines:- sizing, heterogenous, IOPs, queueing, upload/download capacity..
 Network:- bandwidth, network localization, i.e how many hops are different machines.
 latency, link quality, reliability on the network size
 - content of files changing? IO patterns
+any requirements for RCU's, WCU's etc..
+
+One read capacity unit represents one strongly consistent read per second, or two eventually consistent reads per second,
+for items up to 4 KB in size. ...
+
+One write capacity unit represents one write per second for items up to 1 KB in size.
 
 
 Design
