@@ -18,8 +18,9 @@ Design
 3. We could first hash 
    a. each machine by maybe it's ip address 
    b. each chunk by the inode + offset
-4. We could create replicated copied of chunks for reliability. (2-way, 3-way depending on the requirement), 
-   comprise storage vs reliability
+4. We could create replicated copied of chunks. Advantages are
+   a. (2-way, 3-way depending on the requirement), comprise storage vs reliability. 
+   b. For hot spots reads can be distributed to the replicated copies to spread the load
 5. Some framework like zookeeper which can maintain for a given inode what are the corresponding chunks and 
    they are on which machines. Advantages of zookeeper is
       a. It can maintain an ensemble(master slave) and heartbeat a node to check if some node is dead
