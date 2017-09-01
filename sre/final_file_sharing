@@ -5,6 +5,7 @@ Network:- bandwidth, network localization, i.e how many hops are different machi
 latency, link quality, reliability on the network size
 - content of files changing? IO patterns
 
+
 Design
 ======
 1. We have 10K buckets(destination server nodes) in which we need to send the 1TB size file. Hence we could
@@ -24,4 +25,7 @@ Design
       a. It can maintain an ensemble(master slave) and heartbeat a node to check if some node is dead
       b. Help in easily querying for a file using the inode and check on which machines the corresponding chunks lie.
       c. Can help initiate rebalance. 
-6. 
+6. We could build a persistent caching layer which will allow us to acknowledge writes back quicker.
+   what do we optimize on performance or reliability?, we can optimize this by acknowledging by either writing/not writing to
+   the mirrors in persistence layers with SSD's, or acknowledging in memory..fundamentally a tradeoff.
+7. To save space we could compress the data or dedup it..   
