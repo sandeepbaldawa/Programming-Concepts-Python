@@ -11,7 +11,8 @@ Design
 ======
 1. We have 10K buckets(destination server nodes) in which we need to send the 1TB size file. Hence we could
    take the 1TB file and divide it into 100K chunks such that each bucket would receive 10 chunks. If a machine is more
-   powerful CPU/Storage it can get to store more chunks(more slices in the consistent hashing method)
+   powerful CPU/Storage it can get to store more chunks(more slices in the consistent hashing method). Chunks
+   can be done at cache, metadata or data layer.
 2. We could do the above using consistent hashing. Advantages of distributed hashing with consistent hashing
     a. Node add or remove only K/N keys need to be moved.
     b. we can rebalance as and when needed based on the hots spots.
@@ -23,6 +24,7 @@ Design
    a. (2-way, 3-way depending on the requirement), comprise storage vs reliability. 
    b. For hot spots reads can be distributed to the replicated copies to spread the load, something like rebalance
       can be done periodically 
+   c. Important to note we can do writes in parallel on all copies..(P, M1 and M2)   
 5. Some framework like zookeeper which can maintain for a given inode what are the corresponding chunks and 
    they are on which machines. Advantages of zookeeper is
       a. It can maintain an ensemble(master slave) and heartbeat a node to check if some node is dead
@@ -31,9 +33,18 @@ Design
 6. We could build a persistent caching layer which will allow us to acknowledge writes back quicker.
    what do we optimize on performance or reliability?, we can optimize this by acknowledging by either writing/not writing to
    the mirrors in persistence layers with SSD's, or acknowledging in memory..fundamentally a tradeoff.
-7. To save space we could compress the data or dedup it..  
+7. To save space we could compress the data and dedup it and we could do this inline..  
 8. System can rebalance chunks automatedly time to time to reduce the hot spots.
 9. Log structured file system (append only)
+   Why?
+   ===
+   Log-structured filesystems assume that write performance is more of a constraint than read performance. 
+   The justification for this assumption is that read performance can be improved by increasing cache sizes. 
+   For write-heavy loads on disks that aren't too full, a log-structured filesystem produces much faster performance 
+   than a traditional filesystem because it avoids seeks between block writes—this is even enough to pay for the 
+   overhead of segment cleaning and maintaining duplicate log entries. However, for very full disks (requiring frequent cleaning) or for 
+   read-heavy loads that could otherwise take advantage of locality, a traditional filesystem would give lower overhead.
+   
    a. Maintains changes made to a file as delta in an in memory datastructure
    b. Buffer changes to multiple files in one contiguous log segment datastructure
    c. Once log segment fills up, push it to disk and since the log segments are sequential good for the disk(called flushing)
@@ -41,5 +52,29 @@ Design
    e. On reads file has to be reconstructed from the log segments
    f. logs have to be cleaned periodically to make sure disk is not cluttered due to the invalidation of blocks possible
       which can potentially create holes(during overwrites). 
-   g. 
+   Why?/Advantages
+   =============
+   a. For write-intensive applications, the fact that writes all go to the same
+      location may improve write performance substantially (by an order of magnitude in some cases).
+   b. We may get versioning as a bonus: old versions of files are still present in the log, 
+      so we can undo mistakes and/or recover old versions of files.
+   c. We get journaling automatically: all file operations are effectively atomic, 
+      reducing the need for consistency checking.
+   Dis-advantages
+   ==============
+   There is quite a bit of data fragmentation, since updating a few blocks in a file places the 
+   new copies at the end of the log, wherever it happens to be.
+   Some sort of garbage-collection processes is necessary to recover free space from the beginning of the log.
+ 10. SSD's can be divide into Writelogs and Read Cache
+ 11. We can design our write size for optimal performance..
+ 12. Have an in memory tree to find corresponding chunks in SSD/cache
+ 13. Metadata related to files can be writethough from caching to Persistent layer.
+ 14. Caching layers can be in memory(L1 Read) and SSD(WriteLog, L2 Read)
+ 15. Read Cache can dedup data for optimal storage, compression can be costly on read path..
+ 16. Write => ACK no need to compress and deduplicate so that ACK's are fast, from ACK to flushing to disk we can
+     compress and deduplicate.
+ 17. Snapshot the system for recovering and backup.    
+ 
+   
+   
    
