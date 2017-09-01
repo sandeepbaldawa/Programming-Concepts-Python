@@ -1,9 +1,13 @@
-
-
+questions
+=========
+machines:- sizing, heterogenous, IOPs, queueing, upload/download capacity..
+Network:- bandwidth, network localization, i.e how many hops are different machines.
+latency, link quality, reliability on the network size
+- content of files changing? IO patterns
 
 
 advantages of distributed hashing with consistent hashing
 =========================================================
 1. Node add or remove only K/N keys need to be moved.
 2. we can rebalance as and when needed based on the hots spots.
-3. 
+3. performance consistency
