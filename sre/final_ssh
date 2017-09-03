@@ -73,3 +73,22 @@ Major features of SSH
 At this point, you have an ssh-agent program running on your local machine, holding your secret keys in memory. 
 You’re now done. You have passwordless access to all your remote accounts that contain your public key files.
 Say goodbye to the tedium of retyping passwords! The setup lasts until you log out from the local machine or terminate ssh-agent.
+
+5. Access Control
+One can provide limited access through SSH for other users like just run certain application like email
+
+6. Port Forwarding
+Suppose you are logged into a machine away from work and want to access the internal
+news server at your office, news.yoyodyne.com. The Yoyodyne network is connected
+to the Internet, but a network firewall blocks incoming connections to most
+ports, particularly port 119, the news port. The firewall does allow incoming SSH
+connections. SSH can establish a secure tunnel on an arbitrary local TCP port—say, port 3002—to
+the news port on the remote host. The command might look a bit cryptic at this early stage, but here it is:
+
+$ ssh -L 3002:localhost:119 news.yoyodyne.com
+This says “ssh, please establish a secure connection from TCP port 3002 on my local
+machine to TCP port 119, the news port, on news.yoyodyne.com.” So, in order to
+read news securely, configure your news-reading program to connect to port 3002 on
+your local machine. The secure tunnel created by ssh automatically communicates
+with the news server on news.yoyodyne.com, and the news traffic passing through the
+tunnel is protected by encryption.
