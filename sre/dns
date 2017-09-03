@@ -32,3 +32,16 @@ What are zones?
    Secondary Zone
    Stub Zone
    
+Primary Zone => Database is stored locally on the server (on local harddrive)
+advantages => Can be on any server type
+dis-advantages => Two Primary Zones cannot communicate with each other directly(because stored on local db).
+                  This causes additional traffic.
+                  No fault tolerance on failures.
+                  It can be easily hacked
+                  no security
+                  
+                  
+                  
+                   
+
+
