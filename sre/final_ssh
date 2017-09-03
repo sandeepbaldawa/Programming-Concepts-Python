@@ -372,3 +372,13 @@ the algorithm. In such cases, you should turn off the Nagle Algorithm using the
 NoDelay keyword:
 # Tectia
 NoDelay yes
+
+Scan servers
+=============
+nmaps or scanssh
+
+compression also possible
+
+
+Debugging ssh
+=============
