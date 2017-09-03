@@ -92,3 +92,59 @@ read news securely, configure your news-reading program to connect to port 3002 
 your local machine. The secure tunnel created by ssh automatically communicates
 with the news server on news.yoyodyne.com, and the news traffic passing through the
 tunnel is protected by encryption.
+
+Known Hosts
+===========
+The first time an SSH client encounters a new remote machine, it may report that it’s
+never seen the machine before, printing a message like the following:
+$ ssh -l pat shell.isp.com
+The authenticity of host 'shell.isp.com (192.168.0.2)' can't be established.
+RSA key fingerprint is 77:a5:69:81:9b:eb:40:76:7b:13:04:a9:6c:f4:9c:5d.
+Are you sure you want to continue connecting (yes/no)?
+Assuming you respond yes (the most common response), the client continues:
+Warning: Permanently added 'shell.isp.com,192.168.0.2' (RSA) to the list of known
+hosts.
+This message appears only the first time you contact a particular remote host. The
+message is a security feature related to SSH’s concept of known hosts.
+
+If authentication of the server fails, various things may happen depending on the reason
+for failure and the SSH configuration. Typically a warning appears on the screen,
+ranging from a repeat of the known-hosts message:
+Host key not found from the list of known hosts.
+Are you sure you want to continue connecting (yes/no)?
+to more dire words:
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that the RSA host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+77:a5:69:81:9b:eb:40:76:7b:13:04:a9:6c:f4:9c:5d.
+Please contact your system administrator.
+Add correct host key in /home/smith/.ssh/known_hosts to get rid of this message.
+Offending key in /home/smith/.ssh/known_hosts:36
+
+Key Management
+==============
+User's can be authenticated using keys rather than username/password
+
+Passwords have following drawbacks:-
+1.  In order for a password to be secure, it should be long and random, but such
+passwords are hard to memorize
+2. A password sent across the network, even protected by an SSH secure channel,
+can be captured when it arrives on the remote host if that host has been compromised.
+3. Most operating systems support only a single password per account. For shared
+accounts (e.g., a superuser account), this presents difficulties:
+— Password changes are inconvenient because the new password must be communicated
+to all people with access to the account.
+— Tracking usage of the account becomes difficult because the operating system
+doesn’t distinguish between the different users of the account.
+To address these problems, SSH supports public-key authentication: instead of relying
+on the password scheme of the host operating system,
+
+A key is a digital identity. It’s a unique string of binary data that means “This is me,
+honestly, I swear.” And with a little cryptographic magic, your SSH client can prove
+to a server that its key is genuine, and you are really you.
+
+An SSH identity uses a pair of keys, one private and one public.
