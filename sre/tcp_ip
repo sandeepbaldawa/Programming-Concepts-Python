@@ -1,0 +1,8 @@
+what is 3 way handshake
+======================
+Happens before a http request is done
+- Use between client to server to see if they can even connect and speak to each other.
+
+Client send to Server => SYNC(fundamentally meaning can I connect to you? from client)
+Server send to Client => SYNC, ACK (fundamentally meaning I acknowledge you made a request and yes you can connect to me from server)
+Client send to Server => ACK(undamentally meaning server acknowledged, thanks we are now ready for all communication from client)
