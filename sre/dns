@@ -32,6 +32,8 @@ What are zones?
    Secondary Zone
    Stub Zone
    
+PRIMARY ZONE
+============
 Primary Zone => Database is stored locally on the server (on local harddrive)
 advantages => Can be on any server type
 dis-advantages => Two Primary Zones cannot communicate with each other directly(because stored on local db).
@@ -39,6 +41,30 @@ dis-advantages => Two Primary Zones cannot communicate with each other directly(
                   No fault tolerance on failures.
                   It can be easily hacked
                   no security
+
+PRIMARY ZONE ACTIVE DIRECTORY INTEGRATION
+=========================================
+Database stored in active directory
+DNS Server put on Domain Controller
+For fault tolerance need atleast 2 active DNS if one DNS goes down other takes over
+All records are stored in active directory
+Full security
+
+Secondary zone
+==============
+Used for load balancing
+Delegation record put on secondary zone
+
+Stub zone
+=========
+Database stored locally and get them from primary
+used for conditional forward
+Record types
+1. Start of authority(TTL etc..)
+2. NS Records (for ww.zyz.com send request to serverA)
+3. A (glue host) maps to ipaddress
+
+                  
                   
                   
                   
