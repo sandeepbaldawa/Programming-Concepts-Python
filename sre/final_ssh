@@ -211,4 +211,32 @@ The effects of the agent last until you terminate  the agent, usually just befor
 2. SSH clients comunicate with the ssh-agent via local sockets or named pipe whose filename is stored in
 an environment variable, so all clients (and all other processes) within your login session
 have access to the agent.
-3. 
+3. ssh-agent $SHELL
+Creates a shell which has access to the ssh-agent
+
+Once the agent is running, it’s time to load private keys into it using the ssh-add program.
+By default, ssh-add loads the key from your default identity file:
+$ ssh-add
+Enter passphrase for /home/you/.ssh/id_dsa: ********
+Identity added: /home/you/.ssh/id_dsa (/home/you/.ssh/id_dsa)
+Now ssh and scp can connect to remote hosts without prompting for your passphrase.
+Figure 2-3 shows the process.
+
+ssh-add
+=======
+Decrypts private key and stores in agent.
+Identity file(public and private keys encrypted) => ssh-add decrypts the private key and stores in agent(plain text) => 
+ssh then this key for authenticating..
+
+It can do other things too..
+
+To load a key other than your default
+identity into the agent, provide the filename as an argument to ssh-add:
+$ ssh-add my-other-key-file
+You can also list the keys the agent currently holds:
+$ ssh-add -l
+delete a key from the agent in memory:
+$ ssh-add -d name-of-key-file
+or delete all keys from the agent in memory:
+$ ssh-add -D
+
