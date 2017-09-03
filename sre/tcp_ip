@@ -5,9 +5,16 @@ Happens before a http request is done
 
 Client send to Server => SYNC(fundamentally meaning can I connect to you? from client)
 Server send to Client => SYNC, ACK (fundamentally meaning I acknowledge you made a request and yes you can connect to me from server)
-Client send to Server => ACK(undamentally meaning server acknowledged, thanks we are now ready for all communication from client)
+Client send to Server => ACK(fundamentally meaning server acknowledged, thanks we are now ready for all communication from client)
 
 If SYNC/ACK not received means
 1. Server is down
 2. Or client blocked by firewall
 
+How does connection end?
+=======================
+Once client received a http request response/file etc.
+
+Client send to Server => FIN(fundamentally meaning am done from client)
+Server send to Client => FIN, ACK (fundamentally meaning I acknowledge you made a finish request and yes you can dis-connect to me from server)
+Client send to Server => ACK
