@@ -197,3 +197,18 @@ but this requires stealing the private-key file first.
 A host’s security can be greatly increased by disabling password authentication altogether
 and permitting only SSH connections by key.
 ssh-copy-id -i key_file [user@]server_name
+
+What happens if key changes
+===========================
+Once ssh-keygen is run on a client machine, it's public key changes and all servers having the public key of this
+client should change.
+
+ssh-agent
+=========
+1. ssh-agent is a program that keeps private keys in memory and provides authentication If you preload an agent with private keys at the beginning
+of a login session, your SSH clients won’t prompt for passphrases. Instead, they communicate with the agent as needed. 
+The effects of the agent last until you terminate  the agent, usually just before logging out.
+2. SSH clients comunicate with the ssh-agent via local sockets or named pipe whose filename is stored in
+an environment variable, so all clients (and all other processes) within your login session
+have access to the agent.
+3. 
