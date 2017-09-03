@@ -22,3 +22,13 @@ Components of DNS
 =================
 1. Root level server
 2. TLD - Top level domain
+
+What are zones?
+==============
+- Zones are how the database records for dns are stored.
+- 4 main zone types
+   Primary Zone
+   Primary Zone with Active Directory integration
+   Secondary Zone
+   Stub Zone
+   
