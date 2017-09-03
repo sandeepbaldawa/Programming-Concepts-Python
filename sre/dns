@@ -31,8 +31,15 @@ Distributed database system that can serve as foundation for name resolution in 
    for administrative purposes domains can be organized into zones
    discrete and contiguous area of domain names space
    helps in delegating forwading, one large domain name can be difficult to administor
+   
 3. Name Servers
 Name Resolution Process
+Holds database data related to zones
+authority to make changes to the zones file
+secondary zone database can help balance workload
+secondary zone db files updated regularly from the primary
+
+
 
 What are zones?
 ==============
