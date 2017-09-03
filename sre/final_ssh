@@ -1,0 +1,75 @@
+Whenever data is sent by a computer to the network, SSH automatically
+encrypts (scrambles) it. Then, when the data reaches its intended recipient
+automatically decrypts (unscrambles) it. The result is transparent encryption: users
+can work normally, unaware that their communications are safely encrypted on the
+network.
+
+1. SSH is a client/server based protocol 
+2. An SSH server program, typically installed and run by a system administrator, accepts or rejects incoming
+connections to its host computer.
+3. Users then run SSH client programs, typically on
+other computers, to make requests of the SSH server, such as “Please log me in,”
+“Please send me a file,” or “Please execute this command.”
+4. All communications between clients and servers are securely encrypted and protected from modification.
+5. In summary  SSH creates a channel for running a shell on a remote computer, with end-to-end encryption between the two
+systems.
+
+SSH Protocol
+============
+The SSH protocol covers authentication, encryption, and the integrity of data transmitted
+over a network
+
+Authentication
+--------------
+Reliably determines someone’s identity. If you try to log into an account on a
+remote computer, SSH asks for digital proof of your identity. If you pass the test,
+you may log in; otherwise, SSH rejects the connection
+
+Encryption
+----------
+Scrambles data so that it is unintelligible except to the intended recipients. This
+protects your data as it passes over the network.
+
+Integrity
+---------
+Guarantees the data traveling over the network arrives unaltered. If a third party
+captures and modifies your data in transit, SSH detects this fact.
+
+Examples of Client programs are in : ssh, scp, putty, etc
+
+Major features of SSH
+=====================
+1. Secure Remote Logins
+   Programs like telnet transmit username/password in plain text and reable by a n/w snooper,
+   In SSH protocol, the client authenticates you to the remote computer’s SSH server using an encrypted
+   connection, meaning that your username and password are encrypted before they leave the local machine.
+   The SSH server then logs you in, and your entire login and session is encrypted as it travels between client 
+   and server.
+2. Secure File Transfer
+   ftp is not secure for file transfers, A third party can intercept and read the packets as they travel
+   over the network. Using SSH, the file can be transferred securely between machines with a single secure copy command. 
+   If the file were named myfile, the command executed on firstaccount.com might be:
+   scp myfile metoo@secondaccount.com:
+3. Secure Remote Command Execution
+   Many SSH clients can run a single remote command if
+   you provide it at the end of the command line. This short shell script does the trick:
+   #!/bin/sh
+  for machine in grape lemon kiwi melon
+  do
+    ssh $machine /usr/bin/w Execute remote command by ssh
+  done
+4. Keys and Agents
+   SSH has various authentication mechanisms, and the most secure is based on keys rather than passwords. 
+   Using keys, together with a program called an authentication agent, SSH can authenticate 
+   you to all your computer accounts securely without requiring you to memorize many passwords or enter them repeatedly. It works like this:
+   1. In advance (and only once), place special, nonsecure files called public key files
+      into your remote computer accounts. These enable your SSH clients (ssh, scp) to
+      access your remote accounts.
+   2. On your local machine, invoke the ssh-agent program, which runs in the
+      background.
+   3. Choose the key (or keys) you will need during your login session.
+   4. Load the keys into the agent with the ssh-add program. This requires knowledge
+      of each key’s secret passphrase.
+At this point, you have an ssh-agent program running on your local machine, holding your secret keys in memory. 
+You’re now done. You have passwordless access to all your remote accounts that contain your public key files.
+Say goodbye to the tedium of retyping passwords! The setup lasts until you log out from the local machine or terminate ssh-agent.
