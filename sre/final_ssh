@@ -14,29 +14,6 @@ other computers, to make requests of the SSH server, such as “Please log me in
 5. In summary  SSH creates a channel for running a shell on a remote computer, with end-to-end encryption between the two
 systems.
 
-SSH Protocol
-============
-The SSH protocol covers authentication, encryption, and the integrity of data transmitted
-over a network
-
-Authentication
---------------
-Reliably determines someone’s identity. If you try to log into an account on a
-remote computer, SSH asks for digital proof of your identity. If you pass the test,
-you may log in; otherwise, SSH rejects the connection
-
-Encryption
-----------
-Scrambles data so that it is unintelligible except to the intended recipients. This
-protects your data as it passes over the network.
-
-Integrity
----------
-Guarantees the data traveling over the network arrives unaltered. If a third party
-captures and modifies your data in transit, SSH detects this fact.
-
-Examples of Client programs are in : ssh, scp, putty, etc
-
 Major features of SSH
 =====================
 1. Secure Remote Logins
@@ -129,31 +106,28 @@ Key Management
 ==============
 User's can be authenticated using keys rather than username/password
 
-Passwords have following drawbacks:-
-1.  In order for a password to be secure, it should be long and random, but such
-passwords are hard to memorize
-2. A password sent across the network, even protected by an SSH secure channel,
-can be captured when it arrives on the remote host if that host has been compromised.
-3. Most operating systems support only a single password per account. For shared
-accounts (e.g., a superuser account), this presents difficulties:
-— Password changes are inconvenient because the new password must be communicated
-to all people with access to the account.
-— Tracking usage of the account becomes difficult because the operating system
-doesn’t distinguish between the different users of the account.
-To address these problems, SSH supports public-key authentication: instead of relying
-on the password scheme of the host operating system,
-
 A key is a digital identity. It’s a unique string of binary data that means “This is me,
 honestly, I swear.” And with a little cryptographic magic, your SSH client can prove
 to a server that its key is genuine, and you are really you.
 
 How does it work?
 ==================
-1. An SSH identity uses a pair of keys, one private and one public.
-2. The private key is a closely guarded secret only you have. Your SSH clients use it to prove your identity to servers.
-3. The public key is, like the name says, public. You place it freely into your accounts on SSH server machines. 
-   During authentication, the SSH client and server have a little conversation about your private and public key. If they match (according
-   to a cryptographic test), your identity is proven, and authentication succeeds.
+1. An identity consists of two parts, called the private key and the public key. Together,
+they are known as a key pair.
+2. The private key represents your identity for outgoing SSH connections. When you run an SSH client in your account, 
+such as ssh or scp, and it requests a connection with an SSH server, the client uses this private key to prove your identity 
+to the server. Private keys must be kept secret. An intruder with your private key can access your account as easily as you can.
+3. The public key represents your identity for incoming connections to your account. When an SSH client requests access to 
+your account, using a private key as proof of identity, the SSH server examines the corresponding public key. If the keys 
+“match” (according to a cryptographic test), authentication succeeds and the connection proceeds. Public keys don’t need to 
+be secret; they can’t be used to break into an account.
+
+The .pub file containing your public key has no function by itself. Before it can be
+used for authentication, this public key must be copied into an authorization file on
+an SSH server machine, ~/.ssh/authorized_keys. Thereafter, when an SSH client
+requests a connection to your server account using a private key as proof of identity,
+the OpenSSH server consults your authorized_keys file to find the matching public
+key.
 
 Steps:-
 =====
@@ -169,6 +143,18 @@ account to see if you may enter.” Specifically, the server checks smith’s pu
 keys to see if the authenticator “matches” any of them. (The “match” is another
 cryptographic operation.) If so, the server says, “OK, come on in!” Otherwise,
 the authentication fails.
+
+ssh-keygen
+==========
+Creates key pairs
+
+ssh-agent
+=========
+Holds private keys in memory, saving you from typing your passphrase repeatedly
+
+ssh-add
+=======
+Loads private keys into the agent
 
 generate keys using  ssh-keygen
 ===============================
