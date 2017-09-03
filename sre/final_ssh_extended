@@ -1,0 +1,40 @@
+SSH Protocol
+============
+The SSH protocol covers authentication, encryption, and the integrity of data transmitted
+over a network
+
+Authentication
+--------------
+Reliably determines someone’s identity. If you try to log into an account on a
+remote computer, SSH asks for digital proof of your identity. If you pass the test,
+you may log in; otherwise, SSH rejects the connection
+
+Encryption
+----------
+Scrambles data so that it is unintelligible except to the intended recipients. This
+protects your data as it passes over the network.
+
+Integrity
+---------
+Guarantees the data traveling over the network arrives unaltered. If a third party
+captures and modifies your data in transit, SSH detects this fact.
+
+Examples of Client programs are in : ssh, scp, putty, etc
+
+Keys Management
+=================
+
+Passwords have following drawbacks:-
+1.  In order for a password to be secure, it should be long and random, but such
+passwords are hard to memorize
+2. A password sent across the network, even protected by an SSH secure channel,
+can be captured when it arrives on the remote host if that host has been compromised.
+3. Most operating systems support only a single password per account. For shared
+accounts (e.g., a superuser account), this presents difficulties:
+— Password changes are inconvenient because the new password must be communicated
+to all people with access to the account.
+— Tracking usage of the account becomes difficult because the operating system
+doesn’t distinguish between the different users of the account.
+To address these problems, SSH supports public-key authentication: instead of relying
+on the password scheme of the host operating system,
+
