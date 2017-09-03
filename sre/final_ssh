@@ -317,3 +317,58 @@ Otherwise, the server terminates the connection after a specified interval of id
 The time value can specify units, e.g., three hours:
 # Tectia
 IdleTimeout 3H
+
+Failed logins(login grace time)
+===========================
+Suppose a user attempts to log in via SSH but fails to authenticate. What should the
+server do? The keywords LoginGraceTime, MaxAuthTries (OpenSSH), and
+PasswordGuesses (Tectia) control the server’s response.
+Users are given a limited time to authenticate successfully. The default is 120 seconds
+(2 minutes) for OpenSSH or 600 seconds (10 minutes) for Tectia. This timeout
+is controlled by the LoginGraceTime keyword, given a value in seconds:
+LoginGraceTime 60
+
+Limiting simultaneous connections
+=================================
+One can configure max connections in parallel at a given time
+
+Reverse IP mappings
+===================
+The SSH server optionally does a reverse DNS lookup on a client’s IP address. That
+is, it looks up the name associated with the address, then looks up the addresses for
+that name and makes sure that the client’s address is among them. If this check fails,
+the server refuses the connection. This feature uses standard system services like
+gethostbyname( ) and gethostbyaddr( ) to perform these mappings, so the databases
+that are consulted depend on the host operating system configuration. It might use
+the DNS, the Network Information Service (NIS or YP), static files on a server
+machine, or some combination.
+
+To enable this check for OpenSSH, provide the UseDNS keyword with a value of yes
+or no:*
+# OpenSSH
+UseDNS yes
+
+This feature is a bit of security-oriented consistency checking. SSH uses cryptographic
+signatures to determine a peer’s identity, but the list of peer public keys (the
+known hosts database) is often indexed by hostname, so SSH must translate the
+address to a name in order to check the peer’s identity. Reverse mapping tries to
+ensure that someone isn’t playing games with the naming service in a cracking
+attempt. There is a trade-off, however, since in today’s Internet, the DNS reverseaddress
+mappings aren’t always kept up to date. The SSH server might reject legitimate
+connection attempts because of poorly maintained reverse-address mappings
+over which you have no control. In general, we recommend turning off this feature; it
+isn’t usually worth the hassle, and you avoid long reverse-lookup delays at times
+when DNS is down.
+
+Controlling the Nagle Algorithm
+================================
+TCP/IP has a feature called the Nagle Algorithm, which is designed to reduce the
+number of TCP segments sent with very small amounts of data (e.g., one byte), usually
+as part of an interactive terminal session. Over fast links such as Ethernet, the
+Nagle Algorithm generally isn’t needed. Over a wide-area network, however, it can
+cause noticeable delays in the responsiveness of X clients and character terminal displays,
+as multibyte terminal control sequences may be transmitted inconveniently by
+the algorithm. In such cases, you should turn off the Nagle Algorithm using the
+NoDelay keyword:
+# Tectia
+NoDelay yes
