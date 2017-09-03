@@ -18,3 +18,18 @@ Once client received a http request response/file etc.
 Client send to Server => FIN(fundamentally meaning am done from client)
 Server send to Client => FIN, ACK (fundamentally meaning I acknowledge you made a finish request and yes you can dis-connect to me from server)
 Client send to Server => ACK
+
+What is a traceroute, and how does it work?
+==========================================
+understanding of ICMP, TTL, and routing hops. Bonus points if they also know UDP trace routing.
+
+What is NAT? Where would you use it? How does it work? What are some limitations?
+=================================================================================
+
+What is QoS? How does it work? Where would you apply it? When is it enforced?
+
+What I'm looking for: knowledge of traffic prioritization schemes, at least a vague understanding of classification levels at the header level, understanding of judicious application to time and 
+latency sensitive protocols, and knowledge of contention vs. non-contention
+===========================================================================
+
+
