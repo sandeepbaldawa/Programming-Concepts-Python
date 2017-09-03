@@ -7,16 +7,7 @@
   that should be recorded in the dns tables
 - reverse dns maps ipaddr to domain name
 
-Basic working
-=============
-1. User requests for www.google.com
-2. Request goes to DNS which returns the ip addr the domain name matches to
-3. User computer uses this ipaddr to go through the router to the internet to find which subnet/machine/port the ipaddr
-   maps to and connects to the same.
 
-
-- Important to note that a given DNS server will have mappings only for the local LAN
-- So if the DNS server does not have a record in it's table's it will query the remote DNS server to get the mapping
 
 Components of DNS
 =================
@@ -31,7 +22,6 @@ Distributed database system that can serve as foundation for name resolution in 
    for administrative purposes domains can be organized into zones
    discrete and contiguous area of domain names space
    helps in delegating forwading, one large domain name can be difficult to administor
-   
 3. Name Servers
 Name Resolution Process
 Holds database data related to zones
@@ -39,6 +29,23 @@ authority to make changes to the zones file
 secondary zone database can help balance workload
 secondary zone db files updated regularly from the primary
 
+Basic working
+=============
+A forward lookup query is sent to map a name to an ipaddress
+Client first queries it's nearest local name server for eg:-w1.micrsoft.training.com
+The local name server checks it's zone database file if it has authority for this
+The name server in turn queries the root name server since it does not have authority for the same
+The root name server then queries a com name server which checks it's local zone database file for the entry
+
+
+1. User requests for www.google.com
+2. Request goes to DNS which returns the ip addr the domain name matches to
+3. User computer uses this ipaddr to go through the router to the internet to find which subnet/machine/port the ipaddr
+   maps to and connects to the same.
+
+
+- Important to note that a given DNS server will have mappings only for the local LAN
+- So if the DNS server does not have a record in it's table's it will query the remote DNS server to get the mapping
 
 
 What are zones?
