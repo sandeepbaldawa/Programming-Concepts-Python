@@ -20,8 +20,19 @@ Basic working
 
 Components of DNS
 =================
-1. Root level server
-2. TLD - Top level domain
+Distributed database system that can serve as foundation for name resolution in TCP/IP.
+1. Domain Name Space
+   Provides structure of DNS distributed database.
+   Is like a n-ary tree with the root domain as "."
+   First level domain name can be organization names(like org, edu, com etc..)
+   Second level domain names are registered to individuals (like microsoft.com, stanford.edu etc..)
+   fqdn maps host name to ip address
+2. Zones
+   for administrative purposes domains can be organized into zones
+   discrete and contiguous area of domain names space
+   helps in delegating forwading, one large domain name can be difficult to administor
+3. Name Servers
+Name Resolution Process
 
 What are zones?
 ==============
