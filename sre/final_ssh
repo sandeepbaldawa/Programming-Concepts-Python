@@ -240,3 +240,80 @@ $ ssh-add -d name-of-key-file
 or delete all keys from the agent in memory:
 $ ssh-add -D
 
+SSH server
+==========
+sshd reads its configuration file at startup. Therefore, if you modify the file while the
+server is running, the changes don’t affect the server. You must force the server to
+reread the file in order to accept the changes. This is done by sending a SIGHUP
+signal to the server process. The pid of the server is found in a file, usually /var/run/
+sshd.pid 
+
+ kill -HUP `pidof sshd`
+
+server key management
+=====================
+The host key of sshd uniquely identifies a server to SSH clients. The host key is
+stored in a pair of files, one containing the private key and the other the public key
+Each private key has a corresponding public key, stored in a second file with the
+same name but with .pub appended.
+
+You may also configure sshd to bind its listening port on a particular network interface.
+By default, the port is bound on all active network interfaces on the host. The
+ListenAddress keyword limits sshd to listen only on specific interfaces; the default
+value is 0.0.0.0.
+
+sshd normally runs as a daemon, listening for incoming connection requests, and
+forking whenever it accepts a connection from a client. This spawns a separate child
+process (a copy of the parent sshd process) to handle each session. The child process
+exits when the session ends.
+
+Alternatively, the server may be invoked by inetd or xinetd, like many other network
+daemons. In this case, the general-purpose network daemon listens for and accepts
+the SSH connections. It then starts a new instance of sshd for each session with the
+already-connected socket attached to the standard input, output, and error streams
+of sshd. Each sshd invocation is responsible for a single session.
+
+If you prefer this behavior, place an appropriate line in the inetd or xinetd configuration
+file to describe the SSH service, invoking sshd with the –i command-line option.
+For inetd, add a single line to /etc/inetd.conf:
+ssh stream tcp nowait root /usr/local/sbin/sshd sshd -i
+
+By default, the OpenSSH server restarts itself after it accepts each connection from a
+client, and forks to create a separate child process to handle the session.† Relative
+pathnames can’t be used for server restarts, since sshd changes its working directory
+shortly after it begins running.
+
+The parent process (i.e., the one that listens for
+incoming connections) sends a copy of its configuration and the SSH-1 server key (if
+one is used) via another socket to the restarted child process, which knows to read
+the data because of the same –R option. The child process then proceeds to handle
+the session normally.
+
+If OpenSSH is started by inetd or xinetd, then there is no need to restart the SSH
+server, because a new instance of sshd is started by inetd/xinetd for each connection.
+
+Keep Alive feature(detect dead connections)
+===================
+The keepalive feature (TCPKeepAlive in OpenSSH, KeepAlive in Tectia) is concerned
+with recognizing when a connection has failed. Suppose a client establishes an SSH
+connection, and sometime later, the client host crashes abruptly. If the SSH server
+has no reason to send unsolicited messages to the client, it may never notice the halfdead
+TCP connection to its partner, and the sshd remains around indefinitely, using
+up system resources such as memory and a process slot (and making the sysadmin’s
+ps output messy).
+
+Idle connections
+================
+ If an SSH connection
+is established between a server and a client, but no data passes over the
+connection for a long time, what should the server do: keep the connection, or terminate
+it?
+The IdleTimeout keyword tells the server what to do if a connection is idle, i.e., if the
+user doesn’t transmit any data in a given period. If IdleTimeout is zero (the default),
+the server does nothing, leaving idle connections intact:
+# Tectia
+IdleTimeout 0
+Otherwise, the server terminates the connection after a specified interval of idleness.
+The time value can specify units, e.g., three hours:
+# Tectia
+IdleTimeout 3H
