@@ -171,9 +171,29 @@ cryptographic operation.) If so, the server says, “OK, come on in!” Otherwis
 the authentication fails.
 
 generate keys using  ssh-keygen
+===============================
 ssh-keygen then creates your local SSH directory (~/.ssh for OpenSSH or ~/.ssh2 for
 Tectia) if it doesn’t already exist, and stores the private and public components of
 the generated key in two files there.
 
+Installing OpenSSH Keys with ssh-copy-id
+========================================
+OpenSSH includes a program, ssh-copy-id, that installs a public key automatically on
+a remote server with a single command, placing it into ~/.ssh/authorized_keys:
 
-
+Public-key authentication is more secure than password authentication because:
+==============================================================================
+1. It requires two secret components—the identity file on disk, and the passphrase
+in your head—so both must be captured in order for an adversary to access your
+account. Password authentication requires only one component, the password,
+which might be easier to steal.
+2. Neither the passphrase nor the key is sent to the remote host, just the authenticator
+discussed earlier. Therefore, no secret information is transmitted off the
+client machine.
+3. Machine-generated cryptographic keys are infeasible to guess. Human-generated
+passwords are routinely cracked by a password-guessing technique called a
+dictionary attack. A dictionary attack may be mounted on the passphrase as well,
+but this requires stealing the private-key file first.
+A host’s security can be greatly increased by disabling password authentication altogether
+and permitting only SSH connections by key.
+ssh-copy-id -i key_file [user@]server_name
