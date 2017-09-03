@@ -6,3 +6,8 @@ Happens before a http request is done
 Client send to Server => SYNC(fundamentally meaning can I connect to you? from client)
 Server send to Client => SYNC, ACK (fundamentally meaning I acknowledge you made a request and yes you can connect to me from server)
 Client send to Server => ACK(undamentally meaning server acknowledged, thanks we are now ready for all communication from client)
+
+If SYNC/ACK not received means
+1. Server is down
+2. Or client blocked by firewall
+
