@@ -1,3 +1,5 @@
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/3/html/Reference_Guide/s1-ssh-conn.html
+
 Whenever data is sent by a computer to the network, SSH automatically
 encrypts (scrambles) it. Then, when the data reaches its intended recipient
 automatically decrypts (unscrambles) it. The result is transparent encryption: users
