@@ -59,6 +59,9 @@ Design
    what do we optimize on performance or reliability?, we can optimize this by acknowledging by either writing/not writing to
    the mirrors in persistence layers with SSD's, or acknowledging in memory..fundamentally a tradeoff.
 7. To save space we could compress the data and dedup it and we could do this inline..  
+7a. To validate if files reaching the destination are same we could do a rolling checksum to avoid calculating checksum of a 
+    large file which can be extremely slow. The router layer can identify chunks of files transmitted and received and rolling
+    checksums for those.
 8. System can rebalance chunks automatedly time to time to reduce the hot spots.
 9. Log structured file system (append only)
    Why?
