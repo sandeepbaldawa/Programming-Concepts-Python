@@ -44,6 +44,29 @@ Link Layer
 | Dest addr | source addr | length | DSAP | SSAP |  cmd | org code| type|     data     |  CRC |
 
 
+What is loopback?
+=================
+ Most implementations support a loopback interface that allows a client and server on the same
+host to communicate with each other using TCP/IP. The class A network ID 127 is reserved for
+the loopback interface. By convention, most systems assign the IP address of 127.0.0.1 to this
+interface and assign it the name localhost.
+
+What is MTU?
+==========
+There is a limit on the size of the frame for both Ethernet encapsulation and 802.3 encapsulation. This limits the number of
+bytes of data to 1500 and 1492, respectively. This characteristic of the link layer is called the MTU, its maximum transmission
+unit. Most types of networks have an upper limit. If IP has a datagram to send, and the datagram is larger than the link layer's MTU, IP performs
+fragmentation, breaking the datagram up into smaller pieces (fragments), so that each fragment is
+smaller than the MTU.
+
+What is path MTU?
+=================
+When two hosts on the same network are communicating with each other, it is the MTU of the
+network that is important. But when two hosts are communicating across multiple networks, each
+link can have a different MTU. The important numbers are not the MTUs of the two networks to
+which the two hosts connect, but rather the smallest MTU of any data link that packets traverse
+between the two hosts. This is called the path MTU.
+
 
 what is 3 way handshake
 ======================
