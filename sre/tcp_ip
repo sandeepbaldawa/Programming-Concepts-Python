@@ -79,7 +79,7 @@ link can have a different MTU. The important numbers are not the MTUs of the two
 which the two hosts connect, but rather the smallest MTU of any data link that packets traverse
 between the two hosts. This is called the path MTU.
 
-What is ARP?
+What is ARP? (Address Resolution Protocol)
 ===========
 - Assuming an Ethernet, the sending host must convert the 32-bit IP address into a 48-bit
 Ethernet address. A translation is required from the logical Internet address to its
@@ -116,6 +116,17 @@ expiration time of an entry in the cache is 20 minutes from the time the entry w
 sun (140.252.13.33) at 8:0:20:3:f6:42
 svr4 (140.252.13.34) at 0:0:c0:c2:9b:26
 
+What is RARP?(Reverse address resolution protocol?)
+===================================================
+When a system with a local disk is bootstrapped it normally obtains its IP address from a
+configuration file that's read from a disk file. But a system without a disk, such as an X
+terminal or a diskless workstation, needs some other way to obtain its IP address. 
+
+Each system on a network has a unique hardware address, assigned by the manufacturer
+of the network interface. The principle of RARP is for the diskless system to read its
+unique hardware address from the interface card and send an RARP request (a broadcast
+frame on the network) asking for someone to reply with the diskless system's IP address
+(in an RARP reply). 
 
 what is 3 way handshake
 ======================
