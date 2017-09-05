@@ -68,6 +68,19 @@ sending the confirmation encrypted with its private key.
 3. The client decrypts the confirmation with the server’s public key and the client and server are all set to exchange data 
 securely using the encryption algorithm selected and the secret session key agreed.
 
+On client side
+===============
+An ssh-agent** is a program that keeps private keys in memory and provides authentication
+services to SSH clients. If you preload an agent with private keys at the beginning
+of a login session, your SSH clients won’t prompt for passphrases. Instead, they
+communicate with the agent as needed. The effects of the agent last until you terminate
+the agent, usually just before logging out.
+
+Once the ssh-agent is running, it’s time to load private keys into it using the ssh-add program.
+By default, ssh-add** loads the key from your default identity file and decrypts the private key and loads it in memory:
+
+
+
 Major features of SSH
 =====================
 1. Secure Remote Logins
