@@ -161,6 +161,36 @@ For now realize that if we type a ping
 command, and a few seconds pass before the first line of output with the IP address is printed,
 this is the time required for the DNS to determine the IP address corresponding to the hostname. 
 
+How does traceroute work?
+=========================
+Traceroute uses ICMP and the TTL field in the IP header. The TTL field (time-to-live) is an
+8-bit field that the sender initializes to some value. The recommended initial value is
+specified in the Assigned Numbers RFC and is currently 64
+
+The purpose of the TTL field is to prevent datagrams from ending up in infinite loops,
+which can occur during routing transients. For example, when a router crashes or when the
+connection between two routers is lost, it can take the routing protocols some time (from
+seconds to a few minutes) to detect the lost route and work around it. During this time
+period it is possible for the datagram to end up in routing loops. The TTL field puts an
+upper limit on these looping datagrams. 
+
+We can now guess the operation of Traceroute. It sends an IP datagram with a TTL of 1 to
+the destination host. The first router to handle the datagram decrements the TTL, discards
+the datagram, and sends back the ICMP time exceeded. This identifies the first router in the
+path. Traceroute then sends a datagram with a TTL of 2, and we find the IP address of the
+second router. This continues until the datagram reaches the destination host. But even
+though the arriving IP datagram has a TTL of 1, the destination host won't throw it away
+and generate the ICMP time exceeded, since the datagram has reached its final destination.
+How can we determine when we've reached the destination?
+Traceroute sends UDP datagrams to the destination host, but it chooses the destination UDP
+port number to be an unlikely value (larger than 30,000), making it improbable that an
+application at the destination is using that port. This causes the destination host's UDP
+module to generate an ICMP "port unreachable" error when the datagram
+arrives. All Traceroute needs to do is differentiate between the received ICMP messagestime
+exceeded versus port unreachable-to know when it's done. 
+
+
+
 
 what is 3 way handshake
 ======================
