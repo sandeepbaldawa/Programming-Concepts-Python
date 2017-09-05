@@ -16,6 +16,53 @@ other computers, to make requests of the SSH server, such as “Please log me in
 5. In summary  SSH creates a channel for running a shell on a remote computer, with end-to-end encryption between the two
 systems.
 
+
+Step 1: Host Identification
+===========================
+The client machine needs to ensure that it is communicating with the remote machine 
+it has been asked to by the application program, and not with another machine that is spoofing it. The server machine on the 
+remote side also has the option to ensure that the user is connecting from the machine as it appears to be, and not from 
+another machine that is spoofing it. This step is accomplished as outlined below:
+1. The client contacts the server and requests for its public-key certificate. 
+2. The client maintains a list of public keys for server machines available to it. If it is asked to contact a machine for 
+  which it does not have a public key locally held, it will warn the user with a message telling that the public  key 
+  reported by the server is not in the list of known hosts  and ask the user whether the user wants to continue connecting.
+3. If  the  user  agrees  to  continue  connecting,  the  client  verifies  the  authenticity  of  the  Certifying Authority 
+   (CA)  that  issued  the  public  key  certificate  for  the  server  and  if  satisfied,  accepts  the public keys. The 
+   machine then adds the server’s public keys to its personal list of host public keys. 
+4. When the administrator has included the public key for the client machine in the per-machine list of known host public keys
+   on the server machine, the server may want the client machine to prove that it is what it claims to be. 
+   The server  will create a “challenge” encrypted with  the  client’s host public key and send it to the client. Only a  
+   genuine client machine will be able to decrypt this message with  its private key. The client then sends the same 
+   challenge encrypted with the public key of the server. If the server when decrypting the message gets the same challenge 
+   it sent, the client is genuine. 
+
+Step  2:  Encryption
+===================
+The  objective  of  this  step  is  to  establish  a  secure  end-to-end  link  that  supports encryption of the data 
+transferred. Even the password and other authentication information are encrypted and are not transmitted in plaintext. 
+This step is accomplished as outlined below: 
+1. Once the host identification step is successfully done, the client sends a list of encryption algorithms it could use and
+their corresponding keys. This is sent encrypted with the public key of the server.
+2. The server decrypts the list with its private key and chooses the strongest encryption algorithm that it could handle 
+from the list sent by the client. 
+3. The server then notifies the selected encryption algorithm to the client by encrypting the notification using 
+its private key. 
+4. The client  generates  the appropriate  secret  session key  for  the  encryption  algorithm  selected and notifies the 
+session key to the server by encrypting the notification with the public key of the server.
+5. The server decrypts the notification with its private key and extracts the secret session key. 
+
+Step 3: User Authentication
+===========================
+In this step, the user proves to the server that he/she has the right to perform operations as a particular user on the server
+machine. This is accomplished as outlined below: 
+1. The client asks for the username and password from the user, encrypts them with the server’s public key and sends to the 
+server. 
+2. The server checks the validity of  the username and password and if  everything  is fine, accepts the connection request by 
+sending the confirmation encrypted with its private key. 
+3. The client decrypts the confirmation with the server’s public key and the client and server are all set to exchange data 
+securely using the encryption algorithm selected and the secret session key agreed.
+
 Major features of SSH
 =====================
 1. Secure Remote Logins
