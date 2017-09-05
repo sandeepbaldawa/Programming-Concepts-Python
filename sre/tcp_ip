@@ -38,6 +38,13 @@ common TCP/IP applications that almost every implementation provides:
 ❍ SMTP, the Simple Mail Transfer protocol, for electronic mail,
 ❍ SNMP, the Simple Network Management Protocol, 
 
+Link Layer
+=========
+|     6     |    6        |  2     |  1   | 1    | 1    |   3     |  2  |   38-1492    |  4   |   
+| Dest addr | source addr | length | DSAP | SSAP |  cmd | org code| type|     data     |  CRC |
+
+
+
 what is 3 way handshake
 ======================
 Happens before a http request is done
