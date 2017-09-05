@@ -59,6 +59,18 @@ unit. Most types of networks have an upper limit. If IP has a datagram to send, 
 fragmentation, breaking the datagram up into smaller pieces (fragments), so that each fragment is
 smaller than the MTU.
 
+How to find MTU?
+================
+
+netstat -in
+Name Mtu Net/Dest Address lpkts lerrs Opkts Oerrs Collis Queue
+leO 1500 140.252.13.32 140.252.13.33 67719 0 92133 0 1 0
+slO 552 140.252.1.183 140.252.1.29 48035 0 54963 0 0 0
+loO 1536 127.0.0.0 127.0.0.1 15548 0 15548 0 0 0
+
+This command prints the MTU of each interface, the number of input packets, input errors, output
+packets, output errors, collisions, and the current size of the output queue. 
+
 What is path MTU?
 =================
 When two hosts on the same network are communicating with each other, it is the MTU of the
