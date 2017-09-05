@@ -128,6 +128,40 @@ unique hardware address from the interface card and send an RARP request (a broa
 frame on the network) asking for someone to reply with the diskless system's IP address
 (in an RARP reply). 
 
+What is ICMP?(Internet Control message protocol)?
+=================================================
+
+| Header | 8bit type | 8 bit message | 16 bit checksum |
+
+CMP (Internet Control Message Protocol) is an error-reporting protocol network devices like 
+routers use to generate error messages to the source IP address when network problems prevent delivery 
+of IP packets.
+ICMP is often considered part of the IP layer. It communicates error messages and other
+conditions that require attention. ICMP messages are usually acted on by either the IP layer
+or the higher layer protocol (TCP or UDP). Some ICMP messages cause errors to be
+returned to user processes. 
+
+How does ping work?
+====================
+Unix implementations of ping set the identifier field in the ICMP message to the process ID of
+the sending process. This allows ping to identify the returned responses if there are multiple
+instances of ping running at the same time on the same host. 
+
+The sequence number starts at 0 and is incremented every time a new echo request is sent. ping
+prints the sequence number of each returned packet, allowing us to see if packets are missing,
+reordered, or duplicated. IP is a best effort datagram delivery service, so any of these three
+conditions can occur. 
+
+When the ICMP echo reply is returned, the sequence number is printed, followed by the TTL,
+and the round-trip time is calculated. (TTL is the time-to-live field in the IP header. The current
+BSD ping program prints the received TTL each time an echo reply is received-some
+implementations don't do this. 
+
+For now realize that if we type a ping
+command, and a few seconds pass before the first line of output with the IP address is printed,
+this is the time required for the DNS to determine the IP address corresponding to the hostname. 
+
+
 what is 3 way handshake
 ======================
 Happens before a http request is done
