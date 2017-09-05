@@ -18,18 +18,19 @@ Management Protocol) provide the network layer in the TCP/IP protocol suite.
 3. The transport layer provides a flow of data between two hosts, for the application layer
 above. In the TCP/IP protocol suite there are two vastly different transport protocols:
 TCP (Transmission Control Protocol) and UDP (User Datagram Protocol). 
+
 TCP provides a reliable flow of data between two hosts. It is concerned with things such
 as dividing the data passed to it from the application into appropriately sized chunks for
 the network layer below, acknowledging received packets, setting timeouts to make
 certain the other end acknowledges packets that are sent, and so on. Because this reliable
 flow of data is provided by the transport layer, the application layer can ignore all these
 details.
+
 UDP, on the other hand, provides a much simpler service to the application layer. It just
 sends packets of data called datagrams from one host to the other, but there is no
 guarantee that the datagrams reach the other end. Any desired reliability must be added
 by the application layer.
-There is a use for each type of transport protocol, which we'll see when we look at the
-different applications that use TCP and UDP.
+
 4. The application layer handles the details of the particular application. There are many
 common TCP/IP applications that almost every implementation provides:
 ❍ Telnet for remote login,
