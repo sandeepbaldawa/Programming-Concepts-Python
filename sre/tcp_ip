@@ -79,6 +79,43 @@ link can have a different MTU. The important numbers are not the MTUs of the two
 which the two hosts connect, but rather the smallest MTU of any data link that packets traverse
 between the two hosts. This is called the path MTU.
 
+What is ARP?
+===========
+- Assuming an Ethernet, the sending host must convert the 32-bit IP address into a 48-bit
+Ethernet address. A translation is required from the logical Internet address to its
+corresponding physical hardware address. This is the function of ARP.
+ARP is intended for broadcast networks where many hosts or routers are connected to a
+single network.
+- ARP sends an Ethernet frame called an ARP request to every host on the network. This is
+called a broadcast. The ARP request contains the IP address of the destination host (whose name is bsdi) and is the
+request "if you are the owner of this IP address, please respond to me with your hardware
+address." 
+- The destination host's ARP layer receives this broadcast, recognizes that the sender is
+asking for its hardware address, and replies with an ARP reply. This reply contains the IP
+address and the corresponding hardware address.
+- The ARP reply is received and the IP datagram that forced the ARP request-reply to be
+exchanged can now be sent.
+- The IP datagram is sent to the destination host. 
+
+The fundamental concept behind ARP is that the network interface has a hardware address (a 48-
+bit value for an Ethernet or token ring interface). Frames exchanged at the hardware level must be
+addressed to the correct interface. But TCP/IP works with its own addresses: 32-bit IP addresses.
+Knowing a host's IP address doesn't let the kernel send a frame to that host. The kernel (i.e., the
+Ethernet driver) must know the destination's hardware address to send it data.
+
+ The function of ARP is to provide a dynamic mapping between 32-bit IP addresses and the hardware addresses
+used by various network technologies. 
+
+What is ARP cache?
+===============
+Essential to the efficient operation of ARP is the maintenance of an ARP cache on each host. This
+cache maintains the recent mappings from Internet addresses to hardware addresses. The normal
+expiration time of an entry in the cache is 20 minutes from the time the entry was created. 
+
+ arp -a
+sun (140.252.13.33) at 8:0:20:3:f6:42
+svr4 (140.252.13.34) at 0:0:c0:c2:9b:26
+
 
 what is 3 way handshake
 ======================
