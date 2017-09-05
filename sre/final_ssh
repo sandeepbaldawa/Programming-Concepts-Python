@@ -85,6 +85,32 @@ sshd is the process listening for a TCP connection on some TCP port.
 One can have run multiple servers for example, two copies of sshd listening on different TCP
 ports, or even several versions of sshd at once.
 
+By default, the OpenSSH server restarts itself after it accepts each connection from a
+client, and forks to create a separate child process to handle the session. sshd changes its working directory
+shortly after it begins running(absolute path name passed as directory).
+
+If the server restart fails for some other reason (e.g., the executable file used originally
+to start sshd was renamed or removed), then the child process continues to run
+after forking, but produces a warning (which is usually sent to syslog):
+error: rexec of /usr/sbin/sshd failed: No such file or directory
+Before it restarts, the child process adds the undocumented –R option at the end of
+its command line: this is used by the new process to detect that it has been restarted,
+and should therefore use the already connected socket that it inherits from its parent
+for communication with the client.* The parent process (i.e., the one that listens for
+incoming connections) sends a copy of its configuration and the SSH-1 server key (if
+one is used) via another socket to the restarted child process, which knows to read
+the data because of the same –R option. The child process then proceeds to handle
+the session normally.
+
+If OpenSSH is started by inetd or xinetd, then there is no need to restart the SSH
+server, because a new instance of sshd is started by inetd/xinetd for each connection.
+[5.3.3.2] In fact, the function of the restarted child process is so similar to the operation
+of the server with inetd/xinetd that the –R option enables the same side effects as
+the –i option: notably, debug output is forced to syslog instead of the standard error.
+
+
+
+
 Major features of SSH
 =====================
 1. Secure Remote Logins
