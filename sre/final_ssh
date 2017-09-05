@@ -17,6 +17,11 @@ other computers, to make requests of the SSH server, such as “Please log me in
 systems.
 
 
+1. First step is DNS resolution
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/sre/dns
+
+2. Next step is key management
+
 Step 1: Host Identification
 ===========================
 The client machine needs to ensure that it is communicating with the remote machine 
