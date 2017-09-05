@@ -18,6 +18,24 @@ systems.
 
 
 1. First step is DNS resolution
+- The application, the SSH client, calls the function gethostbyname(3) to convert the 
+hostname (bsdi) into its 32-bit IP address. This function is called a resolver in the DNS
+(Domain Name System)
+- TCP sends a connection request segment to the remote host by sending an IP datagram to
+its IP address.
+-  If the destination host is on a locally attached network (e.g., Ethernet, token ring, or the
+other end of a point-to-point link), the IP datagram can be sent directly to that host. If the
+destination host is on a remote network, the IP routing function determines the Internet
+address of a locally attached next-hop router to send the IP datagram to. In either case the
+IP datagram is sent to a host or router on a locally attached network. 
+- Assuming an Ethernet, the sending host must convert the 32-bit IP address into a 48-bit
+Ethernet address. A translation is required from the logical Internet address to its
+corresponding physical hardware address. This is the function of ARP.
+ARP is intended for broadcast networks where many hosts or routers are connected to a
+single network. 
+
+
+The FTP client asks its TCP to establish a connection with that IP address. 
 https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/sre/dns
 
 2. Next step is key management
