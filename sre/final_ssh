@@ -79,7 +79,11 @@ the agent, usually just before logging out.
 Once the ssh-agent is running, it’s time to load private keys into it using the ssh-add program.
 By default, ssh-add** loads the key from your default identity file and decrypts the private key and loads it in memory:
 
-
+On server side
+=============
+sshd is the process listening for a TCP connection on some TCP port.
+One can have run multiple servers for example, two copies of sshd listening on different TCP
+ports, or even several versions of sshd at once.
 
 Major features of SSH
 =====================
