@@ -263,7 +263,8 @@ connection must maintain a sequence number of the data flowing in each direction
 What is MSS?
 ===========
 The maximum segment size (MSS) is a parameter of the options field of the TCP header that specifies the largest amount of data, 
-specified in bytes, that a computer or communications device can receive in a single TCP segment.
+specified in bytes, that a computer or communications device can receive in a single TCP segment. minus the size of the fixed 
+TCP and IP headers.
 
 What is sliding window protocol in TCP?
 =======================================
@@ -291,6 +292,32 @@ let's assume receiver and congestion window size is "4"
 Optimal size of window(in packets) (1 + 2 *Tp)/Tt
 Tp => Propogation time
 Tt => Trasmission time
+
+How does TCP work?
+==================
+1. The requesting end (normally called the client) sends a SYN segment specifying the port
+number of the server that the client wants to connect to, and the client's initial sequence
+number (ISN, 1415531521 in this example). This is segment 1. 
+
+2. The server responds with its own SYN segment containing the server's initial sequence
+number (segment 2). The server also acknowledges the client's SYN by ACKing the
+client's ISN plus one. A SYN consumes one sequence number. 
+
+3. The client must acknowledge this SYN from the server by ACKing the server's ISN plus 
+one (segment 3). These three segments complete the connection establishment.
+
+The ISN should change over time, so that each connection has a different
+ISN
+
+4. While it takes three segments to establish a connection, it takes four to terminate a connection.
+This is caused by TCP's half-close. Since a TCP connection is full-duplex (that is, data can be
+flowing in each direction independently of the other direction), each direction must be shut
+down independently. The rule is that either end can send a FIN when it is done sending data.
+When a TCP receives a FIN, it must notify the application that the other end has terminated that
+direction of data flow. The sending of a FIN is normally the result of the application issuing a
+close
+
+
 
 
 what is 3 way handshake
