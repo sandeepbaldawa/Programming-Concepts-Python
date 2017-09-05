@@ -260,6 +260,34 @@ therefore the sequence number plus 1 of the last successfully received byte of d
 flowing in each direction, independent of the other direction. Therefore, each end of a
 connection must maintain a sequence number of the data flowing in each direction. 
 
+What is MSS?
+===========
+The maximum segment size (MSS) is a parameter of the options field of the TCP header that specifies the largest amount of data, 
+specified in bytes, that a computer or communications device can receive in a single TCP segment.
+
+What is sliding window protocol in TCP?
+=======================================
+IP protocol does not guarantee the packet arriving in order or taking the same route.
+Hence TCP should make sure the packets arrive in order.
+
+TCP uses a form of flow control called a sliding window protocol. It
+allows the sender to transmit multiple packets before it stops and waits for an
+acknowledgment. This leads to faster data transfer, since the sender doesn't have to stop and
+wait for an acknowledgment each time a packet is sent. 
+
+Sender => 0 1 2 3 4 5 6 7 8 9 10
+Receiver => 
+
+In example sender has 10 packets to be send across n/w
+let's assume receiver and congestion window size is "4"
+1. Initially sender send packets 0 1 2 3
+2. Receiver based on the seq no will order these packets(since they can come out of order)
+   Receiver sends ACK + 4 (I have received pakcets till 3, please send 4)
+3. Let's assume next sender sends packets 4 5 6 7 and packet "6" is lost in the n/w
+4. The receiver arranges packets based on seq no and sends back ACK + 6(still waiting for packet 6)
+5. Sender then sends 6 7 8 9
+6. Receiver then send ACK + 10
+
 
 
 what is 3 way handshake
