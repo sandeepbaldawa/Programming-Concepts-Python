@@ -288,6 +288,9 @@ let's assume receiver and congestion window size is "4"
 5. Sender then sends 6 7 8 9
 6. Receiver then send ACK + 10
 
+Optimal size of window(in packets) (1 + 2 *Tp)/Tt
+Tp => Propogation time
+Tt => Trasmission time
 
 
 what is 3 way handshake
