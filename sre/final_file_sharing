@@ -55,6 +55,18 @@ Design
       c. Can help initiate rebalance. 
       d. "Quorum" refers to the minimum number of nodes that must agree on a  transaction before it is considered committed. 
       e. "Ensemble" refers to the full set of peer servers in a ZooKeeper cluster. 
+      f. Acts as a Name service you may want to keep a track of which servers or services are up and running and want to  look up their status by name. 
+         ZooKeeper gives a simple interface to do the same.
+      g. Locking— The serialized access to a shared resource in any distributed system, you may need to implement distributed mutexes(a program object that allows multiple program threads to share the same resource, such as file access). 
+         ZooKeeper provides an easy way for you to implement them.   
+      h. Synchronization—Distributed mutexes  with hand in hand synchronizing access is the need for shared resources. Whether implementing a producer-consumer queue or a barrier, 
+         ZooKeeper is the solution which provides for a simple interface to implement that.   
+      i. Configuration management— Using ZooKeeper to centrally store and manage the configuration of your distributed system 
+         can be done. This means any new nodes joining can pick up the up-to-date centralized configuration from ZooKeeper as 
+         soon as they join the system. This also allows you to centrally modify the state of your distributed 
+         system by changing the centralized configuration through one of the ZooKeeper clients.   
+      j. Leader election— The distributed system may have to deal with problem of nodes going down, also you may want to implement an automatic fail-over strategy.
+         ZooKeeper provides off-the-shelf support for doing so through leader election.   
 5b. On the side sending the file we could have asynch transfer to efficiently transfer during blocking IOs.  
 5c. Re-create chunks(data, metadata, cache) on dead nodes, disks etc.
 6. We could build a persistent caching layer which will allow us to acknowledge writes back quicker.
