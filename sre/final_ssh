@@ -142,6 +142,94 @@ The protocol argument is usually zero, to select the default protocol for the gi
 The default protocol for a SOCK_STREAM socket in the AF_INET communication domain is TCP (Transmission Control Protocol)
 The default protocol for a SOCK_DGRAM socket in the AF_INET communication domain is UDP (User Datagram Protocol).
 
+In contrast, using a connection-oriented protocol for communicating with a peer is like making a phone call.
+First, you need to establish a connection by placing a phone call, but after the connection is in place, 
+you can communicate bidirectionally with each other. The connection is a peer-to-peer communication channel over 
+which you talk. Your words contain no addressing information, as a point-to-point virtual connection exists between both 
+ends of the call, and the connection itself implies a particular source and destination.
+
+Calling socket is similar to calling open. In both cases, you get a file descriptor that can be used for I/O. When you are done using the file descriptor, 
+you call close to relinquish access to the file or socket and free up the file descriptor for reuse.
+
+Can be used with calls like select(), poll(), read(), write() etc..
+
+
+Byte Ordering
+============
+Network protocols specify a byte ordering so that heterogeneous computer systems can exchange protocol 
+information without confusing the byte ordering. The TCP/IP protocol suite uses big-endian byte order. 
+The byte ordering becomes visible to applications when they exchange formatted data.
+
+If it's an Intel 80x86, Host Byte Order is Little-Endian. If it's a Motorola 68k, Host Byte Order is Big-Endian. 
+If it's a PowerPC, Host Byte Order is... well, it depends!
+
+Address Format
+==============
+First StructTM—struct addrinfo. This structure is a more recent invention, and 
+is used to prep the socket address structures for subsequent use. It's also used in host name lookups, and
+service name lookups. First things you'll call when making a connection.
+
+struct addrinfo {
+    int              ai_flags;     // AI_PASSIVE, AI_CANONNAME, etc.
+    int              ai_family;    // AF_INET, AF_INET6, AF_UNSPEC
+    int              ai_socktype;  // SOCK_STREAM, SOCK_DGRAM
+    int              ai_protocol;  // use 0 for "any"
+    size_t           ai_addrlen;   // size of ai_addr in bytes
+    struct sockaddr *ai_addr;      // struct sockaddr_in or _in6
+    char            *ai_canonname; // full canonical hostname
+
+    struct addrinfo *ai_next;      // linked list, next node
+};
+
+You'll load this struct up a bit, and then call getaddrinfo(). 
+It'll return a pointer to a new linked list of these structures filled out with all the goodies you need.
+
+1. You can force it to use IPv4 or IPv6 in the ai_family field, or leave it as AF_UNSPEC to use whatever.
+2. Note that this is a linked list: ai_next points at the next element—there could be several results for you to choose from.
+3. ai_addr field in the struct addrinfo is a pointer to a struct sockaddr. This is where we start getting
+   into the nitty-gritty details of what's inside an IP address structure.
+
+The struct sockaddr holds socket address information for many types of sockets.
+
+struct sockaddr {
+    unsigned short    sa_family;    // address family, AF_xxx
+    char              sa_data[14];  // 14 bytes of protocol address
+}; 
+
+sa_family will be AF_INET (IPv4) or AF_INET6 (IPv6)
+sa_data contains a destination address and port number for the socket
+
+
+This is structure passed to a socket to connect
+
+// (IPv4 only--see struct sockaddr_in6 for IPv6)
+
+struct sockaddr_in {
+    short int          sin_family;  // Address family, AF_INET
+    unsigned short int sin_port;    // Port number
+    struct in_addr     sin_addr;    // Internet address
+    unsigned char      sin_zero[8]; // Same size as struct sockaddr
+};
+
+sin_family can be AF_NET (IPV4) or AF_INET6(IPV6)
+
+
+
+
+Address Lookup
+============
+Ideally, an application won’t have to be aware of the internal structure of a socket address. If an application simply passes
+socket addresses around as sockaddr structures and doesn’t rely on any protocol-specific features, then the application will 
+work with many different protocols that provide the same type of service.
+Historically, the BSD networking software has provided interfaces to access the various network configuration information. 
+In this section, we discuss them in a little more detail and introduce the newer functions used to look up addressing 
+information. The network configuration information returned by these functions can be kept in a number of places.
+This information can be kept in static files (e.g., /etc/hosts, /etc/services), or it can be managed by a name service, 
+such as DNS (Domain Name System) or NIS (Network Information Service). Regardless of where the information is kept, 
+the same functions can be used to access it. The hosts known by a given computer system are found by calling gethostent.
+
+We can get network names and numbers with a similar set of interfaces.
+
 
 
 
