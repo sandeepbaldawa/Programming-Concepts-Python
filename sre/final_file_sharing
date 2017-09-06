@@ -53,6 +53,8 @@ Design
       b. Help in easily querying for a file using the inode and check on which machines the corresponding chunks lay.
          Other option is to use finger printing to indetify file(small unique key for large amount of data)
       c. Can help initiate rebalance. 
+      d. "Quorum" refers to the minimum number of nodes that must agree on a  transaction before it is considered committed. 
+      e. "Ensemble" refers to the full set of peer servers in a ZooKeeper cluster. 
 5b. On the side sending the file we could have asynch transfer to efficiently transfer during blocking IOs.  
 5c. Re-create chunks(data, metadata, cache) on dead nodes, disks etc.
 6. We could build a persistent caching layer which will allow us to acknowledge writes back quicker.
