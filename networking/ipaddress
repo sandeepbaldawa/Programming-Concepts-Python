@@ -48,7 +48,15 @@ Total ips => 2 ^ 28
 first octate 240 to 255 and 224 - 239
 class E usually used by military
 
+How to find private ip's
+========================
+The following block of IP address are reserved for private network (i.e., they are non routable in the internet).
 
+> 10.0.0.0- 10.255.255.255:(class A)
+> 172.16.0.0-172.31.255.255:(class B)
+> 192.168.0.0-192.168.255.255:(class C)
+>100.x.x.x :Reserved for Carrier NAT
+( This IP is normally assigned by Carrier network)
 
 
 
