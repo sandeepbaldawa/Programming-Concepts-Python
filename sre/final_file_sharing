@@ -43,7 +43,7 @@ Design
    take the 1TB file and divide it into 100K chunks such that each bucket would receive 10 chunks. If a machine is more
    powerful CPU/Storage it can get to store more chunks(more slices in the consistent hashing method). Chunks
    can be done at cache, metadata or data layer.
-2. We could do the above using consistent hashing. Advantages of distributed hashing with consistent hashing
+2. We could do this using consistent hashing. Advantages of distributed hashing with consistent hashing
     a. Node add or remove only K/N keys need to be moved.
     b. we can rebalance as and when needed based on the hots spots.
     c. performance consistency
