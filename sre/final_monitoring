@@ -2,15 +2,17 @@ Goals
 ====
 - Good interface, with minimum clicking to get to good data.
 - Qualitative measurement of metrics with deterministic outcome.
-- Alerting to predict patterns of beavior
+- visualizing operational metrics of various services
+- easily configurables metrics(publisher/subscriber)
+- calibrating metrics to proper intervals to avoid itter introduced by time-boxing smaller intervals
+- Alerting to predict patterns of behavior
 - Automation for most tasks like collecting, adding, analyzing a metric.
 - Abilty to co-relate different metrics without much user intervention
 - Reduce noise by giving capability to serives/users to listen to only what one is interested in
 - Easy to add new people and keep up with the growth of new engineers.
 - Not much touch points to add a metric. Metrics adding should be automated and error free
 - Consistent set of metrics to work with
-- Optimum performance and space usage.
-
+- Optimum performance(eg:- time it takes for queries) and space usage.
 
 - automated monitoring important because of the sheer scale of services to monitor. Also to reduce noise
   Publisher subscriber would be better applicable. Automated reporting too is equally important.
@@ -18,6 +20,23 @@ Goals
 - Generating graphs/pictures important for understanding behavior/anamolies etc mainly because of the sheer amount of data
   present, it will be very difficult to understand the same manually. 
 - Policies and response rules to judge the system
+
+Design
+=======
+1. Graphing tools provide a clear and nearly-immediate signal that something is broken (and badly). 
+We can use this signal to trigger alerts and escalate to someone to take a look. So it's important we
+have few entities
+
+Data collection from various sources
+  A script running on each host discovers the services running, parses the GC log for that service, and pumps out 
+  metrics. 
+  Granularity is very important as it allows one to zoom in to collect more details.
+  Ability to collect different metrics and from heterogenous sources
+
+Modules generating graphs from these sources
+Services have flexibility to subscribe to which graph to monitor specific characteristics
+Policy manager to decide when to generate alerts
+
 
 Collecting metrics
 =================
