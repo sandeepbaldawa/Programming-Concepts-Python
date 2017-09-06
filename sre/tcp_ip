@@ -360,6 +360,21 @@ What does an IP packet contain?
 3. Checksum
 4. Data
 
+What is switch vs hub
+=====================
+
+Switch is an imporvement over Hub which is nothing but a splitter, which does a broadcast of all data on all ports.
+
+- COmmunication between devices on the same network
+- Layer 2
+- Use MAC(MAC's are unique for each device with upper digits indicating the manufacturer) for unique identification of devices on the network
+- SMart to recognize the destination by remebering the port it is connected to
+- Better than Hub
+- Managed/Umanaged switches
+
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/networking/switches.txt
+
+
 What is a traceroute, and how does it work?
 ==========================================
 understanding of ICMP, TTL, and routing hops. Bonus points if they also know UDP trace routing.
