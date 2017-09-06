@@ -36,9 +36,9 @@ device that allows a login, does a fork followed by an exec of the program getty
 pseudo terminal is used to emulate the behavior of a serial terminal and map terminal operations to network operations, 
 and vice versa.
 
-What happens on the SSH client side?
+What happens during SSH?
 ===================================
-1. A user on another host (that is connected to the server’s host through a network of some form)
+1. A client host (that is connected to the server’s host through a network of some form)
 or on the same host initiates the login by starting the ssh client:
 
 ssh hostname
