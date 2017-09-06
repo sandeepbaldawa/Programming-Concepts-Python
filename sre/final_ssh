@@ -237,6 +237,123 @@ Who is translating the IP address from one to the other? That's right, the firew
 some common private n/w ones you'll see are 10.x.x.x and 192.168.x.x, 
 where x is 0-255, generally. Less common is 172.y.x.x, where y goes between 16 and 31.
 
+System Calls
+=============
+Step 1 getaddrinfo():-
+=======================
+A tiny bit of history: it used to be that you would use a function called gethostbyname() to do DNS lookups. 
+Then you'd load that information by hand into a struct sockaddr_in, and use that in your calls.
+
+In these modern times, you now have the function getaddrinfo() that does all kinds of good stuff for you, 
+including DNS and service name lookups, and fills out the structs you need, besides!
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+
+int getaddrinfo(const char *node,     // e.g. "www.example.com" or IP
+                const char *service,  // e.g. "http" or port number
+                const struct addrinfo *hints,
+                struct addrinfo **res);
+                
+1. The node parameter is the host name to connect to, or an IP address.
+2. service, which can be a port number, like "80", or the name of a particular service (found in The IANA Port List or the /etc/services file on your Unix machine) 
+like "http" or "ftp" or "telnet" or "smtp" or whatever.
+3. hints parameter points to a struct addrinfo that you've already filled out with relevant information.
+
+***if you're a server who wants to listen on your host's IP address, port 3490.
+
+******* Code ***********
+
+int status;
+struct addrinfo hints;
+struct addrinfo *servinfo;  // will point to the results
+
+memset(&hints, 0, sizeof hints); // make sure the struct is empty
+hints.ai_family = AF_UNSPEC;     // don't care IPv4 or IPv6
+hints.ai_socktype = SOCK_STREAM; // TCP stream sockets
+hints.ai_flags = AI_PASSIVE;     // fill in my IP for me
+
+if ((status = getaddrinfo(NULL, "3490", &hints, &servinfo)) != 0) {
+    fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
+    exit(1);
+}
+
+// servinfo now points to a linked list of 1 or more struct addrinfos
+
+// ... do everything until you don't need servinfo anymore ....
+
+freeaddrinfo(servinfo); // free the linked-list
+
+***if you're a client who wants to connect to a particular server, say "www.example.net" port 3490.
+
+******* Code ***********
+
+int status;
+struct addrinfo hints;
+struct addrinfo *servinfo;  // will point to the results
+
+memset(&hints, 0, sizeof hints); // make sure the struct is empty
+hints.ai_family = AF_UNSPEC;     // don't care IPv4 or IPv6
+hints.ai_socktype = SOCK_STREAM; // TCP stream sockets
+
+// get ready to connect
+status = getaddrinfo("www.example.net", "3490", &hints, &servinfo);
+
+// servinfo now points to a linked list of 1 or more struct addrinfos
+
+// etc.
+
+
+Step 2 socket():-
+===================
+
+#include <sys/types.h>
+#include <sys/socket.h>
+
+int socket(int domain, int type, int protocol); 
+
+ you can call getprotobyname() to look up the protocol you want, "tcp" or "udp".
+ 
+The domain argument determines the nature of the communication, including the address format(IPV4 or IPV6)
+The type argument determines the type of the socket, which further determines the communication characteristics.(TCP/UDP etc.)
+The protocol argument is usually zero, to select the default protocol for the given domain and socket type.
+The default protocol for a SOCK_STREAM socket in the AF_INET communication domain is TCP (Transmission Control Protocol)
+The default protocol for a SOCK_DGRAM socket in the AF_INET communication domain is UDP (User Datagram Protocol).
+
+What you really want to do is use the values from the results of the call to getaddrinfo(), and feed them into socket() 
+directly like this:
+
+
+int s;
+struct addrinfo hints, *res;
+
+// do the lookup
+// [pretend we already filled out the "hints" struct]
+getaddrinfo("www.example.com", "http", &hints, &res);
+
+s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+
+Step 3 bind()(only server side):-
+===================
+Once you have a socket, you might have to associate that socket with a port on your local machine. 
+(This is commonly done if you're going to listen() for incoming connections on a specific port—multiplayer network games 
+do this when they tell you to "connect to 192.168.5.10 port 3490".) 
+The port number is used by the kernel to match an incoming packet to a certain process's socket descriptor. 
+
+#include <sys/types.h>
+#include <sys/socket.h>
+
+int bind(int sockfd, struct sockaddr *my_addr, int addrlen);
+
+1. sockfd is the socket file descriptor returned by socket().
+2. my_addr is a pointer to a struct sockaddr that contains information about your address, namely, port and IP address.
+3. addrlen is the length in bytes of that address.
+
+example that binds the socket to the host the program is running on, port 3490:
+
+
+
 
 
 
