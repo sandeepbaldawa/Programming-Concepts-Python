@@ -67,6 +67,14 @@ Design
          system by changing the centralized configuration through one of the ZooKeeper clients.   
       j. Leader election— The distributed system may have to deal with problem of nodes going down, also you may want to implement an automatic fail-over strategy.
          ZooKeeper provides off-the-shelf support for doing so through leader election.   
+         
+    At any given time, one ZooKeeper client is connected to one ZooKeeper server. Each ZooKeeper server can handle a 
+    large number of client connections at the same time. Each client periodically sends pings(also know  as heartbeat ) to the
+    ZooKeeper server it is connected to let it know that it is alive and connected. The ZooKeeper server revert with an 
+    acknowledgment of the ping, indicating the server is alive as well. When the client does not receive an acknowledgment
+    from the server within the specified time, the client connects to another server in the cluster, 
+    and the client session is transparently transferred over to the new ZooKeeper server.     
+         
 5b. On the side sending the file we could have asynch transfer to efficiently transfer during blocking IOs.  
 5c. Re-create chunks(data, metadata, cache) on dead nodes, disks etc.
 6. We could build a persistent caching layer which will allow us to acknowledge writes back quicker.
