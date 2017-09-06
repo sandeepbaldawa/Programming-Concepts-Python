@@ -127,6 +127,22 @@ of the server with inetd/xinetd that the –R option enables the same side effec
 the –i option: notably, debug output is forced to syslog instead of the standard error.
 
 
+Networking IPC
+===============
+Socket Descriptors
+-------------------
+A socket is an abstraction of a communication endpoint. 
+Just as they would use file descriptors to access files, applications use socket descriptors to access sockets.
+
+int socket(int domain, int type, int protocol);
+
+The domain argument determines the nature of the communication, including the address format
+The type argument determines the type of the socket, which further determines the communication characteristics.(TCP/UDP etc.)
+The protocol argument is usually zero, to select the default protocol for the given domain and socket type.
+The default protocol for a SOCK_STREAM socket in the AF_INET communication domain is TCP (Transmission Control Protocol)
+The default protocol for a SOCK_DGRAM socket in the AF_INET communication domain is UDP (User Datagram Protocol).
+
+
 
 
 Major features of SSH
