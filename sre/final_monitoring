@@ -2,6 +2,7 @@ Goals
 ====
 - Good interface, with minimum clicking to get to good data.
 - Qualitative measurement of metrics with deterministic outcome.
+- Collect network, application and performance from remote sites and analyze
 - visualizing operational metrics of various services
 - easily configurables metrics(publisher/subscriber)
 - calibrating metrics to proper intervals to avoid itter introduced by time-boxing smaller intervals
@@ -32,6 +33,13 @@ Data collection from various sources
   metrics. 
   Granularity is very important as it allows one to zoom in to collect more details.
   Ability to collect different metrics and from heterogenous sources
+  eg:-
+  Accessibility of intranet and internet sites
+  Collecting metrics like packet loss, latency, jitter between all sites and datacenters with QOS Queues
+  Intranet and internet link failover check
+  Accessibility of cloud services
+  Accessibility of critical corporate applications
+  Speed / throughput of network (intranet/internet)
 
 Modules generating graphs from these sources
 Services have flexibility to subscribe to which graph to monitor specific characteristics
