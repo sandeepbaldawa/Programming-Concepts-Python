@@ -59,6 +59,8 @@ int getaddrinfo(const char *node,     // e.g. "www.example.com" or IP
    
 Details on DNS:- https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/sre/dns   
 
+2a. ssh server also uses getaddrinfo() except for querying locally..
+
 3. A network socket is opened by specificing IPV4/IPV6, TCP/UDP etc..This returns a descriptor which can be used for communication.
 
 int socket(int domain, int type, int protocol); 
@@ -73,7 +75,28 @@ getaddrinfo("www.example.com", "http/ssh", &hints, &res);
 
 s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
 
-4. Next step is to connect
+3a. On the server side the inetd/sshd process listens for a connection to arrive.
+    It also creates a socket and uses bind() to bind the socket to a port address(22 for ssh and 80 for http)
+    The port number is used by the kernel to match an incoming packet to a certain process's socket descriptor. 
+
+    To display open ports and established TCP connections,
+    netstat -vatn
+
+    int listen(int sockfd, int backlog); 
+
+    sockfd is the usual socket file descriptor from the socket()
+    backlog is the number of connections allowed on the incoming queue(max no of incoming connections at a 
+    time which can wait until accept() is done) 
+    
+    the sequence of system calls you'll make is:
+
+    getaddrinfo();
+    socket();
+    bind();
+    listen();
+    /* accept() goes here */ 
+
+4. On the client side Next step is to connect
 int connect(int sockfd, struct sockaddr *serv_addr, int addrlen); 
 
 sockfd is our friendly neighborhood socket file descriptor
@@ -82,7 +105,39 @@ addrlen is the length in bytes of the server address structure.
 
 All of this information can be gleaned from the results of the getaddrinfo()
 
-5. Next step is the key management i.e.
+4a. On the server side
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 
+
+1. sockfd is the listen()ing socket descriptor. 
+2. addr will usually be a pointer to a local struct sockaddr_storage. 
+   This is where the information about the incoming connection will go (and with it you can determine which host is calling you
+   from which port). 
+3. addrlen is a local integer variable that should be set to sizeof(struct sockaddr_storage) 
+   before its address is passed to accept().
+
+Client's connect() to he server machine on a port that it is listen()ing on. 
+will be queued up waiting to be accept()ed. Once server calls accept() and get's the
+pending connection. It'll return to you a brand new socket file descriptor to use for this single connection! 
+The original one is still listening for more new connections, and the newly created one is finally ready to send() and recv(). 
+
+You may also configure sshd to bind its listening port on a particular network interface.
+By default, the port is bound on all active network interfaces on the host. The
+ListenAddress keyword limits sshd to listen only on specific interfaces; the default
+value is 0.0.0.0.
+
+sshd normally runs as a daemon, listening for incoming connection requests, and
+forking whenever it accepts a connection from a client. This spawns a separate child
+process (a copy of the parent sshd process) to handle each session. The child process
+exits when the session ends.
+
+Alternatively, the server may be invoked by inetd or xinetd, like many other network
+daemons. In this case, the general-purpose network daemon listens for and accepts
+the SSH connections. It then starts a new instance of sshd for each session with the
+already-connected socket attached to the standard input, output, and error streams
+of sshd. Each sshd invocation is responsible for a single session.
+
+
+5. Next step is the client server key management..
 
 Step 1: Host Identification
 ===========================
@@ -139,5 +194,3 @@ sending the confirmation encrypted with its private key.
 securely using the encryption algorithm selected and the secret session key agreed.
 
 
-What happens on the server side?
-===============================
