@@ -7,6 +7,8 @@ latency, link quality, reliability on the network size
 - content of files changing? IO patterns
 any requirements for RCU's, WCU's etc..
 
+Are the clients requesting data or server is pushing the data..
+
 One read capacity unit represents one strongly consistent read per second, or two eventually consistent reads per second,
 for items up to 4 KB in size. ...
 
@@ -157,7 +159,40 @@ Least Frequently Used (LFU): Counts how often an item is needed. Those that are 
 Random Replacement (RR): Randomly selects a candidate item and discards it to make space when necessary.
 
 
- 
+ 21. Use Indexes Indexes are well known when it comes to databases; they are used to improve the speed of data retrieval 
+     operations on the data store. An index makes the trade-offs of increased storage overhead, and slower writes 
+     (since we not only have to write the data but also have to update the index) for the benefit of faster reads. 
+     Indexes are used to quickly locate data without having to examine every row in a database table. Indexes can be created
+     using one or more columns of a database table, providing the basis for both rapid random lookups and efficient 
+     access of ordered records.
+     
+ 22. Use Proxy A proxy server is an intermediary piece of hardware/software that sits between the client 
+     and the back-end server. It receives requests from clients and relays them to the origin servers. Typically, proxies 
+     are used to filter requests or log requests, or sometimes transform requests (by adding/removing headers, 
+     encrypting/decrypting, or compression). Another advantage of a proxy server is that its cache can serve a lot of 
+     requests. If multiple clients access a particular resource, the proxy server can cache it and serve all clients without 
+     going to the remote server.
+     
+     proxy is to collapse requests for data that is spatially close together in the storage (consecutively on disk). 
+     This strategy will result in decreasing request latency. For example, let’s say a bunch of servers request parts of file: 
+     part1, part2, part3, etc. We can set up our proxy in such a way that it can recognize the spatial locality of the individual
+     requests, thus collapsing them into a single request and reading complete file, which will greatly minimize the reads from 
+     the data origin. Such scheme makes a big difference in request time when we are doing random accesses across TBs of data. 
+     Proxies are particularly useful under high load situations, or when we have limited
+     caching since proxies can mostly batch several requests into one.
+
+23. A processing queue is as simple as it sounds: all incoming tasks are added to the queue, and as soon as any worker has 
+    the capacity to process, they can pick up a task from the queue. These tasks could represent a simple write to a database,
+    or something as complex as generating a thumbnail preview image for a document. Queues are also used for fault tolerance as
+    they can provide some protection from service outages and failures. For example, we can create a highly robust
+    queue that can retry service requests that have failed due to transient system failures. 
+    RabbitMQ, ZeroMQ, ActiveMQ, and BeanstalkD.
+    
+    
+    
+    
+    
+     
    
    
    
