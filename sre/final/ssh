@@ -26,8 +26,15 @@ device that allows a login, does a fork followed by an exec of the program getty
    
    init (ID 1) ====> init and exec ===> getty (opens file descriptors 0,1,2, reads username, initial environemnt) ==> login
               forks
- 
-              
+4. Login compares entered password and the expected password. It also encrypts the password we enter using crypt
+   Login retries on failures etc. PAM library provide authentication methods for user for which services are available.
+   If we log in correctly, login will change home directory, change oenwerhip of the terminal, initialize envionment variables
+   $PATH, $SHELL, $HOME, username etc. At this point, our login shell is running. Its parent process ID is the original 
+   init process (process ID 1), so when our login shell terminates, init is notified (it is sent a SIGCHLD signal) and it starts the whole procedure over again for this terminal.
+
+5. To allow the same software to process logins over both terminal logins and network logins, a software driver called a 
+pseudo terminal is used to emulate the behavior of a serial terminal and map terminal operations to network operations, 
+and vice versa.
 
 What happens on the SSH client side?
 ===================================
@@ -36,9 +43,101 @@ or on the same host initiates the login by starting the ssh client:
 
 ssh hostname
 
+2.The ssh client, calls the function getaddrinfo() to convert the 
+hostname (www.linkedin.com) into its IP address. This function is called a resolver in the DNS
+(Domain Name System). This function does DNS and service name lookups, and fills out the structs you need
+
+int getaddrinfo(const char *node,     // e.g. "www.example.com" or IP
+                const char *service,  // e.g. "http" or port number
+                const struct addrinfo *hints,
+                struct addrinfo **res);
+   a. The node parameter is the host name to connect to, or an IP address.
+   b. service, which can be a port number, like "80", or the name of a particular service
+   (found in The IANA Port List or the /etc/services file on your Unix machine) 
+   like "http" or "ftp" or "telnet" or "smtp" or whatever.
+   c. hints parameter points to a struct addrinfo that you've already filled out with relevant information.
+   
+Details on DNS:- https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/sre/dns   
+
+3. A network socket is opened by specificing IPV4/IPV6, TCP/UDP etc..This returns a descriptor which can be used for communication.
+
+int socket(int domain, int type, int protocol); 
+
+The domain argument determines the nature of the communication, including the address format(IPV4 or IPV6)
+The type argument determines the type of the socket, which further determines the communication characteristics.(TCP/UDP etc.)
+The protocol argument is usually zero, to select the default protocol for the given domain and socket type.
+
+// do the lookup
+// [pretend we already filled out the "hints" struct]
+getaddrinfo("www.example.com", "http/ssh", &hints, &res);
+
+s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+
+4. Next step is to connect
+int connect(int sockfd, struct sockaddr *serv_addr, int addrlen); 
+
+sockfd is our friendly neighborhood socket file descriptor
+serv_addr is a struct sockaddr containing the destination port and IP address
+addrlen is the length in bytes of the server address structure.
+
+All of this information can be gleaned from the results of the getaddrinfo()
+
+5. Next step is the key management i.e.
+
+Step 1: Host Identification
+===========================
+The client machine needs to ensure that it is communicating with the remote machine 
+it has been asked to by the application program, and not with another machine that is spoofing it. The server machine on the 
+remote side also has the option to ensure that the user is connecting from the machine as it appears to be, and not from 
+another machine that is spoofing it. This step is accomplished as outlined below:
+1. The client contacts the server and requests for its public-key certificate. 
+2. The client maintains a list of public keys for server machines available to it. If it is asked to contact a machine for 
+  which it does not have a public key locally held, it will warn the user with a message telling that the public  key 
+  reported by the server is not in the list of known hosts  and ask the user whether the user wants to continue connecting.
+3. If  the  user  agrees  to  continue  connecting,  the  client  verifies  the  authenticity  of  the  Certifying Authority 
+   (CA)  that  issued  the  public  key  certificate  for  the  server  and  if  satisfied,  accepts  the public keys. The 
+   machine then adds the server’s public keys to its personal list of host public keys. 
+4. When the administrator has included the public key for the client machine in the per-machine list of known host public keys
+   on the server machine, the server may want the client machine to prove that it is what it claims to be. 
+   The server  will create a “challenge” encrypted with  the  client’s host public key and send it to the client. Only a  
+   genuine client machine will be able to decrypt this message with  its private key. The client then sends the same 
+   challenge encrypted with the public key of the server. If the server when decrypting the message gets the same challenge 
+   it sent, the client is genuine. 
+
+An ssh-agent** is a program that keeps private keys in memory and provides authentication
+services to SSH clients. The effects of the agent last until you terminate
+the agent, usually just before logging out.
+
+Once the ssh-agent is running, it’s time to load private keys into it using the ssh-add program.
+By default, ssh-add** loads the key from your default identity file and decrypts the private key and loads it in memory:
 
 
-DNS lookup
+Step  2:  Encryption
+===================
+The  objective  of  this  step  is  to  establish  a  secure  end-to-end  link  that  supports encryption of the data 
+transferred. Even the password and other authentication information are encrypted and are not transmitted in plaintext. 
+This step is accomplished as outlined below: 
+1. Once the host identification step is successfully done, the client sends a list of encryption algorithms it could use and
+their corresponding keys. This is sent encrypted with the public key of the server.
+2. The server decrypts the list with its private key and chooses the strongest encryption algorithm that it could handle 
+from the list sent by the client. 
+3. The server then notifies the selected encryption algorithm to the client by encrypting the notification using 
+its private key. 
+4. The client  generates  the appropriate  secret  session key  for  the  encryption  algorithm  selected and notifies the 
+session key to the server by encrypting the notification with the public key of the server.
+5. The server decrypts the notification with its private key and extracts the secret session key. 
+
+Step 3: User Authentication
+===========================
+In this step, the user proves to the server that he/she has the right to perform operations as a particular user on the server
+machine. This is accomplished as outlined below: 
+1. The client asks for the username and password from the user, encrypts them with the server’s public key and sends to the 
+server. 
+2. The server checks the validity of  the username and password and if  everything  is fine, accepts the connection request by 
+sending the confirmation encrypted with its private key. 
+3. The client decrypts the confirmation with the server’s public key and the client and server are all set to exchange data 
+securely using the encryption algorithm selected and the secret session key agreed.
+
 
 What happens on the server side?
 ===============================
