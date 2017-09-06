@@ -212,6 +212,32 @@ struct sockaddr_in {
 };
 
 sin_family can be AF_NET (IPV4) or AF_INET6(IPV6)
+sin_port must be in Network Byte Order (by using htons()!
+sin_addr is the 4 byte ipaddress in IPV4
+
+What about IPv6? Similar structs exist for it
+Also strcutures exist to hold both IPV4 and IPV6 addresses
+
+One can convert a given ipaddress into these structures
+eg:-
+struct sockaddr_in sa; // IPv4
+struct sockaddr_in6 sa6; // IPv6
+
+inet_pton(AF_INET, "10.12.110.57", &(sa.sin_addr)); // IPv4
+inet_pton(AF_INET6, "2001:db8:63b3:1::3490", &(sa6.sin6_addr)); // IPv6
+
+There are also functions which can convert the other way around..
+
+What is NAT?
+=============
+If I log into a remote computer, it tells me I'm logged in from 192.0.2.33 which is the public IP address my ISP has 
+provided to me. But if I ask my local computer what its IP address is, it says 10.0.0.5. 
+Who is translating the IP address from one to the other? That's right, the firewall! It's doing NAT!
+
+some common private n/w ones you'll see are 10.x.x.x and 192.168.x.x, 
+where x is 0-255, generally. Less common is 172.y.x.x, where y goes between 16 and 31.
+
+
 
 
 
