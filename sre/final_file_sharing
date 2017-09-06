@@ -114,6 +114,19 @@ Design
    what do we optimize on performance or reliability?, we can optimize this by acknowledging by either writing/not writing to
    the mirrors in persistence layers with SSD's, or acknowledging in memory..fundamentally a tradeoff.
 7. To save space we could compress the data and dedup it and we could do this inline..  
+   a. Post-process deduplication
+   With post-process deduplication, new chunks are first stored on the storage device, and later some process analyzes the 
+   data looking for duplication. The benefit is that clients will not need to wait for the hash calculation or lookup to
+   complete before storing the data, thereby ensuring that there is no degradation in storage performance. 
+   Drawbacks of this approach are 1) We will unnecessarily be storing duplicate data, though for a short time, 
+   2) Duplicate data will be transferred consuming bandwidth.
+
+    b. In-line deduplication
+    Alternatively, deduplication hash calculations can be done in real-time as the clients are entering data on their 
+    device. If our system identifies a chunk which it has already stored, only a reference to the existing chunk will be 
+    added in the metadata, rather than the full copy of the chunk. This approach will give us optimal network and storage
+    usage. 
+ 
 7a. To validate if files reaching the destination are same we could do a rolling checksum to avoid calculating checksum of a 
     large file which can be extremely slow. The router layer can identify chunks of files transmitted and received and rolling
     checksums for those.
@@ -254,8 +267,25 @@ IV. Indexer will process the events received from the Watcher and update the int
    to share it with everyone. To handle this, we will be storing permissions of each file in our metadata DB to reflect 
    what files are visible or modifiable by any user.
     
-    
-    
+ 28. Metadata Partitioning
+ Consistent hash based partition
+ 
+ 29. 
+ 
+Advantages of Redis
+===============
+No schema or column names
+Can do 110k sets/sec and 80k gets/sec
+Rich data-type support
+Cache and disk persistence
+Not CPU intensive
+1% CPU can handle more than 1K small read/write per sec
+Gets nosql, caching and persistence all together
+Supports lot of clients like Python, C, C++, java, php etc.
+Secure
+Designed to be used internally by trusted clients
+Data encryption not supported
+
     
      
    
