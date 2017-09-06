@@ -135,6 +135,10 @@ Design
  the data but also have to update the index) for the benefit of faster reads. 
  Indexes are used to quickly locate data without having to examine every row in a database table.
  
+ Load balancers can come between
+ 1. Webserver and App Server
+ 2. App server and database server
+ 
    
    
    
