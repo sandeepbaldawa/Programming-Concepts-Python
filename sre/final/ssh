@@ -1,0 +1,44 @@
+What is SSH?
+============
+. SSH is a client/server based protocol 
+2. An SSH server program, typically installed and run by a system administrator, accepts or rejects incoming
+connections to its host computer.
+3. Users then run SSH client programs, typically on
+other computers, to make requests of the SSH server, such as “Please log me in,”
+“Please send me a file,” or “Please execute this command.”
+4. All communications between clients and servers are securely encrypted and protected from modification.
+5. In summary  SSH creates a channel for running a shell on a remote computer, with end-to-end encryption between the two
+systems.
+
+How terminal devices are initialized?
+=====================================
+1. The system administrator creates a file, usually /etc/ttys, that has one line per terminal device. 
+Each line specifies the name of the device and other parameters that are passed to the getty program.
+
+2. When the system is bootstrapped, the kernel creates process ID 1, the init process, and it is init 
+that brings the system up in multiuser mode. The init process reads the file /etc/ttys and, for every terminal 
+device that allows a login, does a fork followed by an exec of the program getty.
+
+3. It is getty that calls open for the terminal device. The terminal is opened for reading and writing.
+   Once the device is open, file descriptors 0, 1, and 2 are set to the device. Then getty outputs something like login: 
+   and waits for us to enter our user name. When we enter our user name, getty’s job is complete, and it then invokes 
+   the login program
+   
+   init (ID 1) ====> init and exec ===> getty (opens file descriptors 0,1,2, reads username, initial environemnt) ==> login
+              forks
+ 
+              
+
+What happens on the SSH client side?
+===================================
+1. A user on another host (that is connected to the server’s host through a network of some form)
+or on the same host initiates the login by starting the ssh client:
+
+ssh hostname
+
+
+
+DNS lookup
+
+What happens on the server side?
+===============================
