@@ -1,10 +1,11 @@
 A protocol suite, such as TCP/IP, is the combination of
 different protocols at various layers. TCP/IP is normally considered to be a 4-layer system,
 
-Application (Telnet, FTP, e-mail, etc.)
-Transport (TCP, UDP)
-Network (IP, ICMP, IGMP)
-Link (device driver and interface card)
+Application Layer (telnet, ftp, etc.)
+Host-to-Host Transport Layer/TCP (TCP, UDP)
+Internet Layer/IP (IP and routing)
+Network Access Layer/Link Layer (Ethernet, wi-fi, or whatever)
+
 
 Each layer has a different responsibility.
 1. The link layer, sometimes called the data-link layer or network interface layer, normally
@@ -318,7 +319,11 @@ direction of data flow. The sending of a FIN is normally the result of the appli
 close
 
 
-
+Why IPV6
+=========
+IPV4 might run out of ipaddresses soon, 32 bits represents some 4 billion numbers (232), while 128 bits represents about
+340 trillion trillion trillion numbers (for real, 2128). 
+That's like a million IPv4 Internets for every single star in the Universe.
 
 what is 3 way handshake
 ======================
