@@ -393,8 +393,31 @@ understanding of ICMP, TTL, and routing hops. Bonus points if they also know UDP
 
 What is NAT? Where would you use it? How does it work? What are some limitations?
 =================================================================================
+ Private (Or Disconnected) Networks
+ Lots of places have a firewall that hides the network from the rest of the world for their own protection.
+ And often times, the firewall translates "internal" IP addresses to "external" (that everyone else in the world knows) 
+ IP addresses using a process called Network Address Translation, or NAT.
+ 
+ For instance, I have a firewall at home. I have two static IPv4 addresses allocated to me by the DSL company, 
+ and yet I have seven computers on the network. How is this possible? Two computers can't share the same IP address, or
+ else the data wouldn't know which one to go to!
+ 
+ The answer is: they don't share the same IP addresses. They are on a private network with 24 million IP addresses allocated to it. They are all just for me. Well, all for me as far as anyone else is concerned. Here's what's happening:
+
+If I log into a remote computer, it tells me I'm logged in from 192.0.2.33 which is the public IP address my ISP has provided to me. But if I ask my local computer what its IP address is, it says 10.0.0.5. Who is translating the 
+IP address from one to the other? That's right, the firewall! It's doing NAT!
+
+10.x.x.x is one of a few reserved networks that are only to be used either on fully disconnected networks, 
+or on networks that are behind firewalls. 
+You'll see are 10.x.x.x and 192.168.x.x, where x is 0-255, generally. Less common is 172.y.x.x, 
+where y goes between 16 and 31.
+
+Networks behind a NATing firewall don't need to be on one of these reserved networks,
+but they commonly are.
+
 
 What is QoS? How does it work? Where would you apply it? When is it enforced?
+===========================================================================
 
 What I'm looking for: knowledge of traffic prioritization schemes, at least a vague understanding of classification levels at the header level, understanding of judicious application to time and 
 latency sensitive protocols, and knowledge of contention vs. non-contention
