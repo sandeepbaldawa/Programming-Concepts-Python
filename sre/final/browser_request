@@ -36,6 +36,10 @@ e. Recursive search – Your ISP’s DNS server begins a recursive search, from 
 
 The browser forms/sends a HTTP request to the web server
 
+web browsers use the HTTP protocol which uses stream sockets to get page
+stream sockets achieve this high level of data transmission quality using "The Transmission Control Protocol",
+otherwise known as "TCP" 
+
 ou can be pretty sure that Facebook’s homepage will not be served from the browser cache because dynamic pages expire either very quickly or immediately (expiry date set to past).
 So, the browser will send this request to the Facebook server:
 
