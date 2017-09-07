@@ -195,3 +195,10 @@ This pattern is sometimes referred to as “AJAX”, which stands for “Asynchr
 even though there is no particular reason why the server has to format the response as XML. For example, 
 Facebook returns snippets of JavaScript code in response to asynchronous requests.
 
+Since HTTP is a request-response protocol, the chat server cannot push new messages to the client. Instead, the client has 
+to poll the server every few seconds to see if any new messages arrived.
+Long polling is an interesting technique to decrease the load on the server in these types of scenarios. If the server 
+does not have any new messages when polled, it simply does not send a response back. And, if a message for this client is 
+received within the timeout period, the server will find the outstanding 
+request and return the message with the response.
+
