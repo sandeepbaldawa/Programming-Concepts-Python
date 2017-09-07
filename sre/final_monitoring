@@ -1,5 +1,37 @@
-Goals
+Goals(Why monitor)?
 ====
+- Analyzing long-term trends. How big is my database and how fast is it growing? How quickly is my daily-active 
+  user count growing?
+- Comparing over time or experiment groups
+  Are queries faster with Acme Bucket of Bytes 2.72 versus Ajax DB 3.14? 
+  How much better is my memcache hit rate with an extra node? 
+  Is my site slower than it was last week?  
+- Alerting
+  Something is broken, and somebody needs to fix it right now! Or, something might break soon, so somebody 
+  should look soon.
+- Building dashboards
+  Dashboards should answer basic questions about your service, 
+  and normally include some form of the four golden signals.
+- Conducting adhoc retrospective analysis (i.e., debugging)
+  Our latency just shot up; what else happened around the same time?  
+- System monitoring is also helpful in supplying raw input into business analytics 
+- Facilitating analysis of security breaches
+- Black-box monitoring
+  Testing externally visible behavior as a user would see it.
+- White-box monitoring
+  Monitoring based on metrics exposed by the internals of the system, including logs,
+  interfaces like the Java Virtual Machine Profiling Interface, or an HTTP handler that emits internal statistics.  
+- Dashboard
+  An application (usually web-based) that provides a summary view of a service’s core metrics. 
+  A dashboard may have filters, selectors, and so on, but is prebuilt to expose the metrics most important to its users.  
+- Root cause
+  A defect in a software or human system that, if repaired, instills confidence that this event won’t happen again 
+  in the same way. A given incident might have multiple root causes: for example, perhaps it was caused by a combination
+  of insufficient process automation, software that crashed on bogus input, and insufficient testing of the script used 
+  to generate the configuration. Each of these factors might stand alone as a root cause, and each should be repaired.
+- capacity planning and traffic prediction
+  Base on disk filing up or cluster filing up or based on the runnign traffic.
+-   
 - Good interface, with minimum clicking to get to good data.
 - Qualitative measurement of metrics with deterministic outcome.
 - Collect network, application and performance from remote sites and analyze
@@ -14,7 +46,6 @@ Goals
 - Not much touch points to add a metric. Metrics adding should be automated and error free
 - Consistent set of metrics to work with
 - Optimum performance(eg:- time it takes for queries) and space usage.
-
 - automated monitoring important because of the sheer scale of services to monitor. Also to reduce noise
   Publisher subscriber would be better applicable. Automated reporting too is equally important.
 - Subscribers can be microservices which inrepret this data.  
