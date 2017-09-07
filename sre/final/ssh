@@ -75,6 +75,13 @@ getaddrinfo("www.example.com", "http/ssh", &hints, &res);
 
 s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
 
+3a1. The client is responsible for beginning the initial TCP handshake with the server, 
+     negotiating the secure connection, verifying that the server's identity matches previously recorded information, 
+     and providing credentials to authenticate. An SSH session is established in two separate stages. The first is to agree 
+     upon and establish encryption to protect future communication. The second stage is to authenticate the
+     user and discover whether access to the server should be granted.
+     
+     
 3a. On the server side the inetd/sshd process listens for a connection to arrive.
     It also creates a socket and uses bind() to bind the socket to a port address(22 for ssh and 80 for http)
     The port number is used by the kernel to match an incoming packet to a certain process's socket descriptor. 
@@ -95,6 +102,15 @@ s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
     bind();
     listen();
     /* accept() goes here */ 
+    
+    When a TCP connection is made by a client, the server responds with the protocol versions it supports. 
+    If the client can match one of the acceptable protocol versions, the connection continues. The server also provides
+    its public host key, which the client can use to check whether this was the intended host.
+    
+    At this point, both parties negotiate a session key using a version of something called the Diffie-Hellman algorithm. 
+    This algorithm (and its variants) make it possible for each party to combine their own private data with public data 
+    from the other 
+    system to arrive at an identical secret session key.
 
 4. On the client side Next step is to connect
 int connect(int sockfd, struct sockaddr *serv_addr, int addrlen); 
@@ -204,6 +220,7 @@ certain secret data.
 SSH can be configured to utilize a variety of different symmetrical cipher systems, including AES,
 Blowfish, 3DES, CAST128, and Arcfour.
 
+
 Asymmetrical Encryption
 =======================
 Asymmetrical encryption is different from symmetrical encryption in that to send data in a single direction, 
@@ -229,6 +246,17 @@ demonstrated that they are in control of the private key.
    SSH key pairs can be used to authenticate a client to a server. The client creates a key pair and then uploads the 
    public key to any remote server it wishes to access. This is placed in a file called authorized_keys within the ~/.ssh 
    directory in the user account's home directory on the remote server.   
+   
+The shared secret encryption that is used for the rest of the connection is called binary packet protocol. 
+The above process allows each party to equally participate in generating the shared secret, which does not allow one 
+end to control the secret. It also accomplishes the task of generating an identical shared secret without 
+ever having to send that information over insecure channels.
+
+The generated secret is a symmetric key, meaning that the same key used to encrypt a message can
+be used to decrypt it on the other side. The purpose of this is to wrap all further communication in an encrypted 
+tunnel that cannot be deciphered by outsiders.
+
+After the session encryption is established, the user authentication stage begins.   
 
 
 Step 3: User Authentication
@@ -241,5 +269,37 @@ server.
 sending the confirmation encrypted with its private key. 
 3. The client decrypts the confirmation with the server’s public key and the client and server are all set to exchange data 
 securely using the encryption algorithm selected and the secret session key agreed.
+
+The most popular and recommended alternative is the use of SSH key pairs. SSH key pairs are asymmetric keys,
+meaning that the two associated keys serve different functions.
+
+The public key is used to encrypt data that can only be decrypted with the private key. The public key can be 
+freely shared, because, although it can encrypt for the private key, there is no method of deriving the private key from 
+the public key.
+
+
+Authentication using SSH key pairs begins after the symmetric encryption has been established
+
+1. The client begins by sending an ID for the key pair it would like to authenticate with to the server.
+2. The server check's the authorized_keys file of the account that the client is attempting to log into for the key ID.
+3. If a public key with matching ID is found in the file, the server generates a random number and uses the public key 
+   to encrypt the number. The server sends the client this encrypted message.
+4. If the client actually has the associated private key, it will be able to decrypt the message using that key, revealing 
+   the original number.
+5. The client combines the decrypted number with the shared session key that is being used to encrypt the communication, and 
+    calculates the MD5 hash of this value.
+6. The client then sends this MD5 hash back to the server as an answer to the encrypted number message.
+7. The server uses the same shared session key and the original number that it sent to the client to calculate the MD5 value on its own. It compares its own calculation to the one that the client sent back. If these two values match, it proves that the client was in
+    possession of the private key and the client is authenticated.
+
+The basis of this procedure for classic Diffie-Hellman is:
+
+Both parties agree on a large prime number, which will serve as a seed value.
+Both parties agree on an encryption generator (typically AES), which will be used to manipulate the values in a predefined way.
+Independently, each party comes up with another prime number which is kept secret from the other party. This number is used as the private key for this interaction (different than the private SSH key used for authentication).
+The generated private key, the encryption generator, and the shared prime number are used to generate a public key that is derived from the private key, but which can be shared with the other party.
+Both participants then exchange their generated public keys.
+The receiving entity uses their own private key, the other party's public key, and the original shared prime number to compute a shared secret key. Although this is independently computed by each party, using opposite private and public keys, it will result in the same shared secret key.
+The shared secret is then used to encrypt all communication that follows.
 
 
