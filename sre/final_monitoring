@@ -177,7 +177,24 @@ media image, static image, json, javascript
 This provides opportunity to optimize the most frequently used pages contents
 
 Site Speed Monitoring
+built a monitoring system using GoSpeed data and a comparison rule engine, to proactively capture and alert people. 
+This site speed monitoring system is built in an intelligent way that can filter false positive noise. 
+Alerts are sent through email to related teams. Links of the monitoring system and GoSpeed are attached in the alert 
+email so that we can quickly visualize a specific issue, and do a deep dive into analysis 
+details manually using the visualization described in previous sections.
 
+Early Integration
+We typically ramp up new features gradually, starting with employees, then to a small percentage of members, 
+then larger percentage of members, and finally full roll-out. Our A/B test framework is used during feature ramp-up. 
+During each step of ramp up, integrated as part of site health check in our site speed monitoring system. 
+If any ramp-up causes a slow down beyond a certain threshold, we will alert related teams and feature owners. 
+This automated check helps us detect degradation in real-time when a feature is ramped up.
+
+
+Site Speed Data Analysis
+Use raw data and visualization provided to 
+analyze performance, and engagement correlation. 
+These results help to make important decisions to make site better.
 
 
 
