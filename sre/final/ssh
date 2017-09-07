@@ -258,6 +258,11 @@ tunnel that cannot be deciphered by outsiders.
 
 After the session encryption is established, the user authentication stage begins.   
 
+As you can see, the asymmetry of the keys allows the server to encrypt messages to the client using the public key. 
+The client can then prove that it holds the private key by decrypting the message correctly. The two types of encryption 
+that are used (symmetric shared secret, and asymmetric public-private keys) are each able to leverage their 
+specific strengths in this model.
+
 
 Step 3: User Authentication
 ===========================
