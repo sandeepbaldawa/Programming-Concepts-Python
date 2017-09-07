@@ -103,8 +103,38 @@ the open source Boomerang library
 6. Metrics for different endpoint devices
 
 7. page load is the fundamental metric for performance
+   We can have this at different service layers
+   as to call each service makes
+   their dependency on other services
+   why it changes over time(increase in load time)
 
-8. rendering time
+8. rendering time (time taken by 3rd party items like ads)
+
+9. Ability to track infra level monitoring
+   load balancers
+   cachin
+   persistence 
+   proxy
+   queues
+   
+10. Ability to provide all pages calls which happen to load/render a specific page.
+    to help drill down in service level details.
+
+11. track the hot spots and clicks and route taken by the user for the same.
+
+12. Time taken for system to recover on failures like node, disk, power failure, backup etc.
+
+13. System-level metrics used to evaluate the health of the machine (e.g., CPU utilization)
+Application-level metrics used to evaluate the health of the service (e.g., HTTP error codes, exception rates, and counts)
+Metrics to evaluate the health of the JVM (e.g., GC data)
+
+14. whitebox level monitoring (eg:- new exceptions introduced, are these documented? can other services handle these?)
+
+15. monitor systems with real/simulated heavy load, stress, scale, long running, upgraded etc..
+
+16. Ability to monitor by zooming in on a specific region and add correlations for metrics in code, automated way or manual
+
+17. 
 
 Heat-Map
 This visualization view provides products, operations, and executive teams a quick overview of latency 
