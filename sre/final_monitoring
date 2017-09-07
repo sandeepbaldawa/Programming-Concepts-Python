@@ -31,7 +31,12 @@ Goals(Why monitor)?
   to generate the configuration. Each of these factors might stand alone as a root cause, and each should be repaired.
 - capacity planning and traffic prediction
   Base on disk filing up or cluster filing up or based on the runnign traffic.
--   
+- Push
+  Any change to a service’s running software or its configuration.
+- Understanding symtoms vs cause
+  our monitoring system should address two questions: what’s broken, and why?
+
+The "what’s broken" indicates the symptom; the "why" indicates a (possibly intermediate) cause  
 - Good interface, with minimum clicking to get to good data.
 - Qualitative measurement of metrics with deterministic outcome.
 - Collect network, application and performance from remote sites and analyze
@@ -52,6 +57,59 @@ Goals(Why monitor)?
 - Generating graphs/pictures important for understanding behavior/anamolies etc mainly because of the sheer amount of data
   present, it will be very difficult to understand the same manually. 
 - Policies and response rules to judge the system
+
+
+What metrics to use for max result and min noise
+================================================
+The four golden signals of monitoring are latency, traffic, errors, and saturation.
+If you can only measure four metrics of your user-facing system, focus on these four.
+
+1. Latency
+The time it takes to service a request. It’s important to distinguish between the latency of successful
+requests and the latency of failed requests. For example, an HTTP 500 error triggered due to
+loss of connection to a database or other critical backend might be served very quickly; 
+however, as an HTTP 500 error indicates a failed request, factoring 500s into your overall latency might result 
+in misleading calculations. On the other hand, a slow error is even worse than a fast error! 
+Therefore, it’s important to track error latency, as opposed to just filtering out errors.
+
+2. Traffic
+A measure of how much demand is being placed on your system, measured in a high-level system-specific metric. 
+For a web service, this measurement is usually HTTP requests per second, perhaps broken out by the nature of 
+the requests (e.g., static versus dynamic content). For an audio streaming system, this measurement might
+focus on network I/O rate or concurrent sessions. For a key-value storage system, this measurement might
+be transactions and retrievals per second.
+
+3. Errors
+The rate of requests that fail, either explicitly (e.g., HTTP 500s), 
+implicitly (for example, an HTTP 200 success response, but coupled with the wrong content), or by policy 
+(for example, "If you committed to one-second response times, any request over one second is an error"). 
+Where protocol response codes are insufficient to express all failure conditions, 
+secondary (internal) protocols may be necessary to track partial failure modes. 
+Monitoring these cases can be drastically different: catching HTTP 500s at your load balancer can do a decent 
+job of catching all completely failed requests, while only end-to-end system tests can detect that you’re serving
+the wrong content.
+
+4. Saturation
+How "full" your service is. A measure of your system fraction, emphasizing the resources that are most constrained
+(e.g., in a memory-constrained system, show memory; in an I/O-constrained system, show I/O).
+Note that many systems degrade in performance before they achieve 100% utilization, so having a utilization target
+is essential.
+
+Some important points
+=====================
+1. A healthy monitoring and alerting pipeline is simple and easy to reason about. It focuses primarily on symptoms for paging,
+reserving cause-oriented heuristics to serve as aids to debugging problems. 
+2. Monitoring symptoms is easier the further
+"up" your stack you monitor, though monitoring saturation and performance of subsystems such as databases often must be
+performed directly on the subsystem itself.
+3. Email alerts are of very limited value and tend to easily become overrun 
+with noise; instead, you should favor a dashboard that monitors all ongoing subcritical problems for the sort of 
+information that typically ends up in email alerts. A dashboard might also be paired with a log, in order to analyze
+historical correlations.
+
+Over the long haul, achieving a successful on-call rotation and product includes choosing to alert on symptoms or 
+imminent real problems, adapting your targets to goals that are actually achievable, and making sure that your monitoring
+supports rapid diagnosis.
 
 Design
 =======
