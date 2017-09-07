@@ -1,4 +1,6 @@
 1. You enter a URL into the browser
+   The browser extracts the domain name from the URL.
+   
 2. The browser looks up the IP address for the domain name
 
 The first step in the navigation is to figure out the IP address for the visited domain. The DNS lookup proceeds as follows:
@@ -25,6 +27,9 @@ e. Recursive search – Your ISP’s DNS server begins a recursive search, from 
    d. Anycast is a routing technique where a single IP address maps to multiple physical servers. 
       Unfortunately, anycast does not fit well with TCP and is rarely used in that scenario.
    
+   The request sent to the DNS server is almost always smaller than the maximum packet size, and is thus sent off as a 
+   single packet. In addition to the content of the request, the packet includes the
+   IP address it is destined for in its header.
    
  
 3. On the application layer.
