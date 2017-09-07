@@ -182,6 +182,55 @@ its private key.
 session key to the server by encrypting the notification with the public key of the server.
 5. The server decrypts the notification with its private key and extracts the secret session key. 
 
+The relationship of the components that encrypt and decrypt data determine whether an encryption scheme 
+is symmetrical or asymmetrical.
+
+Symmetrical Encryption
+======================
+Symmetrical encryption is a type of encryption where one key can be used to encrypt messages to the opposite party, and 
+also to decrypt the messages received from the other participant. 
+This means that anyone who holds the key can encrypt and decrypt messages to anyone else holding the key.
+
+Symmetric keys are used by SSH in order to encrypt the entire connection. Contrary to what some users assume, 
+public/private asymmetrical key pairs that can be created are only used for authentication, not the encrypting the 
+connection. 
+The symmetrical encryption allows even password authentication to be protected against snooping.
+
+The client and server both contribute toward establishing this key, and the resulting secret is never known to outside 
+parties. The secret key is created through a process known as a key exchange algorithm. This exchange results in the server 
+and client both arriving at the same key independently by sharing certain pieces of public data and manipulating them with 
+certain secret data. 
+
+SSH can be configured to utilize a variety of different symmetrical cipher systems, including AES,
+Blowfish, 3DES, CAST128, and Arcfour.
+
+Asymmetrical Encryption
+=======================
+Asymmetrical encryption is different from symmetrical encryption in that to send data in a single direction, 
+two associated keys are needed. One of these keys is known as the private key, while the other is called the public key.
+
+The public key can be freely shared with any party. It is associated with its paired key, but the private key
+cannot be derived from the public key. The mathematical relationship between the public key and the private 
+key allows the public key to encrypt messages that can only be decrypted by the private key. This is a one-way ability, 
+meaning that the public key has no ability to decrypt the messages it writes, nor can it decrypt anything the private key
+may send it.
+
+The private key should be kept entirely secret and should never be shared with another party. This is a key requirement
+for the public key paradigm to work. The private key is the only component capable of decrypting messages that were
+encrypted using the associated public key. By virtue of this fact, any entity capable decrypting these messages has \
+demonstrated that they are in control of the private key.
+
+1. SSH utilizes asymmetric encryption in a few different places. During the initial key exchange process used to set up the
+   symmetrical encryption (used to encrypt the session), asymmetrical encryption is used. In this stage, both parties 
+   produce temporary key pairs and exchange the public key in order to produce the shared secret that will be used for
+   symmetrical encryption.
+   
+2. The more well-discussed use of asymmetrical encryption with SSH comes from SSH key-based authentication. 
+   SSH key pairs can be used to authenticate a client to a server. The client creates a key pair and then uploads the 
+   public key to any remote server it wishes to access. This is placed in a file called authorized_keys within the ~/.ssh 
+   directory in the user account's home directory on the remote server.   
+
+
 Step 3: User Authentication
 ===========================
 In this step, the user proves to the server that he/she has the right to perform operations as a particular user on the server
