@@ -35,6 +35,8 @@ Goals(Why monitor)?
   Any change to a service’s running software or its configuration.
 - Understanding symtoms vs cause
   our monitoring system should address two questions: what’s broken, and why?
+- optimizing web performance for different geographic locations is important for member engagement and experience.   
+  
 
 The "what’s broken" indicates the symptom; the "why" indicates a (possibly intermediate) cause  
 - Good interface, with minimum clicking to get to good data.
@@ -95,6 +97,13 @@ How "full" your service is. A measure of your system fraction, emphasizing the r
 Note that many systems degrade in performance before they achieve 100% utilization, so having a utilization target
 is essential.
 
+5. basic metrics from Navigation Timing and Resource timing in web browsers are collected through JavaScript using
+the open source Boomerang library
+
+6. Metrics for different endpoint devices
+
+7. 
+
 Some important points
 =====================
 1. A healthy monitoring and alerting pipeline is simple and easy to reason about. It focuses primarily on symptoms for paging,
@@ -113,11 +122,8 @@ supports rapid diagnosis.
 
 Design
 =======
-1. Graphing tools provide a clear and nearly-immediate signal that something is broken (and badly). 
-We can use this signal to trigger alerts and escalate to someone to take a look. So it's important we
-have few entities
 
-Data collection from various sources
+1. Module to collect raw data
   A script running on each host discovers the services running, parses the GC log for that service, and pumps out 
   metrics. 
   Granularity is very important as it allows one to zoom in to collect more details.
@@ -129,10 +135,56 @@ Data collection from various sources
   Accessibility of cloud services
   Accessibility of critical corporate applications
   Speed / throughput of network (intranet/internet)
+2. preprocess the raw data in Hadoop clusters for daily or hourly aggregation
+3. Modules generating graphs from these sources
+4. Services have flexibility to subscribe to which graph to monitor specific characteristics
+5. Policy manager to decide when to generate alerts
 
-Modules generating graphs from these sources
-Services have flexibility to subscribe to which graph to monitor specific characteristics
-Policy manager to decide when to generate alerts
+How to build dasboards?
+=====================
+
+Heat-Map
+This visualization view provides products, operations, and executive teams a quick overview of latency 
+distribution across the world using a colored picture map. 
+If a country is of interest, the country can be selected to see a city/state level heat-map.
+
+Goals Tracking
+We set goals to improve site speed in yearly or quarterly intervals depending on available optimization 
+methods and resources. GoSpeed provides a canned report for teams to quickly check where they are against 
+their goals. beginning of the year we set to improve page load time 40% for a page in a specific country by
+the end of Q3 2014. Each week we expect some incremental progress, with 40% slower than the goal at start of the year, 
+and 0% difference at the end of Q3. As shown in Figure 3, blue line is the expectation, and black 
+line is the actual progress for a given week.
+We can quickly know from the chart that this page was in good progress from January to June.
+
+Web Browser Breakdown
+Browser traffic share and browser performance are useful sources for us to do browser-specific optimizations. 
+As RUM data contains user agents with browser information, we are able to process and visualize the details. 
+Figure 3 shows page load time differences in browsers for a selected page; 
+Chrome is more than 30% faster than IE 9 for this page. Figure 4 shows traffic shares for different browsers.
+
+Compare Metrics in Different Dimensions
+In many diagnostic or analytic cases we need to slice and dice the data in a way that we can dive 
+deeply to specific issues. In GoSpeed, we provide preprocessed aggregation data so that our internal teams can 
+compare different metrics in different dimensions quickly.
+
+Real-Time Visualization
+Compare different metrics with same timeline to see issue is in which component/service.
+
+Page Weight Correlation
+Check pages are built from what components and how many requests come for which page,..
+media image, static image, json, javascript
+This provides opportunity to optimize the most frequently used pages contents
+
+Site Speed Monitoring
+
+
+
+
+
+
+
+
 
 
 Collecting metrics
