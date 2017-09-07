@@ -102,46 +102,9 @@ the open source Boomerang library
 
 6. Metrics for different endpoint devices
 
-7. 
+7. page load is the fundamental metric for performance
 
-Some important points
-=====================
-1. A healthy monitoring and alerting pipeline is simple and easy to reason about. It focuses primarily on symptoms for paging,
-reserving cause-oriented heuristics to serve as aids to debugging problems. 
-2. Monitoring symptoms is easier the further
-"up" your stack you monitor, though monitoring saturation and performance of subsystems such as databases often must be
-performed directly on the subsystem itself.
-3. Email alerts are of very limited value and tend to easily become overrun 
-with noise; instead, you should favor a dashboard that monitors all ongoing subcritical problems for the sort of 
-information that typically ends up in email alerts. A dashboard might also be paired with a log, in order to analyze
-historical correlations.
-
-Over the long haul, achieving a successful on-call rotation and product includes choosing to alert on symptoms or 
-imminent real problems, adapting your targets to goals that are actually achievable, and making sure that your monitoring
-supports rapid diagnosis.
-
-Design
-=======
-
-1. Module to collect raw data
-  A script running on each host discovers the services running, parses the GC log for that service, and pumps out 
-  metrics. 
-  Granularity is very important as it allows one to zoom in to collect more details.
-  Ability to collect different metrics and from heterogenous sources
-  eg:-
-  Accessibility of intranet and internet sites
-  Collecting metrics like packet loss, latency, jitter between all sites and datacenters with QOS Queues
-  Intranet and internet link failover check
-  Accessibility of cloud services
-  Accessibility of critical corporate applications
-  Speed / throughput of network (intranet/internet)
-2. preprocess the raw data in Hadoop clusters for daily or hourly aggregation
-3. Modules generating graphs from these sources
-4. Services have flexibility to subscribe to which graph to monitor specific characteristics
-5. Policy manager to decide when to generate alerts
-
-How to build dasboards?
-=====================
+8. rendering time
 
 Heat-Map
 This visualization view provides products, operations, and executive teams a quick overview of latency 
@@ -194,7 +157,48 @@ This automated check helps us detect degradation in real-time when a feature is 
 Site Speed Data Analysis
 Use raw data and visualization provided to 
 analyze performance, and engagement correlation. 
-These results help to make important decisions to make site better.
+These results help to make important decisions to make site better. 
+
+Some important points
+=====================
+1. A healthy monitoring and alerting pipeline is simple and easy to reason about. It focuses primarily on symptoms for paging,
+reserving cause-oriented heuristics to serve as aids to debugging problems. 
+2. Monitoring symptoms is easier the further
+"up" your stack you monitor, though monitoring saturation and performance of subsystems such as databases often must be
+performed directly on the subsystem itself.
+3. Email alerts are of very limited value and tend to easily become overrun 
+with noise; instead, you should favor a dashboard that monitors all ongoing subcritical problems for the sort of 
+information that typically ends up in email alerts. A dashboard might also be paired with a log, in order to analyze
+historical correlations.
+
+Over the long haul, achieving a successful on-call rotation and product includes choosing to alert on symptoms or 
+imminent real problems, adapting your targets to goals that are actually achievable, and making sure that your monitoring
+supports rapid diagnosis.
+
+Design
+=======
+
+1. Module to collect raw data
+  A script running on each host discovers the services running, parses the GC log for that service, and pumps out 
+  metrics. 
+  Granularity is very important as it allows one to zoom in to collect more details.
+  Ability to collect different metrics and from heterogenous sources
+  eg:-
+  Accessibility of intranet and internet sites
+  Collecting metrics like packet loss, latency, jitter between all sites and datacenters with QOS Queues
+  Intranet and internet link failover check
+  Accessibility of cloud services
+  Accessibility of critical corporate applications
+  Speed / throughput of network (intranet/internet)
+2. preprocess the raw data in Hadoop clusters for daily or hourly aggregation
+3. Modules generating graphs from these sources
+4. Services have flexibility to subscribe to which graph to monitor specific characteristics
+5. Policy manager to decide when to generate alerts
+
+How to build dasboards?
+=====================
+
+
 
 
 
