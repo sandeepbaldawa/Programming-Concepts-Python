@@ -360,6 +360,13 @@ What does an IP packet contain?
 3. Checksum
 4. Data
 
+Why use UDP at all, when TCP is so reliable?
+============================================
+Why would you use an unreliable underlying protocol? Two reasons: speed and speed. It's way faster to fire-and-forget 
+than it is to keep track of what has arrived safely and make sure it's in order and all that. If you're sending chat 
+messages, TCP is great; if you're sending 40 positional updates per second of the players in the world, 
+maybe it doesn't matter so much if one or two get dropped, and UDP is a good choice.
+
 What is switch vs hub
 =====================
 
