@@ -24,6 +24,8 @@ device that allows a login, does a fork followed by an exec of the program getty
    and waits for us to enter our user name. When we enter our user name, getty’s job is complete, and it then invokes 
    the login program
    
+   
+   
    init (ID 1) ====> init and exec ===> getty (opens file descriptors 0,1,2, reads username, initial environemnt) ==> login
               forks
 4. Login compares entered password and the expected password. It also encrypts the password we enter using crypt
@@ -75,13 +77,7 @@ getaddrinfo("www.example.com", "http/ssh", &hints, &res);
 
 s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
 
-3a1. The client is responsible for beginning the initial TCP handshake with the server, 
-     negotiating the secure connection, verifying that the server's identity matches previously recorded information, 
-     and providing credentials to authenticate. An SSH session is established in two separate stages. The first is to agree 
-     upon and establish encryption to protect future communication. The second stage is to authenticate the
-     user and discover whether access to the server should be granted.
-     
-     
+
 3a. On the server side the inetd/sshd process listens for a connection to arrive.
     It also creates a socket and uses bind() to bind the socket to a port address(22 for ssh and 80 for http)
     The port number is used by the kernel to match an incoming packet to a certain process's socket descriptor. 
@@ -107,10 +103,13 @@ s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
     If the client can match one of the acceptable protocol versions, the connection continues. The server also provides
     its public host key, which the client can use to check whether this was the intended host.
     
-    At this point, both parties negotiate a session key using a version of something called the Diffie-Hellman algorithm. 
-    This algorithm (and its variants) make it possible for each party to combine their own private data with public data 
-    from the other 
-    system to arrive at an identical secret session key.
+    
+    
+    3a1. The client is responsible for beginning the initial TCP handshake with the server, 
+     negotiating the secure connection, verifying that the server's identity matches previously recorded information, 
+     and providing credentials to authenticate. An SSH session is established in two separate stages. The first is to agree 
+     upon and establish encryption to protect future communication. The second stage is to authenticate the
+     user and discover whether access to the server should be granted.
 
 4. On the client side Next step is to connect
 int connect(int sockfd, struct sockaddr *serv_addr, int addrlen); 
@@ -131,6 +130,13 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 3. addrlen is a local integer variable that should be set to sizeof(struct sockaddr_storage) 
    before its address is passed to accept().
 
+    sshd normally runs as a daemon, listening for incoming connection requests, and forking whenever it accepts a
+    connection from a client. This spawns a separate child
+    process (a copy of the parent sshd process) to handle each session. The child process exits when the session ends.
+    At this point, both parties negotiate a session key using a version of something called the Diffie-Hellman algorithm. 
+    This algorithm (and its variants) make it possible for each party to combine their own private data with public data 
+    from the other 
+    system to arrive at an identical secret session key.
 Client's connect() to he server machine on a port that it is listen()ing on. 
 will be queued up waiting to be accept()ed. Once server calls accept() and get's the
 pending connection. It'll return to you a brand new socket file descriptor to use for this single connection! 
@@ -168,7 +174,7 @@ another machine that is spoofing it. This step is accomplished as outlined below
 3. If  the  user  agrees  to  continue  connecting,  the  client  verifies  the  authenticity  of  the  Certifying Authority 
    (CA)  that  issued  the  public  key  certificate  for  the  server  and  if  satisfied,  accepts  the public keys. The 
    machine then adds the server’s public keys to its personal list of host public keys. 
-4. When the administrator has included the public key for the client machine in the per-machine list of known host public keys
+4. If public key of the client machine is copied to the known host public keys
    on the server machine, the server may want the client machine to prove that it is what it claims to be. 
    The server  will create a “challenge” encrypted with  the  client’s host public key and send it to the client. Only a  
    genuine client machine will be able to decrypt this message with  its private key. The client then sends the same 
@@ -203,18 +209,19 @@ is symmetrical or asymmetrical.
 
 Symmetrical Encryption
 ======================
-Symmetrical encryption is a type of encryption where one key can be used to encrypt messages to the opposite party, and 
-also to decrypt the messages received from the other participant. 
-This means that anyone who holds the key can encrypt and decrypt messages to anyone else holding the key.
+Symmetrical encryption is a type of encryption anyone who holds a single key can encrypt and decrypt messages to anyone 
+else holding the same key.
 
-Symmetric keys are used by SSH in order to encrypt the entire connection. Contrary to what some users assume, 
-public/private asymmetrical key pairs that can be created are only used for authentication, not the encrypting the 
-connection. 
+Symmetric keys are used by SSH in order to encrypt the entire connection. 
 The symmetrical encryption allows even password authentication to be protected against snooping.
 
+The purpose of this is to wrap all further communication in an encrypted 
+tunnel that cannot be deciphered by outsiders.
+
+After the session encryption is established, the user authentication stage begins. 
+
 The client and server both contribute toward establishing this key, and the resulting secret is never known to outside 
-parties. The secret key is created through a process known as a key exchange algorithm. This exchange results in the server 
-and client both arriving at the same key independently by sharing certain pieces of public data and manipulating them with 
+parties. , the server and client both arriving at the same key independently by sharing certain pieces of public data and manipulating them with 
 certain secret data. 
 
 SSH can be configured to utilize a variety of different symmetrical cipher systems, including AES,
@@ -237,7 +244,7 @@ for the public key paradigm to work. The private key is the only component capab
 encrypted using the associated public key. By virtue of this fact, any entity capable decrypting these messages has \
 demonstrated that they are in control of the private key.
 
-1. SSH utilizes asymmetric encryption in a few different places. During the initial key exchange process used to set up the
+1. During the initial key exchange process used to set up the
    symmetrical encryption (used to encrypt the session), asymmetrical encryption is used. In this stage, both parties 
    produce temporary key pairs and exchange the public key in order to produce the shared secret that will be used for
    symmetrical encryption.
@@ -252,12 +259,7 @@ The above process allows each party to equally participate in generating the sha
 end to control the secret. It also accomplishes the task of generating an identical shared secret without 
 ever having to send that information over insecure channels.
 
-The generated secret is a symmetric key, meaning that the same key used to encrypt a message can
-be used to decrypt it on the other side. The purpose of this is to wrap all further communication in an encrypted 
-tunnel that cannot be deciphered by outsiders.
-
-After the session encryption is established, the user authentication stage begins.   
-
+  
 As you can see, the asymmetry of the keys allows the server to encrypt messages to the client using the public key. 
 The client can then prove that it holds the private key by decrypting the message correctly. The two types of encryption 
 that are used (symmetric shared secret, and asymmetric public-private keys) are each able to leverage their 
