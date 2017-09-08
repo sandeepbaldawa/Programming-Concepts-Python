@@ -270,7 +270,7 @@ IV. Indexer will process the events received from the Watcher and update the int
  28. Metadata Partitioning
  Consistent hash based partition
  
- 29. 
+ 29. Consider tuning Nagle's algorithm...
  
 Advantages of Redis
 ===============
