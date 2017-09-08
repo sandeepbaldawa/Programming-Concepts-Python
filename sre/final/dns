@@ -1,0 +1,98 @@
+- maps domain names to ip address
+- is a service on the TCP/IP n/w
+- DHCP dynamically assigns ip address to machines on the n/w
+- usually built into routers for normal users
+- In enterprise world we have windows servers and bind which can serve as dns
+- dhcp servers should always talk to dns servers, because when a dhcp server generates a dynamic ip, 
+  that should be recorded in the dns tables
+- reverse dns maps ipaddr to domain name
+
+
+
+Components of DNS
+=================
+Distributed database system that can serve as foundation for name resolution in TCP/IP.
+1. Domain Name Space
+   Provides structure of DNS distributed database.
+   Is like a n-ary tree with the root domain as "."
+   First level domain name can be organization names(like org, edu, com etc..)
+   Second level domain names are registered to individuals (like microsoft.com, stanford.edu etc..)
+   fqdn maps host name to ip address
+2. Zones
+   for administrative purposes domains can be organized into zones
+   discrete and contiguous area of domain names space
+   helps in delegating forwading, one large domain name can be difficult to administor
+3. Name Servers
+Name Resolution Process
+Holds database data related to zones
+authority to make changes to the zones file
+secondary zone database can help balance workload
+secondary zone db files updated regularly from the primary
+
+Basic working
+=============
+A forward lookup query is sent to map a name to an ipaddress
+Client first queries it's nearest local name server for eg:-w1.micrsoft.training.com
+The local name server checks it's zone database file if it has authority for this
+The name server in turn queries the root name server since it does not have authority for the same
+The root name server then queries a com name server which checks it's local zone database file for the entry
+
+
+1. User requests for www.google.com
+2. Request goes to DNS which returns the ip addr the domain name matches to
+3. User computer uses this ipaddr to go through the router to the internet to find which subnet/machine/port the ipaddr
+   maps to and connects to the same.
+
+
+- Important to note that a given DNS server will have mappings only for the local LAN
+- So if the DNS server does not have a record in it's table's it will query the remote DNS server to get the mapping
+
+
+What are zones?
+==============
+- Zones are how the database records for dns are stored.
+- 4 main zone types
+   Primary Zone
+   Primary Zone with Active Directory integration
+   Secondary Zone
+   Stub Zone
+   
+PRIMARY ZONE
+============
+Primary Zone => Database is stored locally on the server (on local harddrive)
+advantages => Can be on any server type
+dis-advantages => Two Primary Zones cannot communicate with each other directly(because stored on local db).
+                  This causes additional traffic.
+                  No fault tolerance on failures.
+                  It can be easily hacked
+                  no security
+
+PRIMARY ZONE ACTIVE DIRECTORY INTEGRATION
+=========================================
+Database stored in active directory
+DNS Server put on Domain Controller
+For fault tolerance need atleast 2 active DNS if one DNS goes down other takes over
+All records are stored in active directory
+Full security
+
+Secondary zone
+==============
+Used for load balancing
+Delegation record put on secondary zone
+
+Stub zone
+=========
+Database stored locally and get them from primary
+used for conditional forward
+Record types
+1. Start of authority(TTL etc..)
+2. NS Records (for ww.zyz.com send request to serverA)
+3. A (glue host) maps to ipaddress
+
+                  
+                  
+                  
+                  
+                   
+
+
