@@ -16,7 +16,8 @@ e. Recursive search – Your ISP’s DNS server begins a recursive search, from 
    and so a hit to the root nameserver will not be necessary.
    
    
-   One worrying thing about DNS is that the entire domain like wikipedia.org or facebook.com seems to map to a single IP address. 
+   One worrying thing about DNS is that the entire domain like wikipedia.org or facebook.com seems to map to a single 
+   IP address. 
    
  Fortunately, there are ways of mitigating the bottleneck:
    a. Round-robin DNS is a solution where the DNS lookup returns multiple IP addresses, rather than just one. For example, 
