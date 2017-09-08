@@ -438,3 +438,74 @@ FIN – No more data from sender (Seen after a connection is closed)
 What protocol does DNS use?
 =========================
 Usually UDP, but TCP is used for zone transfers also if a record is taking too long to return via UDP
+
+How does basic routing work?
+=============================
+In a small business LAN, the primary networking devices are network interface cards (NICs), that connect PC's and 
+servers to the LAN, and Hubs and/or switches that interconnect the various LAN devices and create the Ethernet backbone. 
+These devices operate at the data link layer. For the LAN users to connect to the Internet or to a 
+remote branch office a device called a router must be used.
+
+A router passes data between multiple networks. It works at the OSI Network Layer (Layer3), which means that it must be 
+able to understand the data packets so that it can route them to their destination. They are essentially computers optimized 
+for handling packets that have to be transferred between separate networks. Routers attempt to send packets from their 
+source to their destination in the fastest way 
+
+On a network, packets with destinations on the LAN go directly from the sending machine to the destination machine without
+any intermediaries. However if the destination address of a packet is outside the LAN, the sending machine sends it to the
+router, which the sending machine knows as the default gateway, and has no further interaction with that packet. When the 
+router receives a packet destined for a point outside the LAN, it looks to see if it has a route to get the packet to that 
+destination network; if it does (or if it has a default gateway of its own), it will send the packet to the next stop.
+
+routers send packets according to the available routes between networks and try to determine the shortest possible 
+route at any given time.
+
+How does a router do this? Well, inside a router there's a set of data called routing tables. Routing tables include:
+
+All possible routes the router is aware of
+Information on which connections lead to particular groups of addresses
+Priorities for connections to be used
+Rules for handling both routine and special cases of traffic
+Routing tables are dynamic - they are updated by routing protocols such as Routing Information Protocol (RIP) or Open 
+Shortest Path First (OSPF) that constantly pass messages between routers. The router consults them to determine whether or 
+not it has a route to a particular destination address.
+
+The routing table can be as simple as a half-dozen lines of code in small routers but can grow to massive size and 
+complexity in very large routers that handle the bulk of Internet traffic.
+
+Explanation of Routing
+
+When a router takes a packet and sends it closer to its final destination, we say it has forwarded a packet. In the 
+simplest terms, that's what a router does; it forwards packets toward their destination and it tries to do so at the least 
+possible "cost" Cost, for a router, is not measured in dollars and cents, but in "hops". Every time a packet is routed
+between one router and another, a number in the data packet called the hop count increases by 1. If the hop count
+reaches certain preset limits (for example RIP allows a maximum of 16 hops), the packet may be discarded as undeliverable 
+since in 16 hops, the routers have not been able to deliver the packet to the destination address.
+
+For routers, however, cost is not the absolute variable it is in the physical world because it's not much more expensive 
+to go "the long way" from an origin to a destination when dealing with the Internet. This is because:
+
+Data moves at the speed of light (or very close to it over copper wires), so any additional distance is not very relevant.
+The Internet was designed to be redundant. If the first route fails, try a second or third.
+The design of the Internet is solid because it reroutes data packets all the time as a result of events like 
+natural disasters and power failures.
+
+Other Router Functions: Security
+
+Routers can add security to your WAN. If your WAN is accessed by many users, or if it passes over high-speed 
+digital phone lines or the Internet, your WAN is a potential target for hackers, crackers, identity theft, 
+denial of service attacks, virus infections and much more. Today's SMB routers can be configured with features such as:
+
+Built in Firewalls
+Intrusion detection
+Authentication
+Encryption
+Intrusion detection
+VPN's.
+
+Summary
+Knowing where and how to send data packets is the most important job of a router. Simple routers do this and nothing more.
+Other routers add additional functions including security features to the jobs they perform. The one constant is that modern
+networks, including the Internet, could not exist without the router. Cisco Systems, Inc, has a complete line of business 
+class routers that will serve the SMB community.
+
