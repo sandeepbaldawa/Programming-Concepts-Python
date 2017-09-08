@@ -47,6 +47,7 @@ Goals(Why monitor)?
 - load monitoring from collected metrics
 - help easily prioritize tasks
 - How long are we willing to wait for an optimization proposal?
+- Easy integration with 3rd party tools like nagios, iperf, netperf, iostat etc..
 
   
 
