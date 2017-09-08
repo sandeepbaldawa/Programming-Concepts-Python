@@ -1,0 +1,55 @@
+https://www.ssh.com/ssh/
+http://openyoudao.org/_media/ssh_second_edition.pdf
+https://kyleisom.net/articles/ssh_keys.html
+How do I debug SSH problems?
+============================
+1. Examine the SSH server logs. 
+   These will reported by syslog according the server's syslog configuration, often in /var/log/messages.
+   sudo tail -f /var/log/auth.log 
+   On Red Hat, it's /var/log/secure
+   
+2. Add the -vvv switch to your SSH client command line, causing it to report verbosely on what it does   
+
+3. Run an instance of the server in debug mode, and test your connection against it:
+   [on the server as root]
+   # sshd -d -p 1234
+
+   [on the client]
+   $ ssh -vvv -p 1234 ...
+   
+4. Check the ssh environment
+operating systems on the client and server hosts, and their versions
+SSH software on the client and server hosts, and their versions
+
+5. When I try to connect to an SSH server, I get the error "Connection refused."
+   No SSH server is running where you tried to connect. Double-check the hostname and TCP port number: 
+   perhaps the server is running on a port different from the default?
+   try running netstat -tanp on the server side to see on which port the sshd service is bound to.
+   
+6. When I log in, the message of the day (/etc/motd) prints twice.
+   Both sshd and the login program are printing it. 
+   Disable sshd 's printing by setting the serverwide configuration keyword PrintMotd to no.
+
+7. When I log in, I see two messages about email, such as "No mail" or "You have mail."
+   Both sshd and the login program are checking for mail. 
+   Prevent sshd from checking by setting the serverwide configuration keyword CheckMail to no.
+   
+8. The SSH1 server says "Permission denied" and exits.
+   This occurs if all authentication techniques have failed. Run your client in debug mode and read the diagnostic messages,
+
+9. How do I authenticate without typing a password or passphrase?
+   ssh-copy-id
+
+10. I get prompted for my password or passphrase, but before I have time to respond, the SSH server closes the connection.
+    Your server's idle timeout value may be too short. If you are a system administrator of the server machine, 
+    set IdleTimeout to a larger value in the serverwide configuration file
+
+Basic working
+=============
+On first contact, SSH establishes a secure channel between the client and the server so that all transmissions 
+between them are encrypted. The client then prompts for your password, which it supplies to the server 
+over the secure channel. The server authenticates you by checking that the password is correct and permits the login.
+All subsequent client/server exchanges are protected by that secure channel, including everything you type into the 
+SSH application and everything it displays to you from shell.isp.com.
+It’s important to remember that the secure channel exists only between the SSH cli- ent and server machines.
+   
