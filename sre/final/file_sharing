@@ -1,0 +1,293 @@
+questions
+=========
+machines:- sizing, heterogenous, IOPs, queueing, upload/download capacity..
+           SSD's? HDD's? 
+Network:- bandwidth, network localization, i.e how many hops are different machines.
+latency, link quality, reliability on the network size
+- content of files changing? IO patterns
+any requirements for RCU's, WCU's etc..
+- Can we expect huge read and write volumes.
+- What kind of workload (sequential, random..)
+- Are the clients requesting data or server is pushing the data..
+- One read capacity unit represents one strongly consistent read per second, or two eventually consistent reads per second,
+for items up to 4 KB in size. ...One write capacity unit represents one write per second for items up to 1 KB in size.
+- what API's are we looking for
+- Can the number of servers increase decrease?
+- Max file size..
+- will we have lot of metadata queries?
+- Are looking for ACID-ity is required.
+  Atomicity, Consistency, Isolation and Durability of all file operations should be guaranteed.
+
+
+
+
+Entities in the system
+=======================
+- Left server
+- Right clients
+- files being transferred
+- network
+
+CAP theorem
+===========
+states that it is impossible for a distributed software system to simultaneously provide more than two out of three of the following guarantees (CAP): Consistency, Availability and Partition tolerance. When we design a distributed system, 
+trading off among CAP is almost the first thing we want to consider. CAP theorem says while designing a distributed system 
+we can pick only two of:
+
+Consistency: All nodes see the same data at the same time. Consistency is achieved by updating several nodes before allowing 
+further reads.
+
+Availability: Every request gets a response on success/failure. Availability is achieved by replicating the data 
+across different servers.
+
+Partition tolerance: System continues to work despite message loss or partial failure. A system that is partition-tolerant 
+can sustain any amount of network failure that doesn’t result in a failure of the entire network. 
+Data is sufficiently replicated across combinations of nodes and networks to keep the system up through intermittent outages.
+
+We cannot build a general data store that is continually available, sequentially consistent and tolerant to any partition
+failures. We can only build a system that has any two of these three properties. Because, to be consistent, all nodes should
+see the same set of updates in the same order. But if the network suffers a partition, updates in one partition might not
+make it to the other partitions before a client reads from the out-of-date partition after having read from the up-to-date
+one. The only thing that can be done to cope with this possibility is to stop.
+serving requests from the out-of-date partition, but then the service is no longer 100% available.
+
+Design
+======
+1. We have 10K buckets(destination server nodes) in which we need to send the 1TB size file. Hence we could
+   take the 1TB file and divide it into 100K chunks such that each bucket would receive 10 chunks. If a machine is more
+   powerful CPU/Storage it can get to store more chunks(more slices in the consistent hashing method). Chunks
+   can be done at cache, metadata or data layer.
+2. We could do this using consistent hashing. Advantages of distributed hashing with consistent hashing
+    a. Node add or remove only K/N keys need to be moved.
+    b. we can rebalance as and when needed based on the hots spots.
+    c. performance consistency
+3. We could first hash 
+   a. each machine by maybe it's ip address 
+   b. each chunk by the inode + offset
+3a. How do we handle file transfer efficiently? As mentioned above, we can break each file into smaller chunks so that
+    we transfer only those chunks that are modified and not the whole file. Let’s say we divide each file into fixed size 
+    of 4MB chunks. We can statically calculate what could be an optimal chunk size based on 1) Storage devices we use in the
+    cloud to optimize space utilization and Input/output operations per second (IOPS) 2) Network bandwidth 
+    3) Average file size in the storage etc. In our metadata, we should also keep a record of each file and the chunks
+    that constitute it.    
+3b. We could have a seperate metadata server and file storage, to help with quick metadata queries
+3c. Keeping a local copy of metadata not only enable us to do offline updates but also
+    saves a lot of round trips to update remote metadata.
+4. We could create replicated copied of chunks. Advantages are
+   a. (2-way, 3-way depending on the requirement), comprise storage vs reliability. 
+   b. For hot spots reads can be distributed to the replicated copies to spread the load, something like rebalance
+      can be done periodically 
+   c. Important to note we can do writes in parallel on all copies..(P, M1 and M2)   
+5. Some framework like zookeeper which can maintain for a given inode what are the corresponding chunks and 
+   they are on which machines. Advantages of zookeeper is
+      a. It can maintain an ensemble(master slave) and heartbeat a node to check if some node is dead
+      b. Help in easily querying for a file using the inode and check on which machines the corresponding chunks lay.
+         Other option is to use finger printing to indetify file(small unique key for large amount of data)
+      c. Can help initiate rebalance. 
+      d. "Quorum" refers to the minimum number of nodes that must agree on a  transaction before it is considered committed. 
+      e. "Ensemble" refers to the full set of peer servers in a ZooKeeper cluster. 
+      f. Acts as a Name service you may want to keep a track of which servers or services are up and running and want to  look up their status by name. 
+         ZooKeeper gives a simple interface to do the same.
+      g. Locking— The serialized access to a shared resource in any distributed system, you may need to implement distributed mutexes(a program object that allows multiple program threads to share the same resource, such as file access). 
+         ZooKeeper provides an easy way for you to implement them.   
+      h. Synchronization—Distributed mutexes  with hand in hand synchronizing access is the need for shared resources. Whether implementing a producer-consumer queue or a barrier, 
+         ZooKeeper is the solution which provides for a simple interface to implement that.   
+      i. Configuration management— Using ZooKeeper to centrally store and manage the configuration of your distributed system 
+         can be done. This means any new nodes joining can pick up the up-to-date centralized configuration from ZooKeeper as 
+         soon as they join the system. This also allows you to centrally modify the state of your distributed 
+         system by changing the centralized configuration through one of the ZooKeeper clients.   
+      j. Leader election— The distributed system may have to deal with problem of nodes going down, also you may want to implement an automatic fail-over strategy.
+         ZooKeeper provides off-the-shelf support for doing so through leader election.   
+         
+    At any given time, one ZooKeeper client is connected to one ZooKeeper server. Each ZooKeeper server can handle a 
+    large number of client connections at the same time. Each client periodically sends pings(also know  as heartbeat ) to the
+    ZooKeeper server it is connected to let it know that it is alive and connected. The ZooKeeper server revert with an 
+    acknowledgment of the ping, indicating the server is alive as well. When the client does not receive an acknowledgment
+    from the server within the specified time, the client connects to another server in the cluster, 
+    and the client session is transparently transferred over to the new ZooKeeper server.     
+         
+5b. On the side sending the file we could have asynch transfer to efficiently transfer during blocking IOs.  
+5c. Re-create chunks(data, metadata, cache) on dead nodes, disks etc.
+
+
+6. We could build a persistent caching layer which will allow us to acknowledge writes back quicker.
+   what do we optimize on performance or reliability?, we can optimize this by acknowledging by either writing/not writing to
+   the mirrors in persistence layers with SSD's, or acknowledging in memory..fundamentally a tradeoff.
+7. To save space we could compress the data and dedup it and we could do this inline..  
+   a. Post-process deduplication
+   With post-process deduplication, new chunks are first stored on the storage device, and later some process analyzes the 
+   data looking for duplication. The benefit is that clients will not need to wait for the hash calculation or lookup to
+   complete before storing the data, thereby ensuring that there is no degradation in storage performance. 
+   Drawbacks of this approach are 1) We will unnecessarily be storing duplicate data, though for a short time, 
+   2) Duplicate data will be transferred consuming bandwidth.
+
+    b. In-line deduplication
+    Alternatively, deduplication hash calculations can be done in real-time as the clients are entering data on their 
+    device. If our system identifies a chunk which it has already stored, only a reference to the existing chunk will be 
+    added in the metadata, rather than the full copy of the chunk. This approach will give us optimal network and storage
+    usage. 
+ 
+7a. To validate if files reaching the destination are same we could do a rolling checksum to avoid calculating checksum of a 
+    large file which can be extremely slow. The router layer can identify chunks of files transmitted and received and rolling
+    checksums for those.
+8. System can rebalance chunks automatedly time to time to reduce the hot spots.
+9. Log structured file system (append only)
+   Why?
+   ===
+   Log-structured filesystems assume that write performance is more of a constraint than read performance. 
+   The justification for this assumption is that read performance can be improved by increasing cache sizes. 
+   For write-heavy loads on disks that aren't too full, a log-structured filesystem produces much faster performance 
+   than a traditional filesystem because it avoids seeks between block writes—this is even enough to pay for the 
+   overhead of segment cleaning and maintaining duplicate log entries. However, for very full disks (requiring frequent cleaning) or for 
+   read-heavy loads that could otherwise take advantage of locality, a traditional filesystem would give lower overhead.
+   
+   a. Maintains changes made to a file as delta in an in memory datastructure
+   b. Buffer changes to multiple files in one contiguous log segment datastructure
+   c. Once log segment fills up, push it to disk and since the log segments are sequential good for the disk(called flushing)
+   d. We can stripe this log segment across multiple disks for parallel flush'es to the disk   
+   e. On reads file has to be reconstructed from the log segments
+   f. logs have to be cleaned periodically to make sure disk is not cluttered due to the invalidation of blocks possible
+      which can potentially create holes(during overwrites). 
+   Why?/Advantages
+   =============
+   a. For write-intensive applications, the fact that writes all go to the same
+      location may improve write performance substantially (by an order of magnitude in some cases).
+   b. We may get versioning as a bonus: old versions of files are still present in the log, 
+      so we can undo mistakes and/or recover old versions of files.
+   c. We get journaling automatically: all file operations are effectively atomic, 
+      reducing the need for consistency checking.
+   Dis-advantages
+   ==============
+   There is quite a bit of data fragmentation, since updating a few blocks in a file places the 
+   new copies at the end of the log, wherever it happens to be.
+   Some sort of garbage-collection processes is necessary to recover free space from the beginning of the log.
+ 10. SSD's can be divide into Writelogs and Read Cache
+ 11. We can design our write size for optimal performance..
+ 12. Have an in memory tree to find corresponding chunks in SSD/cache
+ 13. Metadata related to files can be writethough from caching to Persistent layer.
+ 14. Caching layers can be in memory(L1 Read) and SSD(WriteLog, L2 Read)
+ 15. Read Cache can dedup data for optimal storage, compression can be costly on read path..
+ 16. Write => ACK no need to compress and deduplicate so that ACK's are fast, from ACK to flushing to disk we can
+     compress and deduplicate.
+ 17. Snapshot the system for recovering and backup.    
+ 18. Indexes can be used; they are used to improve the speed of data retrieval operations on the data store. 
+ An index makes the trade-offs of increased storage overhead, and slower writes (since we not only have to write 
+ the data but also have to update the index) for the benefit of faster reads. 
+ Indexes are used to quickly locate data without having to examine every row in a database table.
+ 
+ Load balancers can come between
+ 1. Webserver and App Server
+ 2. App server and database server
+ 
+ They can be software(HAProxy) or hardware(Citrix Netscaler)
+ 
+ 19. Cache Invalidation policy
+     Write-through cache: 
+     Write-back cache
+     Write-around cache:
+    
+ 20. Cache eviction policies
+     Following are some of the most common cache eviction policies:
+
+First In First Out (FIFO): The cache evicts the first block accessed first without any regard to how often or how many times it was accessed before.
+Last In First Out (LIFO): The cache evicts the block accessed most recently first without any regard to how often or how many times it was accessed before.
+Least Recently Used (LRU): Discards the least recently used items first.
+Most Recently Used (MRU): Discards, in contrast to LRU, the most recently used items first.
+Least Frequently Used (LFU): Counts how often an item is needed. Those that are used least often are discarded first.
+Random Replacement (RR): Randomly selects a candidate item and discards it to make space when necessary.
+
+
+ 21. Use Indexes Indexes are well known when it comes to databases; they are used to improve the speed of data retrieval 
+     operations on the data store. An index makes the trade-offs of increased storage overhead, and slower writes 
+     (since we not only have to write the data but also have to update the index) for the benefit of faster reads. 
+     Indexes are used to quickly locate data without having to examine every row in a database table. Indexes can be created
+     using one or more columns of a database table, providing the basis for both rapid random lookups and efficient 
+     access of ordered records.
+     
+ 22. Use Proxy A proxy server is an intermediary piece of hardware/software that sits between the client 
+     and the back-end server. It receives requests from clients and relays them to the origin servers. Typically, proxies 
+     are used to filter requests or log requests, or sometimes transform requests (by adding/removing headers, 
+     encrypting/decrypting, or compression). Another advantage of a proxy server is that its cache can serve a lot of 
+     requests. If multiple clients access a particular resource, the proxy server can cache it and serve all clients without 
+     going to the remote server.
+     
+     proxy is to collapse requests for data that is spatially close together in the storage (consecutively on disk). 
+     This strategy will result in decreasing request latency. For example, let’s say a bunch of servers request parts of file: 
+     part1, part2, part3, etc. We can set up our proxy in such a way that it can recognize the spatial locality of the individual
+     requests, thus collapsing them into a single request and reading complete file, which will greatly minimize the reads from 
+     the data origin. Such scheme makes a big difference in request time when we are doing random accesses across TBs of data. 
+     Proxies are particularly useful under high load situations, or when we have limited
+     caching since proxies can mostly batch several requests into one.
+
+23. A processing queue is as simple as it sounds: all incoming tasks are added to the queue, and as soon as any worker has 
+    the capacity to process, they can pick up a task from the queue. These tasks could represent a simple write to a database,
+    or something as complex as generating a thumbnail preview image for a document. Queues are also used for fault tolerance as
+    they can provide some protection from service outages and failures. For example, we can create a highly robust
+    queue that can retry service requests that have failed due to transient system failures. 
+    RabbitMQ, ZeroMQ, ActiveMQ, and BeanstalkD.
+    
+
+24. Identifying and resolving bottlenecks
+
+- Is there any single point of failure in our system? What are we doing to mitigate it?
+- Do we’ve enough replicas of the data so that if we lose a few servers, we can still serve our users?
+- Similarly, do we’ve enough copies of different services running, such that a few failures will not cause total system shutdown?
+- How are we monitoring the performance of our service? Do we get alerts whenever critical components fail or their performance degrade?
+
+25. Additional
+
+How much and at which layer should we introduce cache to speed things up?
+What components need better load balancing?
+
+26.  HTTP long polling. With long polling, the client requests information from the server with the expectation that the 
+     server may not respond immediately. If the server has no new data for the client when the poll is received, instead of 
+     sending an empty response, the server holds the request open and waits for response information to become available. 
+     Once it does have new information, the server immediately sends an HTTP/S response to the client, completing the open 
+     HTTP/S Request. Upon receipt of the server response, the client can  immediately issue another server request for future updates.
+27. I. Internal Metadata Database will keep track of all the files, chunks, their versions, and their location in the 
+       file system.
+
+II. Chunker will split the files into smaller pieces called chunks. It will also be responsible for reconstructing a file 
+    from its chunks. Our chunking algorithm will detect the parts of the files that have been modified by the user and 
+    only transfer those parts to the Cloud Storage; this will save us bandwidth and synchronization time.
+
+III. Watcher will monitor the local workspace folders and notify the Indexer (discussed below) of any action performed by
+   the users, e.g., when users create, delete, or update files or folders. Watcher also listens to any changes happening on 
+   other clients that are broadcasted by Synchronization service.
+
+IV. Indexer will process the events received from the Watcher and update the internal metadata database with information 
+    about the chunks of the modified files. Once the chunks are successfully submitted/downloaded to the Cloud Storage, the
+    Indexer will communicate with the remote Synchronization Service to broadcast changes to other clients and update remote 
+    metadata database.
+    
+ 
+27. Security, Permissions and File Sharing
+   One of primary concern users will have while storing their files in the cloud would be the privacy and security 
+   of their data. Especially since in our system users can share their files with other users or even make them public 
+   to share it with everyone. To handle this, we will be storing permissions of each file in our metadata DB to reflect 
+   what files are visible or modifiable by any user.
+    
+ 28. Metadata Partitioning
+ Consistent hash based partition
+ 
+ 29. 
+ 
+Advantages of Redis
+===============
+No schema or column names
+Can do 110k sets/sec and 80k gets/sec
+Rich data-type support
+Cache and disk persistence
+Not CPU intensive
+1% CPU can handle more than 1K small read/write per sec
+Gets nosql, caching and persistence all together
+Supports lot of clients like Python, C, C++, java, php etc.
+Secure
+Designed to be used internally by trusted clients
+Data encryption not supported
+
+    
+     
+   
+   
+   
