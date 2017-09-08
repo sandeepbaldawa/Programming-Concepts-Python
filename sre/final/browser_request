@@ -4,7 +4,9 @@
 2. The browser looks up the IP address for the domain name
 
 The first step in the navigation is to figure out the IP address for the visited domain. The DNS lookup proceeds as follows:
-a. Browser cache – The browser caches DNS records for some time. Interestingly, the OS does not tell the browser the time-to-live for each DNS record, and so the browser caches them for a fixed duration (varies between browsers, 2 – 30 minutes).
+a. Browser cache – The browser caches DNS records for some time. Interestingly, the OS does not tell the browser the
+  time-to-live for each DNS record, and so the browser caches them for a fixed duration 
+  (varies between browsers, 2 – 30 minutes).
 b. OS cache – If the browser cache does not contain the desired record, the browser makes a system call 
    (gethostbyname in Windows). The OS has its own cache.
 c. Router cache – The request continues on to your router, which typically has its own DNS cache.
