@@ -415,6 +415,20 @@ where y goes between 16 and 31.
 Networks behind a NATing firewall don't need to be on one of these reserved networks,
 but they commonly are.
 
+What is Nagle's algorithm?
+==========================
+Controlling the Nagle Algorithm
+================================
+TCP/IP has a feature called the Nagle Algorithm, which is designed to reduce the
+number of TCP segments sent with very small amounts of data (e.g., one byte), usually
+as part of an interactive terminal session. Over fast links such as Ethernet, the
+Nagle Algorithm generally isn’t needed. Over a wide-area network, however, it can
+cause noticeable delays in the responsiveness of X clients and character terminal displays,
+as multibyte terminal control sequences may be transmitted inconveniently by
+the algorithm. In such cases, you should turn off the Nagle Algorithm using the
+NoDelay keyword:
+# Tectia
+NoDelay yes
 
 What is QoS? How does it work? Where would you apply it? When is it enforced?
 ===========================================================================
