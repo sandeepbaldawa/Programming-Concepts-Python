@@ -1,0 +1,263 @@
+Goals(Why monitor)?
+====
+- Analyzing long-term trends. How big is my database and how fast is it growing? How quickly is my daily-active 
+  user count growing?
+- Comparing over time or experiment groups
+  Are queries faster with Acme Bucket of Bytes 2.72 versus Ajax DB 3.14? 
+  How much better is my memcache hit rate with an extra node? 
+  Is my site slower than it was last week?  
+- Alerting
+  Something is broken, and somebody needs to fix it right now! Or, something might break soon, so somebody 
+  should look soon.
+- Building dashboards
+  Dashboards should answer basic questions about your service, 
+  and normally include some form of the four golden signals.
+- Conducting adhoc retrospective analysis (i.e., debugging)
+  Our latency just shot up; what else happened around the same time?  
+- System monitoring is also helpful in supplying raw input into business analytics 
+- Facilitating analysis of security breaches
+- Black-box monitoring
+  Testing externally visible behavior as a user would see it.
+- White-box monitoring
+  Monitoring based on metrics exposed by the internals of the system, including logs,
+  interfaces like the Java Virtual Machine Profiling Interface, or an HTTP handler that emits internal statistics.  
+- Dashboard
+  An application (usually web-based) that provides a summary view of a service’s core metrics. 
+  A dashboard may have filters, selectors, and so on, but is prebuilt to expose the metrics most important to its users.  
+- Root cause
+  A defect in a software or human system that, if repaired, instills confidence that this event won’t happen again 
+  in the same way. A given incident might have multiple root causes: for example, perhaps it was caused by a combination
+  of insufficient process automation, software that crashed on bogus input, and insufficient testing of the script used 
+  to generate the configuration. Each of these factors might stand alone as a root cause, and each should be repaired.
+- capacity planning and traffic prediction
+  Base on disk filing up or cluster filing up or based on the runnign traffic.
+- Push
+  Any change to a service’s running software or its configuration.
+- Understanding symtoms vs cause
+  our monitoring system should address two questions: what’s broken, and why?
+- optimizing web performance for different geographic locations is important for member engagement and experience.   
+  
+
+The "what’s broken" indicates the symptom; the "why" indicates a (possibly intermediate) cause  
+- Good interface, with minimum clicking to get to good data.
+- Qualitative measurement of metrics with deterministic outcome.
+- Collect network, application and performance from remote sites and analyze
+- visualizing operational metrics of various services
+- easily configurables metrics(publisher/subscriber)
+- calibrating metrics to proper intervals to avoid itter introduced by time-boxing smaller intervals
+- Alerting to predict patterns of behavior
+- Automation for most tasks like collecting, adding, analyzing a metric.
+- Abilty to co-relate different metrics without much user intervention
+- Reduce noise by giving capability to serives/users to listen to only what one is interested in
+- Easy to add new people and keep up with the growth of new engineers.
+- Not much touch points to add a metric. Metrics adding should be automated and error free
+- Consistent set of metrics to work with
+- Optimum performance(eg:- time it takes for queries) and space usage.
+- automated monitoring important because of the sheer scale of services to monitor. Also to reduce noise
+  Publisher subscriber would be better applicable. Automated reporting too is equally important.
+- Subscribers can be microservices which inrepret this data.  
+- Generating graphs/pictures important for understanding behavior/anamolies etc mainly because of the sheer amount of data
+  present, it will be very difficult to understand the same manually. 
+- Policies and response rules to judge the system
+
+
+What metrics to use for max result and min noise
+================================================
+The four golden signals of monitoring are latency, traffic, errors, and saturation.
+If you can only measure four metrics of your user-facing system, focus on these four.
+
+1. Latency
+The time it takes to service a request. It’s important to distinguish between the latency of successful
+requests and the latency of failed requests. For example, an HTTP 500 error triggered due to
+loss of connection to a database or other critical backend might be served very quickly; 
+however, as an HTTP 500 error indicates a failed request, factoring 500s into your overall latency might result 
+in misleading calculations. On the other hand, a slow error is even worse than a fast error! 
+Therefore, it’s important to track error latency, as opposed to just filtering out errors.
+
+2. Traffic
+A measure of how much demand is being placed on your system, measured in a high-level system-specific metric. 
+For a web service, this measurement is usually HTTP requests per second, perhaps broken out by the nature of 
+the requests (e.g., static versus dynamic content). For an audio streaming system, this measurement might
+focus on network I/O rate or concurrent sessions. For a key-value storage system, this measurement might
+be transactions and retrievals per second.
+
+3. Errors
+The rate of requests that fail, either explicitly (e.g., HTTP 500s), 
+implicitly (for example, an HTTP 200 success response, but coupled with the wrong content), or by policy 
+(for example, "If you committed to one-second response times, any request over one second is an error"). 
+Where protocol response codes are insufficient to express all failure conditions, 
+secondary (internal) protocols may be necessary to track partial failure modes. 
+Monitoring these cases can be drastically different: catching HTTP 500s at your load balancer can do a decent 
+job of catching all completely failed requests, while only end-to-end system tests can detect that you’re serving
+the wrong content.
+
+4. Saturation
+How "full" your service is. A measure of your system fraction, emphasizing the resources that are most constrained
+(e.g., in a memory-constrained system, show memory; in an I/O-constrained system, show I/O).
+Note that many systems degrade in performance before they achieve 100% utilization, so having a utilization target
+is essential.
+
+5. basic metrics from Navigation Timing and Resource timing in web browsers are collected through JavaScript using
+the open source Boomerang library
+
+6. Metrics for different endpoint devices
+
+7. page load is the fundamental metric for performance
+   We can have this at different service layers
+   as to call each service makes
+   their dependency on other services
+   why it changes over time(increase in load time)
+
+8. rendering time (time taken by 3rd party items like ads)
+
+9. Ability to track infra level monitoring
+   load balancers
+   cachin
+   persistence 
+   proxy
+   queues
+   
+10. Ability to provide all pages calls which happen to load/render a specific page.
+    to help drill down in service level details.
+
+11. track the hot spots and clicks and route taken by the user for the same.
+
+12. Time taken for system to recover on failures like node, disk, power failure, backup etc.
+
+13. System-level metrics used to evaluate the health of the machine (e.g., CPU utilization)
+Application-level metrics used to evaluate the health of the service (e.g., HTTP error codes, exception rates, and counts)
+Metrics to evaluate the health of the JVM (e.g., GC data)
+
+14. whitebox level monitoring (eg:- new exceptions introduced, are these documented? can other services handle these?)
+
+15. monitor systems with real/simulated heavy load, stress, scale, long running, upgraded etc..
+
+16. Ability to monitor by zooming in on a specific region and add correlations for metrics in code, automated way or manual
+
+17. 
+
+Heat-Map
+This visualization view provides products, operations, and executive teams a quick overview of latency 
+distribution across the world using a colored picture map. 
+If a country is of interest, the country can be selected to see a city/state level heat-map.
+
+Goals Tracking
+We set goals to improve site speed in yearly or quarterly intervals depending on available optimization 
+methods and resources. GoSpeed provides a canned report for teams to quickly check where they are against 
+their goals. beginning of the year we set to improve page load time 40% for a page in a specific country by
+the end of Q3 2014. Each week we expect some incremental progress, with 40% slower than the goal at start of the year, 
+and 0% difference at the end of Q3. As shown in Figure 3, blue line is the expectation, and black 
+line is the actual progress for a given week.
+We can quickly know from the chart that this page was in good progress from January to June.
+
+Web Browser Breakdown
+Browser traffic share and browser performance are useful sources for us to do browser-specific optimizations. 
+As RUM data contains user agents with browser information, we are able to process and visualize the details. 
+Figure 3 shows page load time differences in browsers for a selected page; 
+Chrome is more than 30% faster than IE 9 for this page. Figure 4 shows traffic shares for different browsers.
+
+Compare Metrics in Different Dimensions
+In many diagnostic or analytic cases we need to slice and dice the data in a way that we can dive 
+deeply to specific issues. In GoSpeed, we provide preprocessed aggregation data so that our internal teams can 
+compare different metrics in different dimensions quickly.
+
+Real-Time Visualization
+Compare different metrics with same timeline to see issue is in which component/service.
+
+Page Weight Correlation
+Check pages are built from what components and how many requests come for which page,..
+media image, static image, json, javascript
+This provides opportunity to optimize the most frequently used pages contents
+
+Site Speed Monitoring
+built a monitoring system using GoSpeed data and a comparison rule engine, to proactively capture and alert people. 
+This site speed monitoring system is built in an intelligent way that can filter false positive noise. 
+Alerts are sent through email to related teams. Links of the monitoring system and GoSpeed are attached in the alert 
+email so that we can quickly visualize a specific issue, and do a deep dive into analysis 
+details manually using the visualization described in previous sections.
+
+Early Integration
+We typically ramp up new features gradually, starting with employees, then to a small percentage of members, 
+then larger percentage of members, and finally full roll-out. Our A/B test framework is used during feature ramp-up. 
+During each step of ramp up, integrated as part of site health check in our site speed monitoring system. 
+If any ramp-up causes a slow down beyond a certain threshold, we will alert related teams and feature owners. 
+This automated check helps us detect degradation in real-time when a feature is ramped up.
+
+
+Site Speed Data Analysis
+Use raw data and visualization provided to 
+analyze performance, and engagement correlation. 
+These results help to make important decisions to make site better. 
+
+Some important points
+=====================
+1. A healthy monitoring and alerting pipeline is simple and easy to reason about. It focuses primarily on symptoms for paging,
+reserving cause-oriented heuristics to serve as aids to debugging problems. 
+2. Monitoring symptoms is easier the further
+"up" your stack you monitor, though monitoring saturation and performance of subsystems such as databases often must be
+performed directly on the subsystem itself.
+3. Email alerts are of very limited value and tend to easily become overrun 
+with noise; instead, you should favor a dashboard that monitors all ongoing subcritical problems for the sort of 
+information that typically ends up in email alerts. A dashboard might also be paired with a log, in order to analyze
+historical correlations.
+
+Over the long haul, achieving a successful on-call rotation and product includes choosing to alert on symptoms or 
+imminent real problems, adapting your targets to goals that are actually achievable, and making sure that your monitoring
+supports rapid diagnosis.
+
+Design
+=======
+
+1. Module to collect raw data
+  A script running on each host discovers the services running, parses the GC log for that service, and pumps out 
+  metrics. 
+  Granularity is very important as it allows one to zoom in to collect more details.
+  Ability to collect different metrics and from heterogenous sources
+  eg:-
+  Accessibility of intranet and internet sites
+  Collecting metrics like packet loss, latency, jitter between all sites and datacenters with QOS Queues
+  Intranet and internet link failover check
+  Accessibility of cloud services
+  Accessibility of critical corporate applications
+  Speed / throughput of network (intranet/internet)
+2. preprocess the raw data in Hadoop clusters for daily or hourly aggregation
+3. Modules generating graphs from these sources
+4. Services have flexibility to subscribe to which graph to monitor specific characteristics
+5. Policy manager to decide when to generate alerts
+
+How to build dasboards?
+=====================
+
+
+
+
+
+
+
+
+
+
+
+Collecting metrics
+=================
+- Each Service can generate metrics.
+- Collect the standard cross-service metrics automatically from every service
+- broker which can publish these services and interested parties can subscribe to the same.
+- resolution of metrics(intervals they are served) important.
+- capacity planning for infrastructure important, since amount of data is huge
+   understand WCU, RCU, IOPs, throughput, latency, 
+- Configuring(adding/removing) metrics should be easy at various levels, GUI, command line, code etc.
+- Programatically name the metrics so we can do things based on the format
+- A push based system(forcasting what might be needed) that always sent the metrics it had regardless of being
+  in a data store or not
+
+Graphing frontend
+================
+
+- RRDtool is the OpenSource industry standard, high performance data logging and graphing system 
+for time series data. RRDtool can be easily integrated in shell scripts, perl, python, ruby, lua or tcl applications.
+- 
+
+
+
+  
