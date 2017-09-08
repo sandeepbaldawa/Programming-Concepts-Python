@@ -43,7 +43,8 @@ web browsers use the HTTP protocol which uses stream sockets to get page
 stream sockets achieve this high level of data transmission quality using "The Transmission Control Protocol",
 otherwise known as "TCP" 
 
-ou can be pretty sure that Facebook’s homepage will not be served from the browser cache because dynamic pages expire either very quickly or immediately (expiry date set to past).
+ou can be pretty sure that Facebook’s homepage will not be served from the browser cache because dynamic pages expire 
+either very quickly or immediately (expiry date set to past).
 So, the browser will send this request to the Facebook server:
 
 GET http://facebook.com/ HTTP/1.1
@@ -57,10 +58,12 @@ Cookie: datr=1265876274-[...]; locale=en_US; lsd=WW[...]; c_user=2101[...]
 The GET request names the URL to fetch: “http://facebook.com/”. The browser identifies itself (User-Agent header), and 
 states what types of responses it will accept (Accept and Accept-Encoding headers). The Connection header asks the server to
 keep the TCP connection open for further requests.
-The request also contains the cookies that the browser has for this domain. As you probably already know, cookies are key-value pairs that track the state of a web site in between different page requests. And so the cookies store the name of the logged-in user, a secret number that was assigned to the user by the server, some of user’s settings, etc. The cookies will be stored in a text file on the client, 
-and sent to the server with every request.
+The request also contains the cookies that the browser has for this domain. cookies are key-value pairs that track 
+the state of a web site in between different page requests. And so the cookies store the name of the logged-in user, 
+a secret number that was assigned to the user by the server, some of user’s settings, etc. The cookies will be stored in a
+text file on the client, and sent to the server with every request.
 
-4. The facebook server responds with a permanent redirect
+4. The server responds with a permanent redirect
 
 This is the response that the Facebook server sent back to the browser request:
 HTTP/1.1 301 Moved Permanently
@@ -80,12 +83,13 @@ Content-Length: 0
 The server responded with a 301 Moved Permanently response to tell the browser to go to “http://www.facebook.com/” 
 instead of “http://facebook.com/”.
 
-There are interesting reasons why the server insists on the redirect instead of immediately responding with the web page that the user wants to see.
+There are interesting reasons why the server insists on the redirect instead of immediately responding with the web page 
+that the user wants to see.
 One reason has to do with search engine rankings. See, if there are two URLs for the same page, say http://www.igoro.com/
 and http://igoro.com/, search engine  may consider them to be two different sites, each with fewer incoming links and 
-thus a lower ranking. Search engines understand permanent redirects (301), and will combine the incoming links from both sources into a single ranking.
-Also, multiple URLs for the same content are not cache-friendly. When a piece of content has multiple names, it will 
-potentially appear multiple times in caches.
+thus a lower ranking. Search engines understand permanent redirects (301), and will combine the incoming links from both 
+sources into a single ranking. Also, multiple URLs for the same content are not cache-friendly. When a piece of content has
+multiple names, it will potentially appear multiple times in caches.
 
 5. The browser follows the redirect
 
