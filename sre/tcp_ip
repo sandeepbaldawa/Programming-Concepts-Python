@@ -527,4 +527,6 @@ Create boot media, which will be used to begin the installation.
 Make the installation source available.
 Start the Kickstart installation.
 
-
+Virtual Memory
+==============
+https://gabrieletolomei.wordpress.com/miscellanea/operating-systems/virtual-memory-paging-and-swapping/
