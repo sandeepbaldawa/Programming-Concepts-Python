@@ -509,3 +509,22 @@ Other routers add additional functions including security features to the jobs t
 networks, including the Internet, could not exist without the router. Cisco Systems, Inc, has a complete line of business 
 class routers that will serve the SMB community.
 
+Kickstart
+=========
+automatically perform unattended operating system installation and configuration.
+
+Kickstart is normally used at sites with many such Linux systems, to allow easy installation[2] and consistent configuration of new computer systems.
+
+Kickstart configuration files can be built three ways:
+
+1. By hand.
+2. By using the GUI system-config-kickstart tool.
+3. By using the standard Red Hat installation program Anaconda.
+
+Create a Kickstart file.
+Make the Kickstart file available on removable media, a hard drive or a network location.
+Create boot media, which will be used to begin the installation.
+Make the installation source available.
+Start the Kickstart installation.
+
+
