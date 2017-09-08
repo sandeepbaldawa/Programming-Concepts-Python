@@ -1,0 +1,753 @@
+Networking IPC
+===============
+Socket Descriptors
+-------------------
+A socket is an abstraction of a communication endpoint. 
+Just as they would use file descriptors to access files, applications use socket descriptors to access sockets.
+
+int socket(int domain, int type, int protocol);
+
+The domain argument determines the nature of the communication, including the address format
+The type argument determines the type of the socket, which further determines the communication characteristics.(TCP/UDP etc.)
+The protocol argument is usually zero, to select the default protocol for the given domain and socket type.
+The default protocol for a SOCK_STREAM socket in the AF_INET communication domain is TCP (Transmission Control Protocol)
+The default protocol for a SOCK_DGRAM socket in the AF_INET communication domain is UDP (User Datagram Protocol).
+
+In contrast, using a connection-oriented protocol for communicating with a peer is like making a phone call.
+First, you need to establish a connection by placing a phone call, but after the connection is in place, 
+you can communicate bidirectionally with each other. The connection is a peer-to-peer communication channel over 
+which you talk. Your words contain no addressing information, as a point-to-point virtual connection exists between both 
+ends of the call, and the connection itself implies a particular source and destination.
+
+Calling socket is similar to calling open. In both cases, you get a file descriptor that can be used for I/O. When you are done using the file descriptor, 
+you call close to relinquish access to the file or socket and free up the file descriptor for reuse.
+
+Can be used with calls like select(), poll(), read(), write() etc..
+
+
+Byte Ordering
+============
+Network protocols specify a byte ordering so that heterogeneous computer systems can exchange protocol 
+information without confusing the byte ordering. The TCP/IP protocol suite uses big-endian byte order. 
+The byte ordering becomes visible to applications when they exchange formatted data.
+
+If it's an Intel 80x86, Host Byte Order is Little-Endian. If it's a Motorola 68k, Host Byte Order is Big-Endian. 
+If it's a PowerPC, Host Byte Order is... well, it depends!
+
+Address Format
+==============
+First StructTM—struct addrinfo. This structure is a more recent invention, and 
+is used to prep the socket address structures for subsequent use. It's also used in host name lookups, and
+service name lookups. First things you'll call when making a connection.
+
+struct addrinfo {
+    int              ai_flags;     // AI_PASSIVE, AI_CANONNAME, etc.
+    int              ai_family;    // AF_INET, AF_INET6, AF_UNSPEC
+    int              ai_socktype;  // SOCK_STREAM, SOCK_DGRAM
+    int              ai_protocol;  // use 0 for "any"
+    size_t           ai_addrlen;   // size of ai_addr in bytes
+    struct sockaddr *ai_addr;      // struct sockaddr_in or _in6
+    char            *ai_canonname; // full canonical hostname
+
+    struct addrinfo *ai_next;      // linked list, next node
+};
+
+You'll load this struct up a bit, and then call getaddrinfo(). 
+It'll return a pointer to a new linked list of these structures filled out with all the goodies you need.
+
+1. You can force it to use IPv4 or IPv6 in the ai_family field, or leave it as AF_UNSPEC to use whatever.
+2. Note that this is a linked list: ai_next points at the next element—there could be several results for you to choose from.
+3. ai_addr field in the struct addrinfo is a pointer to a struct sockaddr. This is where we start getting
+   into the nitty-gritty details of what's inside an IP address structure.
+
+The struct sockaddr holds socket address information for many types of sockets.
+
+struct sockaddr {
+    unsigned short    sa_family;    // address family, AF_xxx
+    char              sa_data[14];  // 14 bytes of protocol address
+}; 
+
+sa_family will be AF_INET (IPv4) or AF_INET6 (IPv6)
+sa_data contains a destination address and port number for the socket
+
+
+This is structure passed to a socket to connect
+
+// (IPv4 only--see struct sockaddr_in6 for IPv6)
+
+struct sockaddr_in {
+    short int          sin_family;  // Address family, AF_INET
+    unsigned short int sin_port;    // Port number
+    struct in_addr     sin_addr;    // Internet address
+    unsigned char      sin_zero[8]; // Same size as struct sockaddr
+};
+
+sin_family can be AF_NET (IPV4) or AF_INET6(IPV6)
+sin_port must be in Network Byte Order (by using htons()!
+sin_addr is the 4 byte ipaddress in IPV4
+
+What about IPv6? Similar structs exist for it
+Also strcutures exist to hold both IPV4 and IPV6 addresses
+
+One can convert a given ipaddress into these structures
+eg:-
+struct sockaddr_in sa; // IPv4
+struct sockaddr_in6 sa6; // IPv6
+
+inet_pton(AF_INET, "10.12.110.57", &(sa.sin_addr)); // IPv4
+inet_pton(AF_INET6, "2001:db8:63b3:1::3490", &(sa6.sin6_addr)); // IPv6
+
+There are also functions which can convert the other way around..
+
+What is NAT?
+=============
+If I log into a remote computer, it tells me I'm logged in from 192.0.2.33 which is the public IP address my ISP has 
+provided to me. But if I ask my local computer what its IP address is, it says 10.0.0.5. 
+Who is translating the IP address from one to the other? That's right, the firewall! It's doing NAT!
+
+some common private n/w ones you'll see are 10.x.x.x and 192.168.x.x, 
+where x is 0-255, generally. Less common is 172.y.x.x, where y goes between 16 and 31.
+
+System Calls
+=============
+Step 1 getaddrinfo():-
+=======================
+A tiny bit of history: it used to be that you would use a function called gethostbyname() to do DNS lookups. 
+Then you'd load that information by hand into a struct sockaddr_in, and use that in your calls.
+
+In these modern times, you now have the function getaddrinfo() that does all kinds of good stuff for you, 
+including DNS and service name lookups, and fills out the structs you need, besides!
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+
+int getaddrinfo(const char *node,     // e.g. "www.example.com" or IP
+                const char *service,  // e.g. "http" or port number
+                const struct addrinfo *hints,
+                struct addrinfo **res);
+                
+1. The node parameter is the host name to connect to, or an IP address.
+2. service, which can be a port number, like "80", or the name of a particular service (found in The IANA Port List or the /etc/services file on your Unix machine) 
+like "http" or "ftp" or "telnet" or "smtp" or whatever.
+3. hints parameter points to a struct addrinfo that you've already filled out with relevant information.
+
+***if you're a server who wants to listen on your host's IP address, port 3490.
+
+******* Code ***********
+
+int status;
+struct addrinfo hints;
+struct addrinfo *servinfo;  // will point to the results
+
+memset(&hints, 0, sizeof hints); // make sure the struct is empty
+hints.ai_family = AF_UNSPEC;     // don't care IPv4 or IPv6
+hints.ai_socktype = SOCK_STREAM; // TCP stream sockets
+hints.ai_flags = AI_PASSIVE;     // fill in my IP for me
+
+if ((status = getaddrinfo(NULL, "3490", &hints, &servinfo)) != 0) {
+    fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
+    exit(1);
+}
+
+// servinfo now points to a linked list of 1 or more struct addrinfos
+
+// ... do everything until you don't need servinfo anymore ....
+
+freeaddrinfo(servinfo); // free the linked-list
+
+***if you're a client who wants to connect to a particular server, say "www.example.net" port 3490.
+
+******* Code ***********
+
+int status;
+struct addrinfo hints;
+struct addrinfo *servinfo;  // will point to the results
+
+memset(&hints, 0, sizeof hints); // make sure the struct is empty
+hints.ai_family = AF_UNSPEC;     // don't care IPv4 or IPv6
+hints.ai_socktype = SOCK_STREAM; // TCP stream sockets
+
+// get ready to connect
+status = getaddrinfo("www.example.net", "3490", &hints, &servinfo);
+
+// servinfo now points to a linked list of 1 or more struct addrinfos
+
+// etc.
+
+
+Step 2 socket():-
+===================
+
+#include <sys/types.h>
+#include <sys/socket.h>
+
+int socket(int domain, int type, int protocol); 
+
+ you can call getprotobyname() to look up the protocol you want, "tcp" or "udp".
+ 
+The domain argument determines the nature of the communication, including the address format(IPV4 or IPV6)
+The type argument determines the type of the socket, which further determines the communication characteristics.(TCP/UDP etc.)
+The protocol argument is usually zero, to select the default protocol for the given domain and socket type.
+The default protocol for a SOCK_STREAM socket in the AF_INET communication domain is TCP (Transmission Control Protocol)
+The default protocol for a SOCK_DGRAM socket in the AF_INET communication domain is UDP (User Datagram Protocol).
+
+What you really want to do is use the values from the results of the call to getaddrinfo(), and feed them into socket() 
+directly like this:
+
+
+int s;
+struct addrinfo hints, *res;
+
+// do the lookup
+// [pretend we already filled out the "hints" struct]
+getaddrinfo("www.example.com", "http", &hints, &res);
+
+s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+
+Step 3 bind()(only server side):-
+===================
+Once you have a socket, you might have to associate that socket with a port on your local machine. 
+(This is commonly done if you're going to listen() for incoming connections on a specific port—multiplayer network games 
+do this when they tell you to "connect to 192.168.5.10 port 3490".) 
+The port number is used by the kernel to match an incoming packet to a certain process's socket descriptor. 
+
+#include <sys/types.h>
+#include <sys/socket.h>
+
+int bind(int sockfd, struct sockaddr *my_addr, int addrlen);
+
+1. sockfd is the socket file descriptor returned by socket().
+2. my_addr is a pointer to a struct sockaddr that contains information about your address, namely, port and IP address.
+3. addrlen is the length in bytes of that address.
+
+example that binds the socket to the host the program is running on, port 3490:
+
+struct addrinfo hints, *res;
+int sockfd;
+
+// first, load up address structs with getaddrinfo():
+
+memset(&hints, 0, sizeof hints);
+hints.ai_family = AF_UNSPEC;  // use IPv4 or IPv6, whichever
+hints.ai_socktype = SOCK_STREAM;
+hints.ai_flags = AI_PASSIVE;     // fill in my IP for me
+
+getaddrinfo(NULL, "3490", &hints, &res);
+
+// make a socket:
+
+sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+
+// bind it to the port we passed in to getaddrinfo():
+
+bind(sockfd, res->ai_addr, res->ai_addrlen);
+
+bind() also returns -1 on error and sets errno to the error's value.
+
+All ports below 1024 are RESERVED (unless you're the superuser)! You can have any port number above that, 
+right up to 65535 (provided they aren't already being used by another program.)
+
+Sometimes, you might notice, you try to rerun a server and bind() fails, claiming "Address already in use.
+" What does that mean? Well, a little bit of a socket that was connected is still hanging around in the kernel, 
+and it's hogging the port.
+
+
+Step4(connect())(Client side):-
+============================
+#include <sys/types.h>
+#include <sys/socket.h>
+
+int connect(int sockfd, struct sockaddr *serv_addr, int addrlen); 
+
+sockfd is our friendly neighborhood socket file descriptor
+serv_addr is a struct sockaddr containing the destination port and IP address
+addrlen is the length in bytes of the server address structure.
+
+All of this information can be gleaned from the results of the getaddrinfo()
+
+example where we make a socket connection to "www.example.com", port 3490:
+
+struct addrinfo hints, *res;
+int sockfd;
+
+// first, load up address structs with getaddrinfo():
+
+memset(&hints, 0, sizeof hints);
+hints.ai_family = AF_UNSPEC;
+hints.ai_socktype = SOCK_STREAM;
+
+getaddrinfo("www.example.com", "3490", &hints, &res);
+
+// make a socket:
+
+sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+
+// connect!
+
+connect(sockfd, res->ai_addr, res->ai_addrlen);
+
+Notice that we didn't call bind(). Basically, we don't care about our local port number; we 
+only care where we're going (the remote port). The kernel will choose a local port for us, 
+and the site we connect to will automatically get this information from us.
+
+
+Step5 (listen() Only for server side)
+=====================================
+int listen(int sockfd, int backlog); 
+
+sockfd is the usual socket file descriptor from the socket()
+backlog is the number of connections allowed on the incoming queue(max no of incoming connections at a time which can wait
+until accept() is done)
+
+the sequence of system calls you'll make is:
+
+getaddrinfo();
+socket();
+bind();
+listen();
+/* accept() goes here */ 
+
+Step6 (accept() Server side only)
+================================
+
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 
+
+1. sockfd is the listen()ing socket descriptor. 
+2. addr will usually be a pointer to a local struct sockaddr_storage. 
+   This is where the information about the incoming connection will go (and with it you can determine which host is calling you
+   from which port). 
+3. addrlen is a local integer variable that should be set to sizeof(struct sockaddr_storage) before its address is passed to accept(). accept() will not put more than that many bytes into addr. If it puts fewer in, it'll change the value of addrlen to reflect that.
+
+someone far far away will try to connect() to your machine on a port that you are listen()ing on. 
+Their connection will be queued up waiting to be accept()ed. You call accept() and you tell it to get the
+pending connection. It'll return to you a brand new socket file descriptor to use for this single connection! 
+That's right, suddenly you have two socket file descriptors for the price of one! The original one is still 
+listening for more new connections, and the newly created one is finally ready to send() and recv(). 
+
+example:-
+
+#define MYPORT "3490"  // the port users will be connecting to
+#define BACKLOG 10     // how many pending connections queue will hold
+
+int main(void)
+{
+    struct sockaddr_storage their_addr;
+    socklen_t addr_size;
+    struct addrinfo hints, *res;
+    int sockfd, new_fd;
+
+    // !! don't forget your error checking for these calls !!
+
+    // first, load up address structs with getaddrinfo():
+
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_UNSPEC;  // use IPv4 or IPv6, whichever
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_PASSIVE;     // fill in my IP for me
+
+    getaddrinfo(NULL, MYPORT, &hints, &res);
+
+    // make a socket, bind it, and listen on it:
+
+    sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+    bind(sockfd, res->ai_addr, res->ai_addrlen);
+    listen(sockfd, BACKLOG);
+
+    // now accept an incoming connection:
+
+    addr_size = sizeof their_addr;
+    new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &addr_size);
+
+    // ready to communicate on socket descriptor new_fd!
+    .
+    .
+    .
+
+Last Step send() and recv()
+============================
+int send(int sockfd, const void *msg, int len, int flags); 
+
+sockfd is the socket descriptor you want to send data to (whether it's the one returned by socket() or the one 
+you gotwith accept().) 
+msg is a pointer to the data you want to send, and len is the length of that data in bytes.
+
+sendto() and recvfrom()—Talk to me, DGRAM-style
+
+Last of Last close() and shutdown()
+===================================
+
+
+Auxilllary functions
+====================
+The function getpeername() will tell you who is at the other end of a connected stream socket
+gethostname() returns the name of the computer that your program is running on
+
+
+
+
+
+
+
+
+
+Address Lookup
+============
+Ideally, an application won’t have to be aware of the internal structure of a socket address. If an application simply passes
+socket addresses around as sockaddr structures and doesn’t rely on any protocol-specific features, then the application will 
+work with many different protocols that provide the same type of service.
+Historically, the BSD networking software has provided interfaces to access the various network configuration information. 
+In this section, we discuss them in a little more detail and introduce the newer functions used to look up addressing 
+information. The network configuration information returned by these functions can be kept in a number of places.
+This information can be kept in static files (e.g., /etc/hosts, /etc/services), or it can be managed by a name service, 
+such as DNS (Domain Name System) or NIS (Network Information Service). Regardless of where the information is kept, 
+the same functions can be used to access it. The hosts known by a given computer system are found by calling gethostent.
+
+We can get network names and numbers with a similar set of interfaces.
+
+
+
+
+Major features of SSH
+=====================
+1. Secure Remote Logins
+   Programs like telnet transmit username/password in plain text and reable by a n/w snooper,
+   In SSH protocol, the client authenticates you to the remote computer’s SSH server using an encrypted
+   connection, meaning that your username and password are encrypted before they leave the local machine.
+   The SSH server then logs you in, and your entire login and session is encrypted as it travels between client 
+   and server.
+2. Secure File Transfer
+   ftp is not secure for file transfers, A third party can intercept and read the packets as they travel
+   over the network. Using SSH, the file can be transferred securely between machines with a single secure copy command. 
+   If the file were named myfile, the command executed on firstaccount.com might be:
+   scp myfile metoo@secondaccount.com:
+3. Secure Remote Command Execution
+   Many SSH clients can run a single remote command if
+   you provide it at the end of the command line. This short shell script does the trick:
+   #!/bin/sh
+  for machine in grape lemon kiwi melon
+  do
+    ssh $machine /usr/bin/w Execute remote command by ssh
+  done
+4. Keys and Agents
+   SSH has various authentication mechanisms, and the most secure is based on keys rather than passwords. 
+   Using keys, together with a program called an authentication agent, SSH can authenticate 
+   you to all your computer accounts securely without requiring you to memorize many passwords or enter them repeatedly. It works like this:
+   1. In advance (and only once), place special, nonsecure files called public key files
+      into your remote computer accounts. These enable your SSH clients (ssh, scp) to
+      access your remote accounts.
+   2. On your local machine, invoke the ssh-agent program, which runs in the
+      background.
+   3. Choose the key (or keys) you will need during your login session.
+   4. Load the keys into the agent with the ssh-add program. This requires knowledge
+      of each key’s secret passphrase.
+At this point, you have an ssh-agent program running on your local machine, holding your secret keys in memory. 
+You’re now done. You have passwordless access to all your remote accounts that contain your public key files.
+Say goodbye to the tedium of retyping passwords! The setup lasts until you log out from the local machine or terminate ssh-agent.
+
+5. Access Control
+One can provide limited access through SSH for other users like just run certain application like email
+
+6. Port Forwarding
+Suppose you are logged into a machine away from work and want to access the internal
+news server at your office, news.yoyodyne.com. The Yoyodyne network is connected
+to the Internet, but a network firewall blocks incoming connections to most
+ports, particularly port 119, the news port. The firewall does allow incoming SSH
+connections. SSH can establish a secure tunnel on an arbitrary local TCP port—say, port 3002—to
+the news port on the remote host. The command might look a bit cryptic at this early stage, but here it is:
+
+$ ssh -L 3002:localhost:119 news.yoyodyne.com
+This says “ssh, please establish a secure connection from TCP port 3002 on my local
+machine to TCP port 119, the news port, on news.yoyodyne.com.” So, in order to
+read news securely, configure your news-reading program to connect to port 3002 on
+your local machine. The secure tunnel created by ssh automatically communicates
+with the news server on news.yoyodyne.com, and the news traffic passing through the
+tunnel is protected by encryption.
+
+Known Hosts
+===========
+The first time an SSH client encounters a new remote machine, it may report that it’s
+never seen the machine before, printing a message like the following:
+$ ssh -l pat shell.isp.com
+The authenticity of host 'shell.isp.com (192.168.0.2)' can't be established.
+RSA key fingerprint is 77:a5:69:81:9b:eb:40:76:7b:13:04:a9:6c:f4:9c:5d.
+Are you sure you want to continue connecting (yes/no)?
+Assuming you respond yes (the most common response), the client continues:
+Warning: Permanently added 'shell.isp.com,192.168.0.2' (RSA) to the list of known
+hosts.
+This message appears only the first time you contact a particular remote host. The
+message is a security feature related to SSH’s concept of known hosts.
+
+If authentication of the server fails, various things may happen depending on the reason
+for failure and the SSH configuration. Typically a warning appears on the screen,
+ranging from a repeat of the known-hosts message:
+Host key not found from the list of known hosts.
+Are you sure you want to continue connecting (yes/no)?
+to more dire words:
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that the RSA host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+77:a5:69:81:9b:eb:40:76:7b:13:04:a9:6c:f4:9c:5d.
+Please contact your system administrator.
+Add correct host key in /home/smith/.ssh/known_hosts to get rid of this message.
+Offending key in /home/smith/.ssh/known_hosts:36
+
+Key Management
+==============
+User's can be authenticated using keys rather than username/password
+
+A key is a digital identity. It’s a unique string of binary data that means “This is me,
+honestly, I swear.” And with a little cryptographic magic, your SSH client can prove
+to a server that its key is genuine, and you are really you.
+
+How does it work?
+==================
+1. An identity consists of two parts, called the private key and the public key. Together,
+they are known as a key pair.
+2. The private key represents your identity for outgoing SSH connections. When you run an SSH client in your account, 
+such as ssh or scp, and it requests a connection with an SSH server, the client uses this private key to prove your identity 
+to the server. Private keys must be kept secret. An intruder with your private key can access your account as easily as you can.
+3. The public key represents your identity for incoming connections to your account. When an SSH client requests access to 
+your account, using a private key as proof of identity, the SSH server examines the corresponding public key. If the keys 
+“match” (according to a cryptographic test), authentication succeeds and the connection proceeds. Public keys don’t need to 
+be secret; they can’t be used to break into an account.
+
+The .pub file containing your public key has no function by itself. Before it can be
+used for authentication, this public key must be copied into an authorization file on
+an SSH server machine, ~/.ssh/authorized_keys. Thereafter, when an SSH client
+requests a connection to your server account using a private key as proof of identity,
+the OpenSSH server consults your authorized_keys file to find the matching public
+key.
+
+Steps:-
+=====
+1. Your client says, “Hey server, I’d like to connect by SSH to an account on your
+system, specifically, the account owned by user smith.”
+2. The server says, “Well, maybe. First, I challenge you to prove your identity!”
+And the server sends some data, known as a challenge, to the client
+3. Your client says, “I accept your challenge. Here is proof of my identity. I made it
+myself by mathematically using your challenge and my private key.” This
+response to the server is called an authenticator.
+4. The server says, “Thanks for the authenticator. I will now examine the smith
+account to see if you may enter.” Specifically, the server checks smith’s public
+keys to see if the authenticator “matches” any of them. (The “match” is another
+cryptographic operation.) If so, the server says, “OK, come on in!” Otherwise,
+the authentication fails.
+
+ssh-keygen
+==========
+Creates key pairs
+
+ssh-agent
+=========
+Holds private keys in memory, saving you from typing your passphrase repeatedly
+
+ssh-add
+=======
+Loads private keys into the agent
+
+generate keys using  ssh-keygen
+===============================
+ssh-keygen then creates your local SSH directory (~/.ssh for OpenSSH or ~/.ssh2 for
+Tectia) if it doesn’t already exist, and stores the private and public components of
+the generated key in two files there.
+
+Installing OpenSSH Keys with ssh-copy-id
+========================================
+OpenSSH includes a program, ssh-copy-id, that installs a public key automatically on
+a remote server with a single command, placing it into ~/.ssh/authorized_keys:
+
+Public-key authentication is more secure than password authentication because:
+==============================================================================
+1. It requires two secret components—the identity file on disk, and the passphrase
+in your head—so both must be captured in order for an adversary to access your
+account. Password authentication requires only one component, the password,
+which might be easier to steal.
+2. Neither the passphrase nor the key is sent to the remote host, just the authenticator
+discussed earlier. Therefore, no secret information is transmitted off the
+client machine.
+3. Machine-generated cryptographic keys are infeasible to guess. Human-generated
+passwords are routinely cracked by a password-guessing technique called a
+dictionary attack. A dictionary attack may be mounted on the passphrase as well,
+but this requires stealing the private-key file first.
+A host’s security can be greatly increased by disabling password authentication altogether
+and permitting only SSH connections by key.
+ssh-copy-id -i key_file [user@]server_name
+
+What happens if key changes
+===========================
+Once ssh-keygen is run on a client machine, it's public key changes and all servers having the public key of this
+client should change.
+
+ssh-agent
+=========
+1. ssh-agent is a program that keeps private keys in memory and provides authentication If you preload an agent with private keys at the beginning
+of a login session, your SSH clients won’t prompt for passphrases. Instead, they communicate with the agent as needed. 
+The effects of the agent last until you terminate  the agent, usually just before logging out.
+2. SSH clients comunicate with the ssh-agent via local sockets or named pipe whose filename is stored in
+an environment variable, so all clients (and all other processes) within your login session
+have access to the agent.
+3. ssh-agent $SHELL
+Creates a shell which has access to the ssh-agent
+
+Once the agent is running, it’s time to load private keys into it using the ssh-add program.
+By default, ssh-add loads the key from your default identity file:
+$ ssh-add
+Enter passphrase for /home/you/.ssh/id_dsa: ********
+Identity added: /home/you/.ssh/id_dsa (/home/you/.ssh/id_dsa)
+Now ssh and scp can connect to remote hosts without prompting for your passphrase.
+Figure 2-3 shows the process.
+
+ssh-add
+=======
+Decrypts private key and stores in agent.
+Identity file(public and private keys encrypted) => ssh-add decrypts the private key and stores in agent(plain text) => 
+ssh then this key for authenticating..
+
+It can do other things too..
+
+To load a key other than your default
+identity into the agent, provide the filename as an argument to ssh-add:
+$ ssh-add my-other-key-file
+You can also list the keys the agent currently holds:
+$ ssh-add -l
+delete a key from the agent in memory:
+$ ssh-add -d name-of-key-file
+or delete all keys from the agent in memory:
+$ ssh-add -D
+
+SSH server
+==========
+sshd reads its configuration file at startup. Therefore, if you modify the file while the
+server is running, the changes don’t affect the server. You must force the server to
+reread the file in order to accept the changes. This is done by sending a SIGHUP
+signal to the server process. The pid of the server is found in a file, usually /var/run/
+sshd.pid 
+
+ kill -HUP `pidof sshd`
+
+server key management
+=====================
+The host key of sshd uniquely identifies a server to SSH clients. The host key is
+stored in a pair of files, one containing the private key and the other the public key
+Each private key has a corresponding public key, stored in a second file with the
+same name but with .pub appended.
+
+You may also configure sshd to bind its listening port on a particular network interface.
+By default, the port is bound on all active network interfaces on the host. The
+ListenAddress keyword limits sshd to listen only on specific interfaces; the default
+value is 0.0.0.0.
+
+sshd normally runs as a daemon, listening for incoming connection requests, and
+forking whenever it accepts a connection from a client. This spawns a separate child
+process (a copy of the parent sshd process) to handle each session. The child process
+exits when the session ends.
+
+Alternatively, the server may be invoked by inetd or xinetd, like many other network
+daemons. In this case, the general-purpose network daemon listens for and accepts
+the SSH connections. It then starts a new instance of sshd for each session with the
+already-connected socket attached to the standard input, output, and error streams
+of sshd. Each sshd invocation is responsible for a single session.
+
+If you prefer this behavior, place an appropriate line in the inetd or xinetd configuration
+file to describe the SSH service, invoking sshd with the –i command-line option.
+For inetd, add a single line to /etc/inetd.conf:
+ssh stream tcp nowait root /usr/local/sbin/sshd sshd -i
+
+By default, the OpenSSH server restarts itself after it accepts each connection from a
+client, and forks to create a separate child process to handle the session.† Relative
+pathnames can’t be used for server restarts, since sshd changes its working directory
+shortly after it begins running.
+
+The parent process (i.e., the one that listens for
+incoming connections) sends a copy of its configuration and the SSH-1 server key (if
+one is used) via another socket to the restarted child process, which knows to read
+the data because of the same –R option. The child process then proceeds to handle
+the session normally.
+
+If OpenSSH is started by inetd or xinetd, then there is no need to restart the SSH
+server, because a new instance of sshd is started by inetd/xinetd for each connection.
+
+Keep Alive feature(detect dead connections)
+===================
+The keepalive feature (TCPKeepAlive in OpenSSH, KeepAlive in Tectia) is concerned
+with recognizing when a connection has failed. Suppose a client establishes an SSH
+connection, and sometime later, the client host crashes abruptly. If the SSH server
+has no reason to send unsolicited messages to the client, it may never notice the halfdead
+TCP connection to its partner, and the sshd remains around indefinitely, using
+up system resources such as memory and a process slot (and making the sysadmin’s
+ps output messy).
+
+Idle connections
+================
+ If an SSH connection
+is established between a server and a client, but no data passes over the
+connection for a long time, what should the server do: keep the connection, or terminate
+it?
+The IdleTimeout keyword tells the server what to do if a connection is idle, i.e., if the
+user doesn’t transmit any data in a given period. If IdleTimeout is zero (the default),
+the server does nothing, leaving idle connections intact:
+# Tectia
+IdleTimeout 0
+Otherwise, the server terminates the connection after a specified interval of idleness.
+The time value can specify units, e.g., three hours:
+# Tectia
+IdleTimeout 3H
+
+Failed logins(login grace time)
+===========================
+Suppose a user attempts to log in via SSH but fails to authenticate. What should the
+server do? The keywords LoginGraceTime, MaxAuthTries (OpenSSH), and
+PasswordGuesses (Tectia) control the server’s response.
+Users are given a limited time to authenticate successfully. The default is 120 seconds
+(2 minutes) for OpenSSH or 600 seconds (10 minutes) for Tectia. This timeout
+is controlled by the LoginGraceTime keyword, given a value in seconds:
+LoginGraceTime 60
+
+Limiting simultaneous connections
+=================================
+One can configure max connections in parallel at a given time
+
+Reverse IP mappings
+===================
+The SSH server optionally does a reverse DNS lookup on a client’s IP address. That
+is, it looks up the name associated with the address, then looks up the addresses for
+that name and makes sure that the client’s address is among them. If this check fails,
+the server refuses the connection. This feature uses standard system services like
+gethostbyname( ) and gethostbyaddr( ) to perform these mappings, so the databases
+that are consulted depend on the host operating system configuration. It might use
+the DNS, the Network Information Service (NIS or YP), static files on a server
+machine, or some combination.
+
+To enable this check for OpenSSH, provide the UseDNS keyword with a value of yes
+or no:*
+# OpenSSH
+UseDNS yes
+
+This feature is a bit of security-oriented consistency checking. SSH uses cryptographic
+signatures to determine a peer’s identity, but the list of peer public keys (the
+known hosts database) is often indexed by hostname, so SSH must translate the
+address to a name in order to check the peer’s identity. Reverse mapping tries to
+ensure that someone isn’t playing games with the naming service in a cracking
+attempt. There is a trade-off, however, since in today’s Internet, the DNS reverseaddress
+mappings aren’t always kept up to date. The SSH server might reject legitimate
+connection attempts because of poorly maintained reverse-address mappings
+over which you have no control. In general, we recommend turning off this feature; it
+isn’t usually worth the hassle, and you avoid long reverse-lookup delays at times
+when DNS is down.
+
+
+
+Scan servers
+=============
+nmaps or scanssh
+
+compression also possible
+
+
+Debugging ssh
+=============
