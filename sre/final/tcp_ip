@@ -1,0 +1,426 @@
+A protocol suite, such as TCP/IP, is the combination of
+different protocols at various layers. TCP/IP is normally considered to be a 4-layer system,
+
+Application Layer (telnet, ftp, etc.)
+Host-to-Host Transport Layer/TCP (TCP, UDP)
+Internet Layer/IP (IP and routing)
+Network Access Layer/Link Layer (Ethernet, wi-fi, or whatever)
+
+
+Each layer has a different responsibility.
+1. The link layer, sometimes called the data-link layer or network interface layer, normally
+includes the device driver in the operating system and the corresponding network
+interface card in the computer. Together they handle all the hardware details of physically
+interfacing with the cable (or whatever type of media is being used).
+2. The network layer (sometimes called the internet layer) handles the movement of packets
+around the network. Routing of packets, for example, takes place here. IP (Internet
+Protocol), ICMP (Internet Control Message Protocol), and IGMP (Internet Group
+Management Protocol) provide the network layer in the TCP/IP protocol suite.
+3. The transport layer provides a flow of data between two hosts, for the application layer
+above. In the TCP/IP protocol suite there are two vastly different transport protocols:
+TCP (Transmission Control Protocol) and UDP (User Datagram Protocol). 
+
+TCP provides a reliable flow of data between two hosts. It is concerned with things such
+as dividing the data passed to it from the application into appropriately sized chunks for
+the network layer below, acknowledging received packets, setting timeouts to make
+certain the other end acknowledges packets that are sent, and so on. Because this reliable
+flow of data is provided by the transport layer, the application layer can ignore all these
+details.
+
+UDP, on the other hand, provides a much simpler service to the application layer. It just
+sends packets of data called datagrams from one host to the other, but there is no
+guarantee that the datagrams reach the other end. Any desired reliability must be added
+by the application layer.
+
+4. The application layer handles the details of the particular application. There are many
+common TCP/IP applications that almost every implementation provides:
+❍ Telnet for remote login,
+❍ FTP, the File Transfer Protocol,
+❍ SMTP, the Simple Mail Transfer protocol, for electronic mail,
+❍ SNMP, the Simple Network Management Protocol, 
+
+
+
+Link Layer
+=========
+|     6     |    6        |  2     |  1   | 1    | 1    |   3     |  2  |   38-1492    |  4   |   
+| Dest addr | source addr | length | DSAP | SSAP |  cmd | org code| type|     data     |  CRC |
+
+
+What is loopback?
+=================
+ Most implementations support a loopback interface that allows a client and server on the same
+host to communicate with each other using TCP/IP. The class A network ID 127 is reserved for
+the loopback interface. By convention, most systems assign the IP address of 127.0.0.1 to this
+interface and assign it the name localhost.
+
+What is MTU?
+==========
+There is a limit on the size of the frame for both Ethernet encapsulation and 802.3 encapsulation. This limits the number of
+bytes of data to 1500 and 1492, respectively. This characteristic of the link layer is called the MTU, its maximum transmission
+unit. Most types of networks have an upper limit. If IP has a datagram to send, and the datagram is larger than the link layer's MTU, IP performs
+fragmentation, breaking the datagram up into smaller pieces (fragments), so that each fragment is
+smaller than the MTU.
+
+How to find MTU?
+================
+
+netstat -in
+Name Mtu Net/Dest Address lpkts lerrs Opkts Oerrs Collis Queue
+leO 1500 140.252.13.32 140.252.13.33 67719 0 92133 0 1 0
+slO 552 140.252.1.183 140.252.1.29 48035 0 54963 0 0 0
+loO 1536 127.0.0.0 127.0.0.1 15548 0 15548 0 0 0
+
+This command prints the MTU of each interface, the number of input packets, input errors, output
+packets, output errors, collisions, and the current size of the output queue. 
+
+What is path MTU?
+=================
+When two hosts on the same network are communicating with each other, it is the MTU of the
+network that is important. But when two hosts are communicating across multiple networks, each
+link can have a different MTU. The important numbers are not the MTUs of the two networks to
+which the two hosts connect, but rather the smallest MTU of any data link that packets traverse
+between the two hosts. This is called the path MTU.
+
+What is ARP? (Address Resolution Protocol)
+===========
+- Assuming an Ethernet, the sending host must convert the 32-bit IP address into a 48-bit
+Ethernet address. A translation is required from the logical Internet address to its
+corresponding physical hardware address. This is the function of ARP.
+ARP is intended for broadcast networks where many hosts or routers are connected to a
+single network.
+- ARP sends an Ethernet frame called an ARP request to every host on the network. This is
+called a broadcast. The ARP request contains the IP address of the destination host (whose name is bsdi) and is the
+request "if you are the owner of this IP address, please respond to me with your hardware
+address." 
+- The destination host's ARP layer receives this broadcast, recognizes that the sender is
+asking for its hardware address, and replies with an ARP reply. This reply contains the IP
+address and the corresponding hardware address.
+- The ARP reply is received and the IP datagram that forced the ARP request-reply to be
+exchanged can now be sent.
+- The IP datagram is sent to the destination host. 
+
+The fundamental concept behind ARP is that the network interface has a hardware address (a 48-
+bit value for an Ethernet or token ring interface). Frames exchanged at the hardware level must be
+addressed to the correct interface. But TCP/IP works with its own addresses: 32-bit IP addresses.
+Knowing a host's IP address doesn't let the kernel send a frame to that host. The kernel (i.e., the
+Ethernet driver) must know the destination's hardware address to send it data.
+
+ The function of ARP is to provide a dynamic mapping between 32-bit IP addresses and the hardware addresses
+used by various network technologies. 
+
+What is ARP cache?
+===============
+Essential to the efficient operation of ARP is the maintenance of an ARP cache on each host. This
+cache maintains the recent mappings from Internet addresses to hardware addresses. The normal
+expiration time of an entry in the cache is 20 minutes from the time the entry was created. 
+
+ arp -a
+sun (140.252.13.33) at 8:0:20:3:f6:42
+svr4 (140.252.13.34) at 0:0:c0:c2:9b:26
+
+What is RARP?(Reverse address resolution protocol?)
+===================================================
+When a system with a local disk is bootstrapped it normally obtains its IP address from a
+configuration file that's read from a disk file. But a system without a disk, such as an X
+terminal or a diskless workstation, needs some other way to obtain its IP address. 
+
+Each system on a network has a unique hardware address, assigned by the manufacturer
+of the network interface. The principle of RARP is for the diskless system to read its
+unique hardware address from the interface card and send an RARP request (a broadcast
+frame on the network) asking for someone to reply with the diskless system's IP address
+(in an RARP reply). 
+
+What is ICMP?(Internet Control message protocol)?
+=================================================
+
+| Header | 8bit type | 8 bit message | 16 bit checksum |
+
+CMP (Internet Control Message Protocol) is an error-reporting protocol network devices like 
+routers use to generate error messages to the source IP address when network problems prevent delivery 
+of IP packets.
+ICMP is often considered part of the IP layer. It communicates error messages and other
+conditions that require attention. ICMP messages are usually acted on by either the IP layer
+or the higher layer protocol (TCP or UDP). Some ICMP messages cause errors to be
+returned to user processes. 
+
+How does ping work?
+====================
+Unix implementations of ping set the identifier field in the ICMP message to the process ID of
+the sending process. This allows ping to identify the returned responses if there are multiple
+instances of ping running at the same time on the same host. 
+
+The sequence number starts at 0 and is incremented every time a new echo request is sent. ping
+prints the sequence number of each returned packet, allowing us to see if packets are missing,
+reordered, or duplicated. IP is a best effort datagram delivery service, so any of these three
+conditions can occur. 
+
+When the ICMP echo reply is returned, the sequence number is printed, followed by the TTL,
+and the round-trip time is calculated. (TTL is the time-to-live field in the IP header. The current
+BSD ping program prints the received TTL each time an echo reply is received-some
+implementations don't do this. 
+
+For now realize that if we type a ping
+command, and a few seconds pass before the first line of output with the IP address is printed,
+this is the time required for the DNS to determine the IP address corresponding to the hostname. 
+
+How does traceroute work?
+=========================
+Traceroute uses ICMP and the TTL field in the IP header. The TTL field (time-to-live) is an
+8-bit field that the sender initializes to some value. The recommended initial value is
+specified in the Assigned Numbers RFC and is currently 64
+
+The purpose of the TTL field is to prevent datagrams from ending up in infinite loops,
+which can occur during routing transients. For example, when a router crashes or when the
+connection between two routers is lost, it can take the routing protocols some time (from
+seconds to a few minutes) to detect the lost route and work around it. During this time
+period it is possible for the datagram to end up in routing loops. The TTL field puts an
+upper limit on these looping datagrams. 
+
+We can now guess the operation of Traceroute. It sends an IP datagram with a TTL of 1 to
+the destination host. The first router to handle the datagram decrements the TTL, discards
+the datagram, and sends back the ICMP time exceeded. This identifies the first router in the
+path. Traceroute then sends a datagram with a TTL of 2, and we find the IP address of the
+second router. This continues until the datagram reaches the destination host. But even
+though the arriving IP datagram has a TTL of 1, the destination host won't throw it away
+and generate the ICMP time exceeded, since the datagram has reached its final destination.
+How can we determine when we've reached the destination?
+Traceroute sends UDP datagrams to the destination host, but it chooses the destination UDP
+port number to be an unlikely value (larger than 30,000), making it improbable that an
+application at the destination is using that port. This causes the destination host's UDP
+module to generate an ICMP "port unreachable" error when the datagram
+arrives. All Traceroute needs to do is differentiate between the received ICMP messagestime
+exceeded versus port unreachable-to know when it's done. 
+
+
+Why is TCP connection oriented?
+===========================
+The term connection-oriented means the two applications using TCP (normally considered a
+client and a server) must establish a TCP connection with each other before they can
+exchange data.
+
+How is TCP reliable?
+====================
+TCP provides reliability by doing the following: 
+1. The application data is broken into what TCP considers the best sized chunks to send.
+This is totally different from UDP, where each write by the application generates a
+UDP datagram of that size. The unit of information passed by TCP to IP is called a
+segment.
+2. When TCP sends a segment it maintains a timer, waiting for the other end to
+acknowledge reception of the segment. If an acknowledgment isn't received in time,
+the segment is retransmitted.
+3. When TCP receives data from the other end of the connection, it sends an
+acknowledgment.
+4. TCP maintains a checksum on its header and data. This is an end-to-end checksum
+whose purpose is to detect any modification of the data in transit. If a segment arrives
+with an invalid checksum, TCP discards it and doesn't acknowledge receiving it. 
+5. Since TCP segments are transmitted as IP datagrams, and since IP datagrams can
+arrive out of order, TCP segments can arrive out of order. A receiving TCP
+resequences the data if necessary, passing the received data in the correct order to the
+application. 
+6. Since IP datagrams can get duplicated, a receiving TCP must discard duplicate data.
+TCP also provides flow control. Each end of a TCP connection has a finite amount of
+buffer space. A receiving TCP only allows the other end to send as much data as the
+receiver has buffers for. This prevents a fast host from taking all the buffers on a
+slower host. 
+
+Why is TCP stream oriented?
+==========================
+A stream of 8-bit bytes is exchanged across the TCP connection between the two
+applications. There are no record markers automatically inserted by TCP. This is what we
+called a byte stream service. If the application on one end writes 10 bytes, followed by a
+write of 20 bytes, followed by a write of 50 bytes, the application at the other end of the
+connection cannot tell what size the individual writes were. The other end may read the 80
+bytes in four reads of 20 bytes at a time. One end puts a stream of bytes into TCP and the
+same, identical stream of bytes appears at the other end
+
+TCP does not interpret the contents of the bytes at all. 'TCP has no idea if the data
+bytes being exchanged are binary data, ASCII characters, EBCDIC characters, or whatever.
+The interpretation of this byte stream is up to the applications on each end of the connection.
+
+What are some important parts of TCP Header?
+==========================================
+1. Each TCP segment contains the source and destination port number to identify the sending
+and receiving application. These two values, along with the source and destination IP
+addresses in the IP header, uniquely identify each connection. The combination of an IP address and a port number is 
+sometimes called a socket
+
+2. The sequence number identifies the byte in the stream of data from the sending TCP to the
+receiving TCP that the first byte of data in this segment represents. If we consider the stream
+of bytes flowing in one direction between two applications, TCP numbers each byte with a
+sequence number. This sequence number is a 32-bit unsigned number that wraps back
+around to 0 after reaching 232 - 1. 
+
+3. SYNC flag and FIN flag(see three way handshake) during connection establishment and disconnecting.
+
+4. Since every byte that is exchanged is numbered, the acknowledgment number contains the
+next sequence number that the sender of the acknowledgment expects to receive. This is
+therefore the sequence number plus 1 of the last successfully received byte of data. 
+
+5. TCP provides a full-duplex service to the application layer. This means that data can be
+flowing in each direction, independent of the other direction. Therefore, each end of a
+connection must maintain a sequence number of the data flowing in each direction. 
+
+What is MSS?
+===========
+The maximum segment size (MSS) is a parameter of the options field of the TCP header that specifies the largest amount of data, 
+specified in bytes, that a computer or communications device can receive in a single TCP segment. minus the size of the fixed 
+TCP and IP headers.
+
+What is sliding window protocol in TCP?
+=======================================
+IP protocol does not guarantee the packet arriving in order or taking the same route.
+Hence TCP should make sure the packets arrive in order.
+
+TCP uses a form of flow control called a sliding window protocol. It
+allows the sender to transmit multiple packets before it stops and waits for an
+acknowledgment. This leads to faster data transfer, since the sender doesn't have to stop and
+wait for an acknowledgment each time a packet is sent. 
+
+Sender => 0 1 2 3 4 5 6 7 8 9 10
+Receiver => 
+
+In example sender has 10 packets to be send across n/w
+let's assume receiver and congestion window size is "4"
+1. Initially sender send packets 0 1 2 3
+2. Receiver based on the seq no will order these packets(since they can come out of order)
+   Receiver sends ACK + 4 (I have received pakcets till 3, please send 4)
+3. Let's assume next sender sends packets 4 5 6 7 and packet "6" is lost in the n/w
+4. The receiver arranges packets based on seq no and sends back ACK + 6(still waiting for packet 6)
+5. Sender then sends 6 7 8 9
+6. Receiver then send ACK + 10
+
+Optimal size of window(in packets) (1 + 2 *Tp)/Tt
+Tp => Propogation time
+Tt => Trasmission time
+
+How does TCP work?
+==================
+1. The requesting end (normally called the client) sends a SYN segment specifying the port
+number of the server that the client wants to connect to, and the client's initial sequence
+number (ISN, 1415531521 in this example). This is segment 1. 
+
+2. The server responds with its own SYN segment containing the server's initial sequence
+number (segment 2). The server also acknowledges the client's SYN by ACKing the
+client's ISN plus one. A SYN consumes one sequence number. 
+
+3. The client must acknowledge this SYN from the server by ACKing the server's ISN plus 
+one (segment 3). These three segments complete the connection establishment.
+
+The ISN should change over time, so that each connection has a different
+ISN
+
+4. While it takes three segments to establish a connection, it takes four to terminate a connection.
+This is caused by TCP's half-close. Since a TCP connection is full-duplex (that is, data can be
+flowing in each direction independently of the other direction), each direction must be shut
+down independently. The rule is that either end can send a FIN when it is done sending data.
+When a TCP receives a FIN, it must notify the application that the other end has terminated that
+direction of data flow. The sending of a FIN is normally the result of the application issuing a
+close
+
+
+Why IPV6
+=========
+IPV4 might run out of ipaddresses soon, 32 bits represents some 4 billion numbers (232), while 128 bits represents about
+340 trillion trillion trillion numbers (for real, 2128). 
+That's like a million IPv4 Internets for every single star in the Universe.
+
+what is 3 way handshake
+======================
+Happens before a http request is done
+- Use between client to server to see if they can even connect and speak to each other.
+
+Client send to Server => SYNC(fundamentally meaning can I connect to you? from client)
+Server send to Client => SYNC, ACK (fundamentally meaning I acknowledge you made a request and yes you can connect to me from server)
+Client send to Server => ACK(fundamentally meaning server acknowledged, thanks we are now ready for all communication from client)
+
+If SYNC/ACK not received means
+1. Server is down
+2. Or client blocked by firewall
+
+
+How does connection end?
+=======================
+Once client received a http request response/file etc.
+
+Client send to Server => FIN(fundamentally meaning am done from client)
+Server send to Client => FIN, ACK (fundamentally meaning I acknowledge you made a finish request and yes you can dis-connect to me from server)
+Client send to Server => ACK
+
+
+What is IP(Internet Protocol?
+=======================
+IP is the workhorse protocol of the TCP/IP protocol suite. All TCP, UDP, ICMP, and IGMP data gets transmitted as
+IP datagrams. IP provides a best-effort, connection- less datagram delivery service. By “best-effort” we mean there are
+no guarantees that an IP datagram gets to its destination successfully. Although IP does not sim- ply drop all traffic
+unnecessarily, it provides no guarantees as to the fate of the packets it attempts to deliver. When something goes wrong,
+such as a router tem- porarily running out of buffers, IP has a simple error-handling algorithm: throw away some data 
+(usually the last datagram that arrived). Any required reliability must be provided by the
+upper layers (e.g., TCP). IPv4 and IPv6 both use this basic best-effort delivery model.
+
+What does an IP packet contain?
+==============================
+1. Source/Dest addr
+2. version/TTL etc._
+3. Checksum
+4. Data
+
+Why use UDP at all, when TCP is so reliable?
+============================================
+Why would you use an unreliable underlying protocol? Two reasons: speed and speed. It's way faster to fire-and-forget 
+than it is to keep track of what has arrived safely and make sure it's in order and all that. If you're sending chat 
+messages, TCP is great; if you're sending 40 positional updates per second of the players in the world, 
+maybe it doesn't matter so much if one or two get dropped, and UDP is a good choice.
+
+What is switch vs hub
+=====================
+
+Switch is an imporvement over Hub which is nothing but a splitter, which does a broadcast of all data on all ports.
+
+- COmmunication between devices on the same network
+- Layer 2
+- Use MAC(MAC's are unique for each device with upper digits indicating the manufacturer) for unique identification of devices on the network
+- SMart to recognize the destination by remebering the port it is connected to
+- Better than Hub
+- Managed/Umanaged switches
+
+https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/networking/switches.txt
+
+
+What is a traceroute, and how does it work?
+==========================================
+understanding of ICMP, TTL, and routing hops. Bonus points if they also know UDP trace routing.
+
+What is NAT? Where would you use it? How does it work? What are some limitations?
+=================================================================================
+ Private (Or Disconnected) Networks
+ Lots of places have a firewall that hides the network from the rest of the world for their own protection.
+ And often times, the firewall translates "internal" IP addresses to "external" (that everyone else in the world knows) 
+ IP addresses using a process called Network Address Translation, or NAT.
+ 
+ For instance, I have a firewall at home. I have two static IPv4 addresses allocated to me by the DSL company, 
+ and yet I have seven computers on the network. How is this possible? Two computers can't share the same IP address, or
+ else the data wouldn't know which one to go to!
+ 
+ The answer is: they don't share the same IP addresses. They are on a private network with 24 million IP addresses allocated to it. They are all just for me. Well, all for me as far as anyone else is concerned. Here's what's happening:
+
+If I log into a remote computer, it tells me I'm logged in from 192.0.2.33 which is the public IP address my ISP has provided to me. But if I ask my local computer what its IP address is, it says 10.0.0.5. Who is translating the 
+IP address from one to the other? That's right, the firewall! It's doing NAT!
+
+10.x.x.x is one of a few reserved networks that are only to be used either on fully disconnected networks, 
+or on networks that are behind firewalls. 
+You'll see are 10.x.x.x and 192.168.x.x, where x is 0-255, generally. Less common is 172.y.x.x, 
+where y goes between 16 and 31.
+
+Networks behind a NATing firewall don't need to be on one of these reserved networks,
+but they commonly are.
+
+
+What is QoS? How does it work? Where would you apply it? When is it enforced?
+===========================================================================
+
+What I'm looking for: knowledge of traffic prioritization schemes, at least a vague understanding of classification levels at the header level, understanding of judicious application to time and 
+latency sensitive protocols, and knowledge of contention vs. non-contention
+===========================================================================
+
+
