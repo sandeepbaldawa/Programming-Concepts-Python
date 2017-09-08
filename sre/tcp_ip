@@ -435,4 +435,6 @@ RST – Reset the connection (Seen on rejected connections)
 SYN – Synchronize sequence numbers (Seen on new connections)
 FIN – No more data from sender (Seen after a connection is closed)
 
-
+What protocol does DNS use?
+=========================
+Usually UDP, but TCP is used for zone transfers also if a record is taking too long to return via UDP
