@@ -36,6 +36,18 @@ Goals(Why monitor)?
 - Understanding symtoms vs cause
   our monitoring system should address two questions: what’s broken, and why?
 - optimizing web performance for different geographic locations is important for member engagement and experience.   
+- ability to satisfy arbitrary user-defined goals and execute user-defined actions.
+- operational automation that requires such application-aware monitor-analysis-action cycles
+  eg:- dont migrate applications which need to be on a specific set of cluster nodes..
+- monitor balance with respect to disk, network, and CPU utilization.  
+- monitor failures of node and recommend/replace with replicas
+- identify the topic-partitions that consume the most resources in the cluster
+- support easily automable cluster expansions and broker de-commissions
+- monitor heterogenous components(eg:-different servers and configs)
+- load monitoring from collected metrics
+- help easily prioritize tasks
+- How long are we willing to wait for an optimization proposal?
+
   
 
 The "what’s broken" indicates the symptom; the "why" indicates a (possibly intermediate) cause  
@@ -59,6 +71,11 @@ The "what’s broken" indicates the symptom; the "why" indicates a (possibly int
 - Generating graphs/pictures important for understanding behavior/anamolies etc mainly because of the sheer amount of data
   present, it will be very difficult to understand the same manually. 
 - Policies and response rules to judge the system
+- monitors clusters and automatically 
+  adjusts the resources allocated to them to meet pre-defined performance goals.
+- monitor violations of these goals, analyzes the existing workload on the cluster, and 
+  automatically executes administrative operations to satisfy those goals.  
+  
 
 
 What metrics to use for max result and min noise
@@ -135,6 +152,19 @@ Metrics to evaluate the health of the JVM (e.g., GC data)
 16. Ability to monitor by zooming in on a specific region and add correlations for metrics in code, automated way or manual
 
 17. 
+
+Website traffic
+Conversions
+Cost per Conversion
+Conversion Rate
+Form Submissions
+Net New Leads/Contacts
+Engagements
+Cost Per Click
+New Followers (Brand awareness)
+Engagements
+Impressions
+A/B Test Results
 
 Heat-Map
 This visualization view provides products, operations, and executive teams a quick overview of latency 
@@ -220,10 +250,49 @@ Design
   Accessibility of cloud services
   Accessibility of critical corporate applications
   Speed / throughput of network (intranet/internet)
+  
+  
 2. preprocess the raw data in Hadoop clusters for daily or hourly aggregation
 3. Modules generating graphs from these sources
+   visualizing operational metrics, provide operational insight into services
+   go-to tool for resolving incidents "in the moment" as well as understanding what happened after the fact.
+   One way of going about this is to look for deviations from a historical norm, and, frequently
+   egL- bucket
 4. Services have flexibility to subscribe to which graph to monitor specific characteristics
 5. Policy manager to decide when to generate alerts
+6. Module to automatically execute rules
+ - capable of accurately analyzing cluster workloads and 
+   generating execution plans that can be trusted to run without any human intervention.
+ - intelligent enough to execute actions in a manner that does not adversely
+   impact the availability of the cluster to handle normal workloads.
+7. Load Monitor
+   The Load Monitor can collect standard metrics from the cluster and derives per partition resource metrics that are 
+   not directly available (e.g., it estimates CPU utilization on a per-partition basis). It can generate a cluster
+   workload model that accurately captures cluster resource utilization, which includes disk utilization, CPU utilization, 
+   bytes-in rate, and bytes-out rate, at replica-granularity. It then feeds the cluster model into the detector and analyzer. 
+8. Analyzer
+The Analyzer is the "brain" . Generates optimization proposals based on the user-provided optimization goals 
+and the cluster workload model from the Load Monitor.
+Can have priotization in goals
+P0 must be satisfied
+eg:-
+Replica placement must be rack-aware.
+Broker resource utilization must be within pre-defined thresholds
+Network utilization must not be allowed to go beyond a pre-defined capacity,    
+
+P1 are best effort
+Attempt to achieve uniform resource utilization across all
+Attempt to evenly distribute partitions of a specific topic across all brokers.
+
+9. Anomaly detector
+Detects anamolies
+Broker failures: i.e., a non-empty broker leaves a cluster
+
+Goal violations: i.e., an optimization goal is violated.
+
+10. Executor
+The executor is responsible for carrying out the optimization proposals from the analyzer.
+eg:- rebalance nodes since load is heavy..
 
 How to build dasboards?
 =====================
