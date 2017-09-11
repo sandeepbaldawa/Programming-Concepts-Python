@@ -509,6 +509,21 @@ Other routers add additional functions including security features to the jobs t
 networks, including the Internet, could not exist without the router. Cisco Systems, Inc, has a complete line of business 
 class routers that will serve the SMB community.
 
+What is default gateway?
+========================
+What does Default Gateway mean?
+
+A default gateway serves as an access point or IP router that a networked computer uses to send information to a 
+computer in another network or the internet. Default simply means that this gateway is used by default, unless an 
+application specifies another gateway. The default server does not even need to be a router; it may be a computer with two
+network adapters, 
+where one is connected to the local subnet and the other is connected to an outside network.
+
+A default gateway allows computers on a network to communicate with computers on another network. Without it, the network is isolated from the outside. Basically, computers send data that is bound for other networks (one that does not belong to its local IP range) through the default gateway.
+
+Network administrators configure the computer’s routing capability with an IP range's starting address as the default 
+gateway and point all clients to that IP address.
+
 Kickstart
 =========
 automatically perform unattended operating system installation and configuration.
