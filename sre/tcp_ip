@@ -519,7 +519,9 @@ application specifies another gateway. The default server does not even need to 
 network adapters, 
 where one is connected to the local subnet and the other is connected to an outside network.
 
-A default gateway allows computers on a network to communicate with computers on another network. Without it, the network is isolated from the outside. Basically, computers send data that is bound for other networks (one that does not belong to its local IP range) through the default gateway.
+A default gateway allows computers on a network to communicate with computers on another network. Without it, the network is 
+isolated from the outside. Basically, computers send data that is bound for other networks (one that does not belong to 
+its local IP range) through the default gateway.
 
 Network administrators configure the computer’s routing capability with an IP range's starting address as the default 
 gateway and point all clients to that IP address.
