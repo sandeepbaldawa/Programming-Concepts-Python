@@ -2,6 +2,25 @@ Error codes
 ==========
 https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
 
+1. Polling..http client does a request and server does a response, keep doing this from client to server
+2. WebSockets..http client does a request and channel is open for a duplex communication between client and server
+    - Used when client subscriptions change a lot
+    - Client needs to send something to server quickly
+    - application benefits from stateful connections
+    - sending binary objects or custom enconding
+    
+What is long polling?
+=====================
+Basic holding a request from server side till real time data is available and once available respond to the client.
+Can be implemented using aiohttp
+
+Using co-routines "await" to wait for data
+
+What is http streaming?
+======================
+http streaming is where a stream of data can be sent from server to client once a connection is opened
+i.e. request followed by stream of data by server..
+
 Simple rest call
 =================
 >>> import requests
