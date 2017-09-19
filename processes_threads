@@ -67,7 +67,8 @@ Disadv
 1. The big disadvantage is that if you accidentally write some CPU-bound code in a greenlet, it will 
 block the entire program, preventing any other greenlets from running at all instead, 
 whereas with threads it will just slow down the other threads a bit.
-2. 
+2. handling exceptions in the callback_handler is difficult due to the gevent loop 
+3. if you forget to check for errors, your errors will be swallowed
 
 from greenlet import greenlet
 gr1 = greenlet(print_red)
@@ -92,7 +93,10 @@ blue done
 
 switch => paused at current greenlet and yield control to new greenlet..
 
+Important
+1. When a greenlet is created it creates two building blocks, one a thread to execute the function and another an event loop
 
+   
 
 
    
@@ -100,8 +104,24 @@ switch => paused at current greenlet and yield control to new greenlet..
 
 Asynchronous prog
 =================
-event driven programming (twisted library)
+Asynchronous programming is essentially software/userspace threading, where the application manages the threads 
+and context switching rather than the CPU. 
+
 1. One way to do asynchronous programming is with an event loop. The event loop is exactly what it sounds like, 
 there is a queue of events/jobs and a loop that just constantly pulls jobs off the queue and runs them. These jobs are 
 called coroutines. They are a small set of instructions, including which events to put back on to the queue, if any.
-2. 
+2. Other way is to use greenlet threads..
+
+Green Threads Style
+----------------------
+Threads are controlled at the application level, rather than hardware
+Feel like threads; Good for those who understand threading
+Includes all the problems of normal thread-based programming other than CPU context switching
+
+Callback Style
+--------------
+Not like threaded programs at all
+Threads/coroutines are invisible to the programmer
+Callbacks swallow exceptions
+Callbacks are not gather-able
+Callback after callback gets confusing and hard to debug.
