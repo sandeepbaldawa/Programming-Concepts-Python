@@ -6,10 +6,34 @@ Advantages
 ----------
 1. Independent
 2. Good for CPU intensive workloads(like mathematical calculations)
-
+3. Pools/executor default to creating one process per core
 Dis-Advantages
 ---------------
 1. Starting processes is slow(in ms), executor/pools can help.
 2. Maximum processes need to run in parallel are the numbe of cores available
 3. too much context switching and scheduling time spent if number of processes are too high
 4. Not suitable for IO bound workloads
+5. Sharing objects is bit painful for large size objects(billions of elements in array), usually picking/unpickling is used to
+   serialize desrialize info between objects.
+
+Threads
+======
+Light weight processes.
+Threads just have stack segment and share the code and data segment.
+Adv
+---
+1. Modification of an object seen by other thread.
+2. locks and other objects can be used for synchronization
+3. Context switching is faster because of them being light weight
+4. if your code is mostly I/O-bound (meaning you spend more time waiting on the network, the filesystem, 
+    the user, etc. than doing actual work—you can tell this because your CPU usage is nowhere near 100%), 
+     threads will usually be simpler and more efficient.
+
+Disadv
+-----
+1. race conditions possible i.e. object modified by one thread not visible by another
+2. even in single thread modification, it is non-determenistic is other thread would see the change
+3. locks and synchronization is error prone
+4. only single thread can run at a time due to GIL even though we might have 16 threads and 16 cores. This is not true
+   for processes
+5. 
