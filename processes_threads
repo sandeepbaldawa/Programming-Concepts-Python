@@ -1,0 +1,15 @@
+Processes
+========
+Program in execution.
+They have code segment, data segment, stack segment and maybe Heap.
+Advantages
+----------
+1. Independent
+2. Good for CPU intensive workloads(like mathematical calculations)
+
+Dis-Advantages
+---------------
+1. Starting processes is slow(in ms), executor/pools can help.
+2. Maximum processes need to run in parallel are the numbe of cores available
+3. too much context switching and scheduling time spent if number of processes are too high
+4. Not suitable for IO bound workloads
