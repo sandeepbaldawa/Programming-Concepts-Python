@@ -36,9 +36,11 @@ Disadv
 3. locks and synchronization is error prone
 4. only single thread can run at a time due to GIL even though we might have 16 threads and 16 cores. This is not true
    for processes
+5. race-conditions, dead-locks, live-locks, and resource-starvation.   
 
 Greenlets
 =========
+gevent library
 Greenlets—aka cooperative threads, user-level threads, green threads, or fibers—are similar to threads,
 but the application has to schedule them manually. Unlike a process or a thread, your greenlet function just keeps 
 running until it decides to yield control to someone else.
@@ -58,10 +60,48 @@ Adv
 1. code will never be arbitrarily preempted. Every operation that doesn't yield control is guaranteed to be atomic. 
 This makes certain kinds of race conditions impossible. 
 2. your application can schedule things much more efficiently than the general-purpose scheduler in certain circumstances
+3. Easily handle 20k-30k concurrent connections, threads in python can' give this because of the memory overhead
 
 Disadv
 ------
 1. The big disadvantage is that if you accidentally write some CPU-bound code in a greenlet, it will 
 block the entire program, preventing any other greenlets from running at all instead, 
 whereas with threads it will just slow down the other threads a bit.
+2. 
+
+from greenlet import greenlet
+gr1 = greenlet(print_red)
+gr2 = greenlet(print_red)
+
+def print_red():
+   print "red"
+   gr2.switch()
+   print "red done"
+   
+def print_blue():
+   print "blue"
+   gr1.switch()
+   print "blue done"   
+   
+= >
+This prints    
+red
+blue
+red done
+blue done
+
+switch => paused at current greenlet and yield control to new greenlet..
+
+
+
+
+   
+   
+
+Asynchronous prog
+=================
+event driven programming (twisted library)
+1. One way to do asynchronous programming is with an event loop. The event loop is exactly what it sounds like, 
+there is a queue of events/jobs and a loop that just constantly pulls jobs off the queue and runs them. These jobs are 
+called coroutines. They are a small set of instructions, including which events to put back on to the queue, if any.
 2. 
