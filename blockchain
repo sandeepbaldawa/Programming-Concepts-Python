@@ -10,3 +10,20 @@ Consensus refers to a system of ensuring that parties agree to a certain state o
 What is the oldest blockchain in production?
 =============================================
 Bitcoin(not to be confused with cryptocurrency, which is different from blockchain bitcoin)
+
+Difference between DLT(distributed ledger technology) and blockchain technology?
+===============================================================================
+Blockchain is a specific form or subset of distributed ledger technologies, which constructs a chronological chain of blocks, 
+hence the name 'block-chain'. A block refers to a set of transactions that are bundled together and added to the chain at 
+the same time. In the Bitcoin blockchain, the miner nodes bundle unconfirmed and valid transactions into a block. Each block
+contains a given number of transactions. In the Bitcoin network, miners must solve a cryptographic challenge to propose the
+next block. This process is known as 'proof of work', and requires significant computing power. 
+
+Timestamping is another key feature of blockchain technology. Each block is timestamped, with each new block referring to the previous block. Combined with cryptographic hashes, this timestamped chain of blocks provides an immutable record of all transactions in the network, from the very first (or genesis) block.
+
+A block commonly consists of four pieces of metadata:
+
+        The reference to the previous block
+        The proof of work, also known as a nonce
+        The timestamp
+        The Merkle tree root for the transactions included in this block.
