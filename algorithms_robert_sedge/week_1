@@ -24,9 +24,9 @@ Use cases
 
 Fundamentally helps find connected components..
 
-More concretely
-- Given N objects
-- Given M operations(union and find)
+Goals
+- Given N objects (can be huge)
+- Given M operations(union and find) (can be huge)
 - Find an efficient datastructure for union find
 
 class UF():
