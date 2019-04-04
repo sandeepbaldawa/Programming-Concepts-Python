@@ -18,7 +18,9 @@ Use cases
 - Dynamic Connectivy(eg:- check if two machines are connected on the fly)
 - Krushkals' spanning tree
 - Least common ancestor
--
+- Friends in a social network
+- Pixels in a digital photo
+- transistors in a computer chip
 
 Fundamentally helps find connected components..
 
