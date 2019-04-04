@@ -1,0 +1,4 @@
+Basic plan
+1. Divide array into two halves
+2. Recursively sort each half
+3. Merge the two halves
