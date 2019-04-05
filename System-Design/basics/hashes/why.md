@@ -6,3 +6,5 @@ to find an object
    Key:value
    Hash Function
    Hash table
+5. traditional hashing
+6. consistent hashing
