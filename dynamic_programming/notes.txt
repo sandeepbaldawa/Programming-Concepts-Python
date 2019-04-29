@@ -1,3 +1,14 @@
+Where is DP used?
+=================
+Operations research
+Signal processing
+Geometry
+Computation Biology
+
+One word?
+=========
+Some sort of optimization for backtracking
+
 When can DP be applied?
 ========================
 Divide and Conquer method which can be used when subproblems are repetative in nature unlike something like 
