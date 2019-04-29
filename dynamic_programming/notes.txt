@@ -1,6 +1,7 @@
 When can DP be applied?
 ========================
-Divide and Conquer method which can be used when subproblems are repetative in nature unlike something like merge sort(where things are not repetative)
+Divide and Conquer method which can be used when subproblems are repetative in nature unlike something like 
+merge sort(where things are not repetative)
 
 An example where greedy fails and dp succeeds
 smallest amount of coins needed for denominations 1,8,20
