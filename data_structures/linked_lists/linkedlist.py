@@ -34,6 +34,19 @@ def find_circular(root):
         fast = fast.next.next
     return False
 
+def find_median(root):
+    if not root or not root.next:
+        return None
+    slow = root
+    fast = root.next
+    while(fast and fast.next):
+        if (slow == fast):
+            print "Is Circular"
+            return True
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
 def rev(root):
     """
     Reverse linked list non-recursive
