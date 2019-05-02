@@ -207,14 +207,15 @@ def rev_recur(root):
    root.next = None
    return root
 
-def rev_recur_2(root):
+def reverse_ll_optimized(root):
    """
    Reverse linked list recursive optimized
-   """
-   if not root.next:
+   https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/data_structures/linked_lists/reverse.py
+   """ 
+   if not root or not root.next:
        return root
-
-   curr = rev_recur(root.next)
+    
+   curr = reverse_ll_optimized(root.next)
    root.next.next = root
    root.next = None
    return curr
