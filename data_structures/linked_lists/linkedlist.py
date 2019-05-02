@@ -40,9 +40,16 @@ def find_median(root):
     slow = root
     fast = root.next
     while(fast and fast.next):
-        if (slow == fast):
-            print "Is Circular"
-            return True
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
+def find_3rdlast_node(root):
+    if not root or not root.next:
+        return None
+    slow = root
+    fast = root.next.next # start fast pointer from 3rd node
+    while(fast and fast.next):
         slow = slow.next
         fast = fast.next.next
     return slow
