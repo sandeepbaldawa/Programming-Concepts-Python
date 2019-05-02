@@ -14,14 +14,16 @@ def reverse_ll(root):
 
 def print_ll(root):
     while(root):
-        print root.val
-        root = root.next
+      print(root.val)
+      root = root.next
 
 dummy = root = Node(0)        
-for i in xrange(1,11):
+for i in range(1,11):
     root.next = Node(i)
     root = root.next
 
-print_ll(dummy) 
+print("Original ll")
+print_ll(dummy)
 rev = reverse_ll(dummy)
+print("Reversed ll")
 print_ll(rev)
