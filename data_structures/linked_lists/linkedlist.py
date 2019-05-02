@@ -16,7 +16,68 @@ def print_ll(head):
         tmp = tmp.next
     print("\n")
 
+def find_circular(root):
+    """
+    1. Check if linked list is circular
+    2. Length of cycle is the point the slow, fast meet, increment 
+    slow till it reaches the same point again
+    """
+    if not root or not root.next:
+        return None
+    slow = root
+    fast = root.next
+    while(fast and fast.next):
+        if (slow == fast):
+            print "Is Circular"
+            return True
+        slow = slow.next
+        fast = fast.next.next
+    return False
 
+def rev(root):
+    """
+    Reverse linked list non-recursive
+    """
+    prev = None
+    curr = root
+    next = curr.next
+    while(curr and curr.next):
+        #print curr.data    
+        curr.next = prev
+        prev = curr
+        curr = next
+        next = curr.next
+    curr.next = prev
+    return curr
+
+def rev_recur(root):
+   """
+   Reverse linked list recursive
+   """
+   if not root.next:
+       return root
+
+   curr = rev_recur(root.next)
+   curr.next = root
+   root.next = None
+   return root
+
+def reverse_ll_optimized(root):
+   """
+   Reverse linked list recursive optimized
+   https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/data_structures/linked_lists/reverse.py
+   """ 
+   if not root or not root.next:
+       return root
+    
+   curr = reverse_ll_optimized(root.next)
+   root.next.next = root
+   root.next = None
+   return curr
+
+
+
+   
 def split_ll(root):
     """
     Split the linked list
@@ -34,7 +95,7 @@ def split_ll(root):
    
     l2_head = slow.next 
     slow.next = None 
-    #print_ll(root)
+    #print_ll(root
     #print_ll(l2_head)
     #print " Mid is ", slow.data
     return l2_head
@@ -163,64 +224,6 @@ def mergesort(node):
     n2 = mergesort(mid)
     return merge_optimized(n1, n2)
    
-def find_circular(root):
-    """
-    Check if linked list is circular
-    """
-    if not root or not root.next:
-        return None
-    slow = root
-    fast = root.next
-    while(fast and fast.next):
-        if (slow == fast):
-            print "Is Circular"
-            return True
-        slow = slow.next
-        fast = fast.next.next
-    return False
-   
-def rev(root):
-    """
-    Reverse linked list non-recursive
-    """
-    prev = None
-    curr = root
-    next = curr.next
-    while(curr and curr.next):
-        #print curr.data    
-        curr.next = prev
-        prev = curr
-        curr = next
-        next = curr.next
-    curr.next = prev
-    return curr
-
-def rev_recur(root):
-   """
-   Reverse linked list recursive
-   """
-   if not root.next:
-       return root
-
-   curr = rev_recur(root.next)
-   curr.next = root
-   root.next = None
-   return root
-
-def reverse_ll_optimized(root):
-   """
-   Reverse linked list recursive optimized
-   https://github.com/sandeepbaldawa/Programming-Concepts-Python/blob/master/data_structures/linked_lists/reverse.py
-   """ 
-   if not root or not root.next:
-       return root
-    
-   curr = reverse_ll_optimized(root.next)
-   root.next.next = root
-   root.next = None
-   return curr
-
-
 input = [1, 3, 20, 32, 5, 7, 64, 8]
 input1 = [400, 355, 240, 342, 455, 457, 464, 548]
 #input = []
