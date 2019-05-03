@@ -1,3 +1,7 @@
+# A. In LRU we evict the Least recently used node and replace it with the most recently used if cache is full else insert 
+# the same in cache
+# B. Ordering is important to know the Least recently used node
+
 # 1. LinkedList finding a node is O(N)
 # 2. Order in HashTable is absent, but lookup is O(1)
 # 3. We can combine Linkedlists and HasTables to get the best of both worlds
