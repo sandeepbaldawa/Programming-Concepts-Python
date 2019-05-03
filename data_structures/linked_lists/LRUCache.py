@@ -66,6 +66,11 @@ def __init__(self, capacity):
     self.tail.prev = self.head
 
 def get(self, key):
+    """
+    When a node is accessed remove the node if present from the cache
+    and add it at the Most frequently used location i.e. end of the double
+    linked list
+    """
     if key in self.dic:
         n = self.dic[key]
         self._remove(n)
@@ -74,6 +79,11 @@ def get(self, key):
     return -1
 
 def set(self, key, value):
+    """
+    To add a value
+    1. Add the node on the end of the double linkedlist (indicating the most frequently used order)
+    2. If we exceed capacity of the LRU cache, we evict from the head of the double linkedlist
+    """
     if key in self.dic:
         self._remove(self.dic[key])
     n = Node(key, value)
@@ -85,12 +95,20 @@ def set(self, key, value):
         del self.dic[n.key]
 
 def _remove(self, node):
+    """
+    In double linked list removing node 
+    """
     p = node.prev
     n = node.next
     p.next = n
     n.prev = p
 
 def _add(self, node):
+    """
+    In double linked list adding a node to the tail to indicate
+    the node is the most frequently used, mainly for maintaining time stamp/ordering
+    to help evict nodes
+    """
     p = self.tail.prev
     p.next = node
     self.tail.prev = node
