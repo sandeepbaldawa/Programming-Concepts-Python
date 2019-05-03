@@ -46,6 +46,9 @@
 # Empty Data structureBase Cases: Single element in Linked Hash Table
 # Regular Cases: Read/Write, Cache Full/Empty/Not Full
 
+# Time Complexity: O(1) for both reads and writes
+# Space Complexity: O(n) where n is amount of data in cache
+
 class Node:
 def __init__(self, k, v):
     self.key = k
