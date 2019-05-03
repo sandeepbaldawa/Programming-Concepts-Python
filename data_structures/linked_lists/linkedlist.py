@@ -61,8 +61,7 @@ def rev(root):
     prev = None
     curr = root
     next = curr.next
-    while(curr and curr.next):
-        #print curr.data    
+    while(curr and curr.next): 
         curr.next = prev
         prev = curr
         curr = next
