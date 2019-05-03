@@ -1,3 +1,7 @@
+# 1. LinkedList finding a node is O(N)
+# 2. Order in HashTable is absent, but lookup is O(1)
+# 3. We can combine Linkedlists and HasTables to get the best of both worlds
+
 class Node:
 def __init__(self, k, v):
     self.key = k
