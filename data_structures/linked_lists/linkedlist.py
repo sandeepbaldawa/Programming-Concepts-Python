@@ -51,7 +51,7 @@ def find_3rdlast_node(root):
     fast = root.next.next # start fast pointer from 3rd node
     while(fast and fast.next):
         slow = slow.next
-        fast = fast.next.next
+        fast = fast.next
     return slow
 
 def rev(root):
