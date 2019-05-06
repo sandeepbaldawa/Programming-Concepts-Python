@@ -10,3 +10,10 @@ dfsVisit(Node) {
   visit all unvisited nodes
   mark visited
 }
+
+for all nodes in graph
+  mark unvisited
+for all nodes in graph
+  if node is unvisited
+    dfsVisit(node)
+
