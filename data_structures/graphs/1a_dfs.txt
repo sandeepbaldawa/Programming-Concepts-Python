@@ -5,10 +5,10 @@ Three states
 
 
 dfsVisit(Node) {
-  mark visiting
+  mark Node visiting
   process Node
-  visit all unvisited nodes
-  mark visited
+  dfsVisit each unvisited nodes
+  mark Node visited
 }
 
 ** We need below for unconnected nodes in the graph
