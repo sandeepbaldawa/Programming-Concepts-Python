@@ -1,0 +1,1 @@
+Good article => http://ticki.github.io/blog/skip-lists-done-right/
