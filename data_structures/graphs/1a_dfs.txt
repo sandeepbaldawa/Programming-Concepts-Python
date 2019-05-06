@@ -1,1 +1,12 @@
+Three states
+1. Unvisited
+2. Visiting
+3. Visited
 
+
+dfsVisit(Node) {
+  mark visiting
+  process Node
+  visit all unvisited nodes
+  mark visited
+}
