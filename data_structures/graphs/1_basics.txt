@@ -5,3 +5,12 @@
 1. Adjancency list (most common way, usually use this)
 2. Adjacency matrix
 
+ADJACENCY LIST
+==============
+A -> {B, C}
+C -> {B, D}
+
+class Node {
+   List<Node> neighbours;
+   int data;
+}
