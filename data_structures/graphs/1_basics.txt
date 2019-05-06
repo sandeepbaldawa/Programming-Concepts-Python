@@ -14,3 +14,10 @@ class Node {
    List<Node> neighbours;
    int data;
 }
+
+class Graph {
+   List<Node> neighbours;
+}
+
+Finding edges easier in adjancency matrix
+Finding neighbours easier in adjancency list
