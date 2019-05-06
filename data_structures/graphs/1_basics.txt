@@ -1,1 +1,7 @@
+- directed vs undirected graphs
+- always ask if it is a directed or undirected graph
+- clique => every node is connected to every other node in the graph
+- implement using
+1. Adjancency list (most common way, usually use this)
+2. Adjacency matrix
 
