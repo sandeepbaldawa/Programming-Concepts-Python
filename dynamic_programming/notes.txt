@@ -84,3 +84,11 @@ DAG) assumes it will need every instance whether or not is it use in the overall
 easier to parallelize and can be more space efficient. It is important, however, to remember to first
 formulate the problem abstractly in terms of the inductive structure, then think about it in terms of how
 substructure is shared in a DAG, and only then worry about coding strategies.
+
+
+How to solve?
+=============
+1. Find relationship between problems and sub-problems (use and re-use)
+2. Implement using
+   Recursion and Memoization (Top Down)
+   Tabulation (Bottom Up)
