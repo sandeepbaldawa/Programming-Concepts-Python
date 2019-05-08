@@ -7,3 +7,46 @@ How to solve?
 
 Question:ClimbingStepsProblemLet’s say you have to climb N steps. 
 You can jump 1 step, 3 steps or 5 steps at a time. Howmany ways are there to get to the top of the steps
+
+Bottom Up
+==========
+Pseudocode​:
+Init array a of size N
+Init a[0] to 1For i: 0 to a.length-1     // ensure these are within bounds     
+a[i + 1] = a[i + 1] + a[i];     
+a[i + 3] = a[i + 3] + a[i];     
+a[i + 5] = a[i + 5] + a[i];Last index of array will contain result
+
+public static int waysToClimb(int n) {        
+   int[] a = new int[n+1];        
+   a[0] = 1;        
+   for (int i = 0; i < a.length; i++) {            
+      if (i + 1 < a.length)                
+      a[i + 1] += a[i];            
+      if (i + 3 < a.length)                
+         a[i + 3] += a[i];            
+      if (i + 5 < a.length)                
+         a[i + 5] += a[i];        
+    }        
+    return a[n];    
+}
+
+TopDown Approach using Tabulation
+=================================
+Pseudocode​:
+Init array a of size N
+Init a[0] to 1
+For i: 1 to a.length-1     // ensure these are within bounds     
+a[i] = a[i-1] + a[i-3] + a[i-5]Last index of array will contain result
+
+public static int waysToClimb(int n) {        
+   int[] a = new int[n+1];        
+   a[0] = 1;        
+   for (int i = 1; i < a.length; i++) {    
+      int nMinus1 = i-1 < 0 ? 0 : a[i-1];            
+      int nMinus3 = i-3 < 0 ? 0 : a[i-3];            
+      int nMinus5 = i-5 < 0 ? 0 : a[i-5];            
+      a[i] = nMinus1 + nMinus3 + nMinus5;        
+   }
+   return a[n];    
+}
