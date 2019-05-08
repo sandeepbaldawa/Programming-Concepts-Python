@@ -1,0 +1,9 @@
+How to solve?
+=============
+1. Find relationship between problems and sub-problems (use and re-use)
+2. Implement using
+   Recursion and Memoization (Top Down)
+   Tabulation (Bottom Up)
+
+Question:ClimbingStepsProblemLet’s say you have to climb N steps. 
+You can jump 1 step, 3 steps or 5 steps at a time. Howmany ways are there to get to the top of the steps
