@@ -233,7 +233,7 @@ To solve using passed parameters
 
 Template2
 =========
-traverse (Node n, res):
+traverse (Node n, result):
      if !n:
        return n
      if n % 2:
